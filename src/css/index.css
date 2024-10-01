@@ -1,0 +1,96 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+* {
+  font-family: "Montserrat Alternates", sans-serif;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+}
+
+:root {
+  --primary: #6e8435;
+  --primary-light: #a8be6e;
+  --text: #2e2e2e;
+  --secondary: #ffffff;
+  --secondary-dark: #f7e20070;
+  --purple: #e32967;
+}
+
+body {
+  background: #f4f4f4;
+  color: var(--text);
+}
+
+a {
+  text-decoration: none;
+}
+
+.active {
+  color: var(--primary) !important;
+}
+
+.primary {
+  color: var(--primary);
+}
+
+.swiper {
+  position: static !important;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px;
+  height: 10px;
+  position: absolute;
+  top: -46px;
+  right: 100px;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.swiper-button-next::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: no-repeat url("../assets/images/arrow.png") center/cover;
+}
+
+.swiper-button-prev::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  background: no-repeat url("../assets/images/arrow.png") center/cover;
+}
+
+.swiper-button-next {
+  right: 200px;
+}
+
+.swiper-button-prev {
+  transform: rotate(180deg);
+}
+
+.category__card {
+  position: relative;
+}
+
+.category__card::before {
+  content: "";
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(
+    0deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
