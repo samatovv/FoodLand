@@ -4,11 +4,20 @@ import logo from "../../assets/images/logo.svg";
 import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
 
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
 const Header = () => {
+  const location = useLocation();
   return (
-    <Box component="header" pt="25px">
+    <Box
+      component="header"
+      position='fixed'
+      zIndex={2}
+      top
+      width='100%'
+      // backgroundColor={location.pathname === "/" && "#f4f4f4"}
+      pt="25px"
+    >
       <Container
         maxWidth="lg"
         sx={{
@@ -25,7 +34,9 @@ const Header = () => {
           },
         }}
       >
-        <img src={logo} alt="Логотип FOODLAND" />
+        <Link to="/">
+          <img src={logo} alt="Логотип FOODLAND" />
+        </Link>
         <Box
           component="nav"
           backgroundColor="#FFF"
@@ -62,10 +73,14 @@ const Header = () => {
         </Box>
         <Box>
           <IconButton mr={1}>
-            <img src={cart} alt="Корзина" />
+            <Link to="/profile/cart">
+              <img src={cart} alt="Корзина" />
+            </Link>
           </IconButton>
           <IconButton>
-            <img src={auth} alt="Авторизация" />
+            <Link to="/profile">
+              <img src={auth} alt="Авторизация" />
+            </Link>
           </IconButton>
         </Box>
       </Container>

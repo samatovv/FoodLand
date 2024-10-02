@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Pagination, PaginationItem, Typography } from "@mui/material";
+import { Box, Container, Grid2, Pagination, PaginationItem, Typography } from "@mui/material";
 import React from "react";
 import img1 from "../../assets/images/client1.webp";
 import img2 from "../../assets/images/client2.webp";
@@ -17,8 +17,8 @@ const OurClients = () => {
         <Typography variant="h2" fontWeight="700" mb={5}>
           Наши клиенты
         </Typography>
-        <Grid container spacing={2.5}>
-          <Grid item xs={3}>
+        <Grid2 container spacing={2.5}>
+          <Grid2 item size={3}>
             <Box
               p="24px"
               display="flex"
@@ -65,8 +65,8 @@ const OurClients = () => {
                 </a>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={3}>
+          </Grid2>
+          <Grid2 item size={3}>
             <Box
               p="24px"
               display="flex"
@@ -113,8 +113,8 @@ const OurClients = () => {
                 </a>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={3}>
+          </Grid2>
+          <Grid2 item size={3}>
             <Box
               p="24px"
               display="flex"
@@ -161,8 +161,8 @@ const OurClients = () => {
                 </a>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={3}>
+          </Grid2>
+          <Grid2 item size={3}>
             <Box
               p="24px"
               display="flex"
@@ -209,8 +209,8 @@ const OurClients = () => {
                 </a>
               </Box>
             </Box>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
         <Box display="flex" justifyContent="center" mt={5}>
           <Pagination
             size="large"

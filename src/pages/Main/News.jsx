@@ -1,4 +1,4 @@
-import { Box, Container, Grid, IconButton, Typography } from "@mui/material";
+import { Box, Container, Grid2, IconButton, Typography } from "@mui/material";
 import React from "react";
 import ButtonMore from "../../components/ButtonMore";
 import img1 from "../../assets/images/news1.webp";
@@ -30,11 +30,11 @@ const News = () => {
             </Typography>
           </div>
           <Link to="/news">
-            <ButtonMore txt="Все новости" />
+            <ButtonMore sx={{ width: 164 }} txt="Все новости" />
           </Link>
         </Box>
-        <Grid container>
-          <Grid item xs={6}>
+        <Grid2 container>
+          <Grid2 item size={6}>
             <Box pr="38px">
               <Link to="/news">
                 <img
@@ -82,8 +82,8 @@ const News = () => {
                 </IconButton>
               </Link>
             </Box>
-          </Grid>
-          <Grid item xs={6}>
+          </Grid2>
+          <Grid2 item size={6}>
             <Box display="flex" columnGap={3} alignItems="end">
               <Link to="/news">
                 <img
@@ -255,8 +255,8 @@ const News = () => {
                 </Link>
               </div>
             </Box>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
     </Box>
   );

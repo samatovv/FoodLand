@@ -1,4 +1,4 @@
-import { Box, Container, Typography, Grid } from "@mui/material";
+import { Box, Container, Typography, Grid2 } from "@mui/material";
 import React from "react";
 import star from "../../assets/images/star.svg";
 import shield from "../../assets/images/shield.svg";
@@ -9,10 +9,10 @@ const WhyChooseUs = () => {
   return (
     <Box component="section" p="43px 0 106px" backgroundColor="#FFF">
       <Container maxWidth="lg">
-        <Grid container>
-          <Grid
+        <Grid2 container>
+          <Grid2
             item
-            xs={6}
+            size={6}
             sx={{
               display: "flex",
               flexDirection: " column",
@@ -58,11 +58,11 @@ const WhyChooseUs = () => {
               </Box>
               <img src={img2} width="100%" height="290.95px" alt="Мука" />
             </Box>
-          </Grid>
-          <Grid item container xs={6}>
-            <Grid
+          </Grid2>
+          <Grid2 item container size={6}>
+            <Grid2
               item
-              xs={6}
+              size={6}
               p="27px"
               backgroundColor="#FCFCF1"
               border="1px solid #E6E6E6"
@@ -77,10 +77,10 @@ const WhyChooseUs = () => {
                 нашим клиентам становиться ещё лучше
               </Typography>
               <img src={star} alt="" />
-            </Grid>
-            <Grid
+            </Grid2>
+            <Grid2
               item
-              xs={6}
+              size={6}
               p="27px"
               width="50%"
               border="1px solid #E6E6E6"
@@ -106,10 +106,10 @@ const WhyChooseUs = () => {
                 </Typography>
               </Box>
               <img src={img1} width="100%" height="100%" alt="Мука" />
-            </Grid>
-            <Grid
+            </Grid2>
+            <Grid2
               item
-              xs={6}
+              size={6}
               p="27px"
               backgroundColor="#FFF5E8"
               border="1px solid #E6E6E6"
@@ -124,10 +124,10 @@ const WhyChooseUs = () => {
                 Возможность предоставления технологической поддержки.
               </Typography>
               <img src={shield} alt="" />
-            </Grid>
-            <Grid
+            </Grid2>
+            <Grid2
               item
-              xs={6}
+              size={6}
               p="27px"
               backgroundColor="#FCFCF1"
               border="1px solid #E6E6E6"
@@ -151,9 +151,9 @@ const WhyChooseUs = () => {
                 нашим клиентам становиться ещё лучше
               </Typography>
               <img src={star} alt="" />
-            </Grid>
-          </Grid>
-        </Grid>
+            </Grid2>
+          </Grid2>
+        </Grid2>
       </Container>
     </Box>
   );

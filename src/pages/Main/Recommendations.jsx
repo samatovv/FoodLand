@@ -1,13 +1,21 @@
-import { Box, Container, Grid, Pagination, PaginationItem, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid2,
+  Pagination,
+  PaginationItem,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import ButtonMore from "../../components/ButtonMore";
 import Card from "../../components/Card";
 import ArrowBackIcon from "../../components/ArrowBackIcon";
 import ArrowForwardIcon from "../../components/ArrowForwardIcon";
+import { Link } from "react-router-dom";
 
 const Recommendations = () => {
   return (
-    <Box component="section" p="76px 0">
+    <Box component="section" p="76px 0" backgroundColor="#f4f4f4">
       <Container maxWidth="lg">
         <Box
           display="flex"
@@ -27,25 +35,27 @@ const Recommendations = () => {
               Рекомендуемые товары
             </Typography>
           </div>
-          <ButtonMore txt="Все товары" />
+          <Link to="/catalog">
+            <ButtonMore sx={{ width: 157 }} txt="Все товары" />
+          </Link>
         </Box>
-        <Grid container spacing={5}>
-          <Grid item xs={3}>
+        <Grid2 container spacing={5}>
+          <Grid2 item size={3}>
             <Card />
-          </Grid>
-          <Grid item xs={3}>
+          </Grid2>
+          <Grid2 item size={3}>
             <Card />
-          </Grid>
-          <Grid item xs={3}>
+          </Grid2>
+          <Grid2 item size={3}>
             <Card />
-          </Grid>
-          <Grid item xs={3}>
+          </Grid2>
+          <Grid2 item size={3}>
             <Card />
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
         <Box display="flex" justifyContent="center" mt={5}>
           <Pagination
-					 size="large"
+            size="large"
             renderItem={(item) => (
               <PaginationItem
                 slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}

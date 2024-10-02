@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid2, Typography } from "@mui/material";
 import React from "react";
 import logo from "../../assets/images/logo.svg";
 import { Link } from "react-router-dom";
@@ -10,9 +10,11 @@ const Footer = () => {
   return (
     <Box component="footer" pt="60px" backgroundColor="#F4F4F4">
       <Container maxWidth="lg">
-        <Grid container mb={7}>
-          <Grid item xs={6}>
-            <img src={logo} alt="" />
+        <Grid2 container mb={7}>
+          <Grid2 item size={6}>
+            <Link to="/">
+              <img src={logo} alt="" />
+            </Link>
             <Typography
               variant="subtitle2"
               color="#878787"
@@ -23,7 +25,6 @@ const Footer = () => {
               Ваш путеводитель в области сырья и ингредиентов для пищевой
               промышленности
             </Typography>
-
             <Typography
               variant="subtitle2"
               fontWeight="600"
@@ -37,8 +38,8 @@ const Footer = () => {
               Г.Бишкек ул. Матросова 1а/21 <br />
               +996 0550 114 477
             </Typography>
-          </Grid>
-          <Grid item xs={6} sx={{}}>
+          </Grid2>
+          <Grid2 item size={6} sx={{}}>
             <Box
               display="flex"
               justifyContent="end"
@@ -88,7 +89,7 @@ const Footer = () => {
                         Новости
                       </Typography>
                     </Link>
-                    <Link to="/dashboard">
+                    <Link to="/profile">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -97,7 +98,7 @@ const Footer = () => {
                         Личный кабинет
                       </Typography>
                     </Link>
-                    <Link to="/cart">
+                    <Link to="/profile/cart">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -132,7 +133,7 @@ const Footer = () => {
                     flexDirection="column"
                     rowGap={1}
                   >
-                    <Link to="/">
+                    <Link to="/catalog/?search=Шоколад">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -141,7 +142,7 @@ const Footer = () => {
                         Шоколад
                       </Typography>
                     </Link>
-                    <Link to="/catalog">
+                    <Link to="/catalog/?search=Сливки">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -150,7 +151,7 @@ const Footer = () => {
                         Сливки{" "}
                       </Typography>
                     </Link>
-                    <Link to="/news">
+                    <Link to="/catalog/?search=Сыр">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -159,7 +160,7 @@ const Footer = () => {
                         Сыр
                       </Typography>
                     </Link>
-                    <Link to="/dashboard">
+                    <Link to="/catalog/?search=Декор">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -168,7 +169,7 @@ const Footer = () => {
                         Декор{" "}
                       </Typography>
                     </Link>
-                    <Link to="/cart">
+                    <Link to="/catalog/?search=Орехи">
                       <Typography
                         variant="subtitle2"
                         color="#707070"
@@ -198,8 +199,8 @@ const Footer = () => {
                 </a>
               </Box>
             </Box>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
       <Box
         display="flex"

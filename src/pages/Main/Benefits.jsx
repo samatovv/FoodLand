@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Typography } from "@mui/material";
+import { Box, Container, Grid2, Typography } from "@mui/material";
 import React from "react";
 import img from "../../assets/images/benefits.webp";
 import ButtonMore from "../../components/ButtonMore";
@@ -12,8 +12,8 @@ const Benefits = () => {
           <span className="primary">FOODLAND</span> — Ваш путеводитель в области
           сырья и ингредиентов для пищевой промышленности
         </Typography>
-        <Grid container spacing={1.5}>
-          <Grid item minHeight="100%" xs={5}>
+        <Grid2 container spacing={1.5}>
+          <Grid2 item minHeight="100%" size={5}>
             <Box
               height="100%"
               backgroundColor="#879957"
@@ -46,8 +46,8 @@ const Benefits = () => {
                 </Typography>
               </Box>
             </Box>
-          </Grid>
-          <Grid item xs={7}>
+          </Grid2>
+          <Grid2 item size={7}>
             <Box position="relative">
               <img
                 src={img}
@@ -58,17 +58,25 @@ const Benefits = () => {
               <Link to="/about-us">
                 <ButtonMore
                   sx={{
+                    width: 170,
                     position: "absolute",
                     bottom: 30,
+
                     right: 30,
                     border: "1px solid #B4B4B4",
+                    "& span": {
+                      fontSize: "12px!important",
+                    },
+                    "&:hover": {
+                      border: 0,
+                    },
                   }}
                   txt="Читать далее"
                 />
               </Link>
             </Box>
-          </Grid>
-        </Grid>
+          </Grid2>
+        </Grid2>
       </Container>
     </Box>
   );

@@ -2,29 +2,58 @@ import { Box, Icon, IconButton, Typography } from "@mui/material";
 import React from "react";
 import img from "../assets/images/card.webp";
 import ButtonMore from "./ButtonMore";
+import { Link } from "react-router-dom";
 
 const Card = () => {
   return (
-    <Box p={2} maxWidth={290} backgroundColor="#FFF" borderRadius={3}>
-      <img src={img} style={{ borderRadius: "12px" }} width="100%" alt="" />
-      <Typography
-        color="#000"
-        mt={2}
-        fontWeight="400"
-        sx={{
-          whiteSpace: "nowrap",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-        }}
-        variant="subtitle1"
-        lineHeight={1}
+    <Box
+      p={2}
+      sx={{
+        
+        "&:hover img": {
+          transform: "scale(1.3)",
+        },
+      }}
+      maxWidth={290}
+      backgroundColor="#FFF"
+      borderRadius={3}
+    >
+      <Link
+        to="/catalog/details/1"
+        style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
-        Шпатель кондитерский пластиковый 254мм 50 SG250B
-      </Typography>
+        <img
+          src={img}
+          style={{ borderRadius: "12px", height: 178, transition:'all 800ms ease' }}
+          width="100%"
+          alt=""
+        />
+      </Link>
+      <Link to="/catalog/details/1">
+        <Typography
+          color="#000"
+          mt={2}
+          fontWeight="400"
+          sx={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+          variant="subtitle1"
+          lineHeight={1}
+        >
+          Шпатель кондитерский пластиковый 254мм 50 SG250B
+        </Typography>
+      </Link>
       <Typography mt={0.5} mb={1} color="#797979" variant="body2">
         Вес : 150 кг
       </Typography>
-      <Box display="flex" alignItems='center' mb={2} justifyContent="space-between">
+      <Box
+        display="flex"
+        alignItems="center"
+        mb={2}
+        justifyContent="space-between"
+      >
         <Typography fontWeight={700} variant="h5">
           550 c
         </Typography>

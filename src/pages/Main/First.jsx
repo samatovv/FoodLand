@@ -8,12 +8,13 @@ import image1 from "../../assets/images/1.webp";
 import image2 from "../../assets/images/2.webp";
 import image3 from "../../assets/images/3.webp";
 import image4 from "../../assets/images/4.webp";
-import arrow from "../../assets/images/arrow.svg";
 import "swiper/css";
+
+// SwiperCore.use([Navigation]);
 
 const First = () => {
   return (
-    <Box component="section" p="72px 0">
+    <Box component="section" p="138px 0 72px" backgroundColor="#f4f4f4">
       <Container
         maxWidth="lg"
         sx={{
@@ -33,7 +34,7 @@ const First = () => {
         </Typography>
         <Box mt={6}>
           <TextField placeholder="Найти..." sx={{ mr: "34.5px", width: 318 }} />
-          <ButtonMore txt="Заказать звонок"></ButtonMore>
+          <ButtonMore sx={{ width: 193 }} txt="Заказать звонок"></ButtonMore>
         </Box>
         <Box mt={5} display="flex" alignItems="center" columnGap={3}>
           <img src={partners} width="152px" height="40px" alt="Партнеры" />
