@@ -11,6 +11,9 @@ function App() {
   const location = useLocation();
 
   useEffect(() => {
+    if (!localStorage.getItem("cart")) localStorage.setItem("cart", '[]');
+  }, []);
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 

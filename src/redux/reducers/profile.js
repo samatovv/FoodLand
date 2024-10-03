@@ -5,6 +5,7 @@ const initialState = {
   data: [],
   loginData: {},
   uploadedFile: {},
+  createdOrder: {},
 };
 
 export const profileSlice = createSlice({
@@ -25,6 +26,10 @@ export const profileSlice = createSlice({
     setUploadedFile: (state, action) => {
       state.uploadedFile = action.payload;
     },
+
+    setCreatedOrder: (state, action) => {
+      state.createdOrder = action.payload;
+    },
   },
 });
 
@@ -40,7 +45,11 @@ export const uploadFile = (data) => (dispatch) => {
   Profile.uploadFile(data).then((res) => dispatch(setUploadedFile(res)));
 };
 
-export const { setProfile, setLoginData, setUploadedFile } =
+export const createOrder = (data) => (dispatch) => {
+  Profile.createOrder(data).then((res) => dispatch(setCreatedOrder(res)));
+};
+
+export const { setProfile, setLoginData, setUploadedFile, setCreatedOrder } =
   profileSlice.actions;
 
 export default profileSlice.reducer;

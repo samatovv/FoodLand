@@ -1,5 +1,5 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ButtonMore from "./ButtonMore";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
@@ -7,10 +7,15 @@ import AddOrDelete from "./AddOrDelete";
 const Card = ({ item, search }) => {
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
+  const [cart, setCart] = useState(null);
+  const id = item.id;
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")));
+  }, [cart]);
   const clickHandler = () => {
-    if (localStorage.getItem("cart")) {
-      let cart = localStorage.getItem("cart");
-      cart = JSON.parse(cart);
+    let newItem = cart?.find((item) => item.id === id);
+
+    if (cart?.length === 0 || !newItem) {
       localStorage.setItem(
         "cart",
         JSON.stringify([
@@ -18,19 +23,29 @@ const Card = ({ item, search }) => {
           {
             id: details.id,
             count: count,
+            name: details.name,
+            img: details.images[0].url,
+            description: details.description,
+            sum: details.price * count,
+            price: details.price,
+            idx: details.customId,
           },
         ])
       );
-    } else
+    } else {
+      let updatedCart = cart?.filter((item) => item.id !== id);
       localStorage.setItem(
         "cart",
         JSON.stringify([
+          ...updatedCart,
           {
-            id: details.id,
-            count: count,
+            ...newItem,
+            count: newItem?.count + count,
+            sum: details.price * newItem?.count + count,
           },
         ])
       );
+    }
   };
 
   return (
@@ -89,7 +104,12 @@ const Card = ({ item, search }) => {
         <Typography fontWeight={700} variant="h5">
           {details?.price} c
         </Typography>
-        <AddOrDelete count={count} setCount={setCount} />
+        <AddOrDelete
+          count={count}
+          setCount={setCount}
+          id={item.id}
+          price={item.price}
+        />
         {/* <Box
           p="4px"
           border="1px solid #EEEEEE"

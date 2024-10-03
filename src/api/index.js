@@ -90,4 +90,11 @@ export const Profile = {
       .then((response) => response.data)
       .catch((error) => error.response);
   },
+
+  createOrder(data) {
+    return instance
+      .post(`orders`, data)
+      .then((response) => response)
+      .catch((error) => error.response);
+  },
 };

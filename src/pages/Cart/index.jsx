@@ -10,22 +10,26 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import img from "../../assets/images/1.webp";
 import Inc from "../../assets/images/Inc";
 import Dec from "../../assets/images/Dec";
 import Delete from "../../assets/images/Delete";
 import { useFormik } from "formik";
 import { handleDrawer } from "../../redux/reducers/mainSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import AddOrDelete from "../../components/AddOrDelete";
+import { Link } from "react-router-dom";
+import { createOrder } from "../../redux/reducers/profile";
 
 const Cart = () => {
-  const [cart, setCart] = useState([]);
-  useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("cart")));
-    console.log(cart);
-  }, []);
   const dispatch = useDispatch();
+
+  const [cart, setCart] = useState([]);
+  const firstUpdate = useRef(true);
+
+  const createdOrder = useSelector((state) => state.profile.createdOrder);
+
   const formik = useFormik({
     initialValues: {
       deliveryType: null,
@@ -34,8 +38,52 @@ const Cart = () => {
       comment: "",
       products: [],
     },
-    onSubmit: () => {},
+    onSubmit: (values, { resetForm }) => {
+      let products = cart.map((item) => ({
+        product: item.id,
+        quantity: item.count,
+      }));
+
+      dispatch(
+        createOrder({
+          location: "location_3",
+          products: products,
+          deliveryType: values.deliveryType,
+          deliveryAddress: values.deliveryAddress,
+          deliveryDate: values.deliveryDate,
+          comment: values.comment,
+          weight: 1,
+          price: 1,
+        })
+      );
+    },
   });
+
+  const deleteHandler = (id) => {
+    let filtered = cart.filter((item) => item.id !== id);
+    setCart(filtered);
+    localStorage.setItem("cart", JSON.stringify(filtered));
+  };
+
+  useEffect(() => {
+    setCart(JSON.parse(localStorage.getItem("cart")));
+  }, []);
+
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    if (createdOrder.status == 200) {
+      alert("Успешно");
+      formik.resetForm();
+      localStorage.setItem("cart", "[]");
+      setCart("");
+    } else alert(createdOrder.data.message);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [createdOrder]);
 
   return (
     <>
@@ -63,258 +111,129 @@ const Cart = () => {
                   fontWeight="400"
                   color="#888888"
                 >
-                  Общее кол-во: 15
+                  Общее кол-во: {!cart?.length ? 0 : cart?.length}
                 </Typography>
               </div>
               <Typography
                 variant="subtitle2"
-                color="#960000"
+                color={!cart?.length ? "#666" : "#960000"}
+                onClick={() => {
+                  localStorage.setItem("cart", "[]");
+                  setCart(null);
+                }}
                 sx={{
-                  cursor: "pointer",
+                  cursor: !cart?.length ? "not-allowed" : "pointer",
                   textDecoration: "underline",
                 }}
               >
                 Очистить корзину
               </Typography>
             </Box>
-            <Box
-              borderBottom="1px solid #F1F1F1"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              p="16px"
-            >
-              <Box display="flex">
-                <img
-                  src={img}
-                  width="90px"
-                  style={{ borderRadius: 12 }}
-                  height="90px"
-                  alt=""
-                />
-                <Box ml={2}>
-                  <Typography variant="subtitle2" mb={2} fontWeight="600">
-                    Кондитеркая насадка BX103
-                  </Typography>
-                  <Typography variant="body2" color="#797979">
-                    инвентарь кондитерский
-                  </Typography>
-                </Box>
-              </Box>
+            {!cart?.length ? (
               <Box
+                height="100%"
                 display="flex"
-                width="50%"
-                justifyContent="space-between"
+                justifyContent="center"
                 alignItems="center"
+                flexDirection="column"
               >
-                <Box
-                  p="4px"
-                  border="1px solid #EEEEEE"
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  borderRadius="1000px"
-                  sx={{ "& button": { padding: 0 } }}
+                <Typography
+                  mb={3}
+                  textAlign="center"
+                  variant="h5"
+                  fontWeight={600}
                 >
-                  <IconButton>
-                    <Inc />
-                  </IconButton>
-                  <Box component="span" m="0 12px">
-                    1
-                  </Box>
-                  <IconButton>
-                    <Dec />
-                  </IconButton>
-                </Box>
-                <Typography variant="h5" fontWeight={700}>
-                  5500с
+                  Ваша корзина пуста :(
                 </Typography>
-                <IconButton>
-                  <Delete />
-                </IconButton>
+                <Link to="/catalog">
+                  <Button
+                    sx={{ borderRadius: 2 }}
+                    variant="contained"
+                    color="primary"
+                  >
+                    Перейти в каталог
+                  </Button>
+                </Link>
               </Box>
-            </Box>
-            <Box
-              borderBottom="1px solid #F1F1F1"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              p="16px"
-            >
-              <Box display="flex">
-                <img
-                  src={img}
-                  width="90px"
-                  style={{ borderRadius: 12 }}
-                  height="90px"
-                  alt=""
-                />
-                <Box ml={2}>
-                  <Typography variant="subtitle2" mb={2} fontWeight="600">
-                    Кондитеркая насадка BX103
-                  </Typography>
-                  <Typography variant="body2" color="#797979">
-                    инвентарь кондитерский
-                  </Typography>
-                </Box>
-              </Box>
-              <Box
-                display="flex"
-                width="50%"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box
-                  p="4px"
-                  border="1px solid #EEEEEE"
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  borderRadius="1000px"
-                  sx={{ "& button": { padding: 0 } }}
-                >
-                  <IconButton>
-                    <Inc />
-                  </IconButton>
-                  <Box component="span" m="0 12px">
-                    1
+            ) : (
+              cart
+                .sort((a, b) => a.idx - b.idx)
+                .map((item) => (
+                  <Box
+                    borderBottom="1px solid #F1F1F1"
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    p="16px"
+                  >
+                    <Box display="flex">
+                      <img
+                        src={item.img}
+                        width="90px"
+                        style={{ borderRadius: 12, objectFit: "cover" }}
+                        height="90px"
+                        alt=""
+                      />
+                      <Box ml={2}>
+                        <Typography variant="subtitle2" mb={2} fontWeight="600">
+                          {item.name}
+                        </Typography>
+                        <Typography variant="body2" color="#797979">
+                          {item.description}
+                        </Typography>
+                        <Typography
+                          variant="body1"
+                          mt={2}
+                          fontWeight={500}
+                          color="#000"
+                        >
+                          Цена: {item.price} c
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <Box
+                      display="flex"
+                      width="50%"
+                      justifyContent="space-between"
+                      alignItems="center"
+                    >
+                      <AddOrDelete
+                        cart={cart}
+                        count={item.count}
+                        id={item.id}
+                        cartPage
+                        setCart={setCart}
+                        price={item.price}
+                      />
+                      {/* <Box
+                    p="4px"
+                    border="1px solid #EEEEEE"
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    borderRadius="1000px"
+                    sx={{ "& button": { padding: 0 } }}
+                  >
+                    <IconButton>
+                      <Inc />
+                    </IconButton>
+                    <Box component="span" m="0 12px">
+                      {item.count}
+                    </Box>
+                    <IconButton>
+                      <Dec />
+                    </IconButton>
+                  </Box> */}
+                      <Typography variant="h5" fontWeight={700}>
+                        {item.sum}с
+                      </Typography>
+                      <IconButton onClick={() => deleteHandler(item.id)}>
+                        <Delete />
+                      </IconButton>
+                    </Box>
                   </Box>
-                  <IconButton>
-                    <Dec />
-                  </IconButton>
-                </Box>
-                <Typography variant="h5" fontWeight={700}>
-                  5500с
-                </Typography>
-                <IconButton>
-                  <Delete />
-                </IconButton>
-              </Box>
-            </Box>
-            <Box
-              mt="12px"
-              mb="12px"
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              p="16px"
-              borderBottom="1px solid #F1F1F1"
-            >
-              <Box display="flex">
-                <img
-                  src={img}
-                  width="90px"
-                  style={{ borderRadius: 12 }}
-                  height="90px"
-                  alt=""
-                />
-                <Box ml={2}>
-                  <Typography variant="subtitle2" mb={2} fontWeight="600">
-                    Кондитеркая насадка BX103
-                  </Typography>
-                  <Typography variant="body2" color="#797979">
-                    инвентарь кондитерский
-                  </Typography>
-                </Box>
-              </Box>
-              <Box
-                display="flex"
-                width="50%"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box
-                  p="4px"
-                  border="1px solid #EEEEEE"
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  borderRadius="1000px"
-                  sx={{ "& button": { padding: 0 } }}
-                >
-                  <IconButton>
-                    <Inc />
-                  </IconButton>
-                  <Box component="span" m="0 12px">
-                    1
-                  </Box>
-                  <IconButton>
-                    <Dec />
-                  </IconButton>
-                </Box>
-                <Typography variant="h5" fontWeight={700}>
-                  5500с
-                </Typography>
-                <IconButton>
-                  <Delete />
-                </IconButton>
-              </Box>
-            </Box>
-            <Box
-              display="flex"
-              alignItems="center"
-              justifyContent="space-between"
-              p="16px"
-              // borderBottom="1px solid #F1F1F1"
-            >
-              <Box display="flex">
-                <img
-                  src={img}
-                  width="90px"
-                  style={{ borderRadius: 12 }}
-                  height="90px"
-                  alt=""
-                />
-                <Box ml={2}>
-                  <Typography variant="subtitle2" mb={2} fontWeight="600">
-                    Кондитеркая насадка BX103
-                  </Typography>
-                  <Typography variant="body2" color="#797979">
-                    инвентарь кондитерский
-                  </Typography>
-                </Box>
-              </Box>
-              <Box
-                display="flex"
-                width="50%"
-                justifyContent="space-between"
-                alignItems="center"
-              >
-                <Box
-                  p="4px"
-                  border="1px solid #EEEEEE"
-                  display="flex"
-                  justifyContent="space-between"
-                  alignItems="center"
-                  borderRadius="1000px"
-                  sx={{ "& button": { padding: 0 } }}
-                >
-                  <IconButton>
-                    <Inc />
-                  </IconButton>
-                  <Box component="span" m="0 12px">
-                    1
-                  </Box>
-                  <IconButton>
-                    <Dec />
-                  </IconButton>
-                </Box>
-                <Typography variant="h5" fontWeight={700}>
-                  5500с
-                </Typography>
-                <IconButton>
-                  <Delete />
-                </IconButton>
-              </Box>
-            </Box>
-            {/* <Box display="flex" mt={3}>
-              <Typography variant="subtitle1" fontWeight={500} color="#575757">
-                Итого:
-              </Typography>
-              <Typography variant="h5" ml={7} fontWeight={700}>
-                5500 сом
-              </Typography>
-            </Box> */}
+                ))
+            )}
           </Grid2>
           <Grid2
             item
@@ -356,29 +275,39 @@ const Cart = () => {
                   },
                 }}
               >
-                <Typography variant="subtitle2" mb={2} color="#5B5B5B">
-                  Адрес доставки
-                </Typography>
-                <TextField
-                  name="deliveryAddress"
-                  onChange={formik.handleChange}
-                  value={formik.values.deliveryAddress}
-                  required
-                  placeholder="Ваш адрес"
-                  fullWidth
-                />
-                <Typography mt={2} variant="subtitle2" mb={2} color="#5B5B5B">
-                  Дата доставки
-                </Typography>
-                <TextField
-                  name="deliveryDate"
-                  onChange={formik.handleChange}
-                  value={formik.values.deliveryDate}
-                  required
-                  type="date"
-                  placeholder="Ваш адрес"
-                  fullWidth
-                />
+                {formik.values.deliveryType === "delivery" && (
+                  <>
+                    <Typography variant="subtitle2" mb={2} color="#5B5B5B">
+                      Адрес доставки
+                    </Typography>
+                    <TextField
+                      name="deliveryAddress"
+                      onChange={formik.handleChange}
+                      value={formik.values.deliveryAddress}
+                      required
+                      placeholder="Ваш адрес"
+                      fullWidth
+                    />
+                    <Typography
+                      mt={2}
+                      variant="subtitle2"
+                      mb={2}
+                      color="#5B5B5B"
+                    >
+                      Дата доставки
+                    </Typography>
+                    <TextField
+                      name="deliveryDate"
+                      onChange={formik.handleChange}
+                      value={formik.values.deliveryDate}
+                      required
+                      type="date"
+                      placeholder="Ваш адрес"
+                      fullWidth
+                    />
+                  </>
+                )}
+
                 <Typography mt={2} variant="subtitle2" mb={2} color="#5B5B5B">
                   Комментарии
                 </Typography>
@@ -396,6 +325,7 @@ const Cart = () => {
                   size="small"
                   variant="contained"
                   fullWidth
+                  disabled={!cart.length}
                   sx={{ fontSize: 10 }}
                   color="primary"
                   type="submit"
@@ -405,6 +335,7 @@ const Cart = () => {
                 <Button
                   size="small"
                   variant="contained"
+                  disabled={!cart.length}
                   fullWidth
                   onClick={() => dispatch(handleDrawer())}
                   sx={{
