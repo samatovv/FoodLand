@@ -1,9 +1,10 @@
 import { Box, Button } from "@mui/material";
 import React from "react";
 
-const ButtonMore = ({ txt, sx, fullWidth }) => {
+const ButtonMore = ({ txt, sx, fullWidth, onClick }) => {
   return (
     <Button
+      onClick={onClick}
       fullWidth={fullWidth && true}
       variant="more"
       sx={sx}
@@ -16,7 +17,9 @@ const ButtonMore = ({ txt, sx, fullWidth }) => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <span style={{ fontSize: 13 }}>{txt}</span>
+        <span className="button_txt" style={{ fontSize: 13 }}>
+          {txt}
+        </span>
         <Box width={40} height={40} className="round">
           <svg
             width="40"

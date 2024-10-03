@@ -32,14 +32,13 @@ const WhyChooseUs = () => {
             </Typography>
             <Box
               p="27px"
-              // width="50%"
               border="1px solid #E6E6E6"
               borderLeft="none"
               borderRadius="10px"
               position="relative"
+              className="none_border_left"
               maxHeight={350}
               maxWidth={335}
-              // height={350}
             >
               <Box
                 sx={{
@@ -50,6 +49,7 @@ const WhyChooseUs = () => {
                   position: "absolute",
                   top: 42,
                   left: 52,
+                  borderTopLeftRadius: "0px",
                 }}
               >
                 <Typography color="#FFF" variant="subtitle2">
@@ -86,7 +86,7 @@ const WhyChooseUs = () => {
               border="1px solid #E6E6E6"
               borderRight="none"
               borderRadius="10px"
-              // sx={{ borderTopLeftRadius: "0px 0px!important" }}
+              className="none_border_right"
               position="relative"
               maxHeight={350}
             >

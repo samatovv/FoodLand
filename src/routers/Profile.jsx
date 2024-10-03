@@ -4,17 +4,18 @@ import { Route, Routes } from "react-router";
 import Cart from "../pages/Cart";
 import Dashboard from "../pages/Profile";
 import Preview from "../pages/Preview";
+import { Box } from "@mui/material";
 
 const Profile = () => {
   return (
     <div>
       <Header />
-      <main>
+      <Box component="main">
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="/cart" element={<Cart />} />
         </Routes>
-      </main>
+      </Box>
       <Preview />
     </div>
   );

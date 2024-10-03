@@ -1,4 +1,4 @@
-import { Box, Container, Grid2, Typography } from "@mui/material";
+import { Box, Container, Grid2, IconButton, Typography } from "@mui/material";
 import React from "react";
 import logo from "../../assets/images/logo.svg";
 import { Link } from "react-router-dom";
@@ -36,7 +36,10 @@ const Footer = () => {
             </Typography>
             <Typography variant="subtitle2" fontWeight="400" color="#707070">
               Г.Бишкек ул. Матросова 1а/21 <br />
-              +996 0550 114 477
+              <br />
+              <a className="link" href="tel:+996 0550 114 477">
+                +996 0550 114 477
+              </a>
             </Typography>
           </Grid2>
           <Grid2 item size={6} sx={{}}>
@@ -64,6 +67,7 @@ const Footer = () => {
                   >
                     <Link to="/">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -73,6 +77,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/catalog">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -82,6 +87,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/news">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -91,6 +97,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/profile">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -100,6 +107,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/profile/cart">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -109,6 +117,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/about-us">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -133,8 +142,9 @@ const Footer = () => {
                     flexDirection="column"
                     rowGap={1}
                   >
-                    <Link to="/catalog/?search=Шоколад">
+                    <Link className="link" to="/catalog/?search=Шоколад">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -144,6 +154,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/catalog/?search=Сливки">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -153,6 +164,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/catalog/?search=Сыр">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -162,6 +174,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/catalog/?search=Декор">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -171,6 +184,7 @@ const Footer = () => {
                     </Link>
                     <Link to="/catalog/?search=Орехи">
                       <Typography
+                        className="link"
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
@@ -188,15 +202,15 @@ const Footer = () => {
                 alignItems="center"
                 mt={7}
               >
-                <a href="https://instagram.com">
+                <IconButton target="_blank" href="https://instagram.com">
                   <img src={instagram} alt="" />
-                </a>
-                <a href="https://facebook.com">
+                </IconButton>
+                <IconButton target="_blank" href="https://facebook.com">
                   <img src={facebook} alt="" />
-                </a>
-                <a href="https://twitter.com">
+                </IconButton>
+                <IconButton target="_blank" href="https://twitter.com">
                   <img src={twitter} alt="" />
-                </a>
+                </IconButton>
               </Box>
             </Box>
           </Grid2>

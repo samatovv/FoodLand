@@ -11,11 +11,10 @@ const Header = () => {
   return (
     <Box
       component="header"
-      position='fixed'
+      position={!location.pathname.includes("/profile") && "fixed"}
       zIndex={2}
       top
-      width='100%'
-      // backgroundColor={location.pathname === "/" && "#f4f4f4"}
+      width="100%"
       pt="25px"
     >
       <Container

@@ -14,7 +14,18 @@ const Partners = () => {
       <Typography variant="h2" textAlign="center" fontWeight="bold" mb={6}>
         Официальные дистрибьюторы
       </Typography>
-      <Grid2 container>
+      <Grid2
+        container
+        sx={{
+          "& img": {
+            filter: "grayscale(1)",
+            transition:"all 800ms ease",
+            "&:hover": {
+              filter: "none",
+            },
+          },
+        }}
+      >
         <Grid2 item size={1.7}>
           <img src={img1} alt="" />
         </Grid2>

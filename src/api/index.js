@@ -2,17 +2,92 @@ import axios from "axios";
 import cookie from "cookie_js";
 
 function get_token() {
-  return cookie.get("token");
+  return cookie.get("foodland_token");
 }
 
-const user = cookie.get("token");
+const user = cookie.get("foodland_token");
 
-export const instance = axios.create({
-  baseURL: `https://`,
-  headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json; charset=UTF-8",
+export const instance = axios.create(
+  !!user
+    ? {
+        baseURL: `https://foodlandtest.com/v1/`,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json; charset=UTF-8",
 
-    Authorization: `Bearer ${get_token()}`,
+          Authorization: `Bearer ${get_token()}`,
+        },
+      }
+    : {
+        baseURL: `https://foodlandtest.com/v1/`,
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json; charset=UTF-8",
+        },
+      }
+);
+
+export const Main = {
+  getBanners() {
+    return instance
+      .get(`banners?limit=10&page=1&sortBy=createdAt:desc`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
   },
-});
+  getCategories() {
+    return instance
+      .get(`categories`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+  getProductsRecomended() {
+    return instance
+      .get(`recommendations`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+  getProducts(data) {
+    return instance
+      .get(data)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+  getNews() {
+    return instance
+      .get(`posts`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+};
+
+export const Products = {
+  getProducts(data) {
+    return instance
+      .get(data)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+};
+
+export const Profile = {
+  login(data) {
+    return instance
+      .post(`auth/login`, data)
+      .then((response) => response)
+      .catch((error) => error.response);
+  },
+
+  uploadFile(data) {
+    return instance
+      .post(`upload/single-local`, data)
+      .then((response) => response)
+      .catch((error) => error.response);
+  },
+
+  getProfileData(id) {
+    return instance
+      .get(`users/${id}`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+};

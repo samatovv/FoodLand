@@ -6,14 +6,23 @@ import {
   PaginationItem,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import ButtonMore from "../../components/ButtonMore";
 import Card from "../../components/Card";
 import ArrowBackIcon from "../../components/ArrowBackIcon";
 import ArrowForwardIcon from "../../components/ArrowForwardIcon";
 import { Link } from "react-router-dom";
+import { getProductsRecomended } from "../../redux/reducers/mainSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Recommendations = () => {
+  const dispatch = useDispatch();
+
+  const recomendations = useSelector((state) => state.main.recomendations);
+
+  useEffect(() => {
+    dispatch(getProductsRecomended());
+  }, []);
   return (
     <Box component="section" p="76px 0" backgroundColor="#f4f4f4">
       <Container maxWidth="lg">
@@ -40,18 +49,12 @@ const Recommendations = () => {
           </Link>
         </Box>
         <Grid2 container spacing={5}>
-          <Grid2 item size={3}>
-            <Card />
-          </Grid2>
-          <Grid2 item size={3}>
-            <Card />
-          </Grid2>
-          <Grid2 item size={3}>
-            <Card />
-          </Grid2>
-          <Grid2 item size={3}>
-            <Card />
-          </Grid2>
+          {Array.isArray(recomendations?.results) &&
+            recomendations?.results?.slice(0, 4).map((item, idx) => (
+              <Grid2 item size={3} key={idx}>
+                <Card search item={item} />
+              </Grid2>
+            ))}
         </Grid2>
         <Box display="flex" justifyContent="center" mt={5}>
           <Pagination

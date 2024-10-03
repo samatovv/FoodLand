@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Container, TextField, Typography } from "@mui/material";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation } from "swiper";
+import { Navigation } from "swiper/modules";
 import ButtonMore from "../../components/ButtonMore";
 import partners from "../../assets/images/partners.webp";
 import image1 from "../../assets/images/1.webp";
@@ -9,10 +9,20 @@ import image2 from "../../assets/images/2.webp";
 import image3 from "../../assets/images/3.webp";
 import image4 from "../../assets/images/4.webp";
 import "swiper/css";
-
-// SwiperCore.use([Navigation]);
+import { useNavigate } from "react-router";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "../../redux/reducers/products";
+import { getBanners } from "../../redux/reducers/mainSlice";
 
 const First = () => {
+  const dispatch = useDispatch();
+  const [value, setValue] = useState("");
+  const navigate = useNavigate();
+
+  const banners = useSelector((state) => state.main.banners);
+
+  useEffect(() => dispatch(getBanners()), []);
+
   return (
     <Box component="section" p="138px 0 72px" backgroundColor="#f4f4f4">
       <Container
@@ -33,7 +43,23 @@ const First = () => {
           Ваш надежный поставщик сладкого и не только
         </Typography>
         <Box mt={6}>
-          <TextField placeholder="Найти..." sx={{ mr: "34.5px", width: 318 }} />
+          <form
+            style={{ display: "inline" }}
+            action=""
+            onSubmit={() => {
+              navigate(`/catalog/?search=${value}`);
+            }}
+          >
+            <TextField
+              value={value}
+              onChange={(e) => {
+                setValue(e.target.value);
+                dispatch(setSearch(e.target.value));
+              }}
+              placeholder="Найти..."
+              sx={{ mr: "34.5px", width: 318 }}
+            />
+          </form>
           <ButtonMore sx={{ width: 193 }} txt="Заказать звонок"></ButtonMore>
         </Box>
         <Box mt={5} display="flex" alignItems="center" columnGap={3}>
@@ -59,27 +85,21 @@ const First = () => {
         mt={7}
       >
         <Swiper
-          freeMode={true}
-          slidesPerView={4}
-          slidesPerGroup={4}
-          spaceBetween={30}
           navigation={true}
+          modules={[Navigation]}
+          // freeMode={true}
+          loop={true}
+          slidesPerView={2}
+          centeredSlides={false}
+          spaceBetween={30}
+          initialSlide={2}
         >
-          <SwiperSlide>
-            <img src={image1} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image2} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image3} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image4} alt="" />
-          </SwiperSlide>
-          <SwiperSlide>
-            <img src={image4} alt="" />
-          </SwiperSlide>
+          {Array.isArray(banners?.results) &&
+            banners?.results?.map((item, idx) => (
+              <SwiperSlide key={idx}>
+                <img width={428} height={280} src={item.imageUrl} alt="" />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </Box>
     </Box>

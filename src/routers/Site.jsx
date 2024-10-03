@@ -8,13 +8,14 @@ import Catalog from "../pages/Catalog";
 import Details from "../pages/Details";
 import AboutUs from "../pages/AboutUs";
 import { Box } from "@mui/material";
+import WhatsApp from "../shared/WhatsApp";
 
 const Site = () => {
-  const location = useLocation()
+  const location = useLocation();
   return (
     <>
       <Header />
-      <Box component='main' pt={location.pathname !== '/' && '66px'}>
+      <Box component="main" pt={location.pathname !== "/" && "66px"}>
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/about-us" element={<AboutUs />} />
@@ -24,6 +25,7 @@ const Site = () => {
         </Routes>
       </Box>
       <Footer />
+      <WhatsApp />
     </>
   );
 };

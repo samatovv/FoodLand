@@ -1,9 +1,19 @@
-import { Breadcrumbs, Container, Grid2, Typography } from "@mui/material";
-import React from "react";
+import {
+  Box,
+  Breadcrumbs,
+  Card,
+  Container,
+  Grid2,
+  Pagination,
+  Typography,
+} from "@mui/material";
+import React, { useState } from "react";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import Products from "./Products";
+import Recomendations from "../Details/Recomendations";
+import { useFormik } from "formik";
 
 const Catalog = () => {
   const breadcrumbs = [
@@ -14,6 +24,11 @@ const Catalog = () => {
       Каталог
     </Typography>,
   ];
+
+  const formik = useFormik({
+    initialValues: { category: "" },
+  });
+  const [chip, setChip] = useState("");
   return (
     <>
       <Container
@@ -28,12 +43,12 @@ const Catalog = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Grid2 container mt={2} spacing={6}> 
+        <Grid2 container mt={2} spacing={6}>
           <Grid2 item size={3}>
-            <Categories />
+            <Categories formik={formik} setChip={setChip} />
           </Grid2>
           <Grid2 item size={9}>
-            <Products />
+            <Products formik={formik} setChip={setChip} chip={chip} />
           </Grid2>
         </Grid2>
       </Container>

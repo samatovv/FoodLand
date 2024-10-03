@@ -14,6 +14,7 @@ import Inc from "../../assets/images/Inc";
 import Dec from "../../assets/images/Dec";
 import Cart from "../../assets/images/Cart";
 import { useFormik } from "formik";
+import Recomendations from "./Recomendations";
 
 const Details = () => {
   const formik = useFormik({
@@ -172,6 +173,7 @@ const Details = () => {
           Термостабильны, хорошо переносят процесс заморозка – оттаивание. В
           наличии 2 вкуса: - Вишня - Клубника
         </Typography>
+        <Recomendations />
       </Container>
     </>
   );

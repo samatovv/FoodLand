@@ -1,15 +1,42 @@
-import { Box, Icon, IconButton, Typography } from "@mui/material";
-import React from "react";
-import img from "../assets/images/card.webp";
+import { Box, IconButton, Typography } from "@mui/material";
+import React, { useState } from "react";
 import ButtonMore from "./ButtonMore";
 import { Link } from "react-router-dom";
+import AddOrDelete from "./AddOrDelete";
 
-const Card = () => {
+const Card = ({ item, search }) => {
+  const details = search ? item?.product : item;
+  const [count, setCount] = useState(1);
+  const clickHandler = () => {
+    if (localStorage.getItem("cart")) {
+      let cart = localStorage.getItem("cart");
+      cart = JSON.parse(cart);
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([
+          ...cart,
+          {
+            id: details.id,
+            count: count,
+          },
+        ])
+      );
+    } else
+      localStorage.setItem(
+        "cart",
+        JSON.stringify([
+          {
+            id: details.id,
+            count: count,
+          },
+        ])
+      );
+  };
+
   return (
     <Box
       p={2}
       sx={{
-        
         "&:hover img": {
           transform: "scale(1.3)",
         },
@@ -19,17 +46,22 @@ const Card = () => {
       borderRadius={3}
     >
       <Link
-        to="/catalog/details/1"
+        to={`/catalog/details/${details.id}}`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
         <img
-          src={img}
-          style={{ borderRadius: "12px", height: 178, transition:'all 800ms ease' }}
+          src={Array.isArray(details.images) && details?.images[0]?.url}
+          style={{
+            borderRadius: "12px",
+            height: 178,
+            objectFit: "cover",
+            transition: "all 800ms ease",
+          }}
           width="100%"
           alt=""
         />
       </Link>
-      <Link to="/catalog/details/1">
+      <Link to={`/catalog/details/${details.id}}`}>
         <Typography
           color="#000"
           mt={2}
@@ -42,11 +74,11 @@ const Card = () => {
           variant="subtitle1"
           lineHeight={1}
         >
-          Шпатель кондитерский пластиковый 254мм 50 SG250B
+          {details?.name}
         </Typography>
       </Link>
       <Typography mt={0.5} mb={1} color="#797979" variant="body2">
-        Вес : 150 кг
+        Вес : {details?.weight} кг
       </Typography>
       <Box
         display="flex"
@@ -55,9 +87,10 @@ const Card = () => {
         justifyContent="space-between"
       >
         <Typography fontWeight={700} variant="h5">
-          550 c
+          {details?.price} c
         </Typography>
-        <Box
+        <AddOrDelete count={count} setCount={setCount} />
+        {/* <Box
           p="4px"
           border="1px solid #EEEEEE"
           display="flex"
@@ -111,9 +144,10 @@ const Card = () => {
               />
             </svg>
           </IconButton>
-        </Box>
+        </Box> */}
       </Box>
       <ButtonMore
+        onClick={clickHandler}
         fullWidth
         sx={{ border: "1px solid #F0F0F0" }}
         txt="В корзину"
