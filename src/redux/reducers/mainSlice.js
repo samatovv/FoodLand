@@ -7,6 +7,7 @@ const initialState = {
   recomendations: [],
   categories: [],
   news: [],
+  newsDetails: {},
 };
 
 export const mainSlice = createSlice({
@@ -32,6 +33,10 @@ export const mainSlice = createSlice({
     setNews: (state, action) => {
       state.news = action.payload;
     },
+
+    setNewsDetails: (state, action) => {
+      state.newsDetails = action.payload;
+    },
   },
 });
 
@@ -53,12 +58,17 @@ export const getNews = () => (dispatch) => {
   Main.getNews().then((res) => dispatch(setNews(res)));
 };
 
+export const getNewsDetails = (id) => (dispatch) => {
+  Main.getNewsDetails(id).then((res) => dispatch(setNewsDetails(res)));
+};
+
 export const {
   handleDrawer,
   setProductsRecomended,
   setCategories,
   setNews,
   setBanners,
+  setNewsDetails,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

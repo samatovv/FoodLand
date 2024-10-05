@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import ButtonMore from "./ButtonMore";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
+import AddToCart from "./AddToCart";
 
 const Card = ({ item, search }) => {
   const details = search ? item?.product : item;
@@ -11,7 +12,7 @@ const Card = ({ item, search }) => {
   const id = item.id;
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")));
-  }, [cart]);
+  }, []);
   const clickHandler = () => {
     let newItem = cart?.find((item) => item.id === id);
 
@@ -61,7 +62,7 @@ const Card = ({ item, search }) => {
       borderRadius={3}
     >
       <Link
-        to={`/catalog/details/${details.id}}`}
+        to={`/catalog/details/${details.id}`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
         <img
@@ -76,7 +77,7 @@ const Card = ({ item, search }) => {
           alt=""
         />
       </Link>
-      <Link to={`/catalog/details/${details.id}}`}>
+      <Link to={`/catalog/details/${details.id}`}>
         <Typography
           color="#000"
           mt={2}
@@ -132,8 +133,8 @@ const Card = ({ item, search }) => {
               <path
                 d="M18 12H6"
                 stroke="#858585"
-                stroke-width="1.4"
-                stroke-linecap="round"
+                strokeWidth="1.4"
+                strokeLinecap="round"
               />
             </svg>
           </IconButton>
@@ -153,25 +154,20 @@ const Card = ({ item, search }) => {
               <path
                 d="M12 6L12 18"
                 stroke="#858585"
-                stroke-width="1.4"
-                stroke-linecap="round"
+                strokeWidth="1.4"
+                strokeLinecap="round"
               />
               <path
                 d="M18 12H6"
                 stroke="#858585"
-                stroke-width="1.4"
-                stroke-linecap="round"
+                strokeWidth="1.4"
+                strokeLinecap="round"
               />
             </svg>
           </IconButton>
         </Box> */}
       </Box>
-      <ButtonMore
-        onClick={clickHandler}
-        fullWidth
-        sx={{ border: "1px solid #F0F0F0" }}
-        txt="В корзину"
-      />
+      <AddToCart count={count} id={id} card details={details} />
     </Box>
   );
 };

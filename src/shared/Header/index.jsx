@@ -12,7 +12,7 @@ const Header = () => {
     <Box
       component="header"
       position={!location.pathname.includes("/profile") && "fixed"}
-      zIndex={2}
+      zIndex={5}
       top
       width="100%"
       pt="25px"
@@ -46,25 +46,25 @@ const Header = () => {
           border="1px solid #ECECEC"
         >
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "sans active" : "sans")}
             to="/"
           >
             Главная
           </NavLink>
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "sans active" : "sans")}
             to="/about-us"
           >
             О нас
           </NavLink>
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "sans active" : "sans")}
             to="/news"
           >
             Новости
           </NavLink>
           <NavLink
-            className={({ isActive }) => (isActive ? "active" : "")}
+            className={({ isActive }) => (isActive ? "sans active" : "sans")}
             to="/catalog"
           >
             Каталог

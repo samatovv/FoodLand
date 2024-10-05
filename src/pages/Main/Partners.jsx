@@ -19,32 +19,32 @@ const Partners = () => {
         sx={{
           "& img": {
             filter: "grayscale(1)",
-            transition:"all 800ms ease",
+            transition: "all 800ms ease",
             "&:hover": {
               filter: "none",
             },
           },
         }}
       >
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img1} alt="" />
         </Grid2>
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img2} alt="" />
         </Grid2>
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img3} alt="" />
         </Grid2>
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img4} alt="" />
         </Grid2>
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img5} alt="" />
         </Grid2>
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img6} alt="" />
         </Grid2>
-        <Grid2 item size={1.7}>
+        <Grid2 item size={{ xs: 3, md: 1.7 }}>
           <img src={img7} alt="" />
         </Grid2>
       </Grid2>

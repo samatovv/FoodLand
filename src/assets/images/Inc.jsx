@@ -13,8 +13,8 @@ const Inc = () => {
       <path
         d="M18 12H6"
         stroke="#858585"
-        stroke-width="1.4"
-        stroke-linecap="round"
+        strokeWidth="1.4"
+        strokeLinecap="round"
       />
     </svg>
   );

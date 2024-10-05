@@ -12,8 +12,8 @@ const NavigateNextIcon = () => {
       <path
         d="M6.0013 12.5L9.21246 9.28779C9.64745 8.85267 9.64745 8.14734 9.21246 7.71221L6.0013 4.5"
         stroke="#8A8A8A"
-        stroke-width="1.67143"
-        stroke-linecap="round"
+        strokeWidth="1.67143"
+        strokeLinecap="round"
       />
     </svg>
   );

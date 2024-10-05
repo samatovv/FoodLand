@@ -1,26 +1,31 @@
-import {
-  Box,
-  Button,
-  Chip,
-  Container,
-  Grid2,
-  IconButton,
-  Typography,
-} from "@mui/material";
-import React from "react";
+import { Box, Container, Grid2, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import img from "../../assets/images/1.webp";
 import img2 from "../../assets/images/2.webp";
-import Inc from "../../assets/images/Inc";
-import Dec from "../../assets/images/Dec";
-import Cart from "../../assets/images/Cart";
 import { useFormik } from "formik";
 import Recomendations from "./Recomendations";
+import { getDetails } from "../../redux/reducers/products";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
+import AddOrDelete from "../../components/AddOrDelete";
+import AddToCart from "../../components/AddToCart";
 
 const Details = () => {
+  const dispatch = useDispatch();
+
+  const { id } = useParams();
+  const details = useSelector((state) => state.products.details);
+  const [count, setCount] = useState(1);
+
+  useEffect(() => {
+    dispatch(getDetails(id));
+  }, []);
+
   const formik = useFormik({
     initialValues: {},
     onSubmit: () => {},
   });
+
   return (
     <>
       <Container
@@ -30,46 +35,30 @@ const Details = () => {
         }}
       >
         <Grid2 container spacing={4}>
-          <Grid2 item size={6}>
-            <Box display="flex" columnGap={3}>
-              <Box
-                display="flex"
-                minWidth="105px"
-                flexDirection="column"
-                rowGap={1.5}
-              >
-                <img
-                  width="100%"
-                  height={105}
-                  style={{ borderRadius: 16, objectFit: "cover" }}
-                  src={img}
-                  alt=""
-                />
-                <img
-                  width="100%"
-                  height={105}
-                  style={{ borderRadius: 16, objectFit: "cover" }}
-                  src={img2}
-                  alt=""
-                />
-                <img
-                  width="100%"
-                  height={105}
-                  style={{ borderRadius: 16, objectFit: "cover" }}
-                  src={img}
-                  alt=""
-                />
-              </Box>
+          <Grid2 item size={5}>
+            <Box>
               <img
                 width="100%"
-                height={417}
+                height={405}
                 style={{ borderRadius: 16, objectFit: "cover" }}
-                src={img}
+                src={Array.isArray(details?.images) && details?.images[0]?.url}
                 alt=""
               />
+              <Box display="flex" mt={2} columnGap={2}>
+                {details?.images?.length > 1 &&
+                  details?.images.map((item) => (
+                    <img
+                      width={75}
+                      height={75}
+                      style={{ borderRadius: 16, objectFit: "cover" }}
+                      src={item.url}
+                      alt=""
+                    />
+                  ))}
+              </Box>
             </Box>
           </Grid2>
-          <Grid2 item size={6}>
+          <Grid2 item size={7}>
             <Box
               display="flex"
               height="100%"
@@ -78,19 +67,20 @@ const Details = () => {
             >
               <div>
                 <Typography
+                  className="sans"
                   variant="subtitle1"
                   mb={0.5}
                   color="var(--primary)"
                   fontWeight="700"
                 >
-                  Инвентарь для кондитерского дела
+                  {details.group}
                 </Typography>
-                <Typography variant="h4" fontWeight={700}>
-                  Кондитеркая насадка BX103
+                <Typography className="sans" variant="h4" fontWeight={700}>
+                  {details?.name}
                 </Typography>
               </div>
               <Box component="form" onSubmit={formik.handleSubmit}>
-                <Box
+                {/* <Box
                   display="flex"
                   sx={{
                     "& .MuiChip-root": {
@@ -113,7 +103,7 @@ const Details = () => {
                   <Chip label="BX104" variant="outlined" />
                   <Chip label="BX10S" variant="outlined" />
                   <Chip label="BS" variant="outlined" />
-                </Box>
+                </Box> */}
                 <Box width="50%">
                   <Box
                     mt={4}
@@ -122,33 +112,19 @@ const Details = () => {
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Typography variant="h3" fontWeight="600">
-                      550c
+                    <Typography className="sans" variant="h3" fontWeight="600">
+                      {details.price}c
                     </Typography>
-                    <Box
-                      p="8px 13px"
-                      border="1px solid #EEEEEE"
-                      display="flex"
-                      justifyContent="space-between"
-                      alignItems="center"
-                      borderRadius="1000px"
+                    <AddOrDelete
+                      count={count}
+                      setCount={setCount}
+                      id={details.id}
+                      price={details.price}
                       width="40%"
-                      sx={{ "& button": { padding: 0 } }}
-                    >
-                      <IconButton>
-                        <Inc />
-                      </IconButton>
-                      <Box component="span" m="0 12px">
-                        1
-                      </Box>
-                      <IconButton>
-                        <Dec />
-                      </IconButton>
-                    </Box>
+                      padding="8px 13px"
+                    />
                   </Box>
-                  <Button fullWidth variant="contained" color="primary">
-                    <Cart />В корзину
-                  </Button>
+                  <AddToCart count={count} id={id} details={details} />
                 </Box>
               </Box>
             </Box>
@@ -158,22 +134,22 @@ const Details = () => {
           variant="h5"
           mb={1}
           mt={3}
+          className="sans"
           fontWeight="600"
           color="var(--primary)"
         >
           Описание
         </Typography>
         <Typography
+          className="sans"
           variant="subtitle1"
           whiteSpace="pre-wrap"
           color="#767676"
           fontWeight="400"
         >
-          Подходят для начинки и украшения хлебобулочных и кондитерских изделий.
-          Термостабильны, хорошо переносят процесс заморозка – оттаивание. В
-          наличии 2 вкуса: - Вишня - Клубника
+          {details.description}
         </Typography>
-        <Recomendations />
+        <Recomendations details={details} />
       </Container>
     </>
   );

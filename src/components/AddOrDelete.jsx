@@ -5,6 +5,7 @@ import Dec from "../assets/images/Dec";
 
 const AddOrDelete = ({
   width,
+  padding,
   count,
   setCount,
   id,
@@ -21,14 +22,22 @@ const AddOrDelete = ({
 
         setCart([
           ...updatedCart,
-          { ...newItem, count: count + 1, sum: count + 1 * price },
+          {
+            ...newItem,
+            count: parseInt(count) + 1,
+            sum: parseInt(price) * (parseInt(count) + 1),
+          },
         ]);
 
         localStorage.setItem(
           "cart",
           JSON.stringify([
             ...updatedCart,
-            { ...newItem, count: count + 1, sum: count + 1 * price },
+            {
+              ...newItem,
+              count: parseInt(count) + 1,
+              sum: parseInt(price) * (parseInt(count) + 1),
+            },
           ])
         );
       }
@@ -38,7 +47,7 @@ const AddOrDelete = ({
 
   const deleteHandler = () => {
     if (count > 1) {
-      if (!cartPage) setCount(count - 1);
+      if (!cartPage) setCount(parseInt(count) - 1);
       else {
         let newItem = cart?.find((item) => item.id === id);
         let updatedCart = cart.filter((item) => item.id !== id);
@@ -46,12 +55,20 @@ const AddOrDelete = ({
           "cart",
           JSON.stringify([
             ...updatedCart,
-            { ...newItem, count: count - 1, sum: count - 1 * price },
+            {
+              ...newItem,
+              count: parseInt(count) - 1,
+              sum: (parseInt(count) - 1) * parseInt(price),
+            },
           ])
         );
         setCart([
           ...updatedCart,
-          { ...newItem, count: count - 1, sum: count - 1 * price },
+          {
+            ...newItem,
+            count: parseInt(count) - 1,
+            sum: (parseInt(count) - 1) * parseInt(price),
+          },
         ]);
       }
     }
@@ -59,8 +76,9 @@ const AddOrDelete = ({
 
   return (
     <Box
-      p="4px"
+      p={padding ? padding : "4px"}
       maxWidth={width}
+      width={width}
       border="1px solid #EEEEEE"
       display="flex"
       justifyContent="space-between"
@@ -71,7 +89,7 @@ const AddOrDelete = ({
       <IconButton onClick={deleteHandler}>
         <Inc />
       </IconButton>
-      <Box component="span" m="0 12px">
+      <Box component="span" className="sans" m="0 12px">
         {count}
       </Box>
       <IconButton onClick={add}>

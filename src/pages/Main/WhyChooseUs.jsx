@@ -52,7 +52,12 @@ const WhyChooseUs = () => {
                   borderTopLeftRadius: "0px",
                 }}
               >
-                <Typography color="#FFF" variant="subtitle2">
+                <Typography
+                  className="sans"
+                  fontWeight={400}
+                  color="#FFF"
+                  variant="subtitle2"
+                >
                   200+ товаров
                 </Typography>
               </Box>
@@ -69,10 +74,21 @@ const WhyChooseUs = () => {
               borderRadius="10px"
               maxHeight={350}
             >
-              <Typography variant="h4" mb={4.6} maxWidth={276} fontWeight="600">
+              <Typography
+                className="sans"
+                variant="h4"
+                mb={4.6}
+                maxWidth={276}
+                fontWeight="600"
+              >
                 Нам можно доверять.
               </Typography>
-              <Typography variant="body1" mb={12} color="#707070">
+              <Typography
+                className="sans"
+                variant="body1"
+                mb={12}
+                color="#707070"
+              >
                 Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь
                 нашим клиентам становиться ещё лучше
               </Typography>
@@ -101,7 +117,12 @@ const WhyChooseUs = () => {
                   left: 52,
                 }}
               >
-                <Typography color="#FFF" variant="subtitle2">
+                <Typography
+                  className="sans"
+                  fontWeight={400}
+                  color="#FFF"
+                  variant="subtitle2"
+                >
                   c 2018 года
                 </Typography>
               </Box>
@@ -116,10 +137,21 @@ const WhyChooseUs = () => {
               borderRadius="10px"
               maxHeight={350}
             >
-              <Typography variant="h4" mb={4.6} maxWidth={276} fontWeight="600">
+              <Typography
+                className="sans"
+                variant="h4"
+                mb={4.6}
+                maxWidth={276}
+                fontWeight="600"
+              >
                 Экспертность{" "}
               </Typography>
-              <Typography variant="body1" mb={12} color="#707070">
+              <Typography
+                className="sans"
+                variant="body1"
+                mb={12}
+                color="#707070"
+              >
                 Наша экспертность в сфере применения кондитерского сырья.
                 Возможность предоставления технологической поддержки.
               </Typography>
@@ -139,14 +171,25 @@ const WhyChooseUs = () => {
                 mb="34px"
                 maxWidth={276}
                 fontWeight="600"
+                className="sans"
               >
                 Гарантия качества
               </Typography>
 
-              <Typography fontSize={11} mb="33px" color="#707070">
+              <Typography
+                className="sans"
+                fontSize={11}
+                mb="33px"
+                color="#707070"
+              >
                 Высокий уровень поставляемых услуг
               </Typography>
-              <Typography variant="body1" mb="31px" color="#707070">
+              <Typography
+                className="sans"
+                variant="body1"
+                mb="31px"
+                color="#707070"
+              >
                 Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь
                 нашим клиентам становиться ещё лучше
               </Typography>

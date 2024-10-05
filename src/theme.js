@@ -99,7 +99,7 @@ export const theme = createTheme({
     MuiTextField: {
       styleOverrides: {
         root: {
-          "& .MuiFormControl-root": {
+          "&.MuiFormControl-root": {
             borderRadius: "100px",
           },
 
@@ -115,6 +115,7 @@ export const theme = createTheme({
           "& input": {
             backgroundColor: "#FFFFFF",
             borderRadius: "100px",
+            fontFamily:"Open Sans"
 
             // "&::placeholder": {
             //   fontWeight: "400",

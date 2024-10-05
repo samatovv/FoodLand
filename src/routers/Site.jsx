@@ -7,6 +7,7 @@ import Footer from "../shared/Footer";
 import Catalog from "../pages/Catalog";
 import Details from "../pages/Details";
 import AboutUs from "../pages/AboutUs";
+import NewsDetails from "../pages/News/Details";
 import { Box } from "@mui/material";
 import WhatsApp from "../shared/WhatsApp";
 
@@ -20,6 +21,7 @@ const Site = () => {
           <Route path="/" element={<Main />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/news" element={<News />} />
+          <Route path="/news/:id" element={<NewsDetails />} />
           <Route path="/catalog" element={<Catalog />} />
           <Route path="/catalog/details/:id" element={<Details />} />
         </Routes>

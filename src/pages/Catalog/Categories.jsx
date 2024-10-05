@@ -30,6 +30,7 @@ const Categories = ({ setChip, formik }) => {
       <Accordion
         expanded={expanded}
         onChange={() => setExpanded(!expanded)}
+        className="sans"
         sx={{
           "&.MuiPaper-root ": {
             backgroundColor: "transparent",
@@ -48,6 +49,10 @@ const Categories = ({ setChip, formik }) => {
           "& .MuiAccordion-root::before": { display: "none" },
           "& .MuiFormGroup-root ": {
             ml: "15px",
+          },
+          "& .MuiAccordionSummary-contentGutters": {
+            fontFamily: "Open Sans",
+            fontSize: 16,
           },
         }}
       >
@@ -74,6 +79,13 @@ const Categories = ({ setChip, formik }) => {
             {Array.isArray(categories) &&
               categories.map((item, idx) => (
                 <FormControlLabel
+                  key={idx}
+                  sx={{
+                    "& .MuiTypography-root": {
+                      fontFamily: "Open Sans",
+                      color: "#626262",
+                    },
+                  }}
                   onChange={() => {
                     setChip(item.name);
                     dispatch(

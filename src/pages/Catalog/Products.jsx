@@ -45,7 +45,7 @@ const Products = ({ chip, setChip, formik }) => {
   }, []);
 
   return (
-    <Box component="seciton">
+    <Box component="section">
       <Box
         display="flex"
         mb={2}
@@ -53,7 +53,7 @@ const Products = ({ chip, setChip, formik }) => {
         justifyContent="space-between"
       >
         <Typography variant="h4" fontWeight={700}>
-          {search}
+          {search ? search : "Каталог"}
         </Typography>
         <TextField
           placeholder="Найти на Foodland..."
@@ -86,9 +86,19 @@ const Products = ({ chip, setChip, formik }) => {
           }}
         />
       </Box>
-      <Box display="flex" mb={2.8} columnGap={1}>
+      <Box display="flex" mb={2.6} columnGap={1}>
         {chip && (
-          <Chip label={chip} variant="outlined" onDelete={handleDelete} />
+          <Chip
+            sx={{
+              "& .MuiChip-label": {
+                fontFamily: "Open Sans",
+                color: "#959595",
+              },
+            }}
+            label={chip}
+            variant="outlined"
+            onDelete={handleDelete}
+          />
         )}
       </Box>
       <Grid2 container>

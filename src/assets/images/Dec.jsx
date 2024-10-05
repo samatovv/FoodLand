@@ -13,14 +13,14 @@ const Dec = () => {
       <path
         d="M12 6L12 18"
         stroke="#858585"
-        stroke-width="1.4"
-        stroke-linecap="round"
+        strokeWidth="1.4"
+        strokeLinecap="round"
       />
       <path
         d="M18 12H6"
         stroke="#858585"
-        stroke-width="1.4"
-        stroke-linecap="round"
+        strokeWidth="1.4"
+        strokeLinecap="round"
       />
     </svg>
   );

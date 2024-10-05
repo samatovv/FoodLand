@@ -4,6 +4,7 @@ import { Products } from "../../api/";
 const initialState = {
   products: [],
   search: "",
+  details: {},
 };
 
 export const productsSlice = createSlice({
@@ -16,6 +17,10 @@ export const productsSlice = createSlice({
     setSearch: (state, action) => {
       state.search = action.payload;
     },
+
+    setDetails: (state, action) => {
+      state.details = action.payload;
+    },
   },
 });
 
@@ -23,6 +28,10 @@ export const getProducts = (data) => (dispatch) => {
   Products.getProducts(data).then((res) => dispatch(setProducts(res)));
 };
 
-export const { setProducts, setSearch } = productsSlice.actions;
+export const getDetails = (id) => (dispatch) => {
+  Products.getDetails(id).then((res) => dispatch(setDetails(res)));
+};
+
+export const { setProducts, setSearch, setDetails } = productsSlice.actions;
 
 export default productsSlice.reducer;

@@ -1,5 +1,6 @@
 import axios from "axios";
 import cookie from "cookie_js";
+import { getNews } from "../redux/reducers/mainSlice";
 
 function get_token() {
   return cookie.get("foodland_token");
@@ -14,7 +15,6 @@ export const instance = axios.create(
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json; charset=UTF-8",
-
           Authorization: `Bearer ${get_token()}`,
         },
       }
@@ -26,6 +26,15 @@ export const instance = axios.create(
         },
       }
 );
+
+export const formData = axios.create({
+  baseURL: `https://foodlandtest.com/v1/`,
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "multipart/form-data",
+    Authorization: `Bearer ${get_token()}`,
+  },
+});
 
 export const Main = {
   getBanners() {
@@ -58,12 +67,26 @@ export const Main = {
       .then((response) => response.data)
       .catch((error) => error.response);
   },
+
+  getNewsDetails(id) {
+    return instance
+      .get(`posts/${id}`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
 };
 
 export const Products = {
   getProducts(data) {
     return instance
       .get(data)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+
+  getDetails(id) {
+    return instance
+      .get(`products/${id}`)
       .then((response) => response.data)
       .catch((error) => error.response);
   },
@@ -78,15 +101,22 @@ export const Profile = {
   },
 
   uploadFile(data) {
-    return instance
+    return formData
       .post(`upload/single-local`, data)
       .then((response) => response)
       .catch((error) => error.response);
   },
 
-  getProfileData(id) {
+  updateProfileData(data) {
     return instance
-      .get(`users/${id}`)
+      .patch(`users`, data)
+      .then((response) => response)
+      .catch((error) => error.response);
+  },
+
+  getProfileData() {
+    return instance
+      .get(`users/profile`)
       .then((response) => response.data)
       .catch((error) => error.response);
   },
@@ -95,6 +125,20 @@ export const Profile = {
     return instance
       .post(`orders`, data)
       .then((response) => response)
+      .catch((error) => error.response);
+  },
+
+  repeatOrder(id) {
+    return instance
+      .post(`orders/reorder/${id}`)
+      .then((response) => response)
+      .catch((error) => error.response);
+  },
+
+  getOrders(id) {
+    return instance
+      .get(`/orders?page=5&client=${id}&complexity=easy`)
+      .then((response) => response.data)
       .catch((error) => error.response);
   },
 };

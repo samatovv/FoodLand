@@ -6,6 +6,7 @@ const initialState = {
   loginData: {},
   uploadedFile: {},
   createdOrder: {},
+  orders: {},
 };
 
 export const profileSlice = createSlice({
@@ -30,11 +31,15 @@ export const profileSlice = createSlice({
     setCreatedOrder: (state, action) => {
       state.createdOrder = action.payload;
     },
+
+    setOrders: (state, action) => {
+      state.orders = action.payload;
+    },
   },
 });
 
-export const getProfileData = (data) => (dispatch) => {
-  Profile.getProfileData(data).then((res) => dispatch(setProfile(res)));
+export const getProfileData = () => (dispatch) => {
+  Profile.getProfileData().then((res) => dispatch(setProfile(res)));
 };
 
 export const login = (data) => (dispatch) => {
@@ -45,11 +50,28 @@ export const uploadFile = (data) => (dispatch) => {
   Profile.uploadFile(data).then((res) => dispatch(setUploadedFile(res)));
 };
 
+export const updateProfileData = (data) => (dispatch) => {
+  Profile.updateProfileData(data).then((res) => dispatch(setUploadedFile(res)));
+};
+
 export const createOrder = (data) => (dispatch) => {
   Profile.createOrder(data).then((res) => dispatch(setCreatedOrder(res)));
 };
 
-export const { setProfile, setLoginData, setUploadedFile, setCreatedOrder } =
-  profileSlice.actions;
+export const repeatOrder = (id) => (dispatch) => {
+  Profile.repeatOrder(id).then((res) => dispatch(setCreatedOrder(res)));
+};
+
+export const getOrders = (id) => (dispatch) => {
+  Profile.getOrders(id).then((res) => dispatch(setOrders(res)));
+};
+
+export const {
+  setProfile,
+  setLoginData,
+  setUploadedFile,
+  setCreatedOrder,
+  setOrders,
+} = profileSlice.actions;
 
 export default profileSlice.reducer;

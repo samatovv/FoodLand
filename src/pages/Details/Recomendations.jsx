@@ -10,16 +10,21 @@ import ArrowBackIcon from "../../components/ArrowBackIcon";
 import ArrowForwardIcon from "../../components/ArrowForwardIcon";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductsRecomended } from "../../redux/reducers/mainSlice";
+import { getProducts } from "../../redux/reducers/products";
 
-const Recomendations = () => {
+const Recomendations = ({ details }) => {
   const dispatch = useDispatch();
 
-  const recomendations = useSelector((state) => state.main.recomendations);
+  const products = useSelector((state) => state.products.products);
 
   useEffect(() => {
-    dispatch(getProductsRecomended());
-  }, []);
+    if (details?.id)
+      dispatch(
+        getProducts(
+          `https://foodlandtest.com/v1/products?limit=10&page=1&category=${details?.category}`
+        )
+      );
+  }, [details]);
 
   return (
     <Box component="section" mt={6}>
@@ -27,10 +32,10 @@ const Recomendations = () => {
         Вам могут понравиться{" "}
       </Typography>
       <Grid2 container>
-        {Array.isArray(recomendations?.results) &&
-          recomendations?.results.slice(0, 4).map((item, idx) => (
+        {Array.isArray(products?.results) &&
+          products?.results.slice(0, 4).map((item, idx) => (
             <Grid2 item size={2.4}>
-              <Card search item={item} />
+              <Card  item={item} />
             </Grid2>
           ))}
       </Grid2>

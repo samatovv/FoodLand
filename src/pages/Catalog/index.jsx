@@ -17,10 +17,10 @@ import { useFormik } from "formik";
 
 const Catalog = () => {
   const breadcrumbs = [
-    <Link key="1" to="/">
+    <Link className="sans" key="1" to="/">
       Главная
     </Link>,
-    <Typography key="2" sx={{ color: "text.primary" }}>
+    <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
       Каталог
     </Typography>,
   ];

@@ -26,20 +26,22 @@ const Benefits = () => {
             >
               <Box p="30px">
                 <Typography
-                  fontWeight="bold"
+                  fontWeight="700"
                   mb={5.5}
                   lineHeight="123%"
                   variant="h6"
+                  className="sans"
                 >
                   Мы гордимся долгосрочными и крепкими отношениями с нашими
                   партнёрами и активно развиваем новые.
                 </Typography>
                 <Typography
-                  fontWeight="regular"
+                  fontWeight="300"
                   lineHeight="140%"
                   variant="subtitle1"
+                  className="sans"
                 >
-                  &#8212; Мы предлагаем вам не росто сырье, а экспертность и
+                  &#8212; Мы предлагаем вам не просто сырье, а экспертность и
                   индивидуальный подход: всегда готовы помочь найти
                   альтернативу, закрыть срочную потребность или предложить
                   уникальное решение.

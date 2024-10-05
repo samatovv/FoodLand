@@ -10,9 +10,10 @@ import Header from "../shared/Header";
 import Footer from "../shared/Footer";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../redux/reducers/profile";
+import { getProfileData, login } from "../redux/reducers/profile";
 import cookie from "cookie_js";
 import { useNavigate } from "react-router";
+import { instance } from "../api";
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,7 @@ const Auth = () => {
       cookie.set("foodland_token", loginData.data.tokens.access.token, {
         expires: loginData.data.tokens.access.expires,
       });
+      instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
       navigate("/profile");
     } else alert(loginData.data.message);
 
