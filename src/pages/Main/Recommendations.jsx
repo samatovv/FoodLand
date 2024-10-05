@@ -1,28 +1,32 @@
-import {
-  Box,
-  Container,
-  Grid2,
-  Pagination,
-  PaginationItem,
-  Typography,
-} from "@mui/material";
-import React, { useEffect } from "react";
+import { Box, Container, Grid2, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import ButtonMore from "../../components/ButtonMore";
 import Card from "../../components/Card";
-import ArrowBackIcon from "../../components/ArrowBackIcon";
-import ArrowForwardIcon from "../../components/ArrowForwardIcon";
 import { Link } from "react-router-dom";
 import { getProductsRecomended } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
+import PaginationLarge from "../../components/Pagination";
+import { getProducts } from "../../redux/reducers/products";
 
 const Recommendations = () => {
   const dispatch = useDispatch();
 
-  const recomendations = useSelector((state) => state.main.recomendations);
+  const [page, setPage] = useState(1);
+
+  const products = useSelector((state) => state.products.products);
+
+  // useEffect(() => {
+  //   dispatch(getProductsRecomended());
+  // }, []);
 
   useEffect(() => {
-    dispatch(getProductsRecomended());
-  }, []);
+    dispatch(getProducts(`recommendations?limit=4&page=${page}`));
+  }, [page]);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   return (
     <Box component="section" p="76px 0" backgroundColor="#f4f4f4">
       <Container maxWidth="lg">
@@ -49,26 +53,18 @@ const Recommendations = () => {
           </Link>
         </Box>
         <Grid2 container spacing={5}>
-          {Array.isArray(recomendations?.results) &&
-            recomendations?.results?.slice(0, 4).map((item, idx) => (
+          {Array.isArray(products?.results) &&
+            products?.results?.map((item, idx) => (
               <Grid2 item size={3} key={idx}>
                 <Card search item={item} />
               </Grid2>
             ))}
         </Grid2>
-        <Box display="flex" justifyContent="center" mt={5}>
-          <Pagination
-            size="large"
-            renderItem={(item) => (
-              <PaginationItem
-                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                {...item}
-              />
-            )}
-            count={5}
-            color="primary"
-          />
-        </Box>{" "}
+        <PaginationLarge
+          page={page}
+          handleChange={handleChange}
+          products={products}
+        />
       </Container>
     </Box>
   );

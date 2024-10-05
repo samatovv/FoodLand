@@ -90,7 +90,7 @@ const Categories = ({ setChip, formik }) => {
                     setChip(item.name);
                     dispatch(
                       getProducts(
-                        `https://foodlandtest.com/v1/products?limit=10&page=1&category=${item.id}`
+                        `https://foodlandtest.com/v1/products?limit=12&page=1&category=${item.id}`
                       )
                     );
                   }}

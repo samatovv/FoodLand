@@ -12,13 +12,9 @@ import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router";
 import { getProducts, setSearch } from "../../redux/reducers/products";
+import PaginationLarge from "../../components/Pagination";
 
 const Products = ({ chip, setChip, formik }) => {
-  const handleDelete = () => {
-    setChip(null);
-    formik.setFieldValue("category", null);
-    dispatch(getProducts("/products"));
-  };
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -26,6 +22,17 @@ const Products = ({ chip, setChip, formik }) => {
   const search = useSelector((state) => state.products.search);
 
   const [searchValue, setValueSearch] = useState("");
+  const [page, setPage] = useState(1);
+
+  const handleDelete = () => {
+    setChip(null);
+    formik.setFieldValue("category", null);
+    dispatch(getProducts("/products"));
+  };
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
 
   useEffect(() => {
     if (location.search) {
@@ -39,10 +46,23 @@ const Products = ({ chip, setChip, formik }) => {
           }`
         )
       );
-    } else {
-      dispatch(getProducts("/products"));
     }
   }, []);
+
+  useEffect(() => {
+    setPage(1);
+  }, [formik.values.category]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    dispatch(
+      getProducts(
+        `products?limit=12${
+          formik.values.category ? `&category=${formik.values.category}` : ""
+        }&page=${page}`
+      )
+    );
+  }, [page]);
 
   return (
     <Box component="section">
@@ -109,6 +129,12 @@ const Products = ({ chip, setChip, formik }) => {
             </Grid2>
           ))}
       </Grid2>
+
+      <PaginationLarge
+        page={page}
+        handleChange={handleChange}
+        products={products}
+      />
     </Box>
   );
 };

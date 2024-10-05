@@ -145,11 +145,14 @@ const Table = () => {
                             <Cancelled />
                           ) : item.status === "completed" ? (
                             <Check />
+                          ) : item.status === "accepted" ? (
+                            <Check />
                           ) : (
-                            item.status === "accepted" && <Check />
+                            item.status === "preorder" && <InProcess />
                           )
                         }
                         sx={{
+                          minWidth: 129,
                           background:
                             item?.status === "new"
                               ? "#f3f4f6"
@@ -157,7 +160,9 @@ const Table = () => {
                               ? "#FBDCDC"
                               : item.status === "completed"
                               ? "#EBFBDC"
-                              : item.status === "accepted" && "#DCF2FB",
+                              : item.status === "accepted"
+                              ? "#DCF2FB"
+                              : item.status === "preorder" && "#DCF2FB",
                         }}
                         label={
                           item?.status === "new"
@@ -166,7 +171,9 @@ const Table = () => {
                             ? "Отменен"
                             : item.status === "completed"
                             ? "Готово"
-                            : item.status === "accepted" && "Принят"
+                            : item.status === "accepted"
+                            ? "Принят"
+                            : item.status === "preorder" && "Предзаказ"
                         }
                       />
                     </td>

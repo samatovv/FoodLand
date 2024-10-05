@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -7,7 +8,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const Form = ({ formik, cart }) => {
   return (
@@ -77,6 +80,13 @@ const Form = ({ formik, cart }) => {
             >
               Дата доставки
             </Typography>
+            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DatePicker
+              // name="deliveryDate"
+              // onChange={formik.handleChange}
+              // value={formik.values.deliveryDate}
+              />
+            </LocalizationProvider> */}
             <TextField
               name="deliveryDate"
               onChange={formik.handleChange}

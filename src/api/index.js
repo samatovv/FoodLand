@@ -137,7 +137,7 @@ export const Profile = {
 
   getOrders(id) {
     return instance
-      .get(`/orders?page=5&client=${id}&complexity=easy`)
+      .get(`/orders?limit=200&client=${id}&complexity=easy`)
       .then((response) => response.data)
       .catch((error) => error.response);
   },

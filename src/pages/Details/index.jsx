@@ -15,11 +15,14 @@ const Details = () => {
 
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
+
   const [count, setCount] = useState(1);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     dispatch(getDetails(id));
-  }, []);
+    setPage(1);
+  }, [id]);
 
   const formik = useFormik({
     initialValues: {},
@@ -149,7 +152,12 @@ const Details = () => {
         >
           {details.description}
         </Typography>
-        <Recomendations details={details} />
+        <Recomendations
+          id={id}
+          details={details}
+          page={page}
+          setPage={setPage}
+        />
       </Container>
     </>
   );

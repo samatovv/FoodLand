@@ -1,30 +1,36 @@
-import {
-  Box,
-  Grid2,
-  Pagination,
-  PaginationItem,
-  Typography,
-} from "@mui/material";
-import React, { useEffect } from "react";
-import ArrowBackIcon from "../../components/ArrowBackIcon";
-import ArrowForwardIcon from "../../components/ArrowForwardIcon";
+import { Box, Grid2, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/reducers/products";
+import PaginationLarge from "../../components/Pagination";
 
-const Recomendations = ({ details }) => {
+const Recomendations = ({ details, id, setPage, page }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.products);
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
+  // useEffect(() => {
+  //   if (details?.id)
+  //     dispatch(
+  //       getProducts(
+  //         `https://foodlandtest.com/v1/products?limit=4&page=1&category=${details?.category}`
+  //       )
+  //     );
+  // }, [details]);
 
   useEffect(() => {
     if (details?.id)
       dispatch(
         getProducts(
-          `https://foodlandtest.com/v1/products?limit=10&page=1&category=${details?.category}`
+          `products?limit=5&category=${details?.category}&page=${page}`
         )
       );
-  }, [details]);
+  }, [id, page, details]);
 
   return (
     <Box component="section" mt={6}>
@@ -33,25 +39,19 @@ const Recomendations = ({ details }) => {
       </Typography>
       <Grid2 container>
         {Array.isArray(products?.results) &&
-          products?.results.slice(0, 4).map((item, idx) => (
-            <Grid2 item size={2.4}>
-              <Card  item={item} />
-            </Grid2>
-          ))}
+          products?.results
+            ?.filter((item) => item.id !== id)
+            .map((item, idx) => (
+              <Grid2 item size={2.4}>
+                <Card item={item} />
+              </Grid2>
+            ))}
       </Grid2>
-      <Box display="flex" justifyContent="center" mt={5}>
-        <Pagination
-          size="large"
-          renderItem={(item) => (
-            <PaginationItem
-              slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-              {...item}
-            />
-          )}
-          count={5}
-          color="primary"
-        />
-      </Box>{" "}
+      <PaginationLarge
+        page={page}
+        handleChange={handleChange}
+        products={products}
+      />
     </Box>
   );
 };
