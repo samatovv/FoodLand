@@ -1,6 +1,5 @@
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import ButtonMore from "./ButtonMore";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
@@ -9,45 +8,46 @@ const Card = ({ item, search }) => {
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
   const [cart, setCart] = useState(null);
-  const id = item.id;
+  const id = item?.id;
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")));
   }, []);
-  const clickHandler = () => {
-    let newItem = cart?.find((item) => item.id === id);
 
-    if (cart?.length === 0 || !newItem) {
-      localStorage.setItem(
-        "cart",
-        JSON.stringify([
-          ...cart,
-          {
-            id: details.id,
-            count: count,
-            name: details.name,
-            img: details.images[0].url,
-            description: details.description,
-            sum: details.price * count,
-            price: details.price,
-            idx: details.customId,
-          },
-        ])
-      );
-    } else {
-      let updatedCart = cart?.filter((item) => item.id !== id);
-      localStorage.setItem(
-        "cart",
-        JSON.stringify([
-          ...updatedCart,
-          {
-            ...newItem,
-            count: newItem?.count + count,
-            sum: details.price * newItem?.count + count,
-          },
-        ])
-      );
-    }
-  };
+  // const clickHandler = () => {
+  //   let newItem = cart?.find((item) => item?.id === id);
+
+  //   if (cart?.length === 0 || !newItem) {
+  //     localStorage.setItem(
+  //       "cart",
+  //       JSON.stringify([
+  //         ...cart,
+  //         {
+  //           id: details?.id,
+  //           count: count,
+  //           name: details.name,
+  //           img: details.images[0].url,
+  //           description: details.description,
+  //           sum: details.price * count,
+  //           price: details.price,
+  //           idx: details.customId,
+  //         },
+  //       ])
+  //     );
+  //   } else {
+  //     let updatedCart = cart?.filter((item) => item?.id !== id);
+  //     localStorage.setItem(
+  //       "cart",
+  //       JSON.stringify([
+  //         ...updatedCart,
+  //         {
+  //           ...newItem,
+  //           count: newItem?.count + count,
+  //           sum: details.price * newItem?.count + count,
+  //         },
+  //       ])
+  //     );
+  //   }
+  // };
 
   return (
     <Box
@@ -62,11 +62,11 @@ const Card = ({ item, search }) => {
       borderRadius={3}
     >
       <Link
-        to={`/catalog/details/${details.id}`}
+        to={`/catalog/details/${details?.id}`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
         <img
-          src={Array.isArray(details.images) && details?.images[0]?.url}
+          src={Array.isArray(details?.images) && details?.images[0]?.url}
           style={{
             borderRadius: "12px",
             height: 178,
@@ -77,7 +77,7 @@ const Card = ({ item, search }) => {
           alt=""
         />
       </Link>
-      <Link to={`/catalog/details/${details.id}`}>
+      <Link to={`/catalog/details/${details?.id}`}>
         <Typography
           color="#000"
           mt={2}
@@ -108,7 +108,7 @@ const Card = ({ item, search }) => {
         <AddOrDelete
           count={count}
           setCount={setCount}
-          id={item.id}
+          id={item?.id}
           price={item.price}
         />
         {/* <Box
