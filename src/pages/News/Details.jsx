@@ -54,23 +54,22 @@ const NewsDetails = () => {
             component="img"
             sx={{
               mt: 3,
-              mb: 4,
+              mb: { xs: 3, md: 4 },
               borderRadius: 2,
               objectFit: "cover",
             }}
             width="100%"
-            height="351px"
+            height={{ xs: 146, md: "351px" }}
             src={details.imageUrl}
             alt=""
           />
-          <Typography fontSize="35px" fontWeight="700">
+          <Typography fontSize={{ xs: 25, md: "35px" }} fontWeight="700">
             {details.title}
           </Typography>
           <Typography
             mt={2.5}
-            variant="h5"
+            fontSize={{ xs: 14, md: 16 }}
             fontWeight={400}
-            c
             className="sans"
             lineHeight="27.24px"
           >
@@ -86,7 +85,7 @@ const NewsDetails = () => {
             alignItems="center"
             mb={3}
           >
-            <Typography fontSize="40px" fontWeight="700">
+            <Typography fontSize={{ xs: 18, md: "40px" }} fontWeight="700">
               Недавние новости
             </Typography>
             <Link to="/news">
@@ -99,10 +98,9 @@ const NewsDetails = () => {
                 ?.slice(0, 3)
                 .filter((item) => item.id !== id)
                 .map((item, idx) => (
-                  <Grid2 key={idx} size={4}>
+                  <Grid2 key={idx} size={{ xs: 12, sm: 6, md: 4 }}>
                     <Link to={`/news/${item.id}`}>
                       <Box
-                        pr="38px"
                         className="news__card"
                         sx={{
                           "& svg": {
@@ -183,7 +181,10 @@ const NewsDetails = () => {
                         >
                           {item.content}
                         </Typography>
-                        <span style={{ textDecoration: "underline" }}>
+                        <span
+                          className="sans"
+                          style={{ textDecoration: "underline" }}
+                        >
                           Читать далее
                           <IconButton sx={{ p: 0, ml: 1 }}>
                             <svg

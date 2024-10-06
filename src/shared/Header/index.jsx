@@ -23,7 +23,7 @@ const Header = () => {
       zIndex={filter ? 1201 : 100}
       backgroundColor="#FFFFFF"
       width="100%"
-      p={{ xs: "11px 15px", md: "25px 0 0" }}
+      p={{ xs: "11px 0", md: "25px 0 0" }}
       borderBottom={filter ? "1px solid #D3D3D3" : "none"}
     >
       <Container
