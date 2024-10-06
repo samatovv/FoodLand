@@ -23,7 +23,12 @@ const Filter = ({ formik, setChip }) => {
       anchor="bottom"
       onClose={() => dispatch(handleFilter(false))}
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Box
+        display="flex"
+        mt={4}
+        justifyContent="space-between"
+        alignItems="center"
+      >
         <Typography fontSize={24} fontWeight={700} className="sans">
           Категории
         </Typography>

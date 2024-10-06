@@ -15,7 +15,7 @@ import NewsCard from "../../components/NewsCard";
 
 const News = () => {
   const dispatch = useDispatch();
-  const md = useMediaQuery("(min-width:768px)");
+  const md = useMediaQuery("(min-width:769px)");
 
   const news = useSelector((state) => state.main.news);
   const lastPost = Array.isArray(news?.results) && news?.results[0];

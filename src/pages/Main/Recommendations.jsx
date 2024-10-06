@@ -60,7 +60,7 @@ const Recommendations = () => {
             </Link>
           )}
         </Box>
-        <Grid2 container spacing={{ xs: 2, md: 5 }}>
+        <Grid2 container spacing={{ xs: 2, lg: 5 }}>
           {Array.isArray(products?.results) &&
             products?.results?.map((item, idx) => (
               <Grid2 size={{ xs: 6, md: 3 }} key={idx}>

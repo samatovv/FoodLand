@@ -16,7 +16,7 @@ const Card = ({ item, search }) => {
         },
       }}
       p={search && { xs: "8px", md: "15px" }}
-      maxWidth={290}
+      maxWidth={{ xs: "unset", md: 290 }}
       backgroundColor="#FFF"
       borderRadius={3}
     >

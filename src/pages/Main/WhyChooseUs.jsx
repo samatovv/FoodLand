@@ -12,7 +12,7 @@ import img1 from "../../assets/images/why.webp";
 import img2 from "../../assets/images/why2.webp";
 
 const WhyChooseUs = () => {
-  const md = useMediaQuery("(min-width:768px)");
+  const md = useMediaQuery("(min-width:769px)");
   return (
     <Box
       component="section"
@@ -27,7 +27,7 @@ const WhyChooseUs = () => {
               display: "flex",
               flexDirection: " column",
               justifyContent: " space-between",
-              alignItems: " self-end",
+              alignItems: { xs: "start", md: "self-end" },
             }}
           >
             <Typography
@@ -98,7 +98,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 variant="body1"
-                mb={{ xs: 5, md: 12 }}
+                mb={{ xs: 5, lg: 12 }}
                 color="#707070"
               >
                 Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь
@@ -165,7 +165,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 variant="body1"
-                mb={{ xs: 3, md: 12 }}
+                mb={{ xs: 3, lg: 12 }}
                 color="#707070"
               >
                 Наша экспертность в сфере применения кондитерского сырья.
@@ -183,7 +183,7 @@ const WhyChooseUs = () => {
             >
               <Typography
                 variant="h4"
-                mb={{ xs: 2, md: "34px" }}
+                mb={{ xs: 2, lg: "34px" }}
                 maxWidth={276}
                 fontWeight="600"
                 className="sans"
@@ -194,7 +194,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 fontSize={{ xs: 13, md: 11 }}
-                mb={{ xs: 1, md: "33px" }}
+                mb={{ xs: 1, lg: "33px" }}
                 color="#707070"
               >
                 Высокий уровень поставляемых услуг
@@ -202,7 +202,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 variant="body1"
-                mb={{ xs: 3, md: "31px" }}
+                mb={{ xs: 3, lg: "31px" }}
                 color="#707070"
               >
                 Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь

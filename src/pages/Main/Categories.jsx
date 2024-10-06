@@ -35,7 +35,7 @@ const Categories = () => {
         </Typography>
         <Grid2
           container
-          spacing={{ xs: 2, md: 5 }}
+          spacing={{ xs: 2, lg: 5 }}
           sx={{
             "& .category__card": {
               borderRadius: "16px",
@@ -44,8 +44,8 @@ const Categories = () => {
             "& .category__more": {
               position: "absolute",
               overflow: "hidden",
-              bottom: { xs: 8, md: 20 },
-              left: { xs: 8, md: 20 },
+              bottom: { xs: 16, lg: 20 },
+              left: { xs: 16, lg: 20 },
               color: "#FFF",
               zIndex: 3,
             },
@@ -80,7 +80,7 @@ const Categories = () => {
                       <ButtonMore
                         txt="Подробнее "
                         sx={{
-                          width: { xs: "90%", md: "100%" },
+                          width: { xs: "70%", sm: "90%", lg: "100%" },
                           "& span": { color: "#000" },
                         }}
                       />
