@@ -7,8 +7,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import img from "../../assets/images/1.webp";
-import img2 from "../../assets/images/2.webp";
+
 import { useFormik } from "formik";
 import Recomendations from "./Recomendations";
 import { getDetails } from "../../redux/reducers/products";

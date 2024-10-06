@@ -15,6 +15,7 @@ const Card = ({ item, search }) => {
           transform: "scale(1.3)",
         },
       }}
+      p={search && { xs: "8px", md: "15px" }}
       maxWidth={290}
       backgroundColor="#FFF"
       borderRadius={3}

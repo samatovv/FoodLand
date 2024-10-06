@@ -7,14 +7,23 @@ export const theme = createTheme({
 
     h1: {
       fontSize: 72,
+      "@media (max-width:768px)": {
+        fontSize: 30,
+      },
     },
 
     h2: {
       fontSize: 56,
+      "@media (max-width:768px)": {
+        fontSize: 28,
+      },
     },
 
     h3: {
       fontSize: 48,
+      "@media (max-width:768px)": {
+        fontSize: 28,
+      },
     },
 
     h4: {
@@ -31,6 +40,9 @@ export const theme = createTheme({
     h6: {
       fontSize: 18,
       lineHeight: 1,
+      "@media (max-width:768px)": {
+        fontSize: 16,
+      },
     },
 
     subtitle1: {

@@ -247,14 +247,14 @@ textarea {
 
 @media (max-width: 768px) {
   .swiper {
-    padding: 0 !important;
+    padding: 0 15px !important;
   }
 
   .swiper-button-next {
-    right: 0;
+    right: 8px;
   }
 
   .swiper-button-prev {
-    right: 50px;
+    right: 58px;
   }
 }

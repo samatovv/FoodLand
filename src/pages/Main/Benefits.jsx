@@ -6,14 +6,18 @@ import { Link } from "react-router-dom";
 
 const Benefits = () => {
   return (
-    <Box component="section" p="118px 0 152px" backgroundColor="#FFFFFF">
+    <Box
+      component="section"
+      p={{ xs: "56px 0", md: "118px 0 152px" }}
+      backgroundColor="#FFFFFF"
+    >
       <Container maxWidth="lg">
-        <Typography variant="h3" mb="47px" fontWeight="bold">
+        <Typography variant="h3" mb={{ xs: 4, md: "47px" }} fontWeight="bold">
           <span className="primary">FOODLAND</span> — Ваш путеводитель в области
           сырья и ингредиентов для пищевой промышленности
         </Typography>
         <Grid2 container spacing={1.5}>
-          <Grid2 item minHeight="100%" size={5}>
+          <Grid2 minHeight="100%" size={{ xs: 12, md: 5 }}>
             <Box
               height="100%"
               backgroundColor="#879957"
@@ -29,7 +33,7 @@ const Benefits = () => {
                   fontWeight="700"
                   mb={5.5}
                   lineHeight="123%"
-                  variant="h6"
+                  fontSize={{ xs: 16, md: 18 }}
                   className="sans"
                 >
                   Мы гордимся долгосрочными и крепкими отношениями с нашими
@@ -38,7 +42,7 @@ const Benefits = () => {
                 <Typography
                   fontWeight="300"
                   lineHeight="140%"
-                  variant="subtitle1"
+                  fontSize={{ xs: 16, md: 16 }}
                   className="sans"
                 >
                   &#8212; Мы предлагаем вам не просто сырье, а экспертность и
@@ -49,12 +53,13 @@ const Benefits = () => {
               </Box>
             </Box>
           </Grid2>
-          <Grid2 item size={7}>
+          <Grid2 size={{ xs: 12, md: 7 }}>
             <Box position="relative">
-              <img
+              <Box
+                component="img"
                 src={img}
                 width="100%"
-                height="503px"
+                height={{ xs: 275, md: "503px" }}
                 alt="Повар накладывает орешки в формочки"
               />
               <Link to="/about-us">

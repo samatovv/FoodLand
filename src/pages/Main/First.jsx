@@ -11,8 +11,9 @@ import Carousel from "../../shared/Carousel";
 
 const First = () => {
   const dispatch = useDispatch();
-  const [value, setValue] = useState("");
   const navigate = useNavigate();
+
+  const [value, setValue] = useState("");
 
   return (
     <Box component="section" p="138px 0 72px" backgroundColor="#f4f4f4">
@@ -33,7 +34,12 @@ const First = () => {
         >
           Ваш надежный поставщик сладкого и не только
         </Typography>
-        <Box mt={6}>
+        <Box
+          mt={6}
+          display="flex"
+          flexDirection={{ xs: "column", md: "row" }}
+          rowGap={2}
+        >
           <form
             style={{ display: "inline" }}
             action=""
@@ -48,10 +54,13 @@ const First = () => {
                 dispatch(setSearch(e.target.value));
               }}
               placeholder="Найти..."
-              sx={{ mr: "34.5px", width: 318 }}
+              sx={{ mr: "34.5px", width: { xs: "100%", md: 318 } }}
             />
           </form>
-          <ButtonMore sx={{ width: 193 }} txt="Заказать звонок"></ButtonMore>
+          <ButtonMore
+            sx={{ width: { xs: "100%", md: 193 } }}
+            txt="Заказать звонок"
+          ></ButtonMore>
         </Box>
         <Box mt={5} display="flex" alignItems="center" columnGap={3}>
           <img src={partners} width="152px" height="40px" alt="Партнеры" />

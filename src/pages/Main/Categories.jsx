@@ -16,7 +16,11 @@ const Categories = () => {
 
   useEffect(() => dispatch(getCategories()), []);
   return (
-    <Box component="section" backgroundColor="#FAF5F1" p="72px 0 152px">
+    <Box
+      component="section"
+      backgroundColor="#FAF5F1"
+      p={{ xs: "56px 0", md: "72px 0 152px" }}
+    >
       <Container maxWidth="lg">
         <Typography
           color="#493829"
@@ -24,18 +28,15 @@ const Categories = () => {
           fontWeight="bold"
           lineHeight="120%"
           maxWidth={681}
-          mb={5}
+          mb={{ xs: 3, md: 5 }}
         >
           Просмотр товаров по{" "}
           <span style={{ color: "#B89776" }}>категориям</span>
         </Typography>
         <Grid2
           container
-          spacing={5}
+          spacing={{ xs: 2, md: 5 }}
           sx={{
-            "& img": {
-              borderRadius: "16px",
-            },
             "& .category__card": {
               borderRadius: "16px",
               overflow: "hidden",
@@ -43,8 +44,8 @@ const Categories = () => {
             "& .category__more": {
               position: "absolute",
               overflow: "hidden",
-              bottom: 20,
-              left: 20,
+              bottom: { xs: 8, md: 20 },
+              left: { xs: 8, md: 20 },
               color: "#FFF",
               zIndex: 3,
             },
@@ -52,19 +53,24 @@ const Categories = () => {
         >
           {Array.isArray(categories) &&
             categories.slice(0, 4).map((item, idx) => (
-              <Grid2 item size={3} key={idx}>
-                <Box className="category__card" position="relative">
-                  <img
+              <Grid2 item size={{ xs: 6, md: 3 }} key={idx}>
+                <Box className="category__card">
+                  <Box
+                    component="img"
                     width="100%"
-                    height="396px"
-                    style={{ objectFit: "cover", minHeight: "396px" }}
+                    height={{ xs: 250, md: "396px" }}
+                    sx={{
+                      objectFit: "cover",
+                      minHeight: { xs: 250, md: "396px" },
+                      borderRadius: "16px",
+                    }}
                     src={item.image.url}
                     alt=""
                   />
                   <Box className="category__more">
                     <Typography
-                      variant="h5"
-                      mb={2.5}
+                      fontSize={{ xs: 16, md: 20 }}
+                      mb={{ xs: 1, md: 2.5 }}
                       maxWidth={219}
                       fontWeight="bold"
                     >
@@ -73,7 +79,10 @@ const Categories = () => {
                     <Link to={`/catalog/?category=${item.id}`}>
                       <ButtonMore
                         txt="Подробнее "
-                        sx={{ width: "100%", "& span": { color: "#000" } }}
+                        sx={{
+                          width: { xs: "90%", md: "100%" },
+                          "& span": { color: "#000" },
+                        }}
                       />
                     </Link>
                   </Box>

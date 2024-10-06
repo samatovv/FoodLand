@@ -1,23 +1,25 @@
-import { Box, Container, Grid2, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid2,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ButtonMore from "../../components/ButtonMore";
 import Card from "../../components/Card";
 import { Link } from "react-router-dom";
-import { getProductsRecomended } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationLarge from "../../components/Pagination";
 import { getProducts } from "../../redux/reducers/products";
 
 const Recommendations = () => {
   const dispatch = useDispatch();
+  const md = useMediaQuery("(min-width:768px)");
 
   const [page, setPage] = useState(1);
 
   const products = useSelector((state) => state.products.products);
-
-  // useEffect(() => {
-  //   dispatch(getProductsRecomended());
-  // }, []);
 
   useEffect(() => {
     dispatch(getProducts(`recommendations?limit=4&page=${page}`));
@@ -28,7 +30,11 @@ const Recommendations = () => {
   };
 
   return (
-    <Box component="section" p="76px 0" backgroundColor="#f4f4f4">
+    <Box
+      component="section"
+      p={{ xs: "56px 0", md: "76px 0" }}
+      backgroundColor="#f4f4f4"
+    >
       <Container maxWidth="lg">
         <Box
           display="flex"
@@ -48,14 +54,16 @@ const Recommendations = () => {
               Рекомендуемые товары
             </Typography>
           </div>
-          <Link to="/catalog">
-            <ButtonMore sx={{ width: 157 }} txt="Все товары" />
-          </Link>
+          {md && (
+            <Link to="/catalog">
+              <ButtonMore sx={{ width: 157 }} txt="Все товары" />
+            </Link>
+          )}
         </Box>
-        <Grid2 container spacing={5}>
+        <Grid2 container spacing={{ xs: 2, md: 5 }}>
           {Array.isArray(products?.results) &&
             products?.results?.map((item, idx) => (
-              <Grid2 item size={3} key={idx}>
+              <Grid2 size={{ xs: 6, md: 3 }} key={idx}>
                 <Card search item={item} />
               </Grid2>
             ))}
