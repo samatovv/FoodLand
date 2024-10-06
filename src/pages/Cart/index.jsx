@@ -1,4 +1,4 @@
-import { Container, Grid2 } from "@mui/material";
+import { Button, Container, Grid2, useMediaQuery } from "@mui/material";
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { useFormik } from "formik";
 // import { handleDrawer } from "../../redux/reducers/mainSlice";
@@ -8,12 +8,17 @@ import Success from "./Success";
 import Alert from "../../components/Alert";
 import Products from "./Products";
 import Form from "./Form";
+import ButtonMore from "../../components/ButtonMore";
+import FormDrawer from "./FormDrawer";
 
 const Cart = () => {
   const dispatch = useDispatch();
 
   const [cart, setCart] = useState([]);
   const [open, setOpen] = useState(false);
+  const [drawer, setDrawer] = useState(false);
+
+  const md = useMediaQuery("(min-width:769px)");
 
   const firstUpdate = useRef(true);
 
@@ -52,6 +57,8 @@ const Cart = () => {
     },
   });
 
+  const handleDrawer = () => setDrawer(!drawer);
+
   useEffect(() => {
     setCart(JSON.parse(localStorage.getItem("cart")));
   }, []);
@@ -74,30 +81,33 @@ const Cart = () => {
 
   return (
     <>
-      <Container maxWidth="lg" sx={{ mt: 4 }}>
-        <Grid2 container spacing={2}>
-          <Grid2
-            item
-            size={8}
-            border="1px solid #E2E2E2"
-            borderRadius="15px"
-            p="15px"
-            maxHeight={512}
-            overflow="scroll"
-          >
+      <Container maxWidth="lg" sx={{ mt: { xs: 0, md: 4 } }}>
+        <Grid2 container pb="24px" spacing={{ xs: 2, lg: 2 }}>
+          <Grid2 size={{ xs: 12, md: 8, lg: 8 }}>
             <Products cart={cart} setCart={setCart} />
           </Grid2>
-          <Grid2
-            item
-            size={4}
-            border="1px solid #E2E2E2"
-            borderRadius="15px"
-            p="15px"
-          >
-            <Form formik={formik} cart={cart} />
+          <Grid2 size={{ xs: 12, md: 4, lg: 4 }}>
+            {md ? (
+              <Form formik={formik} cart={cart} />
+            ) : (
+              <Button
+                fullWidth
+                onClick={handleDrawer}
+                variant="contained"
+                color="primary"
+              >
+                Оформить заказ
+              </Button>
+            )}
           </Grid2>
         </Grid2>
       </Container>
+      <FormDrawer
+        formik={formik}
+        cart={cart}
+        drawer={drawer}
+        handleDrawer={handleDrawer}
+      />
       <Success open={open} setOpen={setOpen} />
       <Alert
         message={createdOrder?.data?.message}

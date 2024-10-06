@@ -33,7 +33,7 @@ const Info = () => {
     if (uploadedFile.status === 201) {
       dispatch(
         updateProfileData({
-          id: `66f63b2791771229369aff0a`,
+          id: data.id,
           image: uploadedFile.data,
         })
       );
@@ -50,53 +50,68 @@ const Info = () => {
         flexDirection="column"
         alignItems="center"
         justifyContent="center"
-        p="28px 0"
+        p={{ xs: "16px 16px 0 16px", md: "28px 0" }}
         borderRadius="16px"
+        mt={{ xs: 4, md: 0 }}
         border="1px solid #BABABA"
       >
-        <img
-          src={!data?.image?.url ? auth : data?.image?.url}
-          width={100}
-          height={100}
-          style={{
-            objectFit: "cover",
-            borderRadius: "100px",
-          }}
-          alt=""
-        />
-        <Typography
-          className="sans"
-          variant="subtitle1"
-          mt={1.2}
-          mb={1.2}
-          fontWeight="600"
+        <Box
+          display="flex"
+          mb={{ xs: 2, md: 0 }}
+          flexDirection={{ xs: "row", md: "column" }}
+          alignItems="center"
+          justifyContent="center"
         >
-          {data?.name}
-        </Typography>
-        <Typography
-          className="sans"
-          variant="body1"
-          mb="2px"
-          fontWeight="400"
-          color="#5B5B5B"
-        >
-          {data?.email}
-        </Typography>
-        <Typography
-          className="sans"
-          variant="body1"
-          mb={2.5}
-          fontWeight="400"
-          color="#5B5B5B"
-        >
-          {data?.phone}
-        </Typography>
+          <Box
+            component="img"
+            src={!data?.image?.url ? auth : data?.image?.url}
+            width={100}
+            height={100}
+            mr={{ xs: 2, md: 0 }}
+            sx={{
+              objectFit: "cover",
+              borderRadius: "100px",
+            }}
+            alt=""
+          />
+          <div>
+            <Typography
+              className="sans"
+              variant="subtitle1"
+              mt={1.2}
+              mb={1.2}
+              fontWeight="600"
+            >
+              {data?.name}
+            </Typography>
+            <Typography
+              className="sans"
+              variant="body1"
+              mb="2px"
+              fontWeight="400"
+              color="#5B5B5B"
+              textAlign={{ xs: "start", md: "center" }}
+            >
+              {data?.email}
+            </Typography>
+            <Typography
+              className="sans"
+              variant="body1"
+              mb={2.5}
+              fontWeight="400"
+              textAlign={{ xs: "start", md: "center" }}
+              color="#5B5B5B"
+            >
+              {data?.phone}
+            </Typography>
+          </div>
+        </Box>
         <Box
           borderTop="1px solid #E2E2E2"
           borderBottom="1px solid #E2E2E2"
           p="15px 0"
           width="100%"
-          mb="50px"
+          mb={{ xs: 1.5, md: "50px" }}
         >
           <Typography
             className="sans"
@@ -133,7 +148,7 @@ const Info = () => {
             backgroundColor: "#F5F5F5",
             borderRadius: "10px",
             color: "#5B5B5B",
-            mb: "62px",
+            mb: { xs: 1.5, md: "62px" },
             fontWeight: 400,
             fontFamily: "Open Sans",
           }}

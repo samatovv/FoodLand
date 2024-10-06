@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
 
 * {
-  font-family: "Montserrat Alternates", sans-serif;
+  /* font-family: "Montserrat Alternates", sans-serif; */
   padding: 0;
   margin: 0;
   color: inherit;
@@ -17,6 +17,10 @@
   --purple: #e32967;
 }
 
+#root {
+  overflow-x: hidden;
+}
+
 body {
   background: #fff;
   color: var(--text);
@@ -25,6 +29,10 @@ body {
 a {
   text-decoration: none;
 }
+
+/* .MuiGrid2-container .MuiGrid2-root {
+  width: -webkit-fill-available;
+} */
 
 .sans {
   font-family: "Open Sans" !important;
@@ -36,6 +44,10 @@ a {
 
 .primary {
   color: var(--primary);
+}
+
+.secondary {
+  color: var(--primary-light) !important;
 }
 
 .link {
@@ -225,5 +237,9 @@ a {
   position: absolute;
   top: 8px;
   right: 8px;
-  transform: scale(1)!important;
+  transform: scale(1) !important;
+}
+
+.MuiPagination-ul {
+  flex-wrap: nowrap !important;
 }

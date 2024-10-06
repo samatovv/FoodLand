@@ -14,8 +14,8 @@ export const mainSlice = createSlice({
   name: "main",
   initialState,
   reducers: {
-    handleDrawer: (state) => {
-      state.open = !state.open;
+    handleDrawer: (state, action) => {
+      state.open = action.payload;
     },
 
     setBanners: (state, action) => {

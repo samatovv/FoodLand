@@ -14,7 +14,14 @@ import { DatePicker } from "@mui/x-date-pickers";
 
 const Form = ({ formik, cart }) => {
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <Box
+      border={{ xs: "none", md: "1px solid #E2E2E2" }}
+      borderRadius="15px"
+      p="15px"
+      component="form"
+      minHeight={{ xs: "unset", md: 609 }}
+      onSubmit={formik.handleSubmit}
+    >
       <Typography variant="h5" mb={2.8} fontWeight="600">
         Оформление заказа
       </Typography>
@@ -146,7 +153,7 @@ const Form = ({ formik, cart }) => {
           Оформить предзаказ
         </Button>
       </Box>
-    </form>
+    </Box>
   );
 };
 

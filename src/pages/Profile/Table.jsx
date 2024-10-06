@@ -1,18 +1,29 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { getOrders, repeatOrder } from "../../redux/reducers/profile";
 import { useDispatch, useSelector } from "react-redux";
-import { Box, Button, Chip, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Chip,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import Check from "../../assets/images/Check";
 import InProcess from "../../assets/images/InProcess";
 import Success from "../Cart/Success";
 import Cancelled from "../../assets/images/Cancelled";
 import { Link } from "react-router-dom";
+import more from "../../assets/images/more.svg";
+import Preview from "../Preview";
 
 const Table = () => {
   const dispatch = useDispatch();
   const id = useSelector((state) => state.profile.data.id);
   const orders = useSelector((state) => state.profile.orders);
   const createdOrder = useSelector((state) => state.profile.createdOrder);
+  const md = useMediaQuery("(min-width:769px)");
+  const [openDrawer, setOpenDrawer] = useState(false);
 
   const [open, setOpen] = useState(false);
   const firstUpdate = useRef(true);
@@ -36,7 +47,11 @@ const Table = () => {
 
   return (
     <>
-      <Box border="1px solid #BABABA" borderRadius="16px" p="0px 20px">
+      <Box
+        border="1px solid #BABABA"
+        borderRadius="16px"
+        p={{ xs: "0", md: "0px 20px" }}
+      >
         <Box
           display="flex"
           mt={2}
@@ -44,6 +59,7 @@ const Table = () => {
           alignItems="center"
           justifyContent="space-between"
           sx={{
+            p: { xs: "10px", md: 0 },
             "& .MuiOutlinedInput-notchedOutline": {
               border: "1px solid #E2E2E2!important",
             },
@@ -97,23 +113,31 @@ const Table = () => {
                   p: "12px 0",
                   background: "#F7F7F7",
                   "&:first-child": {
-                    borderTopLeftRadius: "10px",
-                    borderBottomLeftRadius: "10px",
+                    borderTopLeftRadius: { xs: 0, md: "10px" },
+                    borderBottomLeftRadius: { xs: 0, md: "10px" },
                   },
                   "&:last-child": {
-                    borderTopRightRadius: "10px",
-                    borderBottomRightRadius: "10px",
+                    borderTopRightRadius: { xs: 0, md: "10px" },
+                    borderBottomRightRadius: { xs: 0, md: "10px" },
                   },
                 },
               }}
             >
               <tr>
                 <th>Номер заказа</th>
-                <th>Кол-во товаров</th>
-                <th>Стоимость</th>
+                <th>Цена</th>
+                {md && (
+                  <>
+                    <th>Кол-во товаров</th>
+                  </>
+                )}
                 <th>Статус</th>
-                <th>Экспедитор</th>
-                <th>Номер экспедитора</th>
+                {md && (
+                  <>
+                    <th>Экспедитор</th>
+                    <th>Номер экспедитора</th>
+                  </>
+                )}
                 <th></th>
               </tr>
             </Box>
@@ -125,8 +149,11 @@ const Table = () => {
                   fontSize: 12,
                   fontWeight: 400,
                   borderBottom: "1px solid #00000008",
-                  p: "12px 0",
-                  textAlign: "center",
+                  p: { xs: "7px 10px", md: "12px 0" },
+                  textAlign: { xs: "start", md: "center" },
+                },
+                "& .MuiChip-label": {
+                  p: { xs: "0 2px", md: "0 12px" },
                 },
               }}
             >
@@ -134,7 +161,7 @@ const Table = () => {
                 orders?.results?.map((item, idx) => (
                   <tr key={idx}>
                     <td>{item?.customId}</td>
-                    <td>{item?.products?.length}</td>
+                    {md && <td>{item?.products?.length}</td>}
                     <td>{item?.price}</td>
                     <td>
                       <Chip
@@ -152,7 +179,8 @@ const Table = () => {
                           )
                         }
                         sx={{
-                          minWidth: 129,
+                          minWidth: { xs: 104, md: 129 },
+                          maxWidth: { xs: 104, md: 129 },
                           background:
                             item?.status === "new"
                               ? "#f3f4f6"
@@ -177,293 +205,63 @@ const Table = () => {
                         }
                       />
                     </td>
-                    <td>
-                      {item?.managers[0]?.name ? item?.managers[0]?.name : "-"}
-                    </td>
-                    <td>
-                      {item?.managers[0]?.phone
-                        ? item?.managers[0]?.phone
-                        : "-"}
-                    </td>
-                    <td>
-                      <Link to="/profile/cart/">
-                        <Button
-                          onClick={() =>
-                            localStorage.setItem(
-                              "cart",
-                              JSON.stringify(
-                                item.products.map((item) => ({
-                                  count: item.quantity,
-                                  description: item.product.description,
-                                  name: item.product.name,
-                                  img: item?.product?.images[0]?.url,
-                                  sum: item.product.price * item.quantity,
-                                  price: item.product.price,
-                                  id: item.product.id,
-                                  idx: item.product.customId,
-                                }))
-                              )
-                            )
-                          }
-                        >
-                          Повторить заказ
-                        </Button>
-                      </Link>
-                    </td>
+                    {md ? (
+                      <>
+                        <td>
+                          {item?.managers[0]?.name
+                            ? item?.managers[0]?.name
+                            : "-"}
+                        </td>
+                        <td>
+                          {item?.managers[0]?.phone
+                            ? item?.managers[0]?.phone
+                            : "-"}
+                        </td>
+                        <td>
+                          <Link to="/profile/cart/">
+                            <Button
+                              onClick={() =>
+                                localStorage.setItem(
+                                  "cart",
+                                  JSON.stringify(
+                                    item.products.map((item) => ({
+                                      count: item.quantity,
+                                      description: item.product.description,
+                                      name: item.product.name,
+                                      img: item?.product?.images[0]?.url,
+                                      sum: item.product.price * item.quantity,
+                                      price: item.product.price,
+                                      id: item.product.id,
+                                      idx: item.product.customId,
+                                    }))
+                                  )
+                                )
+                              }
+                            >
+                              Повторить заказ
+                            </Button>
+                          </Link>
+                        </td>
+                      </>
+                    ) : (
+                      <td>
+                        <img
+                          onClick={() => setOpenDrawer(true)}
+                          src={more}
+                          width={25}
+                          height={25}
+                          alt=""
+                        />
+                      </td>
+                    )}
                   </tr>
                 ))}
-              {/* <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<InProcess />}
-                  sx={{
-                    background: "#f3f4f6",
-                  }}
-                  label="В процессе"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Принят"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr>{" "}
-            <tr>
-              <td>№93849</td>
-              <td>5</td>
-              <td>5500</td>
-              <td>
-                <Chip
-                  icon={<Check />}
-                  sx={{
-                    background: "#EBFBDC",
-                  }}
-                  label="Готово"
-                />
-              </td>
-              <td>Андрей М.</td>
-              <td>+996 500 500 500</td>
-              <td>
-                <Button>Повторить заказ</Button>
-              </td>
-            </tr> */}
             </Box>
           </Box>
         </Box>
       </Box>
       <Success reorder open={open} setOpen={setOpen} />
+      <Preview open={openDrawer} setOpen={setOpenDrawer} />
     </>
   );
 };

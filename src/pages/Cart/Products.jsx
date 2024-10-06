@@ -1,4 +1,11 @@
-import { Box, Button, Collapse, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Collapse,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useState } from "react";
 import Delete from "../../assets/images/Delete";
 import AddOrDelete from "../../components/AddOrDelete";
@@ -6,6 +13,7 @@ import { Link } from "react-router-dom";
 import { TransitionGroup } from "react-transition-group";
 
 const Products = ({ cart, setCart }) => {
+  const md = useMediaQuery("(min-width:769px)");
   const [count, setCount] = useState(1);
   const deleteHandler = (id) => {
     let filtered = cart.filter((item) => item.id !== id);
@@ -14,10 +22,17 @@ const Products = ({ cart, setCart }) => {
   };
 
   return (
-    <>
+    <Box
+      border={{ xs: "none", md: "1px solid #E2E2E2" }}
+      borderRadius="15px"
+      p={{ xs: "32px 0 0 0", md: "15px" }}
+      maxHeight={{ xs: "70vh", md: 609 }}
+      minHeight={{ xs: "unset", md: 609 }}
+      overflow="scroll"
+    >
       <Box
         display="flex"
-        mb={2}
+        mb={{ xs: 5, md: 2 }}
         alignItems="end"
         justifyContent="space-between"
       >
@@ -78,6 +93,7 @@ const Products = ({ cart, setCart }) => {
             ?.map((item, idx) => (
               <Collapse key={idx}>
                 <Product
+                  md={md}
                   item={item}
                   deleteHandler={deleteHandler}
                   setCart={setCart}
@@ -89,52 +105,72 @@ const Products = ({ cart, setCart }) => {
             ))}
         </TransitionGroup>
       )}
-    </>
+    </Box>
   );
 };
 
 export default Products;
 
-const Product = ({ item, deleteHandler, cart, setCart, setCount, count }) => (
+const Product = ({ item, deleteHandler, cart, setCart, md }) => (
   <Box
     borderBottom="1px solid #F1F1F1"
     display="flex"
-    alignItems="center"
+    alignItems={{ xs: "start", md: "center" }}
+    flexDirection={{ xs: "column", md: "row" }}
     justifyContent="space-between"
-    p="16px"
+    p={{ xs: "0 0 20px", sm: "16px" }}
+    mb={{ xs: 2.5, md: 0 }}
   >
-    <Box display="flex" width="50%">
-      <img
+    <Box display="flex" width={{ xs: "100%", md: "50%" }}>
+      <Box
+        component="img"
         src={item?.img}
-        width="90px"
-        style={{ borderRadius: 12, objectFit: "cover" }}
-        height="90px"
+        minWidth={{ xs: 80, md: "90px" }}
+        width={{ xs: 80, md: "90px" }}
+        sx={{ borderRadius: "12px", objectFit: "cover" }}
+        height={{ xs: 80, md: "90px" }}
         alt=""
       />
-      <Box maxWidth="60%" ml={2}>
-        <Typography
-          className="sans"
-          variant="subtitle2"
-          mb={2}
-          fontWeight="600"
-        >
-          {item?.name}
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            display: "-webkit-box",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical",
-            wordWrap: "break-word",
-          }}
-          color="#797979"
-          className="sans"
-        >
-          {item?.description}
-        </Typography>
+      <Box
+        display="flex"
+        justifyContent={{ xs: "space-between" }}
+        flexDirection={{ xs: "row", md: "column" }}
+        width={{ xs: "100%", md: "60%" }}
+        ml={{ xs: 1, md: 2 }}
+      >
+        <Box maxWidth="80%">
+          <Typography
+            className="sans"
+            variant="subtitle2"
+            sx={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              wordWrap: "break-word",
+            }}
+            mb={{ xs: 1, md: 2 }}
+            fontWeight="600"
+          >
+            {item?.name}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{
+              textOverflow: "ellipsis",
+              overflow: "hidden",
+              display: "-webkit-box",
+              WebkitLineClamp: 2,
+              WebkitBoxOrient: "vertical",
+              wordWrap: "break-word",
+            }}
+            color="#797979"
+            className="sans"
+          >
+            {item?.description}
+          </Typography>
+        </Box>
         {/* <Typography
           className="sans"
           variant="body1"
@@ -144,13 +180,20 @@ const Product = ({ item, deleteHandler, cart, setCart, setCount, count }) => (
         >
           Цена: {item?.price} c
         </Typography> */}
+        {!md && (
+          <IconButton onClick={() => deleteHandler(item?.id)}>
+            <Delete />
+          </IconButton>
+        )}
       </Box>
     </Box>
     <Box
       display="flex"
-      width="50%"
+      width={{ xs: "100%", md: "50%" }}
+      mt={{ xs: 2, md: 0 }}
       justifyContent="space-between"
       alignItems="center"
+      flexDirection={{ xs: "row-reverse", md: "row" }}
     >
       <AddOrDelete
         cart={cart}
@@ -163,9 +206,11 @@ const Product = ({ item, deleteHandler, cart, setCart, setCount, count }) => (
       <Typography variant="h5" className="sans" fontWeight={700}>
         {item?.sum?.toFixed(2)}с
       </Typography>
-      <IconButton onClick={() => deleteHandler(item?.id)}>
-        <Delete />
-      </IconButton>
+      {md && (
+        <IconButton onClick={() => deleteHandler(item?.id)}>
+          <Delete />
+        </IconButton>
+      )}
     </Box>
   </Box>
 );

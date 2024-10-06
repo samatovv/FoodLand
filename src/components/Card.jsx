@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
@@ -7,51 +7,9 @@ import AddToCart from "./AddToCart";
 const Card = ({ item, search }) => {
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
-  const [cart, setCart] = useState(null);
   const id = item?.id;
-  useEffect(() => {
-    setCart(JSON.parse(localStorage.getItem("cart")));
-  }, []);
-
-  // const clickHandler = () => {
-  //   let newItem = cart?.find((item) => item?.id === id);
-
-  //   if (cart?.length === 0 || !newItem) {
-  //     localStorage.setItem(
-  //       "cart",
-  //       JSON.stringify([
-  //         ...cart,
-  //         {
-  //           id: details?.id,
-  //           count: count,
-  //           name: details.name,
-  //           img: details.images[0].url,
-  //           description: details.description,
-  //           sum: details.price * count,
-  //           price: details.price,
-  //           idx: details.customId,
-  //         },
-  //       ])
-  //     );
-  //   } else {
-  //     let updatedCart = cart?.filter((item) => item?.id !== id);
-  //     localStorage.setItem(
-  //       "cart",
-  //       JSON.stringify([
-  //         ...updatedCart,
-  //         {
-  //           ...newItem,
-  //           count: newItem?.count + count,
-  //           sum: details.price * newItem?.count + count,
-  //         },
-  //       ])
-  //     );
-  //   }
-  // };
-
   return (
     <Box
-      p={2}
       sx={{
         "&:hover img": {
           transform: "scale(1.3)",

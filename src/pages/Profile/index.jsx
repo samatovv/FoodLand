@@ -29,18 +29,18 @@ const Profile = () => {
 
   return (
     <>
-      <Container sx={{ pt: 6, pb: "52px" }} maxWidth="lg">
+      <Container sx={{ pt: { xs: 5, md: 6 }, pb: "52px" }} maxWidth="lg">
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Grid2 container spacing={2} mt={2}>
-          <Grid2 item size={3.1}>
+        <Grid2 container spacing={2} mt={{ xs: 0, md: 2 }}>
+          <Grid2 item size={{ xs: 12, md: 3.1 }}>
             <Info />
           </Grid2>
-          <Grid2 item size={8.9}>
+          <Grid2 item size={{ xs: 12, md: 8.9 }}>
             <Table />
           </Grid2>
         </Grid2>

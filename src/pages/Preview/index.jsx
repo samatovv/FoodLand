@@ -1,25 +1,21 @@
 import { Box, Button, Drawer, IconButton, Typography } from "@mui/material";
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { handleDrawer } from "../../redux/reducers/mainSlice";
 import img from "../../assets/images/1.webp";
 import Delete from "../../assets/images/Delete";
 import AddOrDelete from "../../components/AddOrDelete";
 
-const Preview = () => {
-  const open = useSelector((state) => state.main.open);
-  const dispatch = useDispatch();
+const Preview = ({ open, setOpen }) => {
   return (
     <Drawer
-      anchor="right"
+      anchor="bottom"
       open={open}
       sx={{
         "& .MuiPaper-root": {
           p: "40px",
-          width: "30%",
+          // width: "30%",
         },
       }}
-      onClose={() => dispatch(handleDrawer())}
+      onClose={() => setOpen(false)}
     >
       <Typography variant="h5" fontWeight="bold" mb={4}>
         Просмотр заказа
@@ -147,7 +143,7 @@ const Preview = () => {
           </Box>
         </Box>
       </Box>
-      <Box display="flex" alignItems='center' columnGap='50px' mt={4}>
+      <Box display="flex" alignItems="center" columnGap="50px" mt={4}>
         <div>
           <Typography fontSize="15px" component="span" fontWeight="400">
             Итоговая сумма
@@ -156,7 +152,9 @@ const Preview = () => {
             15000c
           </Typography>
         </div>
-				<Button color="primary" variant="contained">Оплатить</Button>
+        <Button color="primary" variant="contained">
+          Оплатить
+        </Button>
       </Box>
     </Drawer>
   );

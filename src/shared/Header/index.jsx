@@ -1,13 +1,18 @@
-import { Box, Container, IconButton } from "@mui/material";
+import { Box, Container, IconButton, useMediaQuery } from "@mui/material";
 import React from "react";
 import logo from "../../assets/images/logo.svg";
 import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
 
 import { Link, NavLink, useLocation } from "react-router-dom";
+import Burger from "../../assets/images/Burger";
+import { handleDrawer } from "../../redux/reducers/mainSlice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const md = useMediaQuery("(min-width:769px)");
   return (
     <Box
       component="header"
@@ -36,51 +41,59 @@ const Header = () => {
         <Link to="/">
           <img src={logo} alt="Логотип FOODLAND" />
         </Link>
-        <Box
-          component="nav"
-          backgroundColor="#FFF"
-          borderRadius={100}
-          p="12px 32px"
-          display="flex"
-          columnGap={8}
-          border="1px solid #ECECEC"
-        >
-          <NavLink
-            className={({ isActive }) => (isActive ? "sans active" : "sans")}
-            to="/"
+        {md && (
+          <Box
+            component="nav"
+            backgroundColor="#FFF"
+            borderRadius={100}
+            p="12px 32px"
+            display="flex"
+            columnGap={8}
+            border="1px solid #ECECEC"
           >
-            Главная
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => (isActive ? "sans active" : "sans")}
-            to="/about-us"
-          >
-            О нас
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => (isActive ? "sans active" : "sans")}
-            to="/news"
-          >
-            Новости
-          </NavLink>
-          <NavLink
-            className={({ isActive }) => (isActive ? "sans active" : "sans")}
-            to="/catalog"
-          >
-            Каталог
-          </NavLink>
-        </Box>
+            <NavLink
+              className={({ isActive }) => (isActive ? "sans active" : "sans")}
+              to="/"
+            >
+              Главная
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "sans active" : "sans")}
+              to="/about-us"
+            >
+              О нас
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "sans active" : "sans")}
+              to="/news"
+            >
+              Новости
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "sans active" : "sans")}
+              to="/catalog"
+            >
+              Каталог
+            </NavLink>
+          </Box>
+        )}
+
         <Box>
           <IconButton mr={1}>
             <Link to="/profile/cart">
-              <img src={cart} alt="Корзина" />
+              <img src={cart} width="48px" height="48px" alt="Корзина" />
             </Link>
           </IconButton>
           <IconButton>
             <Link to="/profile">
-              <img src={auth} alt="Авторизация" />
+              <img src={auth} width="48px" height="48px" alt="Авторизация" />
             </Link>
           </IconButton>
+          {!md && (
+            <IconButton onClick={() => dispatch(handleDrawer(true))}>
+              <Burger />
+            </IconButton>
+          )}
         </Box>
       </Container>
     </Box>

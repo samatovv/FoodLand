@@ -1,12 +1,12 @@
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
-  breakpoints: {
-    values: {
+  // breakpoints: {
+  //   values: {
 
-      lg: 1300,
-    },
-  },
+  //     // lg: 1300,
+  //   },
+  // },
   typography: {
     fontFamily: "Montserrat Alternates",
     lineHeight: 1,
