@@ -36,6 +36,19 @@ const Carousel = () => {
         centeredSlides={false}
         spaceBetween={30}
         initialSlide={2}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+            spaceBetween: 0,
+          },
+
+          768: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 16,
+          },
+        }}
       >
         {Array.isArray(banners?.results)
           ? banners?.results?.map((item, idx) => (

@@ -8,9 +8,9 @@ const Success = ({ setOpen, open, reorder }) => {
     <Dialog
       sx={{
         "& .MuiPaper-root": {
-          p: "15px 15px 138px",
+          p: { xs: "16px 12px", lg: "15px 15px 138px" },
           borderRadius: "32px",
-          minWidth: 453,
+          minWidth: { xs: "unset", lg: 453 },
         },
       }}
       onClose={handleClose}
@@ -43,7 +43,12 @@ const Success = ({ setOpen, open, reorder }) => {
             fill="#6E8435"
           />
         </svg>
-        <Typography variant="h4" fontWeight={700} mt={6} mb={2.2}>
+        <Typography
+          variant="h4"
+          fontWeight={700}
+          mt={{ xs: 2, md: 6 }}
+          mb={{ xs: 1, md: 2.2 }}
+        >
           {reorder ? "Ваш заказ повторно оформлен!" : "Ваш заказ оформлен!"}
         </Typography>
         <Typography
@@ -51,6 +56,7 @@ const Success = ({ setOpen, open, reorder }) => {
           variant="subtitle1"
           fontWeight={400}
           maxWidth={378}
+          // lineHeight={1.2}
           textAlign="center"
         >
           Заказ оформлен. Спасибо! Мы свяжемся с вами для подтверждения.

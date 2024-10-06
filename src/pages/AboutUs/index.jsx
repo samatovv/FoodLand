@@ -23,11 +23,11 @@ const AboutUs = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Box display="flex" mt={3}>
-          <img src={logo} alt="" />
-          <Box ml="101px">
+        <Box display="flex" flexDirection={{ xs: "column", md: "row" }} mt={3}>
+          <img src={logo} width={116} height={40} alt="" />
+          <Box mt={{ xs: 2, md: 0 }} ml={{ xs: 0, md: "101px" }}>
             <Typography
-              fontSize={24}
+              fontSize={{ xs: 16, md: 24 }}
               fontWeight={700}
               color="var(--primary)"
               mb={1}
@@ -35,7 +35,7 @@ const AboutUs = () => {
               Ваш путеводитель в области:
             </Typography>
             <Typography
-              variant="h3"
+              fontSize={{ xs: 20, md: 40 }}
               fontWeight={800}
               textTransform="uppercase"
               maxWidth={1059}
@@ -44,10 +44,10 @@ const AboutUs = () => {
             </Typography>
           </Box>
         </Box>
-        <Grid2 container spacing={9} mt={11}>
-          <Grid2 item size={3}>
+        <Grid2 container spacing={{ xs: 1, md: 9 }} mt={{ xs: "28px", md: 11 }}>
+          <Grid2 item size={{ xs: 6, lg: 3 }}>
             <Typography
-              fontSize="24px"
+              fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
               className="sans"
               color="var(--primary)"
@@ -57,11 +57,14 @@ const AboutUs = () => {
             >
               Продали
             </Typography>
-            <Typography fontSize="64px" fontWeight={400}>
+            <Typography
+              fontSize={{ xs: 36, md: "64px" }}
+              fontWeight={{ xs: 600, md: 400 }}
+            >
               10K
             </Typography>
             <Typography
-              variant="subtitle1"
+              fontSize={{ xs: 12, md: 16 }}
               color="#465659"
               fontWeight={400}
               maxWidth={257}
@@ -69,9 +72,9 @@ const AboutUs = () => {
               Все товары проходят обязательную сертификацию
             </Typography>
           </Grid2>
-          <Grid2 item size={3}>
+          <Grid2 item size={{ xs: 6, lg: 3 }}>
             <Typography
-              fontSize="24px"
+              fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
               className="sans"
               color="var(--primary)"
@@ -81,11 +84,14 @@ const AboutUs = () => {
             >
               Клиентов
             </Typography>
-            <Typography fontSize="64px" fontWeight={400}>
+            <Typography
+              fontSize={{ xs: 36, md: "64px" }}
+              fontWeight={{ xs: 600, md: 400 }}
+            >
               1200
             </Typography>
             <Typography
-              variant="subtitle1"
+              fontSize={{ xs: 12, md: 16 }}
               color="#465659"
               fontWeight={400}
               maxWidth={257}
@@ -93,9 +99,9 @@ const AboutUs = () => {
               Все товары проходят обязательную сертификацию
             </Typography>
           </Grid2>
-          <Grid2 item size={3}>
+          <Grid2 item size={{ xs: 6, lg: 3 }}>
             <Typography
-              fontSize="24px"
+              fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
               className="sans"
               color="var(--primary)"
@@ -105,11 +111,14 @@ const AboutUs = () => {
             >
               Выбор
             </Typography>
-            <Typography fontSize="64px" fontWeight={400}>
+            <Typography
+              fontSize={{ xs: 36, md: "64px" }}
+              fontWeight={{ xs: 600, md: 400 }}
+            >
               30Т
             </Typography>
             <Typography
-              variant="subtitle1"
+              fontSize={{ xs: 12, md: 16 }}
               color="#465659"
               fontWeight={400}
               maxWidth={257}
@@ -117,9 +126,9 @@ const AboutUs = () => {
               Все товары проходят обязательную сертификацию
             </Typography>
           </Grid2>
-          <Grid2 item size={3}>
+          <Grid2 item size={{ xs: 6, lg: 3 }}>
             <Typography
-              fontSize="24px"
+              fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
               className="sans"
               color="var(--primary)"
@@ -129,11 +138,14 @@ const AboutUs = () => {
             >
               Сертифицированы
             </Typography>
-            <Typography fontSize="64px" fontWeight={400}>
+            <Typography
+              fontSize={{ xs: 36, md: "64px" }}
+              fontWeight={{ xs: 600, md: 400 }}
+            >
               56К
             </Typography>
             <Typography
-              variant="subtitle1"
+              fontSize={{ xs: 12, md: 16 }}
               color="#465659"
               fontWeight={400}
               maxWidth={257}
@@ -145,12 +157,16 @@ const AboutUs = () => {
         <Box mt={10}>
           <Carousel />
         </Box>
-        <Grid2 container spacing="250px" mt={6}>
+        <Grid2 container spacing={{ xs: 2, lg: "250px" }} mt={6}>
           <Grid2 item size={6}>
-            <Typography variant="h3" mb={3} fontWeight={700}>
+            <Typography fontSize={{ xs: 16, md: 48 }} mb={3} fontWeight={700}>
               Мы предлагаем
             </Typography>
-            <Typography className="sans" fontSize={24} fontWeight={400}>
+            <Typography
+              className="sans"
+              fontSize={{ xs: 14, md: 24 }}
+              fontWeight={400}
+            >
               Не просто сырье, а экспертность и индивидуальный подход: всегда
               готовы помочь найти альтернативу, закрыть срочную потребность или
               предложить уникальное решение.
@@ -158,14 +174,18 @@ const AboutUs = () => {
           </Grid2>
           <Grid2 item size={6}>
             <Typography
-              variant="h3"
+              fontSize={{ xs: 16, md: 48 }}
               color="var(--primary)"
               mb={3}
               fontWeight={700}
             >
               Мы предлагаем
             </Typography>
-            <Typography className="sans" fontSize={24} fontWeight={400}>
+            <Typography
+              className="sans"
+              fontSize={{ xs: 14, md: 24 }}
+              fontWeight={400}
+            >
               Не просто сырье, а экспертность и индивидуальный подход: всегда
               готовы помочь найти альтернативу, закрыть срочную потребность или
               предложить уникальное решение.
