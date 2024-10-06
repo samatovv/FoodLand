@@ -23,11 +23,12 @@ const Card = ({ item, search }) => {
         to={`/catalog/details/${details?.id}`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
-        <img
+        <Box
+          component="img"
           src={Array.isArray(details?.images) && details?.images[0]?.url}
-          style={{
+          sx={{
             borderRadius: "12px",
-            height: 178,
+            height: { xs: 142, md: 178 },
             objectFit: "cover",
             transition: "all 800ms ease",
           }}

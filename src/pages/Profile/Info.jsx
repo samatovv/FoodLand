@@ -151,6 +151,7 @@ const Info = () => {
             mb: { xs: 1.5, md: "62px" },
             fontWeight: 400,
             fontFamily: "Open Sans",
+            fontSize: 13,
           }}
         >
           Редактировать фото

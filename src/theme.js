@@ -1,12 +1,6 @@
 import { createTheme } from "@mui/material";
 
 export const theme = createTheme({
-  // breakpoints: {
-  //   values: {
-
-  //     // lg: 1300,
-  //   },
-  // },
   typography: {
     fontFamily: "Montserrat Alternates",
     lineHeight: 1,
@@ -25,6 +19,9 @@ export const theme = createTheme({
 
     h4: {
       fontSize: 28,
+      "@media (max-width:768px)": {
+        fontSize: 20,
+      },
     },
 
     h5: {
@@ -115,7 +112,7 @@ export const theme = createTheme({
           "& input": {
             backgroundColor: "#FFFFFF",
             borderRadius: "100px",
-            fontFamily:"Open Sans"
+            fontFamily: "Open Sans",
 
             // "&::placeholder": {
             //   fontWeight: "400",

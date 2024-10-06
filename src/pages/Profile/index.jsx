@@ -16,13 +16,20 @@ const Profile = () => {
   }, []);
 
   const breadcrumbs = [
-    <Link key="1" className="sans" to="/">
-      Главная
+    <Link key="1" to="/">
+      <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
+        Главная
+      </Typography>
     </Link>,
-    <Typography className="sans" key="2">
+    <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
       Мой профиль
     </Typography>,
-    <Typography className="sans" key="3" sx={{ color: "text.primary" }}>
+    <Typography
+      fontSize={{ xs: 14, md: 13 }}
+      className="sans"
+      key="3"
+      sx={{ color: "text.primary" }}
+    >
       Мои заказы
     </Typography>,
   ];

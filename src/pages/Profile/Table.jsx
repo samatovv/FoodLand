@@ -68,7 +68,7 @@ const Table = () => {
           <Typography fontWeight={600} variant="h4">
             Мои заказы
           </Typography>
-          <TextField type="date" />
+          <TextField placeholder="Выбрать дату" type="date" />
         </Box>
         <Box
           sx={{
