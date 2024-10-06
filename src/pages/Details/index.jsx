@@ -45,9 +45,11 @@ const Details = () => {
         Главная
       </Typography>
     </Link>,
-    <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
-      Каталог
-    </Typography>,
+    <Link key="1" to="/catalog">
+      <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
+        Каталог
+      </Typography>
+    </Link>,
     <Typography
       fontSize={{ xs: 14, md: 13 }}
       className="sans"

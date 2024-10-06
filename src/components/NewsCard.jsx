@@ -9,9 +9,10 @@ const NewsCard = ({ item, idx }) => {
         key={idx}
         className="news__card"
         display="flex"
+        flexDirection={{ xs: "column", sm: "row" }}
+        alignItems={{ xs: "start", sm: "end" }}
         columnGap={3}
         mb={5}
-        alignItems="end"
         sx={{
           "& svg": {
             transition: "all 800ms ease",
@@ -47,23 +48,38 @@ const NewsCard = ({ item, idx }) => {
           },
         }}
       >
-        <div className="div">
-          <img
+        <Box
+          className="div"
+          sx={{
+            minWidth: "250px",
+            width: { xs: "100%", sm: "250px" },
+          }}
+        >
+          <Box
+            component="img"
             style={{ borderRadius: "15px" }}
             src={item.imageUrl}
-            width="250px"
-            height="146px"
+            width={{ xs: "100%", sm: "250px" }}
+            height={{ xs: "196px", sm: "146px" }}
             alt=""
           />
-        </div>
-        <div>
-          <Box display="flex" alignItems="end" justifyContent="space-between">
+        </Box>
+        <div
+          style={{
+            maxWidth: "90%",
+          }}
+        >
+          <Box
+            display="flex"
+            mt={{ xs: 1, sm: 0 }}
+            alignItems="end"
+            justifyContent="space-between"
+          >
             <Typography
               sx={{
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
-                maxWidth: "50%",
               }}
               variant="h5"
               fontWeight="700"
@@ -95,7 +111,7 @@ const NewsCard = ({ item, idx }) => {
           >
             {item.content}
           </Typography>
-          <span style={{ textDecoration: "underline" }}>
+          <span className="sans" style={{ textDecoration: "underline" }}>
             Читать далее
             <IconButton sx={{ p: 0, ml: 1 }}>
               <svg

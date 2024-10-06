@@ -20,7 +20,7 @@ const Header = () => {
     <Box
       component="header"
       position={!location.pathname.includes("/profile") && "fixed"}
-      zIndex={filter ? 1201 : 2}
+      zIndex={filter ? 1201 : 100}
       backgroundColor="#FFFFFF"
       width="100%"
       p={{ xs: "11px 15px", md: "25px 0 0" }}
