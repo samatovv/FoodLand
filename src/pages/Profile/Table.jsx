@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { getOrders, repeatOrder } from "../../redux/reducers/profile";
+import { getOrder, getOrders, repeatOrder } from "../../redux/reducers/profile";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -19,10 +19,12 @@ import Preview from "../Preview";
 
 const Table = () => {
   const dispatch = useDispatch();
+  const md = useMediaQuery("(min-width:769px)");
+
   const id = useSelector((state) => state.profile.data.id);
   const orders = useSelector((state) => state.profile.orders);
   const createdOrder = useSelector((state) => state.profile.createdOrder);
-  const md = useMediaQuery("(min-width:769px)");
+
   const [openDrawer, setOpenDrawer] = useState(false);
 
   const [open, setOpen] = useState(false);
@@ -108,10 +110,11 @@ const Table = () => {
                 zIndex: 2,
                 "& th": {
                   color: "#737680",
-                  fontSize: 12,
-                  fontWeight: 400,
-                  p: "12px 0",
+                  fontSize: { xs: 13, md: 12 },
+                  fontWeight: { xs: 600, md: 400 },
+                  p: { xs: "10px", md: "12px 0" },
                   background: "#F7F7F7",
+                  textAlign: { xs: "start", md: "center" },
                   "&:first-child": {
                     borderTopLeftRadius: { xs: 0, md: "10px" },
                     borderBottomLeftRadius: { xs: 0, md: "10px" },
@@ -148,7 +151,7 @@ const Table = () => {
                   color: "#000000",
                   fontSize: 12,
                   fontWeight: 400,
-                  borderBottom: "1px solid #00000008",
+                  borderBottom: { xs: "none", md: "1px solid #00000008" },
                   p: { xs: "7px 10px", md: "12px 0" },
                   textAlign: { xs: "start", md: "center" },
                 },
@@ -246,7 +249,10 @@ const Table = () => {
                     ) : (
                       <td>
                         <img
-                          onClick={() => setOpenDrawer(true)}
+                          onClick={() => {
+                            setOpenDrawer(true);
+                            dispatch(getOrder(item.id));
+                          }}
                           src={more}
                           width={25}
                           height={25}

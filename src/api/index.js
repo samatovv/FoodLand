@@ -141,4 +141,11 @@ export const Profile = {
       .then((response) => response.data)
       .catch((error) => error.response);
   },
+
+  getOrder(id) {
+    return instance
+      .get(`/orders/${id}`)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
 };
