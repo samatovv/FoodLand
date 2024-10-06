@@ -54,7 +54,7 @@ const OurClients = () => {
               sx={{
                 transition: "all 0.3s linear",
                 "&:hover": {
-                  border: "none",
+                  border: { xs: "1px solid #E6E6E6", md: "none" },
                 },
               }}
             >
@@ -115,7 +115,7 @@ const OurClients = () => {
               sx={{
                 transition: "all 0.3s linear",
                 "&:hover": {
-                  border: "none",
+                  border: { xs: "1px solid #E6E6E6", md: "none" },
                 },
               }}
             >

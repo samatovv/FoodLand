@@ -80,7 +80,7 @@ const Categories = () => {
                       <ButtonMore
                         txt="Подробнее "
                         sx={{
-                          width: { xs: "70%", sm: "90%", lg: "100%" },
+                          width: { xs: "90%", lg: "100%" },
                           "& span": { color: "#000" },
                         }}
                       />
