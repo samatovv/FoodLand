@@ -1,21 +1,27 @@
 import {
-  Box,
   Breadcrumbs,
-  Card,
   Container,
   Grid2,
-  Pagination,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
 import Categories from "./Categories";
 import Products from "./Products";
-import Recomendations from "../Details/Recomendations";
 import { useFormik } from "formik";
+import Filter from "./Filter";
 
 const Catalog = () => {
+  const md = useMediaQuery("(min-width:900px)");
+
+  const [chip, setChip] = useState("");
+
+  const formik = useFormik({
+    initialValues: { category: "" },
+  });
+
   const breadcrumbs = [
     <Link className="sans" key="1" to="/">
       Главная
@@ -25,10 +31,6 @@ const Catalog = () => {
     </Typography>,
   ];
 
-  const formik = useFormik({
-    initialValues: { category: "" },
-  });
-  const [chip, setChip] = useState("");
   return (
     <>
       <Container
@@ -43,15 +45,22 @@ const Catalog = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Grid2 container mt={2} spacing={6}>
-          <Grid2 item size={3}>
-            <Categories formik={formik} setChip={setChip} />
-          </Grid2>
-          <Grid2 item size={9}>
-            <Products formik={formik} setChip={setChip} chip={chip} />
+        <Grid2 container mt={{ xs: "35px", md: 2 }} spacing={6}>
+          {md && (
+            <Grid2 item size={{ xs: 12, md: 3 }}>
+              <Categories formik={formik} setChip={setChip} />
+            </Grid2>
+          )}
+          <Grid2 item size={{ xs: 12, md: 9 }}>
+            <Products
+              formik={formik}
+              setChip={setChip}
+              chip={chip}
+            />
           </Grid2>
         </Grid2>
       </Container>
+      <Filter formik={formik} setChip={setChip} />
     </>
   );
 };

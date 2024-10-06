@@ -74,6 +74,7 @@ const Cart = () => {
       formik.resetForm();
       localStorage.setItem("cart", "[]");
       setCart("");
+      if (drawer) handleDrawer();
     } else formik.setFieldValue("error", true);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

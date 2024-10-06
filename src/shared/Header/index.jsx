@@ -1,26 +1,30 @@
 import { Box, Container, IconButton, useMediaQuery } from "@mui/material";
 import React from "react";
+import logo3 from "../../assets/images/logo3.svg";
 import logo from "../../assets/images/logo.svg";
 import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
-
 import { Link, NavLink, useLocation } from "react-router-dom";
 import Burger from "../../assets/images/Burger";
 import { handleDrawer } from "../../redux/reducers/mainSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:769px)");
+
+  const filter = useSelector((state) => state.main.filter);
+
   return (
     <Box
       component="header"
       position={!location.pathname.includes("/profile") && "fixed"}
-      zIndex={5}
-      top
+      zIndex={filter ? 1201 : 2}
+      backgroundColor="#FFFFFF"
       width="100%"
-      pt="25px"
+      p={{ xs: "11px 15px", md: "25px 0 0" }}
+      borderBottom={filter ? "1px solid #D3D3D3" : "none"}
     >
       <Container
         maxWidth="lg"
@@ -39,7 +43,17 @@ const Header = () => {
         }}
       >
         <Link to="/">
-          <img src={logo} alt="Логотип FOODLAND" />
+          {md ? (
+            <Box component="img" src={logo} alt="" />
+          ) : (
+            <Box
+              component="img"
+              width="97px"
+              height="38px"
+              src={logo3}
+              alt=""
+            />
+          )}
         </Link>
         {md && (
           <Box
