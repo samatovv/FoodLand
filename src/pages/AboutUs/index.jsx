@@ -44,8 +44,8 @@ const AboutUs = () => {
             </Typography>
           </Box>
         </Box>
-        <Grid2 container spacing={{ xs: 1, md: 9 }} mt={{ xs: "28px", md: 11 }}>
-          <Grid2 item size={{ xs: 6, lg: 3 }}>
+        <Grid2 container spacing={{ xs: 1, lg: 9 }} mt={{ xs: "28px", md: 11 }}>
+          <Grid2 item size={{ xs: 6, md: 3 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -72,7 +72,7 @@ const AboutUs = () => {
               Все товары проходят обязательную сертификацию
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, lg: 3 }}>
+          <Grid2 item size={{ xs: 6, md: 3 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -99,7 +99,7 @@ const AboutUs = () => {
               Все товары проходят обязательную сертификацию
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, lg: 3 }}>
+          <Grid2 item size={{ xs: 6, md: 3 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -126,7 +126,7 @@ const AboutUs = () => {
               Все товары проходят обязательную сертификацию
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, lg: 3 }}>
+          <Grid2 item size={{ xs: 6, md: 3 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
