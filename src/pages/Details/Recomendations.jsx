@@ -34,15 +34,15 @@ const Recomendations = ({ details, id, setPage, page }) => {
 
   return (
     <Box component="section" mt={6}>
-      <Typography variant="h5" mt={4} fontWeight={600}>
+      <Typography fontSize={{ xs: 26, md: 20 }} mt={4} fontWeight={600}>
         Вам могут понравиться{" "}
       </Typography>
-      <Grid2 container>
+      <Grid2 container spacing={1.2} mt={2}>
         {Array.isArray(products?.results) &&
           products?.results
-            ?.filter((item) => item.id !== id)
+            // ?.filter((item) => item.id !== id)
             .map((item, idx) => (
-              <Grid2 item size={2.4}>
+              <Grid2 item size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
                 <Card item={item} />
               </Grid2>
             ))}

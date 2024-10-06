@@ -121,7 +121,7 @@ const Products = ({ chip, setChip, formik }) => {
           />
         )}
       </Box>
-      <Grid2 container>
+      <Grid2 container spacing={2}>
         {Array.isArray(products?.results) &&
           products?.results?.map((item, idx) => (
             <Grid2 item size={3} key={idx}>

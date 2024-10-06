@@ -1,39 +1,59 @@
-import { Box, Container, Grid2, IconButton, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid2,
+  IconButton,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 import logo from "../../assets/images/logo.svg";
+import logo3 from "../../assets/images/logo3.svg";
 import { Link } from "react-router-dom";
 import instagram from "../../assets/images/instagram.svg";
 import facebook from "../../assets/images/facebook.svg";
 import twitter from "../../assets/images/twitter.svg";
 
 const Footer = () => {
+  const md = useMediaQuery("(min-width:768px)");
+
   return (
-    <Box component="footer" pt="60px" backgroundColor="#F4F4F4">
+    <Box
+      component="footer"
+      pt={{ xs: 2, md: "60px" }}
+      backgroundColor="#F4F4F4"
+    >
       <Container maxWidth="lg">
-        <Grid2 container mb={7}>
-          <Grid2 item size={6}>
+        <Grid2 container mb={{ xs: "41px", md: 7 }}>
+          <Grid2 item size={{ xs: 12, md: 6 }}>
             <Link to="/">
-              <img src={logo} alt="" />
+              {md ? (
+                <Box component="img" src={logo} alt="" />
+              ) : (
+                <Box component="img" src={logo3} alt="" />
+              )}
             </Link>
             <Typography
               variant="subtitle2"
               color="#878787"
-              mt={2.5}
-              mb={10}
+              mt={{ xs: "28px", md: 2.5 }}
+              mb={{ xs: 2.5, md: 10 }}
               lineHeight="130%"
             >
               Ваш путеводитель в области сырья и ингредиентов для пищевой
               промышленности
             </Typography>
-            <Typography
-              variant="subtitle2"
-              fontWeight="600"
-              mb={2}
-              color="#5F5F5F"
-            >
-              {" "}
-              Контакты
-            </Typography>
+            {md && (
+              <Typography
+                variant="subtitle2"
+                fontWeight="600"
+                mb={2}
+                color="#5F5F5F"
+              >
+                {" "}
+                Контакты
+              </Typography>
+            )}
             <Typography variant="subtitle2" fontWeight="400" color="#707070">
               Г.Бишкек ул. Матросова 1а/21 <br />
               <br />
@@ -42,12 +62,13 @@ const Footer = () => {
               </a>
             </Typography>
           </Grid2>
-          <Grid2 item size={6} sx={{}}>
+          <Grid2 item size={{ xs: 12, md: 6 }} sx={{}}>
             <Box
+              mt={{ xs: "22px", md: 0 }}
               display="flex"
-              justifyContent="end"
+              justifyContent={{ xs: "start", md: "end" }}
               flexDirection="column"
-              alignItems="end"
+              alignItems={{ xs: "start", md: "end" }}
             >
               <Box display="flex" columnGap={2.5}>
                 <Box>
@@ -200,7 +221,7 @@ const Footer = () => {
                 width="219px"
                 columnGap={2}
                 alignItems="center"
-                mt={7}
+                mt={{ xs: 2.5, md: 7 }}
               >
                 <IconButton target="_blank" href="https://instagram.com">
                   <img src={instagram} alt="" />

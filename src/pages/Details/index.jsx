@@ -1,4 +1,11 @@
-import { Box, Container, Grid2, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  Grid2,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect, useState } from "react";
 import img from "../../assets/images/1.webp";
 import img2 from "../../assets/images/2.webp";
@@ -9,9 +16,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
 import AddOrDelete from "../../components/AddOrDelete";
 import AddToCart from "../../components/AddToCart";
+import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
+import { Link } from "react-router-dom";
 
 const Details = () => {
   const dispatch = useDispatch();
+  const md = useMediaQuery("(min-width:768px)");
 
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
@@ -29,20 +39,48 @@ const Details = () => {
     onSubmit: () => {},
   });
 
+  const breadcrumbs = [
+    <Link key="1" to="/">
+      <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
+        Главная
+      </Typography>
+    </Link>,
+    <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
+      Каталог
+    </Typography>,
+    <Typography
+      fontSize={{ xs: 14, md: 13 }}
+      className="sans"
+      key="3"
+      sx={{ color: "text.primary" }}
+    >
+      {details?.group}
+    </Typography>,
+  ];
+
   return (
     <>
       <Container
         maxWidth="lg"
         sx={{
-          p: "60px 0",
+          pt: { xs: 5, md: "60px" },
         }}
       >
-        <Grid2 container spacing={4}>
-          <Grid2 item size={5}>
+        {!md && (
+          <Breadcrumbs
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+          >
+            {breadcrumbs}
+          </Breadcrumbs>
+        )}
+        <Grid2 container mt={{ xs: 2, md: 0 }} spacing={4}>
+          <Grid2 item size={{ xs: 12, sm: 6, lg: 5 }}>
             <Box>
-              <img
+              <Box
+                component="img"
                 width="100%"
-                height={405}
+                height={{ xs: 322, sm: "auto", md: 405 }}
                 style={{ borderRadius: 16, objectFit: "cover" }}
                 src={Array.isArray(details?.images) && details?.images[0]?.url}
                 alt=""
@@ -61,7 +99,7 @@ const Details = () => {
               </Box>
             </Box>
           </Grid2>
-          <Grid2 item size={7}>
+          <Grid2 item size={{ xs: 12, sm: 6, lg: 7 }}>
             <Box
               display="flex"
               height="100%"
@@ -69,15 +107,17 @@ const Details = () => {
               justifyContent="space-between"
             >
               <div>
-                <Typography
-                  className="sans"
-                  variant="subtitle1"
-                  mb={0.5}
-                  color="var(--primary)"
-                  fontWeight="700"
-                >
-                  {details.group}
-                </Typography>
+                {md && (
+                  <Typography
+                    className="sans"
+                    variant="subtitle1"
+                    mb={0.5}
+                    color="var(--primary)"
+                    fontWeight="700"
+                  >
+                    {details.group}
+                  </Typography>
+                )}
                 <Typography className="sans" variant="h4" fontWeight={700}>
                   {details?.name}
                 </Typography>
@@ -107,7 +147,7 @@ const Details = () => {
                   <Chip label="BX10S" variant="outlined" />
                   <Chip label="BS" variant="outlined" />
                 </Box> */}
-                <Box width="50%">
+                <Box width={{ xs: "100%", md: "50%" }}>
                   <Box
                     mt={4}
                     mb={3}
@@ -115,7 +155,11 @@ const Details = () => {
                     alignItems="center"
                     justifyContent="space-between"
                   >
-                    <Typography className="sans" variant="h3" fontWeight="600">
+                    <Typography
+                      className="sans"
+                      fontSize={{ xs: 40, md: 48 }}
+                      fontWeight="600"
+                    >
                       {details.price}c
                     </Typography>
                     <AddOrDelete
@@ -123,7 +167,7 @@ const Details = () => {
                       setCount={setCount}
                       id={details.id}
                       price={details.price}
-                      width="40%"
+                      width={md ? "40%" : 121}
                       padding="8px 13px"
                     />
                   </Box>
