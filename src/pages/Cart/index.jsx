@@ -92,7 +92,12 @@ const Cart = () => {
               <Form formik={formik} cart={cart} />
             ) : (
               <Button
-                fullWidth
+                sx={{
+                  position: "fixed",
+                  bottom: 16,
+                  left: 16,
+                  width: "94%",
+                }}
                 onClick={handleDrawer}
                 variant="contained"
                 color="primary"

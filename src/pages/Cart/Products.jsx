@@ -11,6 +11,7 @@ import Delete from "../../assets/images/Delete";
 import AddOrDelete from "../../components/AddOrDelete";
 import { Link } from "react-router-dom";
 import { TransitionGroup } from "react-transition-group";
+import empty from "../../assets/images/empty.svg";
 
 const Products = ({ cart, setCart }) => {
   const md = useMediaQuery("(min-width:769px)");
@@ -73,8 +74,25 @@ const Products = ({ cart, setCart }) => {
           alignItems="center"
           flexDirection="column"
         >
-          <Typography mb={3} textAlign="center" variant="h5" fontWeight={600}>
-            Ваша корзина пуста :(
+          <img src={empty} alt="" />
+          <Typography
+            mb={1}
+            textAlign="center"
+            fontSize={{ xs: 24 }}
+            color="#808080"
+            fontWeight={600}
+          >
+            Ваша корзина пуста
+          </Typography>
+          <Typography
+            textAlign="center"
+            maxWidth={358}
+            mb="37px"
+            fontSize={{ xs: 16 }}
+            color="#808080"
+            fontWeight={400}
+          >
+            Ваши сладкие шедевры ждут своего времени — добавьте ингредиенты!
           </Typography>
           <Link to="/catalog">
             <Button
@@ -82,7 +100,22 @@ const Products = ({ cart, setCart }) => {
               variant="contained"
               color="primary"
             >
-              Перейти в каталог
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M10 4L7.41421 6.58579C6.63316 7.36684 6.63317 8.63316 7.41421 9.41421L10 12"
+                  stroke="#D2D2D2"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+              Вернуться в Каталог
             </Button>
           </Link>
         </Box>
