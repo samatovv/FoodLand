@@ -9,13 +9,19 @@ import {
 import React from "react";
 import logo from "../../assets/images/logo.svg";
 import logo3 from "../../assets/images/logo3.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import instagram from "../../assets/images/instagram.svg";
 import facebook from "../../assets/images/facebook.svg";
 import twitter from "../../assets/images/twitter.svg";
+import { useAuth } from "../ProtectedRoutes";
+import { useDispatch } from "react-redux";
+import { handleAuthDialog } from "../../redux/reducers/mainSlice";
 
 const Footer = () => {
   const md = useMediaQuery("(min-width:768px)");
+  const isAuth = useAuth();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   return (
     <Box
@@ -116,26 +122,37 @@ const Footer = () => {
                         Новости
                       </Typography>
                     </Link>
-                    <Link to="/profile">
-                      <Typography
-                        className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
-                      >
-                        Личный кабинет
-                      </Typography>
-                    </Link>
-                    <Link to="/profile/cart">
-                      <Typography
-                        className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
-                      >
-                        Корзина
-                      </Typography>
-                    </Link>
+
+                    <Typography
+                      onClick={() =>
+                        isAuth
+                          ? navigate("/profile")
+                          : dispatch(handleAuthDialog(true))
+                      }
+                      sx={{ cursor: "pointer" }}
+                      className="link"
+                      variant="subtitle2"
+                      color="#707070"
+                      fontWeight={400}
+                    >
+                      Личный кабинет
+                    </Typography>
+
+                    <Typography
+                      onClick={() =>
+                        isAuth
+                          ? navigate("/profile/cart")
+                          : dispatch(handleAuthDialog(true))
+                      }
+                      sx={{ cursor: "pointer" }}
+                      className="link"
+                      variant="subtitle2"
+                      color="#707070"
+                      fontWeight={400}
+                    >
+                      Корзина
+                    </Typography>
+
                     <Link to="/about-us">
                       <Typography
                         className="link"

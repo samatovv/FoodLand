@@ -13,6 +13,7 @@ const NewsCard = ({ item, idx }) => {
         alignItems={{ xs: "start", sm: "end" }}
         columnGap={3}
         mb={5}
+        width="100%"
         sx={{
           "& svg": {
             transition: "all 800ms ease",
@@ -37,11 +38,11 @@ const NewsCard = ({ item, idx }) => {
               },
             },
             "& img": {
-              transform: "scale(1.3)",
+              transform: "scale(1.1)",
             },
           },
 
-          "& div": {
+          "& .img": {
             display: "block",
             overflow: "hidden",
             borderRadius: "15px",
@@ -49,7 +50,7 @@ const NewsCard = ({ item, idx }) => {
         }}
       >
         <Box
-          className="div"
+          className="img"
           sx={{
             minWidth: "250px",
             width: { xs: "100%", sm: "250px" },
@@ -66,7 +67,7 @@ const NewsCard = ({ item, idx }) => {
         </Box>
         <div
           style={{
-            maxWidth: "90%",
+            width: "76%",
           }}
         >
           <Box
@@ -80,6 +81,8 @@ const NewsCard = ({ item, idx }) => {
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
+                maxWidth: "50%",
+                width: "50%",
               }}
               variant="h5"
               fontWeight="700"

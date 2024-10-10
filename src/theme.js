@@ -118,7 +118,7 @@ export const theme = createTheme({
           },
 
           "& .MuiOutlinedInput-input": {
-            padding: "14.66px 18px",
+            padding: "12px 14.66px",
           },
 
           "& input": {

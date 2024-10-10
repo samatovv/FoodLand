@@ -7,7 +7,9 @@ import {
   uploadFile,
 } from "../../redux/reducers/profile";
 import auth from "../../assets/images/auth.svg";
+import logout from "../../assets/images/logout.svg";
 import Alert from "../../components/Alert";
+import Logout from "./Logout";
 
 const Info = () => {
   const dispatch = useDispatch();
@@ -17,6 +19,7 @@ const Info = () => {
   const input = useRef(null);
   const firstUpdate = useRef(true);
   const [open, setOpen] = useState(false);
+  const [out, setOut] = useState(false);
 
   const handleChange = (event) => {
     const formData = new FormData();
@@ -148,15 +151,20 @@ const Info = () => {
             backgroundColor: "#F5F5F5",
             borderRadius: "10px",
             color: "#5B5B5B",
-            mb: { xs: 1.5, md: "62px" },
             fontWeight: 400,
+            mb: 2,
             fontFamily: "Open Sans",
             fontSize: 13,
           }}
         >
           Редактировать фото
         </Button>
+        <Button onClick={() => setOut(true)}>
+          <img src={logout} style={{ marginRight: 8 }} alt="" />
+          Выйти из аккаунта
+        </Button>
       </Box>
+      <Logout open={out} close={() => setOut(false)} />
       <Alert
         message={
           uploadedFile.status === 200

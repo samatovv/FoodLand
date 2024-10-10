@@ -51,6 +51,8 @@ const WhyChooseUs = () => {
                 className="none_border_left"
                 maxHeight={350}
                 maxWidth={335}
+                left="2px"
+                top="1px`"
               >
                 <Box
                   sx={{
@@ -85,6 +87,9 @@ const WhyChooseUs = () => {
               border="1px solid #E6E6E6"
               borderRadius="10px"
               maxHeight={350}
+              position="relative"
+              top="1px"
+              left="1px"
             >
               <Typography
                 className="sans"
@@ -115,6 +120,7 @@ const WhyChooseUs = () => {
               borderRadius="10px"
               className="none_border_right"
               position="relative"
+              top="1px"
               maxHeight={{ xs: 210, md: 350 }}
             >
               <Box
@@ -152,6 +158,8 @@ const WhyChooseUs = () => {
               border="1px solid #E6E6E6"
               borderRadius="10px"
               maxHeight={350}
+              position="relative"
+              left="1px"
             >
               <Typography
                 className="sans"

@@ -71,6 +71,13 @@ const Form = ({ formik, cart }) => {
               Адрес доставки
             </Typography>
             <TextField
+              error={formik.values.deliveryAddress === "" && "Заполните поле"}
+              helperText={
+                formik.touched.deliveryAddress &&
+                formik.values.deliveryAddress === "" &&
+                "Заполните поле"
+              }
+              onBlur={() => formik.setTouched("deliveryAddress", true)}
               name="deliveryAddress"
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
@@ -141,7 +148,6 @@ const Form = ({ formik, cart }) => {
           disabled={!cart?.length}
           fullWidth
           onClick={() => formik.setFieldValue("status", "preorder")}
-          // onClick={() => dispatch(handleDrawer())}
           sx={{
             border: "1px solid #DBDBDB",
             fontSize: 10,

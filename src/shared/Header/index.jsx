@@ -4,15 +4,18 @@ import logo3 from "../../assets/images/logo3.svg";
 import logo from "../../assets/images/logo.svg";
 import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import Burger from "../../assets/images/Burger";
-import { handleDrawer } from "../../redux/reducers/mainSlice";
+import { handleAuthDialog, handleDrawer } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../ProtectedRoutes";
 
 const Header = () => {
   const location = useLocation();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const md = useMediaQuery("(min-width:769px)");
+  const isAuth = useAuth();
 
   const filter = useSelector((state) => state.main.filter);
 
@@ -93,15 +96,20 @@ const Header = () => {
         )}
 
         <Box>
-          <IconButton mr={1}>
-            <Link to="/profile/cart">
-              <img src={cart} width="48px" height="48px" alt="Корзина" />
-            </Link>
+          <IconButton
+            mr={1}
+            onClick={() =>
+              isAuth ? navigate("/profile/cart") : dispatch(handleAuthDialog(true))
+            }
+          >
+            <img src={cart} width="48px" height="48px" alt="Корзина" />
           </IconButton>
-          <IconButton>
-            <Link to="/profile">
-              <img src={auth} width="48px" height="48px" alt="Авторизация" />
-            </Link>
+          <IconButton
+            onClick={() =>
+              isAuth ? navigate("/profile") : dispatch(handleAuthDialog(true))
+            }
+          >
+            <img src={auth} width="48px" height="48px" alt="Авторизация" />
           </IconButton>
           {!md && (
             <IconButton onClick={() => dispatch(handleDrawer(true))}>

@@ -84,10 +84,10 @@ const Cart = () => {
     <>
       <Container maxWidth="lg" sx={{ mt: { xs: 0, md: 4 } }}>
         <Grid2 container pb="24px" spacing={{ xs: 2, lg: 2 }}>
-          <Grid2 size={{ xs: 12, md: 8, lg: 8 }}>
+          <Grid2 size={{ xs: 12, md: 8, lg: 7.5 }}>
             <Products cart={cart} setCart={setCart} />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4, lg: 4 }}>
+          <Grid2 size={{ xs: 12, md: 4, lg: 4.5 }}>
             {md ? (
               <Form formik={formik} cart={cart} />
             ) : (

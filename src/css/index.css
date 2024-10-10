@@ -258,3 +258,16 @@ textarea {
     right: 58px;
   }
 }
+
+.roulette {
+  /* animation: translate 2s infinite; */
+}
+
+@keyframes translate {
+  from {
+    transform: translate(200%);
+  }
+  to {
+    transform: translate(0%);
+  }
+}
