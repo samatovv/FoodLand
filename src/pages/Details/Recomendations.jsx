@@ -18,7 +18,7 @@ const Recomendations = ({ details, id, setPage, page }) => {
   //   if (details?.id)
   //     dispatch(
   //       getProducts(
-  //         `https://foodlandtest.com/v1/products?limit=4&page=1&category=${details?.category}`
+  //         `https://api.foodland.kg/v1/products?limit=4&page=1&category=${details?.category}`
   //       )
   //     );
   // }, [details]);

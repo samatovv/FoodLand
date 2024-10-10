@@ -46,7 +46,7 @@ const Products = ({ chip, setChip, formik }) => {
         dispatch(setSearch(decodeURI(location.search.split("=")[1])));
       dispatch(
         getProducts(
-          `https://foodlandtest.com/v1/products?limit=10&page=1&${
+          `https://api.foodland.kg/v1/products?limit=10&page=1&${
             location.search.split("?")[1]
           }`
         )
@@ -117,7 +117,7 @@ const Products = ({ chip, setChip, formik }) => {
             setValueSearch(e.target.value);
             dispatch(
               getProducts(
-                `https://foodlandtest.com/v1/products?limit=10&page=1&search=${e.target.value}`
+                `https://api.foodland.kg/v1/products?limit=10&page=1&search=${e.target.value}`
               )
             );
           }}

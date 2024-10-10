@@ -11,7 +11,7 @@ const user = cookie.get("foodland_token");
 export const instance = axios.create(
   !!user
     ? {
-        baseURL: `https://foodlandtest.com/v1/`,
+        baseURL: `https://api.foodland.kg/v1/`,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json; charset=UTF-8",
@@ -19,7 +19,7 @@ export const instance = axios.create(
         },
       }
     : {
-        baseURL: `https://foodlandtest.com/v1/`,
+        baseURL: `https://api.foodland.kg/v1/`,
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json; charset=UTF-8",
@@ -28,7 +28,7 @@ export const instance = axios.create(
 );
 
 export const formData = axios.create({
-  baseURL: `https://foodlandtest.com/v1/`,
+  baseURL: `https://api.foodland.kg/v1/`,
   headers: {
     Accept: "application/json",
     "Content-Type": "multipart/form-data",

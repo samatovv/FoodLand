@@ -94,7 +94,7 @@ const Categories = ({ setChip, formik }) => {
                       setChip(item.name);
                       dispatch(
                         getProducts(
-                          `https://foodlandtest.com/v1/products?limit=12&page=1&category=${item.id}`
+                          `https://api.foodland.kg/v1/products?limit=12&page=1&category=${item.id}`
                         )
                       );
                     }}
@@ -179,7 +179,7 @@ const Categories = ({ setChip, formik }) => {
                   setChip(item.name);
                   dispatch(
                     getProducts(
-                      `https://foodlandtest.com/v1/products?limit=12&page=1&category=${item.id}`
+                      `https://api.foodland.kg/v1/products?limit=12&page=1&category=${item.id}`
                     )
                   );
                 }}
