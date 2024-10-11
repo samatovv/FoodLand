@@ -10,6 +10,7 @@ import auth from "../../assets/images/auth.svg";
 import logout from "../../assets/images/logout.svg";
 import Alert from "../../components/Alert";
 import Logout from "./Logout";
+import { handleLoading } from "../../redux/reducers/mainSlice";
 
 const Info = () => {
   const dispatch = useDispatch();
@@ -25,6 +26,7 @@ const Info = () => {
     const formData = new FormData();
     formData.append("file", event.target.files[0]);
     dispatch(uploadFile(formData));
+    dispatch(handleLoading(true));
   };
 
   useLayoutEffect(() => {
@@ -32,6 +34,8 @@ const Info = () => {
       firstUpdate.current = false;
       return;
     }
+
+    dispatch(handleLoading(false));
 
     if (uploadedFile.status === 201) {
       dispatch(

@@ -7,12 +7,15 @@ import Profile from "./routers/Profile";
 import ProtectedRoutes from "./shared/ProtectedRoutes";
 import DrawerNav from "./shared/DrawerNav";
 import { handleDrawer } from "./redux/reducers/mainSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Auth from "./pages/Auth";
+import { LinearProgress } from "@mui/material";
 
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
+
+  const loading = useSelector((state) => state.main.loading);
 
   useEffect(() => {
     if (!localStorage.getItem("cart")) localStorage.setItem("cart", "[]");
@@ -24,6 +27,12 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+      {loading && (
+        <LinearProgress
+          color="primary"
+          sx={{ width: "100%", position: "fixed", top: 0, zIndex:1301 }}
+        />
+      )}
       <Routes>
         <Route path="/*" element={<Site />} />
         <Route element={<ProtectedRoutes />}>

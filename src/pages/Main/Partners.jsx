@@ -61,6 +61,7 @@ const Partners = () => {
         sx={{
           display: "flex",
           flexWrap: "nowrap",
+          columnGap: 3,
           "& img": {
             filter: { xs: "none", md: "grayscale(1)" },
             transition: "all 800ms ease",

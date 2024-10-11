@@ -29,6 +29,7 @@ const Products = ({ chip, setChip, formik }) => {
 
   const [searchValue, setValueSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [names, setNames] = useState(1);
 
   const handleDelete = () => {
     setChip(null);
@@ -41,6 +42,7 @@ const Products = ({ chip, setChip, formik }) => {
   };
 
   useEffect(() => {
+    setNames(products?.results?.map((item) => item.name));
     if (location.search) {
       setValueSearch(search);
       if (!location.search.includes("category"))

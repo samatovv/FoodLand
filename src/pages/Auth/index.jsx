@@ -14,12 +14,16 @@ import { login } from "../../redux/reducers/profile";
 import cookie from "cookie_js";
 import { useLocation, useNavigate } from "react-router";
 import { instance } from "../../api";
-import { handleAuthDialog } from "../../redux/reducers/mainSlice";
+import {
+  handleAuthDialog,
+  handleLoading,
+} from "../../redux/reducers/mainSlice";
 import close from "../../assets/images/close.svg";
 import message from "../../assets/images/message.svg";
 import password from "../../assets/images/password.svg";
 import eye from "../../assets/images/eye.svg";
 import view from "../../assets/images/view.svg";
+import Alert from "../../components/Alert";
 
 const Auth = () => {
   const dispatch = useDispatch();
@@ -29,7 +33,7 @@ const Auth = () => {
   const loginData = useSelector((state) => state.profile.loginData);
   const auth = useSelector((state) => state.main.auth);
 
-  const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
   const [visible, setVisible] = useState(false);
   const firstUpdate = useRef(true);
 
@@ -39,13 +43,14 @@ const Auth = () => {
       password: "",
     },
     onSubmit: (data) => {
+      dispatch(handleLoading(true));
       dispatch(login(data));
     },
   });
 
   const closeHandle = () => {
     // if (!location.pathname.includes("catalog"))
-       dispatch(handleAuthDialog());
+    dispatch(handleAuthDialog());
   };
 
   useLayoutEffect(() => {
@@ -55,23 +60,34 @@ const Auth = () => {
     }
 
     // hide linear progress
-    setLoading(false);
+    dispatch(handleLoading(false));
+
+    setOpen(true);
 
     if (loginData.status == 200) {
-      alert("Успешно");
       cookie.set("foodland_token", loginData.data.tokens.access.token, {
         expires: loginData.data.tokens.access.expires,
       });
       instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
       dispatch(handleAuthDialog());
       navigate("/profile");
-    } else alert(loginData.data.message);
+    }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loginData]);
 
   return (
     <>
+      <Alert
+        message={
+          loginData?.status === 200
+            ? "Вы успешно авторизовались!"
+            : loginData?.data?.message
+        }
+        open={open}
+        severity={loginData?.status === 200 ? "success" : "error"}
+        setOpen={() => setOpen(false)}
+      />
       <Dialog
         open={auth}
         sx={{

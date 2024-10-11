@@ -31,6 +31,7 @@ const Form = ({ formik, cart }) => {
         </Typography>
         <RadioGroup
           required
+          defaultValue="delivery"
           name="deliveryType"
           sx={{
             "& .MuiTypography-root": {
@@ -86,38 +87,38 @@ const Form = ({ formik, cart }) => {
               placeholder="Ваш адрес"
               fullWidth
             />
-            <Typography
-              className="sans"
-              mt={2}
-              variant="subtitle2"
-              mb={2}
-              color="#5B5B5B"
-            >
-              Дата доставки
-            </Typography>
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-                disablePast
-                value={formik.values.deliveryDate}
-                onChange={(value) =>
-                  formik.setFieldValue("deliveryDate", value)
-                }
-                slotProps={{
-                  textField: {
-                    fullWidth: true,
-                    error:
-                      formik.touched.deliveryDate && formik.errors.deliveryDate,
-                    helperText:
-                      formik.touched.deliveryDate &&
-                      formik.errors.deliveryDate &&
-                      "Заполните поле",
-                  },
-                }}
-              />
-            </LocalizationProvider>
           </>
         )}
-
+        <Typography
+          className="sans"
+          mt={2}
+          variant="subtitle2"
+          mb={2}
+          color="#5B5B5B"
+        >
+          Дата{" "}
+          {formik.values.deliveryType === "delivery"
+            ? "доставки"
+            : "получения заказа"}
+        </Typography>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            disablePast
+            value={formik.values.deliveryDate}
+            onChange={(value) => formik.setFieldValue("deliveryDate", value)}
+            slotProps={{
+              textField: {
+                fullWidth: true,
+                error:
+                  formik.touched.deliveryDate && formik.errors.deliveryDate,
+                helperText:
+                  formik.touched.deliveryDate &&
+                  formik.errors.deliveryDate &&
+                  "Заполните поле",
+              },
+            }}
+          />
+        </LocalizationProvider>
         <Typography
           className="sans"
           mt={2}

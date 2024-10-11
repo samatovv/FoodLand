@@ -36,6 +36,7 @@ const Catalog = () => {
     </Typography>,
   ];
 
+
   useEffect(() => {
     if (!isAuth) dispatch(handleAuthDialog(true));
   }, []);

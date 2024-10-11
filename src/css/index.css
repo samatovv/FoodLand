@@ -35,6 +35,11 @@ textarea {
   font-size: 16px !important;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:focus {
+  transition: background-color 0s 600000s, color 0s 600000s !important;
+}
+
 .sans {
   font-family: "Open Sans" !important;
 }
@@ -108,7 +113,7 @@ textarea {
   position: absolute;
   bottom: 0;
   left: 0;
-  transition: all 600ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  transition: all 600ms ease;
   background: linear-gradient(
     0deg,
     rgba(2, 0, 36, 1) 0%,
@@ -153,13 +158,13 @@ textarea {
 
 .more .button_txt {
   z-index: 2;
-  transition: transform 600ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  transition: transform 600ms ease;
 }
 
 .round {
   background-color: #6e8435;
   border-radius: 100px;
-  transition: all 600ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  transition: all 600ms ease;
   min-width: 40px;
   min-height: 40px;
   position: absolute;
@@ -168,7 +173,7 @@ textarea {
 }
 
 .more svg {
-  transition: all 600ms cubic-bezier(0.47, 1.64, 0.41, 0.8);
+  transition: all 600ms ease;
 }
 
 .more:hover .button_txt {

@@ -118,7 +118,6 @@ export const theme = createTheme({
           },
 
           "& .Mui-error": {
-         
             "& input": {
               // backgroundColor: "#FFF2F2",
             },
@@ -136,10 +135,10 @@ export const theme = createTheme({
           },
 
           "& input": {
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#FFFFFF!important",
             borderRadius: "100px",
             fontFamily: "Open Sans",
-
+    
             // "&::placeholder": {
             //   fontWeight: "400",
             //   fontSize: "14px",

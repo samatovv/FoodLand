@@ -5,6 +5,7 @@ const initialState = {
   open: false,
   filter: false,
   auth: false,
+  loading: false,
   banners: [],
   recomendations: [],
   categories: [],
@@ -25,6 +26,11 @@ export const mainSlice = createSlice({
     handleAuthDialog: (state, action) => {
       state.auth = action.payload;
     },
+
+    handleLoading: (state, action) => {
+      state.loading = action.payload;
+    },
+
     setBanners: (state, action) => {
       state.banners = action.payload;
     },
@@ -78,6 +84,7 @@ export const {
   setNewsDetails,
   handleFilter,
   handleAuthDialog,
+  handleLoading,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

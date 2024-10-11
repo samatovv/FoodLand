@@ -12,6 +12,7 @@ import ButtonMore from "../../components/ButtonMore";
 import FormDrawer from "./FormDrawer";
 import * as yup from "yup";
 import dayjs from "dayjs";
+import { handleLoading } from "../../redux/reducers/mainSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -25,17 +26,13 @@ const Cart = () => {
   const firstUpdate = useRef(true);
 
   const createdOrder = useSelector((state) => state.profile.createdOrder);
-  var validationSchema = yup.object().shape({
-    deliveryDate: yup.string().min(1).max(255).required(),
-    deliveryAddress: yup.string().min(1).max(255).required(),
-  });
 
   const now = dayjs();
 
   const formik = useFormik({
     validationSchema: validationSchema,
     initialValues: {
-      deliveryType: null,
+      deliveryType: "delivery",
       deliveryDate: now,
       deliveryAddress: "",
       comment: "",
@@ -47,6 +44,8 @@ const Cart = () => {
         product: item.id,
         quantity: item.count,
       }));
+
+      dispatch(handleLoading(true));
 
       dispatch(
         createOrder({
@@ -64,12 +63,16 @@ const Cart = () => {
     },
   });
 
+  var validationSchema = yup.object().shape({
+    deliveryDate: yup.string().min(1).max(255).required(),
+    deliveryAddress:
+      formik.values.deliveryType === "delivery" &&
+      yup.string().min(1).max(255).required(),
+  });
+
   const handleDrawer = () => setDrawer(!drawer);
 
   useEffect(() => {
-    console.log("====================================");
-    console.log(formik.values);
-    console.log("====================================");
     setCart(JSON.parse(localStorage.getItem("cart")));
   }, []);
 
@@ -78,6 +81,7 @@ const Cart = () => {
       firstUpdate.current = false;
       return;
     }
+    dispatch(handleLoading(false));
 
     if (createdOrder.status == 200) {
       setOpen(true);
