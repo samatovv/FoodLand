@@ -10,6 +10,8 @@ import Products from "./Products";
 import Form from "./Form";
 import ButtonMore from "../../components/ButtonMore";
 import FormDrawer from "./FormDrawer";
+import * as yup from "yup";
+import dayjs from "dayjs";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -23,19 +25,24 @@ const Cart = () => {
   const firstUpdate = useRef(true);
 
   const createdOrder = useSelector((state) => state.profile.createdOrder);
+  var validationSchema = yup.object().shape({
+    deliveryDate: yup.string().min(1).max(255).required(),
+    deliveryAddress: yup.string().min(1).max(255).required(),
+  });
+
+  const now = dayjs();
 
   const formik = useFormik({
+    validationSchema: validationSchema,
     initialValues: {
       deliveryType: null,
-      deliveryDate: "",
+      deliveryDate: now,
       deliveryAddress: "",
       comment: "",
       products: [],
       error: false,
     },
     onSubmit: (values) => {
-      console.log(cart);
-
       let products = cart.map((item) => ({
         product: item.id,
         quantity: item.count,
@@ -60,6 +67,9 @@ const Cart = () => {
   const handleDrawer = () => setDrawer(!drawer);
 
   useEffect(() => {
+    console.log("====================================");
+    console.log(formik.values);
+    console.log("====================================");
     setCart(JSON.parse(localStorage.getItem("cart")));
   }, []);
 
@@ -91,19 +101,21 @@ const Cart = () => {
             {md ? (
               <Form formik={formik} cart={cart} />
             ) : (
-              <Button
-                sx={{
-                  position: "fixed",
-                  bottom: 16,
-                  left: 16,
-                  width: "94%",
-                }}
-                onClick={handleDrawer}
-                variant="contained"
-                color="primary"
-              >
-                Оформить заказ
-              </Button>
+              cart.length !== 0 && (
+                <Button
+                  sx={{
+                    position: "fixed",
+                    bottom: 16,
+                    left: 16,
+                    width: "94%",
+                  }}
+                  onClick={handleDrawer}
+                  variant="contained"
+                  color="primary"
+                >
+                  Оформить заказ
+                </Button>
+              )
             )}
           </Grid2>
         </Grid2>

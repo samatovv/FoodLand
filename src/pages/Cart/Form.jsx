@@ -71,17 +71,18 @@ const Form = ({ formik, cart }) => {
               Адрес доставки
             </Typography>
             <TextField
-              error={formik.values.deliveryAddress === "" && "Заполните поле"}
+              error={
+                formik.touched.deliveryAddress && formik.errors.deliveryAddress
+              }
               helperText={
                 formik.touched.deliveryAddress &&
-                formik.values.deliveryAddress === "" &&
+                formik.errors.deliveryAddress &&
                 "Заполните поле"
               }
-              onBlur={() => formik.setTouched("deliveryAddress", true)}
               name="deliveryAddress"
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
-              required
+              // required
               placeholder="Ваш адрес"
               fullWidth
             />
@@ -94,22 +95,26 @@ const Form = ({ formik, cart }) => {
             >
               Дата доставки
             </Typography>
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
-              // name="deliveryDate"
-              // onChange={formik.handleChange}
-              // value={formik.values.deliveryDate}
+                disablePast
+                value={formik.values.deliveryDate}
+                onChange={(value) =>
+                  formik.setFieldValue("deliveryDate", value)
+                }
+                slotProps={{
+                  textField: {
+                    fullWidth: true,
+                    error:
+                      formik.touched.deliveryDate && formik.errors.deliveryDate,
+                    helperText:
+                      formik.touched.deliveryDate &&
+                      formik.errors.deliveryDate &&
+                      "Заполните поле",
+                  },
+                }}
               />
-            </LocalizationProvider> */}
-            <TextField
-              name="deliveryDate"
-              onChange={formik.handleChange}
-              value={formik.values.deliveryDate}
-              required
-              type="date"
-              placeholder="Ваш адрес"
-              fullWidth
-            />
+            </LocalizationProvider>
           </>
         )}
 

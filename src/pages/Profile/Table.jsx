@@ -16,6 +16,9 @@ import Cancelled from "../../assets/images/Cancelled";
 import { Link } from "react-router-dom";
 import more from "../../assets/images/more.svg";
 import Preview from "../Preview";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { DatePicker } from "@mui/x-date-pickers";
 
 const Table = () => {
   const dispatch = useDispatch();
@@ -70,7 +73,9 @@ const Table = () => {
           <Typography fontWeight={600} variant="h4">
             Мои заказы
           </Typography>
-          <TextField placeholder="Выбрать дату" type="date" />
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            <DatePicker disablePast />
+          </LocalizationProvider>{" "}
         </Box>
         <Box
           sx={{

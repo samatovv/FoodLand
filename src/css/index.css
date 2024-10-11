@@ -260,14 +260,14 @@ textarea {
 }
 
 .roulette {
-  /* animation: translate 2s infinite; */
+  animation: slide 40s linear infinite;
 }
 
-@keyframes translate {
-  from {
-    transform: translate(200%);
+@keyframes slide {
+  0% {
+    transform: translate3d(0, 0, 0);
   }
-  to {
-    transform: translate(0%);
+  100% {
+    transform: translate3d(-1692px, 0, 0);
   }
 }

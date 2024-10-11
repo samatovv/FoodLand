@@ -117,6 +117,20 @@ export const theme = createTheme({
             borderRadius: "100px",
           },
 
+          "& .Mui-error": {
+         
+            "& input": {
+              // backgroundColor: "#FFF2F2",
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#d32f2f!important",
+            },
+          },
+
+          "& .MuiFormHelperText-root ": {
+            fontFamily: "Open Sans",
+          },
+
           "& .MuiOutlinedInput-input": {
             padding: "12px 14.66px",
           },

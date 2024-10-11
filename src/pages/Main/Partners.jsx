@@ -14,6 +14,30 @@ import {
   useMediaQuery,
 } from "@mui/material";
 
+const arr = [
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+];
+
 const Partners = () => {
   const md = useMediaQuery("(min-width:768px)");
   return (
@@ -32,11 +56,11 @@ const Partners = () => {
           Официальные дистрибьюторы
         </Typography>
       </Container>
-      <Grid2
+      <Box
         className="roulette"
-        container
-        spacing={{ xs: 2, md: 3 }}
         sx={{
+          display: "flex",
+          flexWrap: "nowrap",
           "& img": {
             filter: { xs: "none", md: "grayscale(1)" },
             transition: "all 800ms ease",
@@ -47,29 +71,10 @@ const Partners = () => {
           },
         }}
       >
-        <Grid2 size={{ xs: 4, lg: 1.7 }}>
-          <img src={img1} alt="" />
-        </Grid2>
-        <Grid2 size={{ xs: 4, lg: 1.7 }}>
-          <img src={img2} alt="" />
-        </Grid2>
-        <Grid2 size={{ xs: 4, lg: 1.7 }}>
-          <img src={img3} alt="" />
-        </Grid2>
-        <Grid2 size={{ xs: 4, lg: 1.7 }}>
-          <img src={img4} alt="" />
-        </Grid2>
-        <Grid2 size={{ xs: 4, lg: 1.7 }}>
-          <img src={img5} alt="" />
-        </Grid2>
-        <Grid2 size={{ xs: 4, lg: 1.7 }}>
-          <img src={img6} alt="" />
-        </Grid2>
-
-        <Grid2 size={{ xs: 4, md: 1.7 }}>
-          <img src={img7} alt="" />
-        </Grid2>
-      </Grid2>
+        {arr.map((item, idx) => (
+          <img src={item} alt="" />
+        ))}
+      </Box>
     </Box>
   );
 };
