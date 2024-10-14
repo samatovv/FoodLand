@@ -117,15 +117,28 @@ export const theme = createTheme({
             borderRadius: "100px",
           },
 
+          "& .Mui-error": {
+            "& input": {
+              // backgroundColor: "#FFF2F2",
+            },
+            "& .MuiOutlinedInput-notchedOutline": {
+              borderColor: "#d32f2f!important",
+            },
+          },
+
+          "& .MuiFormHelperText-root ": {
+            fontFamily: "Open Sans",
+          },
+
           "& .MuiOutlinedInput-input": {
-            padding: "14.66px 18px",
+            padding: "12px 14.66px",
           },
 
           "& input": {
-            backgroundColor: "#FFFFFF",
+            backgroundColor: "#FFFFFF!important",
             borderRadius: "100px",
             fontFamily: "Open Sans",
-
+    
             // "&::placeholder": {
             //   fontWeight: "400",
             //   fontSize: "14px",

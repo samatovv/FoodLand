@@ -4,6 +4,8 @@ import { Main } from "../../api/";
 const initialState = {
   open: false,
   filter: false,
+  auth: false,
+  loading: false,
   banners: [],
   recomendations: [],
   categories: [],
@@ -20,6 +22,13 @@ export const mainSlice = createSlice({
     },
     handleFilter: (state, action) => {
       state.filter = action.payload;
+    },
+    handleAuthDialog: (state, action) => {
+      state.auth = action.payload;
+    },
+
+    handleLoading: (state, action) => {
+      state.loading = action.payload;
     },
 
     setBanners: (state, action) => {
@@ -74,6 +83,8 @@ export const {
   setBanners,
   setNewsDetails,
   handleFilter,
+  handleAuthDialog,
+  handleLoading,
 } = mainSlice.actions;
 
 export default mainSlice.reducer;

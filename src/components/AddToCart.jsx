@@ -3,46 +3,53 @@ import React, { useState } from "react";
 import Cart from "../assets/images/Cart";
 import ButtonMore from "./ButtonMore";
 import InCart from "../assets/images/InCart";
+import { useAuth } from "../shared/ProtectedRoutes";
+import { handleAuthDialog } from "../redux/reducers/mainSlice";
+import { useDispatch } from "react-redux";
 
 const AddToCart = ({ details, count, id, card }) => {
+  const dispatch = useDispatch();
+  const isAuth = useAuth();
+
   const [inCart, setInCart] = useState(null);
 
   const clickHandler = () => {
-    setInCart(true);
     let cart = JSON.parse(localStorage.getItem("cart"));
     let newItem = cart?.find((item) => item.id === id);
-
-    if (!newItem) {
-      localStorage.setItem(
-        "cart",
-        JSON.stringify([
-          ...JSON.parse(localStorage.getItem("cart")),
-          {
-            id: details.id,
-            count: count,
-            name: details.name,
-            img: details.images[0].url,
-            description: details.description,
-            sum: details.price * count,
-            price: details.price,
-            idx: details.customId,
-          },
-        ])
-      );
-    } else {
-      let updatedCart = cart?.filter((item) => item.id !== id);
-      localStorage.setItem(
-        "cart",
-        JSON.stringify([
-          ...updatedCart,
-          {
-            ...newItem,
-            count: newItem?.count + count,
-            sum: details.price * newItem?.count + count,
-          },
-        ])
-      );
-    }
+    if (isAuth) {
+      setInCart(true);
+      if (!newItem) {
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([
+            ...JSON.parse(localStorage.getItem("cart")),
+            {
+              id: details.id,
+              count: count,
+              name: details.name,
+              img: details.images[0].url,
+              description: details.description,
+              sum: details.price * count,
+              price: details.price,
+              idx: details.customId,
+            },
+          ])
+        );
+      } else {
+        let updatedCart = cart?.filter((item) => item.id !== id);
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([
+            ...updatedCart,
+            {
+              ...newItem,
+              count: newItem?.count + count,
+              sum: details.price * newItem?.count + count,
+            },
+          ])
+        );
+      }
+    } else dispatch(handleAuthDialog(true));
   };
 
   return (

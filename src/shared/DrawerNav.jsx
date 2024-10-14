@@ -105,7 +105,7 @@ const DrawerNav = () => {
                 Каталог
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
+            {/* <ListItemButton>
               {profile?.id ? (
                 <NavLink
                   style={{
@@ -151,7 +151,7 @@ const DrawerNav = () => {
               >
                 Корзина
               </NavLink>
-            </ListItemButton>
+            </ListItemButton> */}
           </List>
         </div>
         <ButtonMore

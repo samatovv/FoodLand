@@ -83,18 +83,18 @@ const News = () => {
                         },
                       },
                       "& img": {
-                        transform: "scale(1.3)",
+                        transform: "scale(1.1)",
                       },
                     },
 
-                    "& div": {
+                    "& .img": {
                       display: "block",
                       overflow: "hidden",
                       borderRadius: "15px",
                     },
                   }}
                 >
-                  <div>
+                  <div className="img">
                     <img
                       style={{ borderRadius: "15px" }}
                       src={lastPost?.imageUrl}
@@ -136,7 +136,7 @@ const News = () => {
                   >
                     {lastPost.content}
                   </Typography>
-                  <span style={{ textDecoration: "underline" }}>
+                  <span className="sans" style={{ textDecoration: "underline" }}>
                     Читать далее
                     <IconButton sx={{ p: 0, ml: 1 }}>
                       <svg

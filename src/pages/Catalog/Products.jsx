@@ -16,6 +16,7 @@ import { useLocation } from "react-router";
 import { getProducts, setSearch } from "../../redux/reducers/products";
 import PaginationLarge from "../../components/Pagination";
 import filter from "../../assets/images/filter.svg";
+import empty from "../../assets/images/emptyCart.svg";
 import { handleFilter } from "../../redux/reducers/mainSlice";
 
 const Products = ({ chip, setChip, formik }) => {
@@ -28,6 +29,7 @@ const Products = ({ chip, setChip, formik }) => {
 
   const [searchValue, setValueSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [names, setNames] = useState(1);
 
   const handleDelete = () => {
     setChip(null);
@@ -40,6 +42,7 @@ const Products = ({ chip, setChip, formik }) => {
   };
 
   useEffect(() => {
+    setNames(products?.results?.map((item) => item.name));
     if (location.search) {
       setValueSearch(search);
       if (!location.search.includes("category"))
@@ -159,14 +162,34 @@ const Products = ({ chip, setChip, formik }) => {
           )}
         </Box>
       )}
-      <Grid2 container spacing={2}>
-        {Array.isArray(products?.results) &&
-          products?.results?.map((item, idx) => (
-            <Grid2 item size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }} key={idx}>
-              <Card item={item} />
-            </Grid2>
-          ))}
-      </Grid2>
+      {!products?.results?.length ? (
+        <Box
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          rowGap={4}
+        >
+          <img src={empty} alt="" />
+          <Typography variant="subtitle1" fontWeight={600} color="#AEAEAE">
+            По вашему запросу{" "}
+            <span style={{ color: "#000" }}>{searchValue} </span>
+            ничего не найдено
+          </Typography>
+        </Box>
+      ) : (
+        <Grid2 container spacing={2}>
+          {Array.isArray(products?.results) &&
+            products?.results?.map((item, idx) => (
+              <Grid2
+                item
+                size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}
+                key={idx}
+              >
+                <Card item={item} />
+              </Grid2>
+            ))}
+        </Grid2>
+      )}
 
       <PaginationLarge
         page={page}

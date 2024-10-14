@@ -1,6 +1,5 @@
 import axios from "axios";
 import cookie from "cookie_js";
-import { getNews } from "../redux/reducers/mainSlice";
 
 function get_token() {
   return cookie.get("foodland_token");

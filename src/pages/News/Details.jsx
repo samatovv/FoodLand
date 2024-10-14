@@ -130,7 +130,7 @@ const NewsDetails = () => {
                             },
                           },
 
-                          "& div": {
+                          "& .div": {
                             display: "block",
                             overflow: "hidden",
                             borderRadius: "15px",

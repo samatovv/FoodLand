@@ -10,6 +10,9 @@ import Products from "./Products";
 import Form from "./Form";
 import ButtonMore from "../../components/ButtonMore";
 import FormDrawer from "./FormDrawer";
+import * as yup from "yup";
+import dayjs from "dayjs";
+import { handleLoading } from "../../redux/reducers/mainSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -24,22 +27,25 @@ const Cart = () => {
 
   const createdOrder = useSelector((state) => state.profile.createdOrder);
 
+  const now = dayjs();
+
   const formik = useFormik({
+    validationSchema: validationSchema,
     initialValues: {
-      deliveryType: null,
-      deliveryDate: "",
+      deliveryType: "delivery",
+      deliveryDate: now,
       deliveryAddress: "",
       comment: "",
       products: [],
       error: false,
     },
     onSubmit: (values) => {
-      console.log(cart);
-
       let products = cart.map((item) => ({
         product: item.id,
         quantity: item.count,
       }));
+
+      dispatch(handleLoading(true));
 
       dispatch(
         createOrder({
@@ -57,6 +63,13 @@ const Cart = () => {
     },
   });
 
+  var validationSchema = yup.object().shape({
+    deliveryDate: yup.string().min(1).max(255).required(),
+    deliveryAddress:
+      formik.values.deliveryType === "delivery" &&
+      yup.string().min(1).max(255).required(),
+  });
+
   const handleDrawer = () => setDrawer(!drawer);
 
   useEffect(() => {
@@ -68,6 +81,7 @@ const Cart = () => {
       firstUpdate.current = false;
       return;
     }
+    dispatch(handleLoading(false));
 
     if (createdOrder.status == 200) {
       setOpen(true);
@@ -84,26 +98,28 @@ const Cart = () => {
     <>
       <Container maxWidth="lg" sx={{ mt: { xs: 0, md: 4 } }}>
         <Grid2 container pb="24px" spacing={{ xs: 2, lg: 2 }}>
-          <Grid2 size={{ xs: 12, md: 8, lg: 8 }}>
+          <Grid2 size={{ xs: 12, md: 8, lg: 7.5 }}>
             <Products cart={cart} setCart={setCart} />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4, lg: 4 }}>
+          <Grid2 size={{ xs: 12, md: 4, lg: 4.5 }}>
             {md ? (
               <Form formik={formik} cart={cart} />
             ) : (
-              <Button
-                sx={{
-                  position: "fixed",
-                  bottom: 16,
-                  left: 16,
-                  width: "94%",
-                }}
-                onClick={handleDrawer}
-                variant="contained"
-                color="primary"
-              >
-                Оформить заказ
-              </Button>
+              cart.length !== 0 && (
+                <Button
+                  sx={{
+                    position: "fixed",
+                    bottom: 16,
+                    left: 16,
+                    width: "94%",
+                  }}
+                  onClick={handleDrawer}
+                  variant="contained"
+                  color="primary"
+                >
+                  Оформить заказ
+                </Button>
+              )
             )}
           </Grid2>
         </Grid2>

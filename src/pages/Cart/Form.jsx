@@ -31,6 +31,7 @@ const Form = ({ formik, cart }) => {
         </Typography>
         <RadioGroup
           required
+          defaultValue="delivery"
           name="deliveryType"
           sx={{
             "& .MuiTypography-root": {
@@ -71,41 +72,53 @@ const Form = ({ formik, cart }) => {
               Адрес доставки
             </Typography>
             <TextField
+              error={
+                formik.touched.deliveryAddress && formik.errors.deliveryAddress
+              }
+              helperText={
+                formik.touched.deliveryAddress &&
+                formik.errors.deliveryAddress &&
+                "Заполните поле"
+              }
               name="deliveryAddress"
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
-              required
-              placeholder="Ваш адрес"
-              fullWidth
-            />
-            <Typography
-              className="sans"
-              mt={2}
-              variant="subtitle2"
-              mb={2}
-              color="#5B5B5B"
-            >
-              Дата доставки
-            </Typography>
-            {/* <LocalizationProvider dateAdapter={AdapterDayjs}>
-              <DatePicker
-              // name="deliveryDate"
-              // onChange={formik.handleChange}
-              // value={formik.values.deliveryDate}
-              />
-            </LocalizationProvider> */}
-            <TextField
-              name="deliveryDate"
-              onChange={formik.handleChange}
-              value={formik.values.deliveryDate}
-              required
-              type="date"
+              // required
               placeholder="Ваш адрес"
               fullWidth
             />
           </>
         )}
-
+        <Typography
+          className="sans"
+          mt={2}
+          variant="subtitle2"
+          mb={2}
+          color="#5B5B5B"
+        >
+          Дата{" "}
+          {formik.values.deliveryType === "delivery"
+            ? "доставки"
+            : "получения заказа"}
+        </Typography>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <DatePicker
+            disablePast
+            value={formik.values.deliveryDate}
+            onChange={(value) => formik.setFieldValue("deliveryDate", value)}
+            slotProps={{
+              textField: {
+                fullWidth: true,
+                error:
+                  formik.touched.deliveryDate && formik.errors.deliveryDate,
+                helperText:
+                  formik.touched.deliveryDate &&
+                  formik.errors.deliveryDate &&
+                  "Заполните поле",
+              },
+            }}
+          />
+        </LocalizationProvider>
         <Typography
           className="sans"
           mt={2}
@@ -141,7 +154,6 @@ const Form = ({ formik, cart }) => {
           disabled={!cart?.length}
           fullWidth
           onClick={() => formik.setFieldValue("status", "preorder")}
-          // onClick={() => dispatch(handleDrawer())}
           sx={{
             border: "1px solid #DBDBDB",
             fontSize: 10,

@@ -16,7 +16,7 @@ import { getCategories } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/reducers/products";
 
-const Categories = ({ setChip, formik }) => {
+const Categories = ({ setChip, formik, isAuth }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
 
@@ -32,7 +32,7 @@ const Categories = ({ setChip, formik }) => {
     <Box component="section" pb={13}>
       {md ? (
         <Accordion
-          expanded={expanded}
+          expanded={expanded && isAuth}
           onChange={() => setExpanded(!expanded)}
           className="sans"
           sx={{

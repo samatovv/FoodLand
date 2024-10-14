@@ -14,6 +14,30 @@ import {
   useMediaQuery,
 } from "@mui/material";
 
+const arr = [
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+  img1,
+  img2,
+  img3,
+  img4,
+  img5,
+  img6,
+  img7,
+];
+
 const Partners = () => {
   const md = useMediaQuery("(min-width:768px)");
   return (
@@ -31,45 +55,27 @@ const Partners = () => {
         >
           Официальные дистрибьюторы
         </Typography>
-        <Grid2
-          container
-          spacing={{ xs: 2, md: 0 }}
-          sx={{
-            "& img": {
-              filter: { xs: "none", md: "grayscale(1)" },
-              transition: "all 800ms ease",
-              width: { xs: 120, sm: 210 },
-              "&:hover": {
-                filter: "none",
-              },
-            },
-          }}
-        >
-          <Grid2 size={{ xs: 4, lg: 1.7 }}>
-            <img src={img1} alt="" />
-          </Grid2>
-          <Grid2 size={{ xs: 4, lg: 1.7 }}>
-            <img src={img2} alt="" />
-          </Grid2>
-          <Grid2 size={{ xs: 4, lg: 1.7 }}>
-            <img src={img3} alt="" />
-          </Grid2>
-          <Grid2 size={{ xs: 4, lg: 1.7 }}>
-            <img src={img4} alt="" />
-          </Grid2>
-          <Grid2 size={{ xs: 4, lg: 1.7 }}>
-            <img src={img5} alt="" />
-          </Grid2>
-          <Grid2 size={{ xs: 4, lg: 1.7 }}>
-            <img src={img6} alt="" />
-          </Grid2>
-          {md && (
-            <Grid2 size={{ xs: 4, md: 1.7 }}>
-              <img src={img7} alt="" />
-            </Grid2>
-          )}
-        </Grid2>
       </Container>
+      <Box
+        className="roulette"
+        sx={{
+          display: "flex",
+          flexWrap: "nowrap",
+          columnGap: 3,
+          "& img": {
+            filter: { xs: "none", md: "grayscale(1)" },
+            transition: "all 800ms ease",
+            width: { xs: 120, sm: 210 },
+            "&:hover": {
+              filter: "none",
+            },
+          },
+        }}
+      >
+        {arr.map((item, idx) => (
+          <img src={item} alt="" />
+        ))}
+      </Box>
     </Box>
   );
 };

@@ -64,7 +64,7 @@ const Categories = () => {
                       minHeight: { xs: 250, md: "396px" },
                       borderRadius: "16px",
                     }}
-                    src={item.image.url}
+                    src={item?.image?.url}
                     alt=""
                   />
                   <Box className="category__more">
