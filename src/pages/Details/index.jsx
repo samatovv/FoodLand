@@ -17,6 +17,7 @@ import AddOrDelete from "../../components/AddOrDelete";
 import AddToCart from "../../components/AddToCart";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
+import empty from "../../assets/images/emptyCart.svg";
 
 const Details = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const Details = () => {
 
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
-
+  const images = Array.isArray(details.images) && details.images;
   const [count, setCount] = useState(1);
   const [page, setPage] = useState(1);
 
@@ -80,15 +81,15 @@ const Details = () => {
             <Box>
               <Box
                 component="img"
+                src={!images[0]?.url ? empty : images[0]?.url}
                 width="100%"
                 height={{ xs: 322, sm: "auto", md: 405 }}
-                style={{ borderRadius: 16, objectFit: "cover" }}
-                src={Array.isArray(details?.images) && details?.images[0]?.url}
+                sx={{ borderRadius: 16, objectFit: "scale-down" }}
                 alt=""
               />
               <Box display="flex" mt={2} columnGap={2}>
-                {details?.images?.length > 1 &&
-                  details?.images.map((item) => (
+                {images?.length > 1 &&
+                  images.map((item) => (
                     <img
                       width={75}
                       height={75}
@@ -106,6 +107,7 @@ const Details = () => {
               height="100%"
               flexDirection="column"
               justifyContent="space-between"
+              sx={{ height: "calc(100% - 75px)" }}
             >
               <div>
                 {md && (

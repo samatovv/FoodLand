@@ -67,7 +67,7 @@ const Categories = () => {
                     src={item?.image?.url}
                     alt=""
                   />
-                  <Box className="category__more">
+                  <Box className="category__more" width="80%">
                     <Typography
                       fontSize={{ xs: 16, md: 20 }}
                       mb={{ xs: 1, md: 2.5 }}
@@ -80,7 +80,7 @@ const Categories = () => {
                       <ButtonMore
                         txt="Подробнее "
                         sx={{
-                          width: { xs: "90%", lg: "100%" },
+                          width: "100%",
                           "& span": { color: "#000" },
                         }}
                       />

@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export const useAuth = () => {
   const user = cookie.get("foodland_token");
-  return !!user;
+  return !!user || !!sessionStorage.getItem("token");
 };
 
 const ProtectedRoutes = () => {

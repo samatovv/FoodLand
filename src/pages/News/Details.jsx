@@ -88,9 +88,6 @@ const NewsDetails = () => {
             <Typography fontSize={{ xs: 18, md: "40px" }} fontWeight="700">
               Недавние новости
             </Typography>
-            <Link to="/news">
-              <ButtonMore sx={{ width: 164 }} txt="Все новости" />
-            </Link>
           </Box>
           <Grid2 container spacing="20px">
             {Array.isArray(news?.results) &&

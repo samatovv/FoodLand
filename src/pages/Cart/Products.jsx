@@ -12,6 +12,7 @@ import AddOrDelete from "../../components/AddOrDelete";
 import { Link } from "react-router-dom";
 import { TransitionGroup } from "react-transition-group";
 import empty from "../../assets/images/empty.svg";
+import emptyImg from "../../assets/images/emptyCart.svg";
 
 const Products = ({ cart, setCart }) => {
   const md = useMediaQuery("(min-width:769px)");
@@ -29,7 +30,7 @@ const Products = ({ cart, setCart }) => {
       p={{ xs: "32px 0 0 0", md: "15px" }}
       maxHeight={{ xs: "70vh", md: 609 }}
       minHeight={{ xs: "unset", md: 609 }}
-      overflow={!cart.length ? "auto" : "scroll"}
+      overflow={!cart?.length ? "auto" : "scroll"}
     >
       <Box
         display="flex"
@@ -157,10 +158,10 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
     <Box display="flex" width={{ xs: "100%", md: "50%" }}>
       <Box
         component="img"
-        src={item?.img}
+        src={item?.img ? item?.img : emptyImg}
         minWidth={{ xs: 80, md: "90px" }}
         width={{ xs: 80, md: "90px" }}
-        sx={{ borderRadius: "12px", objectFit: "cover" }}
+        sx={{ borderRadius: "12px", objectFit: "scale-down" }}
         height={{ xs: 80, md: "90px" }}
         alt=""
       />

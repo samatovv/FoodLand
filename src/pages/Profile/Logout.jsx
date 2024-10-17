@@ -7,6 +7,7 @@ const Logout = ({ open, close }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
     cookie.removeSpecific("foodland_token");
+    sessionStorage.clear();
     navigate("/");
   };
   return (
@@ -25,6 +26,7 @@ const Logout = ({ open, close }) => {
         fontWeight={700}
         mb={{ xs: 5, md: 6 }}
         maxWidth={315}
+        textAlign="center"
       >
         Вы точно хотите выйти из аккатунта?
       </Typography>

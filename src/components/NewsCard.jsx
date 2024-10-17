@@ -65,9 +65,9 @@ const NewsCard = ({ item, idx }) => {
             alt=""
           />
         </Box>
-        <div
-          style={{
-            width: "76%",
+        <Box
+          sx={{
+            width: { xs: "100%", md: "76%" },
           }}
         >
           <Box
@@ -132,7 +132,7 @@ const NewsCard = ({ item, idx }) => {
               </svg>
             </IconButton>
           </span>
-        </div>
+        </Box>
       </Box>
     </Link>
   );

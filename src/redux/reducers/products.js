@@ -5,6 +5,7 @@ const initialState = {
   products: [],
   search: "",
   details: {},
+  names: [],
 };
 
 export const productsSlice = createSlice({
@@ -14,6 +15,11 @@ export const productsSlice = createSlice({
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+
+    setProductsNames: (state, action) => {
+      state.names = action.payload;
+    },
+
     setSearch: (state, action) => {
       state.search = action.payload;
     },
@@ -32,6 +38,11 @@ export const getDetails = (id) => (dispatch) => {
   Products.getDetails(id).then((res) => dispatch(setDetails(res)));
 };
 
-export const { setProducts, setSearch, setDetails } = productsSlice.actions;
+export const getProductsNames = () => (dispatch) => {
+  Products.getProductsNames().then((res) => dispatch(setProductsNames(res)));
+};
+
+export const { setProducts, setSearch, setDetails, setProductsNames } =
+  productsSlice.actions;
 
 export default productsSlice.reducer;
