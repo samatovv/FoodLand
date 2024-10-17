@@ -52,10 +52,11 @@ const OurClients = () => {
               borderRadius="24px"
               border="1px solid #E6E6E6"
               sx={{
-                transition: "all 0.3s ease",
+                transition: "box-shadow 0.3s ease",
                 border: "1px solid #E6E6E6",
                 "&:hover": {
                   borderColor: "transparent",
+                  boxShadow: "0px 0px 4px 4px #00000010",
                 },
               }}
             >
@@ -114,9 +115,11 @@ const OurClients = () => {
               borderRadius="24px"
               border="1px solid #E6E6E6"
               sx={{
-                transition: "all 0.3s linear",
+                transition: "box-shadow 0.3s ease",
+                border: "1px solid #E6E6E6",
                 "&:hover": {
-                  border: { xs: "1px solid #E6E6E6", md: "none" },
+                  borderColor: "transparent",
+                  boxShadow: "0px 0px 4px 4px #00000010",
                 },
               }}
             >
@@ -177,9 +180,11 @@ const OurClients = () => {
                   borderRadius="24px"
                   border="1px solid #E6E6E6"
                   sx={{
-                    transition: "all 0.3s linear",
+                    transition: "box-shadow 0.3s ease",
+                    border: "1px solid #E6E6E6",
                     "&:hover": {
-                      border: "none",
+                      borderColor: "transparent",
+                      boxShadow: "0px 0px 4px 4px #00000010",
                     },
                   }}
                 >
@@ -232,9 +237,11 @@ const OurClients = () => {
                   borderRadius="24px"
                   border="1px solid #E6E6E6"
                   sx={{
-                    transition: "all 0.3s linear",
+                    transition: "box-shadow 0.3s ease",
+                    border: "1px solid #E6E6E6",
                     "&:hover": {
-                      border: "none",
+                      borderColor: "transparent",
+                      boxShadow: "0px 0px 4px 4px #00000010",
                     },
                   }}
                 >

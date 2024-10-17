@@ -27,7 +27,7 @@ const AddToCart = ({ details, count, id, card }) => {
               id: details.id,
               count: count,
               name: details.name,
-              img: details.images[0].url,
+              img: !!details.images ? details.images[0]?.url : null,
               description: details.description,
               sum: details.price * count,
               price: details.price,

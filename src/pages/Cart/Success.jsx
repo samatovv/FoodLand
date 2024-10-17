@@ -8,7 +8,7 @@ const Success = ({ setOpen, open, reorder }) => {
     <Dialog
       sx={{
         "& .MuiPaper-root": {
-          p: { xs: "16px 12px", lg: "15px 15px 138px" },
+          p: { xs: "16px 12px 92px", lg: "15px 15px 138px" },
           borderRadius: "32px",
           minWidth: { xs: "unset", lg: 453 },
         },
@@ -46,7 +46,7 @@ const Success = ({ setOpen, open, reorder }) => {
         <Typography
           variant="h4"
           fontWeight={700}
-          mt={{ xs: 2, md: 6 }}
+          mt={{ xs: "28px", md: 6 }}
           mb={{ xs: 1, md: 2.2 }}
         >
           {reorder ? "Ваш заказ повторно оформлен!" : "Ваш заказ оформлен!"}

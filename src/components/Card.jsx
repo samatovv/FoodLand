@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
+import empty from "../assets/images/emptyCart.svg";
 
 const Card = ({ item, search }) => {
   const details = search ? item?.product : item;
@@ -21,16 +22,20 @@ const Card = ({ item, search }) => {
       borderRadius={3}
     >
       <Link
-        to={`/catalog/details/${details?.id}`}
+        to={`/catalog/details/${details?.id ?details?.id:details?._id}`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
         <Box
           component="img"
-          src={Array.isArray(details?.images) && details?.images[0]?.url}
+          src={
+            Array.isArray(details?.images) && !details?.images[0]?.url
+              ? empty
+              : Array.isArray(details?.images) && details?.images[0]?.url
+          }
           sx={{
             borderRadius: "12px",
             height: { xs: 142, md: 178 },
-            objectFit: "cover",
+            objectFit: "scale-down",
             transition: "all 800ms ease",
           }}
           width="100%"

@@ -5,7 +5,7 @@ function get_token() {
   return cookie.get("foodland_token");
 }
 
-const user = cookie.get("foodland_token");
+const user = cookie.get("foodland_token") || sessionStorage.getItem("token");
 
 export const instance = axios.create(
   !!user
@@ -14,7 +14,9 @@ export const instance = axios.create(
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json; charset=UTF-8",
-          Authorization: `Bearer ${get_token()}`,
+          Authorization: `Bearer ${
+            get_token() || sessionStorage.getItem("token")
+          }`,
         },
       }
     : {
@@ -79,6 +81,13 @@ export const Products = {
   getProducts(data) {
     return instance
       .get(data)
+      .then((response) => response.data)
+      .catch((error) => error.response);
+  },
+
+  getProductsNames() {
+    return instance
+      .get(`/products/names`)
       .then((response) => response.data)
       .catch((error) => error.response);
   },

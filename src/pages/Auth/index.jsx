@@ -1,7 +1,9 @@
 import {
   Box,
   Button,
+  Checkbox,
   Dialog,
+  FormControlLabel,
   IconButton,
   InputAdornment,
   TextField,
@@ -41,6 +43,7 @@ const Auth = () => {
     initialValues: {
       emailOrLogin: "",
       password: "",
+      rememberMe: false,
     },
     onSubmit: (data) => {
       dispatch(handleLoading(true));
@@ -65,10 +68,15 @@ const Auth = () => {
     setOpen(true);
 
     if (loginData.status == 200) {
-      cookie.set("foodland_token", loginData.data.tokens.access.token, {
-        expires: loginData.data.tokens.access.expires,
-      });
+      if (formik.values.rememberMe) {
+        cookie.set("foodland_token", loginData.data.tokens.access.token, {
+          expires: loginData.data.tokens.access.expires,
+        });
+        instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
+      } else
+        sessionStorage.setItem("token", loginData.data.tokens.access.token);
       instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
+
       dispatch(handleAuthDialog());
       navigate("/profile");
     }
@@ -80,9 +88,7 @@ const Auth = () => {
     <>
       <Alert
         message={
-          loginData?.status === 200
-            ? "Вы успешно авторизовались!"
-            : loginData?.data?.message
+          loginData?.status === 200 ? "Успешно!" : loginData?.data?.message
         }
         open={open}
         severity={loginData?.status === 200 ? "success" : "error"}
@@ -134,13 +140,21 @@ const Auth = () => {
               Следите за своими заказами и персонализированными предложениями
             </Typography>
           </div>
-          <Box mb={3} mt={3} display="flex" flexDirection="column" rowGap={2}>
+          <Box
+            mb={2}
+            mt={3}
+            alignItems="end"
+            display="flex"
+            flexDirection="column"
+            rowGap={2}
+          >
             <TextField
               required
               name="emailOrLogin"
               onChange={formik.handleChange}
               value={formik.values.emailOrLogin}
               placeholder="Логин"
+              fullWidth
               slotProps={{
                 input: {
                   startAdornment: (
@@ -152,6 +166,7 @@ const Auth = () => {
               }}
             />
             <TextField
+              fullWidth
               required
               placeholder="Пароль"
               name="password"
@@ -178,7 +193,18 @@ const Auth = () => {
               }}
             />
           </Box>
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="rememberMe"
+                onChange={formik.handleChange}
+                value={formik.values.rememberMe}
+              />
+            }
+            label="Запомнить меня"
+          />
           <Button
+            sx={{ mt: "14px" }}
             type="submit"
             variant="contained"
             color="primary"

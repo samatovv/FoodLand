@@ -136,7 +136,13 @@ const Form = ({ formik, cart }) => {
           fullWidth
         />
       </Box>
-      <Box display="flex" mt={5} columnGap={1.5}>
+      <Box
+        display="flex"
+        flexDirection={{ xs: "column", md: "row" }}
+        rowGap={1.5}
+        mt={5}
+        columnGap={1.5}
+      >
         <Button
           size="small"
           variant="contained"

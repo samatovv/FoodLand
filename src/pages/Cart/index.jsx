@@ -132,7 +132,8 @@ const Cart = () => {
       />
       <Success open={open} setOpen={setOpen} />
       <Alert
-        message={createdOrder?.data?.message}
+        // message={createdOrder?.data?.message}
+        message="Ошибка"
         open={formik.values.error}
         severity="error"
         setOpen={() => formik.setFieldValue("error", false)}

@@ -74,7 +74,7 @@ const Table = () => {
             Мои заказы
           </Typography>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker disablePast />
+            <DatePicker />
           </LocalizationProvider>{" "}
         </Box>
         <Box

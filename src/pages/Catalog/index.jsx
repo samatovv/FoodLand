@@ -22,6 +22,8 @@ const Catalog = () => {
   const md = useMediaQuery("(min-width:900px)");
 
   const [chip, setChip] = useState("");
+  const [params, setParams] = useState([]);
+  const [searchValue, setValueSearch] = useState("");
 
   const formik = useFormik({
     initialValues: { category: "" },
@@ -36,7 +38,6 @@ const Catalog = () => {
     </Typography>,
   ];
 
-
   useEffect(() => {
     if (!isAuth) dispatch(handleAuthDialog(true));
   }, []);
@@ -47,6 +48,7 @@ const Catalog = () => {
         maxWidth="lg"
         sx={{
           mt: 4.3,
+          mb: 4,
         }}
       >
         <Breadcrumbs
@@ -58,11 +60,28 @@ const Catalog = () => {
         <Grid2 container mt={{ xs: "35px", md: 2 }} spacing={6}>
           {md && (
             <Grid2 item size={{ xs: 12, md: 3 }}>
-              <Categories isAuth={isAuth} formik={formik} setChip={setChip} />
+              <Categories
+                searchValue={searchValue}
+                setValueSearch={setValueSearch}
+                setParams={setParams}
+                params={params}
+                isAuth={isAuth}
+                chip={chip}
+                formik={formik}
+                setChip={setChip}
+              />
             </Grid2>
           )}
           <Grid2 item size={{ xs: 12, md: 9 }}>
-            <Products formik={formik} setChip={setChip} chip={chip} />
+            <Products
+              searchValue={searchValue}
+              setValueSearch={setValueSearch}
+              setParams={setParams}
+              params={params}
+              formik={formik}
+              setChip={setChip}
+              chip={chip}
+            />
           </Grid2>
         </Grid2>
       </Container>
