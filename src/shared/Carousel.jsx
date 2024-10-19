@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
 import { getBanners } from "../redux/reducers/mainSlice";
+import emptyImg from "../assets/images/emptyCart.svg";
 
 const Carousel = () => {
   const dispatch = useDispatch();
@@ -57,7 +58,8 @@ const Carousel = () => {
                   component="img"
                   width={{ xs: "100%", md: 428, lg: 428 }}
                   height={280}
-                  src={item.imageUrl}
+                  sx={{ objectFit: "scale-down!important" }}
+                  src={item.order > 5 ? item.imageUrl : emptyImg}
                   alt=""
                 />
               </SwiperSlide>

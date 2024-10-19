@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Button,
@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers";
+import { DesktopDatePicker } from "@mui/x-date-pickers";
+import Calendar from "../../assets/images/Calendar";
+
+import "dayjs/locale/ru";
 
 const Form = ({ formik, cart }) => {
   return (
@@ -72,18 +75,10 @@ const Form = ({ formik, cart }) => {
               Адрес доставки
             </Typography>
             <TextField
-              error={
-                formik.touched.deliveryAddress && formik.errors.deliveryAddress
-              }
-              helperText={
-                formik.touched.deliveryAddress &&
-                formik.errors.deliveryAddress &&
-                "Заполните поле"
-              }
               name="deliveryAddress"
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
-              // required
+              required
               placeholder="Ваш адрес"
               fullWidth
             />
@@ -101,11 +96,13 @@ const Form = ({ formik, cart }) => {
             ? "доставки"
             : "получения заказа"}
         </Typography>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-          <DatePicker
+        <LocalizationProvider adapterLocale="ru" dateAdapter={AdapterDayjs}>
+          <DesktopDatePicker
             disablePast
             value={formik.values.deliveryDate}
             onChange={(value) => formik.setFieldValue("deliveryDate", value)}
+            format="YYYY-MM-DD"
+            slots={{ openPickerIcon: Calendar }}
             slotProps={{
               textField: {
                 fullWidth: true,

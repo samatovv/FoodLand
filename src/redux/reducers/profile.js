@@ -67,8 +67,8 @@ export const repeatOrder = (id) => (dispatch) => {
   Profile.repeatOrder(id).then((res) => dispatch(setCreatedOrder(res)));
 };
 
-export const getOrders = (id) => (dispatch) => {
-  Profile.getOrders(id).then((res) => dispatch(setOrders(res)));
+export const getOrders = (id, from, to) => (dispatch) => {
+  Profile.getOrders(id, from, to).then((res) => dispatch(setOrders(res)));
 };
 
 export const getOrder = (id) => (dispatch) => {

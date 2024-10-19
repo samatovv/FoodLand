@@ -143,9 +143,13 @@ export const Profile = {
       .catch((error) => error.response);
   },
 
-  getOrders(id) {
+  getOrders(id, from, to) {
     return instance
-      .get(`/orders?limit=200&client=${id}&complexity=easy`)
+      .get(
+        `/orders?limit=1000&client=${id}&complexity=easy${
+          from ? `&createdFrom=${from}&createdTo=${to}` : ""
+        }`
+      )
       .then((response) => response.data)
       .catch((error) => error.response);
   },

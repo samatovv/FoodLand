@@ -1,20 +1,12 @@
 import { Breadcrumbs, Container, Grid2, Typography } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { getProfileData } from "../../redux/reducers/profile";
 import Table from "./Table";
 import MyProducts from "./MyProducts";
 import Info from "./Info";
 
 const Profile = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProfileData());
-  }, []);
-
   const breadcrumbs = [
     <Link key="1" to="/">
       <Typography fontSize={{ xs: 14, md: 13 }} className="sans">

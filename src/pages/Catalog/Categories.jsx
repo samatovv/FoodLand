@@ -6,8 +6,7 @@ import {
   Checkbox,
   FormControlLabel,
   FormGroup,
-  Radio,
-  RadioGroup,
+  Typography,
   useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
@@ -19,7 +18,6 @@ import { getProducts } from "../../redux/reducers/products";
 const Categories = ({
   setChip,
   chip,
-  formik,
   isAuth,
   params,
   setParams,
@@ -176,35 +174,66 @@ const Categories = ({
           </AccordionDetails>
         </Accordion>
       ) : (
-        <RadioGroup
-          name="category"
-          value={formik.values.category}
-          onChange={formik.handleChange}
+        <Box
+          sx={{
+            "& .MuiAccordion-root::before": { display: "none" },
+          }}
         >
           {Array.isArray(categories) &&
-            categories.map((item, idx) => (
-              <FormControlLabel
-                key={idx}
-                sx={{
-                  "& .MuiTypography-root": {
-                    fontFamily: "Open Sans",
-                    color: "#626262",
-                  },
-                }}
-                onChange={() => {
-                  setChip([...chip, item.name]);
-                  dispatch(
-                    getProducts(
-                      `https://api.foodland.kg/v1/products?limit=12&page=1&category=${item.id}`
-                    )
-                  );
-                }}
-                value={item.id}
-                control={<Radio />}
-                label={item.name}
-              />
-            ))}
-        </RadioGroup>
+            c
+              .filter(
+                (obj, idx, arr) =>
+                  idx === arr.findIndex((t) => t.name === obj.name)
+              )
+              ?.map((item, idx) => (
+                <Accordion
+                  key={idx}
+                  sx={{
+                    "&.MuiPaper-root ": {
+                      backgroundColor: "transparent",
+                      boxShadow: "none",
+                    },
+                    "& .MuiButtonBase-root": {
+                      backgroundColor: "transparent",
+                      borderRadius: "8px",
+                      minHeight: "0!important",
+                      m: "0!important",
+                    },
+                    // "& .MuiAccordionSummary-content": {
+                    //   m: "0!important",
+                    //   p: "9px 15px",
+                    // },
+
+                    "& .MuiTypography-body1": {
+                      fontSize: 15,
+                      fontWeight: 400,
+                      color: "#626262",
+                    },
+                  }}
+                >
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1-content"
+                    id="panel1-header"
+                  >
+                    <Typography> {item?.name}</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    {item.sub.map((ite) => (
+                      <FormGroup>
+                        <FormControlLabel
+                          control={<Checkbox />}
+                          label={ite.name}
+                          checked={params?.find((el) => el.id === ite.id)}
+                          value={ite.id}
+                          onChange={() => handleProducts(ite)}
+                        />
+                      </FormGroup>
+                    ))}
+                  </AccordionDetails>
+                </Accordion>
+              ))}
+        </Box>
       )}
     </Box>
   );

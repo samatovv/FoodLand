@@ -5,7 +5,16 @@ import close from "../../assets/images/close.svg";
 import { handleFilter } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const Filter = ({ formik, setChip }) => {
+const Filter = ({
+  formik,
+  setChip,
+  searchValue,
+  setValueSearch,
+  setParams,
+  params,
+  isAuth,
+  chip,
+}) => {
   const dispatch = useDispatch();
 
   const filter = useSelector((state) => state.main.filter);
@@ -13,7 +22,7 @@ const Filter = ({ formik, setChip }) => {
   return (
     <Drawer
       sx={{
-        "& .MuiPaper-root": {
+        "& .MuiDrawer-paper": {
           p: "8px 8px 24px 15px",
           width: "80vw",
           height: "88vh",
@@ -36,7 +45,16 @@ const Filter = ({ formik, setChip }) => {
           <img src={close} alt="" />
         </IconButton>
       </Box>
-      <Categories formik={formik} setChip={setChip} />
+      <Categories
+        searchValue={searchValue}
+        setValueSearch={setValueSearch}
+        setParams={setParams}
+        params={params}
+        isAuth={isAuth}
+        chip={chip}
+        formik={formik}
+        setChip={setChip}
+      />
     </Drawer>
   );
 };
