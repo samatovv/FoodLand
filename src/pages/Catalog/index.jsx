@@ -85,7 +85,16 @@ const Catalog = () => {
           </Grid2>
         </Grid2>
       </Container>
-      <Filter formik={formik} setChip={setChip} />
+      <Filter
+        searchValue={searchValue}
+        setValueSearch={setValueSearch}
+        setParams={setParams}
+        params={params}
+        isAuth={isAuth}
+        chip={chip}
+        formik={formik}
+        setChip={setChip}
+      />
     </>
   );
 };

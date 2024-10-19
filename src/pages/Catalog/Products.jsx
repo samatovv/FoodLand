@@ -83,13 +83,11 @@ const Products = ({
       setValueSearch(search);
       if (!location.search.includes("category"))
         dispatch(setSearch(decodeURI(location.search.split("=")[1])));
-      // dispatch(
-      //   getProducts(
-      //     `/products/query?search=${
-      //       location.search.split("?")[1]
-      //     }&categoryIds=${`${params.map((item) => item.id)}`}`
-      //   )
-      // );
+      dispatch(
+        getProducts(
+          `/products/query?search=&categoryIds=${location.search.split("=")[1]}`
+        )
+      );
     } else {
       dispatch(getProducts(`/products`));
     }
@@ -129,20 +127,21 @@ const Products = ({
           )}
         </Box>
         {!md && (
-          <Box display="flex" columnGap={1}>
-            {chip && (
-              <Chip
-                sx={{
-                  "& .MuiChip-label": {
-                    fontFamily: "Open Sans",
-                    color: "#959595",
-                  },
-                }}
-                label={chip}
-                variant="outlined"
-                onDelete={handleDelete}
-              />
-            )}
+          <Box display="flex" overflowY='scroll' columnGap={1}>
+            {chip &&
+              chip.map((item) => (
+                <Chip
+                  sx={{
+                    "& .MuiChip-label": {
+                      fontFamily: "Open Sans",
+                      color: "#959595",
+                    },
+                  }}
+                  label={item}
+                  variant="outlined"
+                  onDelete={() => handleDelete(item)}
+                />
+              ))}
           </Box>
         )}
         <Box

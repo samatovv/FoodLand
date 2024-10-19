@@ -131,14 +131,14 @@ export const theme = createTheme({
           },
 
           "& .MuiOutlinedInput-input": {
-            padding: "12px 14.66px",
+            padding: "9px 14.66px",
           },
 
           "& input": {
             backgroundColor: "#FFFFFF!important",
             borderRadius: "100px",
             fontFamily: "Open Sans",
-    
+
             // "&::placeholder": {
             //   fontWeight: "400",
             //   fontSize: "14px",
@@ -150,4 +150,5 @@ export const theme = createTheme({
       },
     },
   },
+
 });
