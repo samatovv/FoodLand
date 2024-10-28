@@ -3,6 +3,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const NewsCard = ({ item, idx }) => {
+  const htmlDecode = (content) => {
+    const e = document.createElement("div");
+    e.innerHTML = content;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+  };
+
   return (
     <Link to={`/news/${item.id}`}>
       <Box
@@ -81,8 +87,8 @@ const NewsCard = ({ item, idx }) => {
                 overflow: "hidden",
                 whiteSpace: "nowrap",
                 textOverflow: "ellipsis",
-                maxWidth: "50%",
-                width: "50%",
+                maxWidth: "80%",
+                width: "80%",
               }}
               variant="h5"
               fontWeight="700"
@@ -111,9 +117,10 @@ const NewsCard = ({ item, idx }) => {
               WebkitBoxOrient: "vertical",
               wordWrap: "break-word",
             }}
-          >
-            {item.content}
-          </Typography>
+            dangerouslySetInnerHTML={{
+              __html: htmlDecode(item.content),
+            }}
+          />
           <span className="sans" style={{ textDecoration: "underline" }}>
             Читать далее
             <IconButton sx={{ p: 0, ml: 1 }}>

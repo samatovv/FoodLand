@@ -27,6 +27,7 @@ const DrawerNav = () => {
         "& .MuiPaper-root": {
           width: "100%",
           pt: "25px",
+          pb:'50px'
         },
       }}
       open={open}
@@ -35,14 +36,14 @@ const DrawerNav = () => {
     >
       <Container
         sx={{
-          height: "90vh",
+          height: "80vh",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
         }}
       >
         <div>
-          <Box display="flex" justifyContent="space-between">
+          <Box display="flex" alignItems='center' justifyContent="space-between">
             <img src={logo} width={108} height={44} alt="" />
             <IconButton onClick={() => dispatch(handleDrawer(false))}>
               <Close />

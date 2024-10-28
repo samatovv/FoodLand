@@ -24,6 +24,7 @@ const Catalog = () => {
   const [chip, setChip] = useState("");
   const [params, setParams] = useState([]);
   const [searchValue, setValueSearch] = useState("");
+  const [page, setPage] = useState(1);
 
   const formik = useFormik({
     initialValues: { category: "" },
@@ -45,7 +46,7 @@ const Catalog = () => {
   return (
     <>
       <Container
-        maxWidth="lg"
+        maxWidth="xl"
         sx={{
           mt: 4.3,
           mb: 4,
@@ -69,11 +70,15 @@ const Catalog = () => {
                 chip={chip}
                 formik={formik}
                 setChip={setChip}
+                page={page}
+                setPage={setPage}
               />
             </Grid2>
           )}
           <Grid2 item size={{ xs: 12, md: 9 }}>
             <Products
+              page={page}
+              setPage={setPage}
               searchValue={searchValue}
               setValueSearch={setValueSearch}
               setParams={setParams}
@@ -86,6 +91,7 @@ const Catalog = () => {
         </Grid2>
       </Container>
       <Filter
+        setPage={setPage}
         searchValue={searchValue}
         setValueSearch={setValueSearch}
         setParams={setParams}
@@ -94,6 +100,7 @@ const Catalog = () => {
         chip={chip}
         formik={formik}
         setChip={setChip}
+        page={page}
       />
     </>
   );

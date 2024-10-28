@@ -7,10 +7,10 @@ const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart }) => {
     <Button
       onClick={onClick}
       fullWidth={fullWidth && true}
-      disabled={inCart}
+      // disabled={inCart}
       variant="more"
       sx={sx}
-      className="more"
+      className={inCart ? "more in_cart_btn" : "more"}
       size="none"
     >
       <Box
@@ -21,7 +21,10 @@ const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart }) => {
       >
         {inCart ? (
           <>
-            <span className="button_txt" style={{ fontSize: 13 }}>
+            <span
+              className="button_txt"
+              style={{ fontSize: 13, color: "#fff" }}
+            >
               В корзине!
             </span>
             <Box width={40} height={40} className="round none">

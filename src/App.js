@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from "react-router";
 import Site from "./routers/Site";
 import { useEffect } from "react";
 import Profile from "./routers/Profile";
-import ProtectedRoutes from "./shared/ProtectedRoutes";
+import ProtectedRoutes, { useAuth } from "./shared/ProtectedRoutes";
 import DrawerNav from "./shared/DrawerNav";
 import { handleDrawer } from "./redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,6 +15,7 @@ import { getProfileData } from "./redux/reducers/profile";
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
+  const isAuth = useAuth;
 
   const loading = useSelector((state) => state.main.loading);
   const data = useSelector((state) => state.profile.data);
@@ -26,7 +27,7 @@ function App() {
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(handleDrawer(false));
-    dispatch(getProfileData());
+    if (isAuth) dispatch(getProfileData());
     if (data.status === 401) sessionStorage.clear();
   }, [location.pathname]);
 

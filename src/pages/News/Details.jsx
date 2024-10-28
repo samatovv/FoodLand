@@ -11,8 +11,6 @@ import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { getNews, getNewsDetails } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import ButtonMore from "../../components/ButtonMore";
-import NewsCard from "../../components/NewsCard";
 
 const NewsDetails = () => {
   const dispatch = useDispatch();
@@ -22,6 +20,12 @@ const NewsDetails = () => {
 
   const details = useSelector((state) => state.main.newsDetails);
   const news = useSelector((state) => state.main.news);
+
+  const htmlDecode = (content) => {
+    const e = document.createElement("div");
+    e.innerHTML = content;
+    return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
+  };
 
   useEffect(() => {
     dispatch(getNews());
@@ -72,9 +76,8 @@ const NewsDetails = () => {
             fontWeight={400}
             className="sans"
             lineHeight="27.24px"
-          >
-            {details.content}
-          </Typography>
+            dangerouslySetInnerHTML={{ __html: htmlDecode(details.content) }}
+          />
         </Container>
       </Box>
       <Box component="section" backgroundColor="#F4F4F4" p="46px 0 59px">

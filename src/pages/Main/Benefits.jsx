@@ -20,7 +20,7 @@ const Benefits = () => {
           <Grid2 minHeight="100%" size={{ xs: 12, md: 5 }}>
             <Box
               height="100%"
-              backgroundColor="#879957"
+              backgroundColor="#93A27C"
               borderRadius="15px"
               color="#FFF"
               display="flex"
@@ -73,9 +73,6 @@ const Benefits = () => {
                     border: "1px solid #B4B4B4",
                     "& span": {
                       fontSize: "12px!important",
-                    },
-                    "&:hover": {
-                      border: 0,
                     },
                   }}
                   txt="Читать далее"

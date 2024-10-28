@@ -1,4 +1,11 @@
-import { Box, Breadcrumbs, Container, Grid2, Typography } from "@mui/material";
+import {
+  Box,
+  Breadcrumbs,
+  Container,
+  Grid2,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
@@ -11,6 +18,7 @@ import facebook from "../../assets/images/facebook.svg";
 import twitter from "../../assets/images/twitter.svg";
 
 const AboutUs = () => {
+  const md = useMediaQuery("(min-width:768px)");
   const breadcrumbs = [
     <Link key="1" className="sans" to="/">
       Главная
@@ -221,13 +229,8 @@ const AboutUs = () => {
           <Carousel />
         </Box>
         <Grid2 container spacing={{ xs: 2, lg: 4 }} mt={6}>
-          <Grid2 item size={6}>
-            <Typography
-              fontSize={{ xs: 16, md: 36 }}
-              mb={3}
-              fontWeight={700}
-              color="#6E8435"
-            >
+          <Grid2 item size={{ xs: 12, md: 6 }}>
+            <Typography fontSize={36} mb={3} fontWeight={700} color="#93A27C">
               Наша компания
             </Typography>
             <Typography
@@ -253,13 +256,8 @@ const AboutUs = () => {
               жизнь свои самые смелые кулинарные задумки.
             </Typography>
           </Grid2>
-          <Grid2 item size={6}>
-            <Typography
-              fontSize={{ xs: 16, md: 36 }}
-              mb={3}
-              color="#6E8435"
-              fontWeight={700}
-            >
+          <Grid2 item size={{ xs: 12, md: 6 }}>
+            <Typography fontSize={36} mb={3} color="#93A27C" fontWeight={700}>
               Нам доверяют
             </Typography>
             <Typography
@@ -285,7 +283,11 @@ const AboutUs = () => {
         <Grid2 container mt={5} spacing={4}>
           <Grid2 size={{ xs: 12, md: 6 }}>
             <Box borderRadius="20px" border="2px solid #DFDFDF" p={4}>
-              <Typography className="sans" fontSize={48} fontWeight={700}>
+              <Typography
+                className="sans"
+                fontSize={{ xs: 33, md: 48 }}
+                fontWeight={700}
+              >
                 Свяжитесь с нами
               </Typography>
               <Typography
@@ -359,19 +361,32 @@ const AboutUs = () => {
               </Box>
             </Box>
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 6 }}>
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
-              width="100%"
-              height="100%"
-              style={{ border: "0", borderRadius: "20px"}}
-              allowfullscreen=""
-              loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
-            ></iframe>
-          </Grid2>
+          {md && (
+            <Grid2 size={{ xs: 12, md: 6 }}>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
+                width="100%"
+                height={!md ? "389px" : "100%"}
+                style={{ border: "0", borderRadius: "20px" }}
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </Grid2>
+          )}
         </Grid2>
       </Container>
+      {!md && (
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
+          width="100%"
+          height={!md ? "389px" : "100%"}
+          style={{ border: "0", borderRadius: "0", marginTop: 32 }}
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      )}
     </Box>
   );
 };

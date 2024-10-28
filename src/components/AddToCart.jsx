@@ -16,40 +16,49 @@ const AddToCart = ({ details, count, id, card }) => {
   const clickHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     let newItem = cart?.find((item) => item.id === id);
-    if (isAuth) {
-      setInCart(true);
-      if (!newItem) {
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([
-            ...JSON.parse(localStorage.getItem("cart")),
-            {
-              id: details.id,
-              count: count,
-              name: details.name,
-              img: !!details.images ? details.images[0]?.url : null,
-              description: details.description,
-              sum: details.price * count,
-              price: details.price,
-              idx: details.customId,
-            },
-          ])
-        );
-      } else {
-        let updatedCart = cart?.filter((item) => item.id !== id);
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([
-            ...updatedCart,
-            {
-              ...newItem,
-              count: newItem?.count + count,
-              sum: details.price * newItem?.count + count,
-            },
-          ])
-        );
-      }
-    } else dispatch(handleAuthDialog(true));
+    if (inCart) {
+      setInCart(false);
+      let filtered = cart.filter((item) => item.id !== id);
+      localStorage.setItem("cart", JSON.stringify(filtered));
+    } else {
+      if (isAuth) {
+        setInCart(true);
+
+        if (!newItem) {
+          localStorage.setItem(
+            "cart",
+            JSON.stringify([
+              ...JSON.parse(localStorage.getItem("cart")),
+              {
+                id: details._id,
+                count: count,
+                name: details.name,
+                img: !!details.images ? details.images[0]?.url : null,
+                description: details.description,
+                sum: details.price * count,
+                price: details.price,
+                idx: details.customId,
+                weight: details.weight * count,
+              },
+            ])
+          );
+        } else {
+          let updatedCart = cart?.filter((item) => item.id !== id);
+          localStorage.setItem(
+            "cart",
+            JSON.stringify([
+              ...updatedCart,
+              {
+                ...newItem,
+                count: newItem?.count + count,
+                sum: details.price * (newItem?.count + count),
+                weight: newItem?.weight + (details.weight * count),
+              },
+            ])
+          );
+        }
+      } else dispatch(handleAuthDialog(true));
+    }
   };
 
   return (

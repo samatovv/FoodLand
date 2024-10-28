@@ -7,7 +7,6 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-
 import { useFormik } from "formik";
 import Recomendations from "./Recomendations";
 import { getDetails } from "../../redux/reducers/products";
@@ -26,13 +25,20 @@ const Details = () => {
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
   const images = Array.isArray(details.images) && details.images;
+
   const [count, setCount] = useState(1);
   const [page, setPage] = useState(1);
+  const [image, setImage] = useState(1);
 
   useEffect(() => {
     dispatch(getDetails(id));
     setPage(1);
+    setImage(images[0]?.url);
   }, [id]);
+
+  useEffect(() => {
+    setImage(images[0]?.url);
+  }, [details]);
 
   const formik = useFormik({
     initialValues: {},
@@ -81,7 +87,7 @@ const Details = () => {
             <Box>
               <Box
                 component="img"
-                src={!images[0]?.url ? empty : images[0]?.url}
+                src={!images[0]?.url ? empty : image}
                 width="100%"
                 height={{ xs: 322, sm: "auto", md: 405 }}
                 sx={{ borderRadius: 16, objectFit: "scale-down" }}
@@ -90,11 +96,21 @@ const Details = () => {
               <Box display="flex" mt={2} columnGap={2}>
                 {images?.length > 1 &&
                   images.map((item) => (
-                    <img
+                    <Box
+                      component="img"
                       width={75}
+                      onClick={() => setImage(item?.url)}
                       height={75}
-                      style={{ borderRadius: 16, objectFit: "cover" }}
-                      src={item.url}
+                      sx={{
+                        borderRadius: 2,
+                        objectFit: "cover",
+                        cursor: "pointer",
+                        transition: "all 0.2s ease",
+                        "&:hover": {
+                          transform: "scale(1.05)",
+                        },
+                      }}
+                      src={item?.url}
                       alt=""
                     />
                   ))}
@@ -107,7 +123,7 @@ const Details = () => {
               height="100%"
               flexDirection="column"
               justifyContent="space-between"
-              sx={{ height: "calc(100% - 75px)" }}
+              sx={{ height: "calc(100% - 95px)" }}
             >
               <div>
                 {md && (
@@ -180,16 +196,18 @@ const Details = () => {
             </Box>
           </Grid2>
         </Grid2>
-        <Typography
-          variant="h5"
-          mb={1}
-          mt={3}
-          className="sans"
-          fontWeight="600"
-          color="var(--primary)"
-        >
-          Описание
-        </Typography>
+        {details.description && (
+          <Typography
+            variant="h5"
+            mb={1}
+            mt={3}
+            className="sans"
+            fontWeight="600"
+            color="var(--primary)"
+          >
+            Описание
+          </Typography>
+        )}
         <Typography
           className="sans"
           variant="subtitle1"
