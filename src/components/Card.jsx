@@ -8,7 +8,7 @@ import empty from "../assets/images/emptyCart.svg";
 const Card = ({ item, search }) => {
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
-  const id = item?.id;
+  const id = item?._id;
   return (
     <Box
       sx={{

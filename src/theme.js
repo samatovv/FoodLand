@@ -6,7 +6,7 @@ export const theme = createTheme({
     lineHeight: 1,
 
     h1: {
-      fontSize: 72,
+      fontSize: 52,
       "@media (max-width:768px)": {
         fontSize: 30,
       },
@@ -64,7 +64,7 @@ export const theme = createTheme({
   },
   palette: {
     primary: {
-      main: "#6e8435",
+      main: "#93A27C",
     },
     secondary: {
       main: "#FFF",
@@ -112,6 +112,10 @@ export const theme = createTheme({
             borderRadius: "100px",
           },
 
+          "& .MuiOutlinedInput-root:hover .MuiOutlinedInput-notchedOutline": {
+            borderColor: "#93A27C",
+          },
+
           "& .MuiOutlinedInput-notchedOutline": {
             borderColor: "transparent",
             borderRadius: "100px",
@@ -138,6 +142,8 @@ export const theme = createTheme({
             backgroundColor: "#FFFFFF!important",
             borderRadius: "100px",
             fontFamily: "Open Sans",
+            border: "2px solid transparent",
+            
 
             // "&::placeholder": {
             //   fontWeight: "400",
@@ -150,5 +156,4 @@ export const theme = createTheme({
       },
     },
   },
-
 });

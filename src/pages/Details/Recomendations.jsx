@@ -34,9 +34,11 @@ const Recomendations = ({ details, id, setPage, page }) => {
 
   return (
     <Box component="section" mt={6}>
-      <Typography fontSize={{ xs: 26, md: 20 }} mt={4} fontWeight={600}>
-        Вам могут понравиться{" "}
-      </Typography>
+      {products?.results?.length && (
+        <Typography fontSize={{ xs: 26, md: 20 }} mt={4} fontWeight={600}>
+          Вам могут понравиться{" "}
+        </Typography>
+      )}
       <Grid2 container spacing={1.2} mt={2}>
         {Array.isArray(products?.results) &&
           products?.results
@@ -47,11 +49,13 @@ const Recomendations = ({ details, id, setPage, page }) => {
               </Grid2>
             ))}
       </Grid2>
-      <PaginationLarge
-        page={page}
-        handleChange={handleChange}
-        products={products}
-      />
+      {products?.results?.length && (
+        <PaginationLarge
+          page={page}
+          handleChange={handleChange}
+          products={products}
+        />
+      )}
     </Box>
   );
 };

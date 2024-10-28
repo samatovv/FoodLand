@@ -24,7 +24,7 @@ const Alert = ({ open, setOpen, severity, message }) => {
       }}
       anchorOrigin={{ vertical: "top", horizontal: "right" }}
       open={open}
-      autoHideDuration={6000}
+      autoHideDuration={5000}
       onClose={setOpen}
     >
       <Message

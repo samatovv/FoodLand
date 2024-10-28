@@ -3,10 +3,12 @@ import {
   Box,
   Button,
   FormControlLabel,
+  IconButton,
   Radio,
   RadioGroup,
   TextField,
   Typography,
+  useMediaQuery,
 } from "@mui/material";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -14,8 +16,11 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import Calendar from "../../assets/images/Calendar";
 
 import "dayjs/locale/ru";
+import Close from "../../assets/images/Close";
 
-const Form = ({ formik, cart }) => {
+const Form = ({ formik, cart, close }) => {
+  const md = useMediaQuery("(min-width:769px)");
+
   return (
     <Box
       border={{ xs: "none", md: "1px solid #E2E2E2" }}
@@ -25,9 +30,21 @@ const Form = ({ formik, cart }) => {
       minHeight={{ xs: "unset", md: 609 }}
       onSubmit={formik.handleSubmit}
     >
-      <Typography variant="h5" mb={2.8} fontWeight="600">
-        Оформление заказа
-      </Typography>
+      <Box
+        display="flex"
+        mb={2.8}
+        justifyContent="space-between"
+        alignItems="center"
+      >
+        <Typography variant="h5" fontWeight="600">
+          Оформление заказа
+        </Typography>
+        {!md && (
+          <IconButton onClick={close}>
+            <Close />
+          </IconButton>
+        )}
+      </Box>
       <Box borderBottom="1px solid #DDDDDD" pb="24px" mb={3}>
         <Typography className="sans" variant="subtitle2" mb={2} color="#5B5B5B">
           Метод доставки
@@ -76,6 +93,7 @@ const Form = ({ formik, cart }) => {
             </Typography>
             <TextField
               name="deliveryAddress"
+              // error={formik.errors.deliveryAddress}
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
               required
@@ -106,12 +124,8 @@ const Form = ({ formik, cart }) => {
             slotProps={{
               textField: {
                 fullWidth: true,
-                error:
-                  formik.touched.deliveryDate && formik.errors.deliveryDate,
-                helperText:
-                  formik.touched.deliveryDate &&
-                  formik.errors.deliveryDate &&
-                  "Заполните поле",
+                // error: formik.errors.deliveryDate,
+                // helperText: "Заполните поле",
               },
             }}
           />

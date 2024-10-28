@@ -10,7 +10,7 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Find from "../../assets/images/Find";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,9 +22,10 @@ import {
 } from "../../redux/reducers/products";
 import filter from "../../assets/images/filter.svg";
 import empty from "../../assets/images/emptyCart.svg";
-import { handleFilter } from "../../redux/reducers/mainSlice";
+import { handleFilter, handleLoading } from "../../redux/reducers/mainSlice";
 import CloseSearch from "../../assets/images/CloseSearch";
 import Fuse from "fuse.js";
+import PaginationLarge from "../../components/Pagination";
 
 const Products = ({
   chip,
@@ -33,6 +34,8 @@ const Products = ({
   setParams,
   searchValue,
   setValueSearch,
+  page,
+  setPage,
 }) => {
   const dispatch = useDispatch();
   const location = useLocation();
@@ -45,6 +48,8 @@ const Products = ({
   const [open, setOpen] = useState(false);
   const [searched, setSearched] = useState([]);
   const [prod, setProd] = useState([]);
+
+  const firstUpdate = useRef(true);
 
   const options = {
     includeScore: true,
@@ -70,26 +75,25 @@ const Products = ({
     setParams(params.filter((el) => el.name !== item));
     dispatch(
       getProducts(
-        `/products/query?search=${searchValue}&categoryIds=${params
+        `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${params
           .filter((el) => el.name !== item)
           .map((item) => item.id)}`
       )
     );
   };
 
+
+  const handleChange = (event, value) => {
+    setPage(value);
+  };
+
   useEffect(() => {
     dispatch(getProductsNames());
+    dispatch(handleLoading(true));
     if (location.search) {
       setValueSearch(search);
       if (!location.search.includes("category"))
         dispatch(setSearch(decodeURI(location.search.split("=")[1])));
-      dispatch(
-        getProducts(
-          `/products/query?search=&categoryIds=${location.search.split("=")[1]}`
-        )
-      );
-    } else {
-      dispatch(getProducts(`/products`));
     }
   }, []);
 
@@ -99,7 +103,40 @@ const Products = ({
 
   useEffect(() => {
     if (products.results) setProd(products?.results);
-    else setProd(products);
+    else setProd(products.products);
+    dispatch(handleLoading(false));
+  }, [products]);
+
+  useEffect(() => {
+    if (!searchValue) {
+      dispatch(
+        getProducts(
+          `/products/query?limit=12&page=${page}&search=&categoryIds=`
+        )
+      );
+      setOpen(false);
+      setPage(1);
+    }
+  }, [searchValue]);
+
+  useEffect(() => {
+    dispatch(
+      getProducts(
+        `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
+          params.length ? `${params.map((item) => item.id)}` : ""
+        }`
+      )
+    );
+  }, [page]);
+
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+
+    // hide linear progress
+    dispatch(handleLoading(false));
   }, [products]);
 
   return (
@@ -127,7 +164,7 @@ const Products = ({
           )}
         </Box>
         {!md && (
-          <Box display="flex" overflowY='scroll' columnGap={1}>
+          <Box display="flex" overflowY="scroll" columnGap={1}>
             {chip &&
               chip.map((item) => (
                 <Chip
@@ -151,9 +188,9 @@ const Products = ({
             setOpen(false);
             dispatch(
               getProducts(
-                `/products/query?search=${searchValue}&categoryIds=${params.map(
-                  (item) => item.id
-                )}`
+                `/products/query?limit=12&page=${page}&search=${decodeURI(
+                  searchValue
+                )}&categoryIds=${params.map((item) => item.id)}`
               )
             );
           }}
@@ -176,7 +213,7 @@ const Products = ({
                     <Find />
                   </InputAdornment>
                 ),
-                endAdornment: (
+                endAdornment: searchValue && (
                   <InputAdornment position="start">
                     <IconButton
                       onClick={() => {
@@ -223,9 +260,9 @@ const Products = ({
                 setOpen(false);
                 dispatch(
                   getProducts(
-                    `/products/query?search=${searchValue}&categoryIds=${params.map(
-                      (item) => item.id
-                    )}`
+                    `/products/query?limit=12&page=${page}&search=${encodeURI(
+                      searchValue
+                    )}&categoryIds=${params.map((item) => item.id)}`
                   )
                 );
               }}
@@ -240,9 +277,9 @@ const Products = ({
                   setValueSearch(item.name);
                   dispatch(
                     getProducts(
-                      `/products/query?search=${
+                      `/products/query?limit=12&page=${page}&search=${encodeURI(
                         item.name
-                      }&categoryIds=${params.map((item) => item.id)}`
+                      )}&categoryIds=${params.map((item) => item.id)}`
                     )
                   );
                 }}
@@ -287,18 +324,25 @@ const Products = ({
           </Typography>
         </Box>
       ) : (
-        <Grid2 container spacing={2}>
-          {Array.isArray(prod) &&
-            prod?.map((item, idx) => (
-              <Grid2
-                item
-                size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}
-                key={idx}
-              >
-                <Card item={item} />
-              </Grid2>
-            ))}
-        </Grid2>
+        <>
+          <Grid2 container spacing={2}>
+            {Array.isArray(prod) &&
+              prod?.map((item, idx) => (
+                <Grid2
+                  item
+                  size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}
+                  key={idx}
+                >
+                  <Card item={item} />
+                </Grid2>
+              ))}
+          </Grid2>
+          <PaginationLarge
+            page={page}
+            handleChange={handleChange}
+            products={products}
+          />
+        </>
       )}
     </Box>
   );

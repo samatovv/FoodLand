@@ -1,7 +1,7 @@
 import { Box, Container, IconButton, useMediaQuery } from "@mui/material";
 import React from "react";
 import logo3 from "../../assets/images/logo3.svg";
-import logo from "../../assets/images/logo.svg";
+import logo from "../../assets/images/logo1.svg";
 import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
 import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -62,7 +62,7 @@ const Header = () => {
           <Box
             component="nav"
             backgroundColor="#FFF"
-            borderRadius={100}
+            borderRadius='16px'
             p="12px 32px"
             display="flex"
             columnGap={8}

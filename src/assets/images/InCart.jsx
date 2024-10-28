@@ -10,7 +10,7 @@ const InCart = ({ inCart }) => {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="34.9494" height="34.9494" rx="17.4747" fill="#6E8435" />
+      <rect width="34.9494" height="34.9494" rx="17.4747" fill="#93A27C" />
       <path
         fill-rule="evenodd"
         clip-rule="evenodd"

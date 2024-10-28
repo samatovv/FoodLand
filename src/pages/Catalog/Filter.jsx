@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const Filter = ({
   formik,
+  setPage,
   setChip,
   searchValue,
   setValueSearch,
@@ -14,6 +15,7 @@ const Filter = ({
   params,
   isAuth,
   chip,
+  page,
 }) => {
   const dispatch = useDispatch();
 
@@ -46,6 +48,7 @@ const Filter = ({
         </IconButton>
       </Box>
       <Categories
+        setPage={setPage}
         searchValue={searchValue}
         setValueSearch={setValueSearch}
         setParams={setParams}
@@ -54,6 +57,7 @@ const Filter = ({
         chip={chip}
         formik={formik}
         setChip={setChip}
+        page={page}
       />
     </Drawer>
   );

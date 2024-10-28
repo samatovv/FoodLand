@@ -29,6 +29,11 @@ const Cart = () => {
 
   const now = dayjs();
 
+  var validationSchema = yup.object().shape({
+    deliveryDate: yup.string().required(),
+    deliveryAddress: yup.string().required(),
+  });
+
   const formik = useFormik({
     validationSchema: validationSchema,
     initialValues: {
@@ -45,6 +50,15 @@ const Cart = () => {
         quantity: item.count,
       }));
 
+      const totalWeight = cart.reduce(
+        (total, amount) => total + parseInt(amount.weight),
+        0
+      );
+      const totalPrice = cart.reduce(
+        (total, amount) => total + parseInt(amount.sum),
+        0
+      );
+
       dispatch(handleLoading(true));
 
       dispatch(
@@ -56,18 +70,11 @@ const Cart = () => {
           deliveryDate: values.deliveryDate,
           status: values.status,
           comment: values.comment,
-          weight: 1,
-          price: 1,
+          weight: totalWeight,
+          price: totalPrice,
         })
       );
     },
-  });
-
-  var validationSchema = yup.object().shape({
-    deliveryDate: yup.string().min(1).max(255).required(),
-    deliveryAddress:
-      formik.values.deliveryType === "delivery" &&
-      yup.string().min(1).max(255).required(),
   });
 
   const handleDrawer = () => setDrawer(!drawer);

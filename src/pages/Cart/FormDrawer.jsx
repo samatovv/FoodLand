@@ -14,7 +14,7 @@ const FormDrawer = ({ handleDrawer, drawer, formik, cart }) => {
       anchor="bottom"
       onClose={handleDrawer}
     >
-      <Form formik={formik} cart={cart} />
+      <Form formik={formik} cart={cart} close={handleDrawer} />
     </Drawer>
   );
 };

@@ -58,8 +58,8 @@ const Carousel = () => {
                   component="img"
                   width={{ xs: "100%", md: 428, lg: 428 }}
                   height={280}
-                  sx={{ objectFit: "scale-down!important" }}
-                  src={item.order > 5 ? item.imageUrl : emptyImg}
+                  sx={{ objectFit: "cover!important" }}
+                  src={item.imageUrl ? item.imageUrl : emptyImg}
                   alt=""
                 />
               </SwiperSlide>
