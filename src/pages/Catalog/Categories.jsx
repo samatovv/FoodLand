@@ -28,7 +28,7 @@ const Categories = ({
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
 
-  const [expanded, setExpanded] = useState(true);
+  // const [expanded, setExpanded] = useState(true);
   const [categories, setCategories] = useState([]);
 
   const allCategories = useSelector((state) => state.main.categories);
@@ -55,15 +55,17 @@ const Categories = ({
       const filteredParams = params.filter((el) => el.id !== item.id);
       setChip([...filtered]);
       setParams([...filteredParams]);
-      dispatch(
-        getProducts(
-          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${filteredParams.map(
-            (item) => item.id
-          )}`
-        )
-      );
-      setPage(1);
+      if (page > 1) setPage(1);
+      if (page === 1)
+        dispatch(
+          getProducts(
+            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${filteredParams.map(
+              (item) => item.id
+            )}`
+          )
+        );
     } else {
+      if (page > 1) setPage(1);
       setChip([...chip, item.name]);
       setParams([...params, { id: item.id, name: item.name }]);
       dispatch(
@@ -73,7 +75,6 @@ const Categories = ({
           }${params.length ? `,${params.map((item) => item.id)}` : ""}`
         )
       );
-      setPage(1);
     }
   };
 
@@ -81,8 +82,8 @@ const Categories = ({
     <Box component="section" pb={13}>
       {md ? (
         <Accordion
-          expanded={expanded && isAuth}
-          onChange={() => setExpanded(!expanded)}
+          expanded={true}
+          // onChange={() => setExpanded(!expanded)}
           className="sans"
           sx={{
             "&.MuiPaper-root ": {
@@ -204,9 +205,11 @@ const Categories = ({
                                   <FormControlLabel
                                     control={
                                       <Checkbox
-                                        checked={params.find(
-                                          (item) => item.id === el.id
-                                        )}
+                                        checked={
+                                          !!params.find(
+                                            (item) => item.id === el.id
+                                          )
+                                        }
                                       />
                                     }
                                     label={el.name}

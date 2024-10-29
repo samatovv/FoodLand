@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { Box, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  TextField,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 
 import ButtonMore from "../../components/ButtonMore";
 import partners from "../../assets/images/partners.webp";
@@ -13,6 +19,7 @@ import Carousel from "../../shared/Carousel";
 const First = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const md = useMediaQuery("(min-width:769px)");
 
   const [value, setValue] = useState("");
 
@@ -29,19 +36,22 @@ const First = () => {
       <Container
         maxWidth="lg"
         sx={{
-          pt: "314px",
+          pt: { xs: "97px", md: "314px" },
         }}
       >
         <Typography
           fontWeight="bold"
           lineHeight="110%"
           variant="h1"
-          maxWidth={657}
+          m={{ xs: "0 auto", md: "unset" }}
+          color="#FFFFFF"
+          maxWidth={{ xs: 299, md: 657 }}
+          textAlign={{ xs: "center", md: "start" }}
         >
           Ваш надежный поставщик сладкого и не только
         </Typography>
         <Box
-          mt={6}
+          mt={{ xs: 5, md: 6 }}
           display="flex"
           flexDirection={{ xs: "column", md: "row" }}
           rowGap={2}
@@ -80,21 +90,30 @@ const First = () => {
             />
           </form>
           <ButtonMore
+            radius
             sx={{ width: { xs: "100%", md: 193, borderRadius: "16px" } }}
             txt="Заказать звонок"
-          ></ButtonMore>
+          />
         </Box>
-        {/* <Box mt={5} display="flex" alignItems="center" columnGap={3}>
-          <img src={partners} width="152px" height="40px" alt="Партнеры" />
-          <Typography
-            className="sans"
-            variant="subtitle2"
-            color="#737373"
-            fontWeight="regular"
+        {!md && (
+          <Box
+            mt={5}
+            justifyContent="center"
+            display="flex"
+            alignItems="center"
+            columnGap={3}
           >
-            +50 компаний
-          </Typography>
-        </Box> */}
+            <img src={partners} width="152px" height="40px" alt="Партнеры" />
+            <Typography
+              className="sans"
+              variant="subtitle2"
+              color="#737373"
+              fontWeight="regular"
+            >
+              +50 компаний
+            </Typography>
+          </Box>
+        )}
       </Container>
       {/* <Carousel /> */}
     </Box>

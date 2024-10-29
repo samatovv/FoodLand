@@ -1,6 +1,6 @@
 import { Box, Container, IconButton, useMediaQuery } from "@mui/material";
 import React from "react";
-import logo3 from "../../assets/images/logo3.svg";
+import logo3 from "../../assets/images/logo.svg";
 import logo from "../../assets/images/logo1.svg";
 import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
@@ -24,7 +24,7 @@ const Header = () => {
       component="header"
       position={!location.pathname.includes("/profile") && "fixed"}
       zIndex={filter ? 1201 : 100}
-      backgroundColor={{ xs: "#FFFFFF", md: "transparent" }}
+      // backgroundColor={{ xs: "#FFFFFF", md: "transparent" }}
       width="100%"
       p={{ xs: "11px 0", md: "25px 0 0" }}
       borderBottom={filter ? "1px solid #D3D3D3" : "none"}

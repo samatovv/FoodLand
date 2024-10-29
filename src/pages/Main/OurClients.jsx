@@ -23,6 +23,8 @@ import img10 from "../../assets/clients/konti.png";
 // import twitter from "../../assets/images/twitter.svg";
 import ArrowForwardIcon from "../../components/ArrowForwardIcon";
 import ArrowBackIcon from "../../components/ArrowBackIcon";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
 
 const clients = [
   { img: img1, name: "Supara Talkan" },
@@ -41,11 +43,113 @@ const OurClients = () => {
   const md = useMediaQuery("(min-width:768px)");
   return (
     <Box component="section" backgroundColor="#FFF" p="62px 0">
-      <Container maxWidth="lg">
+      <Container
+        maxWidth="lg"
+        sx={{
+          "& .clients__card ": {
+            "& img": {
+              filter: { xs: "none", md: "grayscale(1)" },
+              transition: "all 800ms ease",
+            },
+            "&:hover img": {
+              filter: "none",
+            },
+          },
+        }}
+      >
         <Typography variant="h2" fontWeight="700" mb={5}>
           Наши клиенты
         </Typography>
-        <Grid2
+        <Box position="relative" mt={7}>
+          <Swiper
+            navigation={true}
+            modules={[Navigation]}
+            freeMode={true}
+            loop={true}
+            centeredSlides={false}
+            // initialSlide={4}
+            breakpoints={{
+              0: {
+                slidesPerView: 2,
+                slidesPerGroup: 2,
+                spaceBetween: 16,
+              },
+
+              768: {
+                slidesPerView: 4,
+                slidesPerGroup: 4,
+                spaceBetween: 30,
+              },
+            }}
+          >
+            {clients.map((item) => (
+              <SwiperSlide>
+                <Box
+                  className="clients__card"
+                  p={{ xs: "12px", md: "24px" }}
+                  display="flex"
+                  justifyContent="center"
+                  flexDirection="column"
+                  alignItems="center"
+                  borderRadius="24px"
+                  border="1px solid #E6E6E6"
+                  sx={{
+                    transition: "box-shadow 0.3s ease",
+                    border: "1px solid #E6E6E6",
+                    "&:hover": {
+                      borderColor: "transparent",
+                      boxShadow: "0px 0px 4px 4px #00000010",
+                    },
+                  }}
+                >
+                  <Box
+                    component="img"
+                    width={{ xs: 90, md: 180 }}
+                    height={{ xs: 90, md: 180 }}
+                    src={item.img}
+                    alt=""
+                  />
+                  <Typography
+                    mt={3}
+                    mb={1.7}
+                    textAlign="center"
+                    variant="h5"
+                    fontWeight="700"
+                    sx={{
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                  {/* <Typography
+                  variant="subtitle1"
+                  lineHeight="140%"
+                  textAlign="center"
+                  color="#666"
+                  mb={3}
+                >
+                  Объявление о запуске новых вкусов шоколада или какао-порошка
+                </Typography>
+                <Box display="flex" alignItems="center" columnGap="12px">
+                  <a href="https://instagram.com">
+                    <img src={instagram} alt="" />
+                  </a>
+                  <a href="https://facebook.com">
+                    <img src={facebook} alt="" />
+                  </a>
+                  <a href="https://twiiter.com">
+                    <img src={twitter} alt="" />
+                  </a>
+                </Box> */}
+                </Box>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </Box>
+        {/* <Grid2
           container
           sx={{
             "& .clients__card ": {
@@ -102,7 +206,7 @@ const OurClients = () => {
                 >
                   {item.name}
                 </Typography>
-                {/* <Typography
+                <Typography
                   variant="subtitle1"
                   lineHeight="140%"
                   textAlign="center"
@@ -121,24 +225,11 @@ const OurClients = () => {
                   <a href="https://twiiter.com">
                     <img src={twitter} alt="" />
                   </a>
-                </Box> */}
+                </Box>
               </Box>
             </Grid2>
           ))}
-        </Grid2>
-        <Box display="flex" justifyContent="center" mt={5}>
-          <Pagination
-            size="large"
-            renderItem={(item) => (
-              <PaginationItem
-                slots={{ previous: ArrowBackIcon, next: ArrowForwardIcon }}
-                {...item}
-              />
-            )}
-            count={5}
-            color="primary"
-          />
-        </Box>{" "}
+        </Grid2> */}
       </Container>
     </Box>
   );

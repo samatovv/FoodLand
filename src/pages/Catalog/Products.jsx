@@ -6,6 +6,7 @@ import {
   InputAdornment,
   ListItemButton,
   Popover,
+  Skeleton,
   TextField,
   Typography,
   useMediaQuery,
@@ -44,6 +45,7 @@ const Products = ({
   const products = useSelector((state) => state.products.products);
   const names = useSelector((state) => state.products.names);
   const search = useSelector((state) => state.products.search);
+  const loading = useSelector((state) => state.main.loading);
 
   const [open, setOpen] = useState(false);
   const [searched, setSearched] = useState([]);
@@ -71,17 +73,18 @@ const Products = ({
   };
 
   const handleDelete = (item) => {
+    setPage(1);
     setChip(chip.filter((el) => el !== item));
     setParams(params.filter((el) => el.name !== item));
-    dispatch(
-      getProducts(
-        `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${params
-          .filter((el) => el.name !== item)
-          .map((item) => item.id)}`
-      )
-    );
+    if (page === 1)
+      dispatch(
+        getProducts(
+          `/products/query?limit=12&page=1&search=${searchValue}&categoryIds=${params
+            .filter((el) => el.name !== item)
+            .map((item) => item.id)}`
+        )
+      );
   };
-
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -104,22 +107,25 @@ const Products = ({
   useEffect(() => {
     if (products.results) setProd(products?.results);
     else setProd(products.products);
-    dispatch(handleLoading(false));
+    // dispatch(handleLoading(false));
   }, [products]);
 
-  useEffect(() => {
-    if (!searchValue) {
+  useLayoutEffect(() => {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    if (page > 1) setPage(1);
+    if (!searchValue && page === 1) {
       dispatch(
-        getProducts(
-          `/products/query?limit=12&page=${page}&search=&categoryIds=`
-        )
+        getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
       );
       setOpen(false);
-      setPage(1);
     }
   }, [searchValue]);
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     dispatch(
       getProducts(
         `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
@@ -186,13 +192,14 @@ const Products = ({
           onSubmit={(e) => {
             e.preventDefault();
             setOpen(false);
-            dispatch(
-              getProducts(
-                `/products/query?limit=12&page=${page}&search=${decodeURI(
-                  searchValue
-                )}&categoryIds=${params.map((item) => item.id)}`
-              )
-            );
+            if (page === 1)
+              dispatch(
+                getProducts(
+                  `/products/query?limit=12&page=1&search=${decodeURI(
+                    searchValue
+                  )}&categoryIds=${params.map((item) => item.id)}`
+                )
+              );
           }}
           width="100%"
           position="relative"
@@ -242,6 +249,7 @@ const Products = ({
           <Box
             sx={{
               opacity: open ? "1" : "0",
+              visibility: open ? "unset" : "hidden",
               height: open ? "auto" : "0px",
               maxHeight: 200,
               overflow: "scroll",
@@ -260,7 +268,7 @@ const Products = ({
                 setOpen(false);
                 dispatch(
                   getProducts(
-                    `/products/query?limit=12&page=${page}&search=${encodeURI(
+                    `/products/query?limit=12&page=1&search=${encodeURI(
                       searchValue
                     )}&categoryIds=${params.map((item) => item.id)}`
                   )
@@ -277,7 +285,7 @@ const Products = ({
                   setValueSearch(item.name);
                   dispatch(
                     getProducts(
-                      `/products/query?limit=12&page=${page}&search=${encodeURI(
+                      `/products/query?limit=12&page=1&search=${encodeURI(
                         item.name
                       )}&categoryIds=${params.map((item) => item.id)}`
                     )
@@ -309,7 +317,25 @@ const Products = ({
             ))}
         </Box>
       )}
-      {!prod?.length ? (
+      {loading && !prod?.length ? (
+        <>
+          <Grid2 container spacing={2}>
+            {Array.from(Array(8).keys()).map((item, idx) => (
+              <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}>
+                <Skeleton
+                  variant="rect"
+                  sx={{ borderRadius: "20px", mb: 1 }}
+                  width="100%"
+                  height="178px"
+                />
+                <Skeleton width="70%" />
+                <Skeleton width="80%" />
+                <Skeleton width="40%" />
+              </Grid2>
+            ))}
+          </Grid2>
+        </>
+      ) : !prod?.length ? (
         <Box
           display="flex"
           flexDirection="column"
