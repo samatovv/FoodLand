@@ -123,7 +123,7 @@ export const theme = createTheme({
 
           "& .Mui-error": {
             "& input": {
-              // backgroundColor: "#FFF2F2",
+              backgroundColor: "#FFF2F2!important",
             },
             "& .MuiOutlinedInput-notchedOutline": {
               borderColor: "#d32f2f!important",

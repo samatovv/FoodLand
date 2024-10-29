@@ -93,10 +93,11 @@ const Form = ({ formik, cart, close }) => {
             </Typography>
             <TextField
               name="deliveryAddress"
-              // error={formik.errors.deliveryAddress}
+              error={formik.errors.deliveryAddress}
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
               required
+              helperText={formik.errors.deliveryAddress && "Заполните поле*"}
               placeholder="Ваш адрес"
               fullWidth
             />
@@ -160,6 +161,7 @@ const Form = ({ formik, cart, close }) => {
           fullWidth
           disabled={!cart?.length}
           sx={{ fontSize: 10 }}
+          onClick={() => formik.setFieldValue("status", "new")}
           color="primary"
           type="submit"
         >

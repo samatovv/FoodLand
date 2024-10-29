@@ -19,7 +19,22 @@ const AddToCart = ({ details, count, id, card }) => {
     if (inCart) {
       setInCart(false);
       let filtered = cart.filter((item) => item.id !== id);
-      localStorage.setItem("cart", JSON.stringify(filtered));
+      if (!newItem) {
+        localStorage.setItem("cart", JSON.stringify(filtered));
+      } else {
+        localStorage.setItem(
+          "cart",
+          JSON.stringify([
+            ...filtered,
+            {
+              ...newItem,
+              count: newItem?.count - count,
+              sum: details.price * (newItem?.count - count),
+              weight: newItem?.weight - details.weight * count,
+            },
+          ])
+        );
+      }
     } else {
       if (isAuth) {
         setInCart(true);
@@ -52,7 +67,7 @@ const AddToCart = ({ details, count, id, card }) => {
                 ...newItem,
                 count: newItem?.count + count,
                 sum: details.price * (newItem?.count + count),
-                weight: newItem?.weight + (details.weight * count),
+                weight: newItem?.weight + details.weight * count,
               },
             ])
           );

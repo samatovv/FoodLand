@@ -5,7 +5,7 @@ import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
 import empty from "../assets/images/emptyCart.svg";
 
-const Card = ({ item, search }) => {
+const Card = ({ item, search, width }) => {
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
   const id = item?._id;
@@ -16,13 +16,14 @@ const Card = ({ item, search }) => {
           transform: "scale(1.3)",
         },
       }}
+      minWidth={width}
       p={search && { xs: "8px", md: "15px" }}
-      maxWidth={{ xs: "unset", md: 290 }}
+      maxWidth={width ? width : { xs: "unset", md: 290 }}
       backgroundColor="#FFF"
       borderRadius={3}
     >
       <Link
-        to={`/catalog/details/${details?.id ?details?.id:details?._id}`}
+        to={`/catalog/details/${details?.id ? details?.id : details?._id}`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
         <Box

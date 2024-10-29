@@ -16,6 +16,7 @@ import { getProducts } from "../../redux/reducers/products";
 const Recommendations = () => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:768px)");
+  const sm = useMediaQuery("(min-width:426px)");
 
   const [page, setPage] = useState(1);
 
