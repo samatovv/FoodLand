@@ -9,6 +9,7 @@ const Logout = ({ open, close }) => {
     cookie.removeSpecific("foodland_token");
     sessionStorage.clear();
     navigate("/");
+    localStorage.clear();
   };
   return (
     <Dialog
@@ -50,6 +51,7 @@ const Logout = ({ open, close }) => {
         <Button
           onClick={handleLogout}
           fullWidth
+          sx={{ color: "var(--primary)" }}
           size="small"
           variant="outlined"
           color="primary"

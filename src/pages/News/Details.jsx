@@ -153,7 +153,17 @@ const NewsDetails = () => {
                           alignItems="end"
                           justifyContent="space-between"
                         >
-                          <Typography variant="h5" fontWeight="700">
+                          <Typography
+                            sx={{
+                              overflow: "hidden",
+                              whiteSpace: "nowrap",
+                              textOverflow: "ellipsis",
+                              maxWidth: "80%",
+                              width: "80%",
+                            }}
+                            variant="h5"
+                            fontWeight="700"
+                          >
                             {item.title}
                           </Typography>
                           <Typography color="#666" variant="body2">
@@ -166,21 +176,23 @@ const NewsDetails = () => {
                         </Box>
                         <Typography
                           variant="body2"
+                          fontWeight={400}
+                          maxWidth="375px"
+                          mt={1.5}
+                          mb={3}
+                          className="sans"
                           sx={{
                             textOverflow: "ellipsis",
                             overflow: "hidden",
                             display: "-webkit-box",
-                            WebkitLineClamp: 2,
+                            WebkitLineClamp: 3,
                             WebkitBoxOrient: "vertical",
                             wordWrap: "break-word",
                           }}
-                          fontWeight={400}
-                          className="sans"
-                          mt={1.5}
-                          mb={3}
-                        >
-                          {item.content}
-                        </Typography>
+                          dangerouslySetInnerHTML={{
+                            __html: htmlDecode(item.content),
+                          }}
+                        />
                         <span
                           className="sans"
                           style={{ textDecoration: "underline" }}

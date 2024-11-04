@@ -64,8 +64,8 @@ const OurClients = () => {
           <Swiper
             navigation={true}
             modules={[Navigation]}
-            freeMode={true}
-            loop={true}
+            // freeMode={true}
+            // loop={true}
             centeredSlides={false}
             // initialSlide={4}
             breakpoints={{

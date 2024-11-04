@@ -20,6 +20,7 @@ const Success = ({ setOpen, open, reorder }) => {
         sx={{
           width: "fit-content",
           alignSelf: "end",
+          mb: "27px",
         }}
         onClick={handleClose}
       >

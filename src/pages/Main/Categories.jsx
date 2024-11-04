@@ -81,6 +81,7 @@ const Categories = () => {
                         txt="Подробнее "
                         sx={{
                           width: "100%",
+                          p: "4px",
                           "& span": { color: "#000" },
                         }}
                       />

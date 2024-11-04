@@ -184,7 +184,7 @@ const News = () => {
               <Grid2 item size={{ xs: 12, md: 6 }}>
                 {Array.isArray(news?.results) &&
                   news?.results
-                    ?.slice(1, 4)
+                    ?.slice(md ? 1 : 0, 4)
                     .map((item, idx) => <NewsCard item={item} idx={idx} />)}
               </Grid2>
             </Grid2>

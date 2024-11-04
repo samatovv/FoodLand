@@ -78,6 +78,7 @@ export const theme = createTheme({
           borderRadius: "46px",
           boxShadow: "none",
           textTransform: "none",
+          color: "#FFF",
           "&.MuiButton-sizeLarge": {
             padding: "13px 35px",
           },
@@ -143,7 +144,6 @@ export const theme = createTheme({
             borderRadius: "100px",
             fontFamily: "Open Sans",
             border: "2px solid transparent",
-            
 
             // "&::placeholder": {
             //   fontWeight: "400",

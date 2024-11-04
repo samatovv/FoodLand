@@ -176,6 +176,7 @@ const Form = ({ formik, cart, close }) => {
           sx={{
             border: "1px solid #DBDBDB",
             fontSize: 10,
+            color: "#000",
             p: "11px 29px!important",
           }}
           color="secondary"

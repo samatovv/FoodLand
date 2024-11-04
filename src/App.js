@@ -10,7 +10,7 @@ import { handleDrawer } from "./redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Auth from "./pages/Auth";
 import { LinearProgress } from "@mui/material";
-import { getProfileData } from "./redux/reducers/profile";
+import { getProfileData, setProfile } from "./redux/reducers/profile";
 
 function App() {
   const location = useLocation();
@@ -28,7 +28,10 @@ function App() {
     window.scrollTo(0, 0);
     dispatch(handleDrawer(false));
     if (isAuth) dispatch(getProfileData());
-    if (data.status === 401) sessionStorage.clear();
+    if (data.status === 401) {
+      dispatch(setProfile(null));
+      sessionStorage.clear();
+    }
   }, [location.pathname]);
 
   return (

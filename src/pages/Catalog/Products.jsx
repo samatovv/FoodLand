@@ -129,7 +129,7 @@ const Products = ({
     dispatch(
       getProducts(
         `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-          params.length ? `${params.map((item) => item.id)}` : ""
+          params?.length ? `${params.map((item) => item.id)}` : ""
         }`
       )
     );

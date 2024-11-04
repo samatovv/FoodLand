@@ -68,7 +68,7 @@ const AboutUs = () => {
               pb={1}
               borderBottom="1px solid var(--primary)"
             >
-              создали
+              Создали
             </Typography>
             <Typography
               mt={1}
@@ -83,6 +83,7 @@ const AboutUs = () => {
               color="#465659"
               fontWeight={400}
               maxWidth={257}
+              className="sans"
             >
               С нашей мукой создали более 50 млн макаронс.
             </Typography>
@@ -111,6 +112,7 @@ const AboutUs = () => {
               fontSize={{ xs: 12, md: 16 }}
               color="#465659"
               fontWeight={400}
+              className="sans"
               maxWidth={257}
             >
               С нашим сыром испекли более 130 тыс пицц.
@@ -138,6 +140,7 @@ const AboutUs = () => {
               fontSize={{ xs: 12, md: 16 }}
               color="#465659"
               fontWeight={400}
+              className="sans"
               maxWidth={257}
             >
               Мы продали около 500 тонн шоколада.
@@ -166,6 +169,7 @@ const AboutUs = () => {
               color="#465659"
               fontWeight={400}
               maxWidth={257}
+              className="sans"
             >
               С использыванием наших сыров было приготовлено более 1 млн суши.
             </Typography>
@@ -193,6 +197,7 @@ const AboutUs = () => {
               color="#465659"
               fontWeight={400}
               maxWidth={257}
+              className="sans"
             >
               Наименований товаров, адаптированных под ваши потребности
             </Typography>
@@ -220,6 +225,7 @@ const AboutUs = () => {
               color="#465659"
               fontWeight={400}
               maxWidth={257}
+              className="sans"
             >
               Мы осуществили более 10 000 доставок
             </Typography>
@@ -348,15 +354,19 @@ const AboutUs = () => {
                   Подписывайтесь на нас:
                 </Typography>
                 <Box display="flex" alignItems="center" columnGap="12px">
-                  <a href="https://instagram.com">
+                  <a
+                    href="https://www.instagram.com/foodland_ingredients/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     <img src={instagram} alt="" />
                   </a>
-                  <a href="https://facebook.com">
+                  {/* <a href="https://facebook.com">
                     <img src={facebook} alt="" />
                   </a>
                   <a href="https://twiiter.com">
                     <img src={twitter} alt="" />
-                  </a>
+                  </a> */}
                 </Box>
               </Box>
             </Box>

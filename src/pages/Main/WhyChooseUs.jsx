@@ -63,7 +63,7 @@ const WhyChooseUs = () => {
                     position: "absolute",
                     top: 42,
                     left: 52,
-                    borderTopLeftRadius: "0px",
+                    // borderTopLeftRadius: "0px",
                   }}
                 >
                   <Typography
@@ -173,7 +173,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 variant="body1"
-                mb={{ xs: 3, lg: 12 }}
+                mb={{ xs: 3, lg: '110px' }}
                 color="#707070"
               >
                 Наша экспертность в сфере применения кондитерского сырья.
@@ -201,7 +201,8 @@ const WhyChooseUs = () => {
 
               <Typography
                 className="sans"
-                fontSize={{ xs: 13, md: 11 }}
+                // fontSize={{ xs: 13, md: 11 }}
+                whiteSpace='nowrap'
                 mb={{ xs: 1, lg: "33px" }}
                 color="#707070"
               >
