@@ -24,6 +24,7 @@ const Cart = () => {
   const md = useMediaQuery("(min-width:769px)");
 
   const firstUpdate = useRef(true);
+  const firstUpdate2 = useRef(true);
 
   const createdOrder = useSelector((state) => state.profile.createdOrder);
 
@@ -92,7 +93,12 @@ const Cart = () => {
 
     if (createdOrder.status == 200) {
       setOpen(true);
-      formik.resetForm();
+      if (formik.values.deliveryType === "pickup") {
+        formik.resetForm();
+        formik.setFieldValue("deliveryType", "pickup");
+      } else {
+        formik.resetForm();
+      }
       localStorage.setItem("cart", "[]");
       setCart("");
       if (drawer) handleDrawer();
@@ -100,6 +106,20 @@ const Cart = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [createdOrder]);
+
+  useLayoutEffect(() => {
+    if (firstUpdate2.current) {
+      firstUpdate2.current = false;
+      return;
+    }
+
+    if (formik.values.deliveryType === "pickup") {
+      formik.setFieldValue("deliveryAddress", "самовывоз");
+    } else {
+      formik.setFieldValue("deliveryAddress", "");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formik.values.deliveryType]);
 
   return (
     <>
@@ -112,7 +132,7 @@ const Cart = () => {
             {md ? (
               <Form formik={formik} cart={cart} />
             ) : (
-              cart.length !== 0 && (
+              cart?.length !== 0 && (
                 <Button
                   sx={{
                     position: "fixed",

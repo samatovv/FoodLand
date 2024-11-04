@@ -28,7 +28,7 @@ const Categories = ({
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
 
-  // const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState(true);
   const [categories, setCategories] = useState([]);
 
   const allCategories = useSelector((state) => state.main.categories);
@@ -72,7 +72,7 @@ const Categories = ({
         getProducts(
           `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
             item.id
-          }${params.length ? `,${params.map((item) => item.id)}` : ""}`
+          }${params?.length ? `,${params.map((item) => item.id)}` : ""}`
         )
       );
     }
@@ -82,7 +82,7 @@ const Categories = ({
     <Box component="section" pb={13}>
       {md ? (
         <Accordion
-          expanded={true}
+          expanded={expanded}
           // onChange={() => setExpanded(!expanded)}
           className="sans"
           sx={{
@@ -227,21 +227,19 @@ const Categories = ({
           </AccordionDetails>
         </Accordion>
       ) : (
-        {
-          /* <Box
-        sx={{
-          "& .MuiAccordion-root::before": { display: "none" },
-        }}
-      >
-        {Array.isArray(categories) &&
-          first
-            // .filter(
-            //   (obj, idx, arr) =>
-            //     idx === arr.findIndex((t) => t.name === obj.name)
-            // )
-            ?.map((item, idx) => (
+        <Box
+          sx={{
+            "& .MuiAccordion-root::before": { display: "none" },
+            "& .MuiAccordionSummary-contentGutters": {
+              fontFamily: "Open Sans",
+              fontSize: 16,
+            },
+          }}
+        >
+          {Array.isArray(allCategories) &&
+            categories?.first?.map((item) => (
               <Accordion
-                key={idx}
+                key={item}
                 sx={{
                   "&.MuiPaper-root ": {
                     backgroundColor: "transparent",
@@ -251,12 +249,12 @@ const Categories = ({
                     backgroundColor: "transparent",
                     borderRadius: "8px",
                     minHeight: "0!important",
-                    m: "0!important",
+                    // m: "0!important",
                   },
-                  // "& .MuiAccordionSummary-content": {
-                  //   m: "0!important",
-                  //   p: "9px 15px",
-                  // },
+                  "& .MuiAccordionSummary-content": {
+                    // m: "0!important",
+                    // p: "9px 15px",
+                  },
 
                   "& .MuiTypography-body1": {
                     fontSize: 15,
@@ -270,25 +268,71 @@ const Categories = ({
                   aria-controls="panel1-content"
                   id="panel1-header"
                 >
-                  <Typography> {item?.name}</Typography>
+                  {item?.name}
                 </AccordionSummary>
                 <AccordionDetails>
-                  {item.sub.map((ite) => (
-                    <FormGroup>
-                      <FormControlLabel
-                        control={<Checkbox />}
-                        label={ite.name}
-                        checked={params?.find((el) => el.id === ite.id)}
-                        value={ite.id}
-                        onChange={() => handleProducts(ite)}
-                      />
-                    </FormGroup>
-                  ))}
+                  {categories?.second
+                    ?.filter((el) => el.parent.id === item.id)
+                    ?.map((ite) => (
+                      <Accordion
+                        sx={{
+                          "&.MuiPaper-root ": {
+                            backgroundColor: "transparent",
+                            boxShadow: "none",
+                          },
+                          "& .MuiButtonBase-root": {
+                            backgroundColor: "transparent",
+                            borderRadius: "8px",
+                            minHeight: "0!important",
+                            // m: "0!important",
+                          },
+                          "& .MuiAccordionSummary-content": {
+                            // m: "0!important",
+                            // p: "9px 15px",
+                          },
+
+                          "& .MuiTypography-body1": {
+                            fontSize: 15,
+                            fontWeight: 400,
+                            color: "#626262",
+                          },
+                        }}
+                      >
+                        <AccordionSummary
+                          expandIcon={<ExpandMoreIcon />}
+                          aria-controls="panel1-content"
+                          id="panel1-header"
+                        >
+                          {ite.name}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          {categories?.second
+                            ?.filter((el) => el.parent.id === ite.id)
+                            ?.map((el) => (
+                              <FormGroup>
+                                <FormControlLabel
+                                  control={
+                                    <Checkbox
+                                      checked={
+                                        !!params.find(
+                                          (item) => item.id === el.id
+                                        )
+                                      }
+                                    />
+                                  }
+                                  label={el.name}
+                                  value={el.id}
+                                  onChange={() => handleProducts(el)}
+                                />
+                              </FormGroup>
+                            ))}
+                        </AccordionDetails>
+                      </Accordion>
+                    ))}
                 </AccordionDetails>
               </Accordion>
             ))}
-      </Box> */
-        }
+        </Box>
       )}
     </Box>
   );

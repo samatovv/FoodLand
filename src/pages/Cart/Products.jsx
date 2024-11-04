@@ -18,7 +18,7 @@ const Products = ({ cart, setCart }) => {
   const md = useMediaQuery("(min-width:769px)");
   const [count, setCount] = useState(1);
   const deleteHandler = (id) => {
-    let filtered = cart.filter((item) => item.id !== id);
+    let filtered = cart.filter((item) => item?.id !== id);
     setCart(filtered);
     localStorage.setItem("cart", JSON.stringify(filtered));
   };

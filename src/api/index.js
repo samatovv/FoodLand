@@ -38,11 +38,14 @@ export const formData = axios.create({
 });
 
 export const Main = {
-  getBanners() {
-    return instance
-      .get(`banners?limit=10&page=1&sortBy=createdAt:desc`)
-      .then((response) => response.data)
-      .catch((error) => error.response);
+  getBanners(url) {
+    return (
+      instance
+        .get(url)
+        // .get(`banners?limit=10&page=1&sortBy=createdAt:desc`)
+        .then((response) => response.data)
+        .catch((error) => error.response)
+    );
   },
   getCategories() {
     return instance

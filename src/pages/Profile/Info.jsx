@@ -85,6 +85,7 @@ const Info = () => {
             <Typography
               className="sans"
               variant="subtitle1"
+              textAlign="center"
               mt={1.2}
               mb={1.2}
               fontWeight="600"
@@ -163,7 +164,7 @@ const Info = () => {
         >
           Редактировать фото
         </Button>
-        <Button onClick={() => setOut(true)}>
+        <Button sx={{ color: "var(--primary)" }} onClick={() => setOut(true)}>
           <img src={logout} style={{ marginRight: 8 }} alt="" />
           Выйти из аккаунта
         </Button>

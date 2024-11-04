@@ -53,8 +53,8 @@ export const mainSlice = createSlice({
   },
 });
 
-export const getBanners = () => (dispatch) => {
-  Main.getBanners().then((res) => dispatch(setBanners(res)));
+export const getBanners = (url) => (dispatch) => {
+  Main.getBanners(url).then((res) => dispatch(setBanners(res)));
 };
 
 export const getProductsRecomended = () => (dispatch) => {

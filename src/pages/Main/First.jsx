@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -15,6 +15,7 @@ import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { setSearch } from "../../redux/reducers/products";
 import Carousel from "../../shared/Carousel";
+import { getBanners } from "../../redux/reducers/mainSlice";
 
 const First = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,8 @@ const First = () => {
   const md = useMediaQuery("(min-width:769px)");
 
   const [value, setValue] = useState("");
+
+  useEffect(() => dispatch(getBanners(`/banners?type=main`)), []);
 
   return (
     <Box

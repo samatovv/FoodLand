@@ -135,7 +135,7 @@ const Table = () => {
               justifyContent="center"
               alignItems="center"
               rowGap={4}
-              height='100%'
+              height="100%"
             >
               <img src={empty} alt="" />
               <Typography variant="subtitle1" fontWeight={600} color="#AEAEAE">
@@ -228,12 +228,13 @@ const Table = () => {
                   orders?.results?.map((item, idx) => (
                     <tr key={idx}>
                       <td>{item?.customId}</td>
-                      {md && <td>{item?.products?.length}</td>}
                       <td>{item?.price}</td>
+                      {md && <td>{item?.products?.length}</td>}
                       <td>
                         <Chip
                           icon={
-                            item?.status === "new" ? (
+                            item?.status === "new" ||
+                            item.status === "in_progress" ? (
                               <InProcess />
                             ) : item.status === "canceled" ? (
                               <Cancelled />
@@ -249,7 +250,8 @@ const Table = () => {
                             minWidth: { xs: 104, md: 129 },
                             maxWidth: { xs: 104, md: 129 },
                             background:
-                              item?.status === "new"
+                              item?.status === "new" ||
+                              item.status === "in_progress"
                                 ? "#f3f4f6"
                                 : item.status === "canceled"
                                 ? "#FBDCDC"
@@ -260,7 +262,8 @@ const Table = () => {
                                 : item.status === "preorder" && "#DCF2FB",
                           }}
                           label={
-                            item?.status === "new"
+                            item?.status === "new" ||
+                            item.status === "in_progress"
                               ? "В процессе"
                               : item.status === "canceled"
                               ? "Отменен"

@@ -9,7 +9,7 @@ import {
 import React from "react";
 import { handleDrawer } from "../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import logo from "../assets/images/logo.svg";
+import logo from "../assets/images/logo3.svg";
 import auth from "../assets/images/auth.svg";
 import Close from "../assets/images/Close";
 import { NavLink } from "react-router-dom";
