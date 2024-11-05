@@ -43,8 +43,7 @@ const OurClients = () => {
   const md = useMediaQuery("(min-width:768px)");
   return (
     <Box component="section" backgroundColor="#FFF" p="62px 0">
-      <Container
-        maxWidth="lg"
+      <Box
         sx={{
           "& .clients__card ": {
             "& img": {
@@ -57,16 +56,16 @@ const OurClients = () => {
           },
         }}
       >
-        <Typography variant="h2" fontWeight="700" mb={5}>
-          Наши клиенты
+        <Typography variant="h2" textAlign="center" fontWeight="700" mb={5}>
+          Нам доверяют
         </Typography>
         <Box position="relative" mt={7}>
           <Swiper
             navigation={true}
             modules={[Navigation]}
-            // freeMode={true}
-            // loop={true}
-            centeredSlides={false}
+            freeMode={true}
+            loop={true}
+            // centeredSlides={true}
             // initialSlide={4}
             breakpoints={{
               0: {
@@ -86,21 +85,23 @@ const OurClients = () => {
               <SwiperSlide>
                 <Box
                   className="clients__card"
-                  p={{ xs: "12px", md: "24px" }}
+                  // p={{ xs: "12px", md: "24px" }}
                   display="flex"
                   justifyContent="center"
-                  flexDirection="column"
-                  alignItems="center"
-                  borderRadius="24px"
-                  border="1px solid #E6E6E6"
-                  sx={{
-                    transition: "box-shadow 0.3s ease",
-                    border: "1px solid #E6E6E6",
-                    "&:hover": {
-                      borderColor: "transparent",
-                      boxShadow: "0px 0px 4px 4px #00000010",
-                    },
-                  }}
+                  // flexDirection="column"
+                  // alignItems="center"
+                  // borderRadius="24px"
+                  // border="1px solid #E6E6E6"
+                  sx={
+                    {
+                      // transition: "box-shadow 0.3s ease",
+                      //  border: "1px solid #E6E6E6",
+                      // "&:hover": {
+                      //   borderColor: "transparent",
+                      //   boxShadow: "0px 0px 4px 4px #00000010",
+                      // },
+                    }
+                  }
                 >
                   <Box
                     component="img"
@@ -109,7 +110,7 @@ const OurClients = () => {
                     src={item.img}
                     alt=""
                   />
-                  <Typography
+                  {/* <Typography
                     mt={3}
                     mb={1.7}
                     textAlign="center"
@@ -123,7 +124,7 @@ const OurClients = () => {
                     }}
                   >
                     {item.name}
-                  </Typography>
+                  </Typography> */}
                   {/* <Typography
                   variant="subtitle1"
                   lineHeight="140%"
@@ -230,7 +231,7 @@ const OurClients = () => {
             </Grid2>
           ))}
         </Grid2> */}
-      </Container>
+      </Box>
     </Box>
   );
 };

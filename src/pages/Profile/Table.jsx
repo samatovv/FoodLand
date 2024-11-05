@@ -233,14 +233,13 @@ const Table = () => {
                       <td>
                         <Chip
                           icon={
-                            item?.status === "new" ||
                             item.status === "in_progress" ? (
                               <InProcess />
                             ) : item.status === "canceled" ? (
                               <Cancelled />
-                            ) : item.status === "completed" ? (
-                              <Check />
-                            ) : item.status === "accepted" ? (
+                            ) : item.status === "completed" ||
+                              item?.status === "new" ||
+                              item.status === "accepted" ? (
                               <Check />
                             ) : (
                               item.status === "preorder" && <InProcess />
@@ -250,8 +249,9 @@ const Table = () => {
                             minWidth: { xs: 104, md: 129 },
                             maxWidth: { xs: 104, md: 129 },
                             background:
-                              item?.status === "new" ||
-                              item.status === "in_progress"
+                              item?.status === "new"
+                                ? "#DCF2FB"
+                                : item.status === "in_progress"
                                 ? "#f3f4f6"
                                 : item.status === "canceled"
                                 ? "#FBDCDC"
@@ -262,8 +262,9 @@ const Table = () => {
                                 : item.status === "preorder" && "#DCF2FB",
                           }}
                           label={
-                            item?.status === "new" ||
-                            item.status === "in_progress"
+                            item?.status === "new"
+                              ? "Принят"
+                              : item.status === "in_progress"
                               ? "В процессе"
                               : item.status === "canceled"
                               ? "Отменен"

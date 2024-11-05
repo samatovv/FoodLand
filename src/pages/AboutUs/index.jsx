@@ -131,7 +131,7 @@ const AboutUs = () => {
               Продали
             </Typography>
             <Typography
-              fontSize={{ xs: 36, md: "64px" }}
+              fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
               500т
@@ -159,7 +159,7 @@ const AboutUs = () => {
               Приготовлено
             </Typography>
             <Typography
-              fontSize={{ xs: 36, md: "64px" }}
+              fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
               1млн
@@ -187,7 +187,7 @@ const AboutUs = () => {
               Более
             </Typography>
             <Typography
-              fontSize={{ xs: 36, md: "64px" }}
+              fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
               200
@@ -215,7 +215,7 @@ const AboutUs = () => {
               Доставок
             </Typography>
             <Typography
-              fontSize={{ xs: 36, md: "64px" }}
+              fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
               10 000
