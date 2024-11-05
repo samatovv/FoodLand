@@ -34,7 +34,10 @@ export const profileSlice = createSlice({
     },
 
     setOrders: (state, action) => {
-      state.orders = action.payload;
+      state.orders = {
+        ...action.payload,
+        results: action.payload.results.reverse(),
+      };
     },
 
     setOrder: (state, action) => {

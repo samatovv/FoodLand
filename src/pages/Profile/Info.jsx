@@ -40,7 +40,7 @@ const Info = () => {
     if (uploadedFile.status === 201) {
       dispatch(
         updateProfileData({
-          id: data.id,
+          id: data?.id,
           image: uploadedFile.data,
         })
       );

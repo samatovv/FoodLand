@@ -89,6 +89,9 @@ const Categories = ({
             "&.MuiPaper-root ": {
               backgroundColor: "transparent",
               boxShadow: "none",
+              "& *": {
+                fontFamily: "Open Sans",
+              },
             },
             "& .MuiButtonBase-root": {
               backgroundColor: "#F5F5F5",

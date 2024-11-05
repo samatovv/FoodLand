@@ -79,7 +79,7 @@ const Products = ({
     if (page === 1)
       dispatch(
         getProducts(
-          `/products/query?limit=12&page=1&search=${searchValue}&categoryIds=${params
+          `/products/query?limit=12&page=1&search=${encodeURI(searchValue)}&categoryIds=${params
             .filter((el) => el.name !== item)
             .map((item) => item.id)}`
         )
@@ -128,7 +128,7 @@ const Products = ({
     window.scrollTo(0, 0);
     dispatch(
       getProducts(
-        `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
+        `/products/query?limit=12&page=${page}&search=${encodeURI(searchValue)}&categoryIds=${
           params?.length ? `${params.map((item) => item.id)}` : ""
         }`
       )
@@ -195,7 +195,7 @@ const Products = ({
             if (page === 1)
               dispatch(
                 getProducts(
-                  `/products/query?limit=12&page=1&search=${decodeURI(
+                  `/products/query?limit=12&page=1&search=${encodeURI(
                     searchValue
                   )}&categoryIds=${params.map((item) => item.id)}`
                 )
