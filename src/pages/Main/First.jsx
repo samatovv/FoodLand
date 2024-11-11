@@ -98,7 +98,7 @@ const First = () => {
             txt="Заказать звонок"
           />
         </Box>
-        {!md && (
+        {/* {!md && (
           <Box
             mt={5}
             justifyContent="center"
@@ -116,7 +116,7 @@ const First = () => {
               +50 компаний
             </Typography>
           </Box>
-        )}
+        )} */}
       </Container>
       {/* <Carousel /> */}
     </Box>

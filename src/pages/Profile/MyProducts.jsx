@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/reducers/products";
-import { Grid2, Typography } from "@mui/material";
+import { Grid2, Typography, useMediaQuery } from "@mui/material";
 import Card from "../../components/Card";
 import PaginationLarge from "../../components/Pagination";
 
 const MyProducts = () => {
   const dispatch = useDispatch();
-
+  const md = useMediaQuery("(min-width:769px)");
   const products = useSelector((state) => state.products.products);
 
   const [page, setPage] = useState(1);
@@ -17,7 +17,7 @@ const MyProducts = () => {
   };
 
   useEffect(() => {
-    dispatch(getProducts(`products?limit=5&page=${page}`));
+    dispatch(getProducts(`products?limit=${md ? 5 : 6}&page=${page}`));
   }, [page]);
 
   return (

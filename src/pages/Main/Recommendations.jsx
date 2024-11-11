@@ -11,7 +11,7 @@ import Card from "../../components/Card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationLarge from "../../components/Pagination";
-import { getProducts } from "../../redux/reducers/products";
+import { getProducts, getRecomendations } from "../../redux/reducers/products";
 
 const Recommendations = () => {
   const dispatch = useDispatch();
@@ -20,10 +20,10 @@ const Recommendations = () => {
 
   const [page, setPage] = useState(1);
 
-  const products = useSelector((state) => state.products.products);
+  const products = useSelector((state) => state.products.recomendations);
 
   useEffect(() => {
-    dispatch(getProducts(`recommendations?limit=4&page=${page}`));
+    dispatch(getRecomendations(`recommendations?limit=4&page=${page}`));
   }, [page]);
 
   const handleChange = (event, value) => {

@@ -131,6 +131,8 @@ const AboutUs = () => {
               Продали
             </Typography>
             <Typography
+             mt={1}
+             mb={2}
               fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
