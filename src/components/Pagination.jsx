@@ -22,6 +22,10 @@ const PaginationLarge = ({ page, handleChange, products }) => {
         mb: 5,
         display: "flex",
         justifyContent: "center",
+        color: "#FFF",
+        "& .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected": {
+          color: "#FFF",
+        },
       }}
       color="primary"
     />

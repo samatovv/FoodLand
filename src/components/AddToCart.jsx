@@ -5,11 +5,13 @@ import ButtonMore from "./ButtonMore";
 import InCart from "../assets/images/InCart";
 import { useAuth } from "../shared/ProtectedRoutes";
 import { handleAuthDialog } from "../redux/reducers/mainSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const AddToCart = ({ details, count, id, card }) => {
   const dispatch = useDispatch();
   const isAuth = useAuth();
+
+  const data = useSelector((state) => state.profile.data);
 
   const [inCart, setInCart] = useState(null);
 
@@ -19,6 +21,7 @@ const AddToCart = ({ details, count, id, card }) => {
     if (inCart) {
       setInCart(false);
       let filtered = cart.filter((item) => item.id !== id);
+
       if (!newItem) {
         localStorage.setItem("cart", JSON.stringify(filtered));
       } else {
@@ -26,12 +29,12 @@ const AddToCart = ({ details, count, id, card }) => {
           "cart",
           JSON.stringify([
             ...filtered,
-            {
-              ...newItem,
-              count: newItem?.count - count,
-              sum: details.price * (newItem?.count - count),
-              weight: newItem?.weight - details.weight * count,
-            },
+            // {
+            //   ...newItem,
+            //   count: newItem?.count - count,
+            //   sum: details.price * (newItem?.count - count),
+            //   weight: newItem?.weight - details.weight * count,
+            // },
           ])
         );
       }
@@ -45,13 +48,22 @@ const AddToCart = ({ details, count, id, card }) => {
             JSON.stringify([
               ...JSON.parse(localStorage.getItem("cart")),
               {
-                id: details._id,
+                id: details.id ? details.id : details._id,
                 count: count,
                 name: details.name,
                 img: !!details.images ? details.images[0]?.url : null,
                 description: details.description,
-                sum: details.price * count,
-                price: details.price,
+                sum:
+                  details?.prices?.find((item) =>
+                    item.price._id
+                      ? item.price._id
+                      : item.price.id === data?.price?.id
+                  )?.value * count,
+                price: details?.prices?.find((item) =>
+                  item.price._id
+                    ? item.price._id
+                    : item.price.id === data?.price?.id
+                )?.value,
                 idx: details.customId,
                 weight: details.weight * count,
               },
@@ -66,8 +78,14 @@ const AddToCart = ({ details, count, id, card }) => {
               {
                 ...newItem,
                 count: newItem?.count + count,
-                sum: details.price * (newItem?.count + count),
-                weight: newItem?.weight + details.weight * count,
+                sum:
+                  details?.prices?.find((item) =>
+                    item.price._id
+                      ? item.price._id
+                      : (item.price.id === data?.price?.id) === data?.price?.id
+                  )?.value *
+                  (newItem?.count + count),
+                weight: (newItem?.weight + details.weight) * count,
               },
             ])
           );
@@ -82,20 +100,20 @@ const AddToCart = ({ details, count, id, card }) => {
         <Button
           onClick={clickHandler}
           fullWidth
-          disabled={inCart}
+          // disabled={inCart}
           sx={{
+            height: 50,
             position: "relative",
-            "&.Mui-disabled": {
-              background: "transparent",
-              color: "#000",
-              border: "1px solid #F0F0F0",
-            },
+            // "&.Mui-disabled": {
+            //   background: "transparent",
+            //   color: "#000",
+            //   border: "1px solid #F0F0F0",
+            // },
           }}
           variant="contained"
           color="primary"
-          className="button_incart"
         >
-          <Cart />
+          {!inCart && <Cart />}
           <span className={inCart ? "cart_txt in_cart_txt" : "cart_txt"}>
             {inCart ? "В корзине!" : "В корзину"}
           </span>

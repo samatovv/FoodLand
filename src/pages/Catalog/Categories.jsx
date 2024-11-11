@@ -34,7 +34,7 @@ const Categories = ({
   const allCategories = useSelector((state) => state.main.categories);
 
   useEffect(() => {
-    dispatch(getCategories());
+    if (!allCategories.length) dispatch(getCategories());
   }, []);
 
   useEffect(() => {
@@ -83,7 +83,7 @@ const Categories = ({
       {md ? (
         <Accordion
           expanded={expanded}
-          // onChange={() => setExpanded(!expanded)}
+          onChange={() => setExpanded(!expanded)}
           className="sans"
           sx={{
             "&.MuiPaper-root ": {

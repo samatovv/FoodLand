@@ -2,7 +2,7 @@ import { Box, Grid2, Typography } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/reducers/products";
+import { getProducts, getRecomendations } from "../../redux/reducers/products";
 import PaginationLarge from "../../components/Pagination";
 
 const Recomendations = ({ details, id, setPage, page }) => {
@@ -26,7 +26,7 @@ const Recomendations = ({ details, id, setPage, page }) => {
   useEffect(() => {
     if (details?.id)
       dispatch(
-        getProducts(
+        getRecomendations(
           `products?limit=5&category=${details?.category}&page=${page}`
         )
       );

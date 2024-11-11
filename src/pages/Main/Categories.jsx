@@ -1,18 +1,33 @@
 import { Box, Container, Grid2, Typography } from "@mui/material";
 import React, { useEffect } from "react";
-import img from "../../assets/images/category-1.webp";
-import img2 from "../../assets/images/category-2.webp";
-import img3 from "../../assets/images/category-3.webp";
-import img4 from "../../assets/images/category-4.webp";
+import img from "../../assets/images/category-1.png";
+import img2 from "../../assets/images/category-2.png";
+import img3 from "../../assets/images/category-3.png";
+import img4 from "../../assets/images/category-4.png";
 import ButtonMore from "../../components/ButtonMore";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategories } from "../../redux/reducers/mainSlice";
 
+const categories = [
+  {
+    title: "Шоколад и какао продукты",
+    img: img,
+    id: "670cfc0e8d01bf78e1ad9a6c",
+  },
+  { title: "Молочная продукция", img: img2, id: "670cfc198d01bf78e1ad9b16" },
+  { title: "Ингредиенты", img: img3, id: "670cfc088d01bf78e1ad9a53" },
+  {
+    title: "Покрытия и наполнители",
+    img: img4,
+    id: "670cfc0a8d01bf78e1ad9a5c",
+  },
+];
+
 const Categories = () => {
   const dispatch = useDispatch();
 
-  const categories = useSelector((state) => state.main.categories);
+  // const categories = useSelector((state) => state.main.categories);
 
   useEffect(() => dispatch(getCategories()), []);
   return (
@@ -64,7 +79,7 @@ const Categories = () => {
                       minHeight: { xs: 250, md: "396px" },
                       borderRadius: "16px",
                     }}
-                    src={item?.image?.url}
+                    src={item?.img}
                     alt=""
                   />
                   <Box className="category__more" width="80%">
@@ -74,14 +89,14 @@ const Categories = () => {
                       maxWidth={219}
                       fontWeight="bold"
                     >
-                      {item.name}
+                      {item.title}
                     </Typography>
                     <Link to={`/catalog/?category=${item.id}`}>
                       <ButtonMore
                         txt="Подробнее "
                         sx={{
                           width: "100%",
-                          p: "4px",
+                          p: { xs: "4px", md: "4px 4px 4px 16px;" },
                           "& span": { color: "#000" },
                         }}
                       />

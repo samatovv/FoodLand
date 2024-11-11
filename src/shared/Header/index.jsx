@@ -131,7 +131,7 @@ const Header = () => {
                 strokeWidth="1.29807"
                 strokeLinecap="round"
               />
-              {isAuth && (
+              {JSON.parse(localStorage.getItem("cart"))?.length && (
                 <ellipse
                   cx="27.4402"
                   cy="17.258"

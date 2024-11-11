@@ -24,6 +24,7 @@ const Details = () => {
 
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
+  const data = useSelector((state) => state.profile.data);
   const images = Array.isArray(details.images) && details.images;
 
   const [count, setCount] = useState(1);
@@ -179,12 +180,17 @@ const Details = () => {
                       fontSize={{ xs: 40, md: 48 }}
                       fontWeight="600"
                     >
-                      {details.price}c
+                      {
+                        details?.prices?.find(
+                          (item) => item.price.id === data?.price?.id
+                        )?.value
+                      }
+                      c
                     </Typography>
                     <AddOrDelete
                       count={count}
                       setCount={setCount}
-                      id={details.id}
+                      id={id}
                       price={details.price}
                       width={md ? "40%" : 121}
                       padding="8px 13px"

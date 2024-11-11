@@ -240,15 +240,18 @@ const Footer = () => {
                 alignItems="center"
                 mt={{ xs: 2.5, md: 7 }}
               >
-                <IconButton target="_blank" href="https://instagram.com">
+                <IconButton
+                  target="_blank"
+                  href="https://www.instagram.com/foodland_ingredients/"
+                >
                   <img src={instagram} alt="" />
                 </IconButton>
-                <IconButton target="_blank" href="https://facebook.com">
+                {/* <IconButton target="_blank" href="https://facebook.com">
                   <img src={facebook} alt="" />
                 </IconButton>
                 <IconButton target="_blank" href="https://twitter.com">
                   <img src={twitter} alt="" />
-                </IconButton>
+                </IconButton> */}
               </Box>
             </Box>
           </Grid2>

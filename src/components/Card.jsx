@@ -4,8 +4,11 @@ import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
 import empty from "../assets/images/emptyCart.svg";
+import { useSelector } from "react-redux";
 
 const Card = ({ item, search, width }) => {
+  const data = useSelector((state) => state.profile.data);
+
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
   const id = item?._id;
@@ -43,7 +46,7 @@ const Card = ({ item, search, width }) => {
           alt=""
         />
       </Link>
-      <Link to={`/catalog/details/${details?.id}`}>
+      <Link to={`/catalog/details/${details?.id ? details?.id : details?._id}`}>
         <Typography
           color="#000"
           mt={2}
@@ -60,7 +63,8 @@ const Card = ({ item, search, width }) => {
         </Typography>
       </Link>
       <Typography mt={0.5} mb={1} color="#797979" variant="body2">
-        Вес : {details?.weight} кг
+        Вес : {details?.weight}
+        {details?.unitCode}
       </Typography>
       <Box
         display="flex"
@@ -69,13 +73,26 @@ const Card = ({ item, search, width }) => {
         justifyContent="space-between"
       >
         <Typography fontWeight={700} variant="h5">
-          {details?.price} c
+          {
+            details?.prices?.find((item) =>
+              item.price._id
+                ? item.price._id
+                : item.price.id === data?.price?.id
+            )?.value
+          }{" "}
+          c
         </Typography>
         <AddOrDelete
           count={count}
           setCount={setCount}
           id={item?.id}
-          price={item.price}
+          price={
+            details?.prices?.find((item) =>
+              item.price._id
+            ? item.price._id
+            : item.price.id === data?.price?.id === data?.price?.id
+            )?.value
+          }
         />
         {/* <Box
           p="4px"

@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Auth from "./pages/Auth";
 import { LinearProgress } from "@mui/material";
 import { getProfileData, setProfile } from "./redux/reducers/profile";
+import { setDetails } from "./redux/reducers/products";
 
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
 
   const loading = useSelector((state) => state.main.loading);
   const data = useSelector((state) => state.profile.data);
+  const details = useSelector((state) => state.products.details);
 
   useEffect(() => {
     if (!localStorage.getItem("cart")) localStorage.setItem("cart", "[]");
@@ -32,6 +34,7 @@ function App() {
       dispatch(setProfile(null));
       sessionStorage.clear();
     }
+    if (details) dispatch(setDetails([]));
   }, [location.pathname]);
 
   return (
