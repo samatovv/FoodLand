@@ -7,6 +7,7 @@ const initialState = {
   auth: false,
   loading: false,
   banners: [],
+  banner: [],
   recomendations: [],
   categories: [],
   news: [],
@@ -34,6 +35,9 @@ export const mainSlice = createSlice({
     setBanners: (state, action) => {
       state.banners = action.payload;
     },
+    setBanner: (state, action) => {
+      state.banner = action.payload;
+    },
 
     setProductsRecomended: (state, action) => {
       state.recomendations = action.payload;
@@ -55,6 +59,10 @@ export const mainSlice = createSlice({
 
 export const getBanners = (url) => (dispatch) => {
   Main.getBanners(url).then((res) => dispatch(setBanners(res)));
+};
+
+export const getBanner = (url) => (dispatch) => {
+  Main.getBanners(url).then((res) => dispatch(setBanner(res)));
 };
 
 export const getProductsRecomended = () => (dispatch) => {
@@ -81,6 +89,7 @@ export const {
   setCategories,
   setNews,
   setBanners,
+  setBanner,
   setNewsDetails,
   handleFilter,
   handleAuthDialog,

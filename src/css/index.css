@@ -7,9 +7,9 @@
   margin: 0;
   color: inherit;
 }
-.first {
+/* .first {
   background: url(../assets/images/main.png) center/cover no-repeat;
-}
+} */
 
 :root {
   --primary: #93a27c;

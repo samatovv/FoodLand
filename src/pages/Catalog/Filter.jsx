@@ -27,11 +27,12 @@ const Filter = ({
         "& .MuiDrawer-paper": {
           p: "8px 8px 24px 15px",
           width: "80vw",
-          height: "88vh",
+          height: "100vh",
+          pt:'58px'
         },
       }}
       open={filter}
-      anchor="bottom"
+      anchor="left"
       onClose={() => dispatch(handleFilter(false))}
     >
       <Box

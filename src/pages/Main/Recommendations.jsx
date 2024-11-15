@@ -13,7 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import PaginationLarge from "../../components/Pagination";
 import { getProducts, getRecomendations } from "../../redux/reducers/products";
 
-const Recommendations = () => {
+const Recommendations = ({ setCart }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:768px)");
   const sm = useMediaQuery("(min-width:426px)");
@@ -23,7 +23,9 @@ const Recommendations = () => {
   const products = useSelector((state) => state.products.recomendations);
 
   useEffect(() => {
-    dispatch(getRecomendations(`recommendations?limit=4&page=${page}`));
+    dispatch(
+      getRecomendations(`recommendations?limit=${!sm ? 21 : 4}&page=${page}`)
+    );
   }, [page]);
 
   const handleChange = (event, value) => {
@@ -34,6 +36,7 @@ const Recommendations = () => {
     <Box
       component="section"
       p={{ xs: "56px 0", md: "76px 0" }}
+      overflow="scroll"
       backgroundColor="#f4f4f4"
     >
       <Container maxWidth="lg">
@@ -61,19 +64,25 @@ const Recommendations = () => {
             </Link>
           )}
         </Box>
-        <Grid2 container spacing={{ xs: 2, lg: 5 }}>
+        <Grid2
+          sx={{ width: { xs: "3000px", md: "unset" }, overflowX: "scroll" }}
+          container
+          spacing={{ xs: 2, lg: 5 }}
+        >
           {Array.isArray(products?.results) &&
             products?.results?.map((item, idx) => (
-              <Grid2 size={{ xs: 6, md: 3 }} key={idx}>
-                <Card search item={item} />
+              <Grid2 size={{ xs: 1, md: 3 }} key={idx}>
+                <Card setCart={setCart} search item={item} />
               </Grid2>
             ))}
         </Grid2>
-        <PaginationLarge
-          page={page}
-          handleChange={handleChange}
-          products={products}
-        />
+        {sm && (
+          <PaginationLarge
+            page={page}
+            handleChange={handleChange}
+            products={products}
+          />
+        )}
       </Container>
     </Box>
   );

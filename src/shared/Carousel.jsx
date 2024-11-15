@@ -12,7 +12,7 @@ const Carousel = () => {
 
   const banners = useSelector((state) => state.main.banners);
 
-  useEffect(() => dispatch(getBanners()), []);
+  useEffect(() => dispatch(getBanners(`/banners?type=secondary`)), []);
 
   return (
     <Box
@@ -51,32 +51,18 @@ const Carousel = () => {
           },
         }}
       >
-        {Array.isArray(banners?.results)
-          ? banners?.results?.map((item, idx) => (
-              <>
-                <SwiperSlide key={idx}>
-                  <Box
-                    component="img"
-                    width={{ xs: "100%", md: 428, lg: 428 }}
-                    height={280}
-                    sx={{ objectFit: "cover!important" }}
-                    src={item.imageUrl ? item.imageUrl : emptyImg}
-                    alt=""
-                  />
-                </SwiperSlide>
-              
-              </>
-            ))
-          : Array.from(Array(10).keys()).map((item, idx) => (
-              <SwiperSlide
-                key={idx}
-                style={{
-                  height: 280,
-                }}
-              >
-                <Skeleton variant="rect" width={428} height="100%" />
-              </SwiperSlide>
-            ))}
+        {banners?.results?.map((item, idx) => (
+          <SwiperSlide key={idx}>
+            <Box
+              component="img"
+              width={{ xs: "100%", md: 428, lg: 428 }}
+              height={280}
+              sx={{ objectFit: "cover!important" }}
+              src={item.imageUrl ? item.imageUrl : emptyImg}
+              alt=""
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </Box>
   );

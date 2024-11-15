@@ -5,7 +5,7 @@ import { Grid2, Typography, useMediaQuery } from "@mui/material";
 import Card from "../../components/Card";
 import PaginationLarge from "../../components/Pagination";
 
-const MyProducts = () => {
+const MyProducts = ({ setCart }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:769px)");
   const products = useSelector((state) => state.products.products);
@@ -33,7 +33,7 @@ const MyProducts = () => {
               size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}
               key={idx}
             >
-              <Card item={item} />
+              <Card setCart={setCart} item={item} />
             </Grid2>
           ))}
       </Grid2>

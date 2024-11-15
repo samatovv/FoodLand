@@ -28,9 +28,10 @@ const Table = () => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:769px)");
 
-  const id = useSelector((state) => state.profile.data.id);
+  const id = useSelector((state) => state.profile.data?.id);
   const orders = useSelector((state) => state.profile.orders);
   const createdOrder = useSelector((state) => state.profile.createdOrder);
+  const data = useSelector((state) => state.profile.data);
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -59,7 +60,7 @@ const Table = () => {
       return;
     }
 
-    if (createdOrder.status === 200) {
+    if (createdOrder?.status === 200) {
       setOpen(true);
     }
 
@@ -233,16 +234,16 @@ const Table = () => {
                       <td>
                         <Chip
                           icon={
-                            item.status === "in_progress" ? (
+                            item?.status === "in_progress" ? (
                               <InProcess />
-                            ) : item.status === "canceled" ? (
+                            ) : item?.status === "canceled" ? (
                               <Cancelled />
-                            ) : item.status === "completed" ||
+                            ) : item?.status === "completed" ||
                               item?.status === "new" ||
-                              item.status === "accepted" ? (
+                              item?.status === "accepted" ? (
                               <Check />
                             ) : (
-                              item.status === "preorder" && <InProcess />
+                              item?.status === "preorder" && <InProcess />
                             )
                           }
                           sx={{
@@ -251,28 +252,28 @@ const Table = () => {
                             background:
                               item?.status === "new"
                                 ? "#DCF2FB"
-                                : item.status === "in_progress"
+                                : item?.status === "in_progress"
                                 ? "#f3f4f6"
-                                : item.status === "canceled"
+                                : item?.status === "canceled"
                                 ? "#FBDCDC"
-                                : item.status === "completed"
+                                : item?.status === "completed"
                                 ? "#EBFBDC"
-                                : item.status === "accepted"
+                                : item?.status === "accepted"
                                 ? "#DCF2FB"
-                                : item.status === "preorder" && "#DCF2FB",
+                                : item?.status === "preorder" && "#DCF2FB",
                           }}
                           label={
                             item?.status === "new"
                               ? "Принят"
-                              : item.status === "in_progress"
+                              : item?.status === "in_progress"
                               ? "В процессе"
-                              : item.status === "canceled"
+                              : item?.status === "canceled"
                               ? "Отменен"
-                              : item.status === "completed"
+                              : item?.status === "completed"
                               ? "Готово"
-                              : item.status === "accepted"
+                              : item?.status === "accepted"
                               ? "Принят"
-                              : item.status === "preorder" && "Предзаказ"
+                              : item?.status === "preorder" && "Предзаказ"
                           }
                         />
                       </td>
@@ -300,9 +301,16 @@ const Table = () => {
                                         description: item.product.description,
                                         name: item.product.name,
                                         img: item?.product?.images[0]?.url,
-                                        sum: item.product.price * item.quantity,
-                                        price: item.product.price,
-                                        id: item.product.id,
+                                        sum:
+                                          item?.product?.prices?.find(
+                                            (item) =>
+                                              item.price.id === data?.price?.id
+                                          )?.value * item.quantity,
+                                        price: item?.product?.prices?.find(
+                                          (item) =>
+                                            item.price.id === data?.price?.id
+                                        )?.value,
+                                        id: item.product?.id,
                                         idx: item.product.customId,
                                       }))
                                     )
@@ -319,7 +327,7 @@ const Table = () => {
                           <img
                             onClick={() => {
                               setOpenDrawer(true);
-                              dispatch(getOrder(item.id));
+                              dispatch(getOrder(item?.id));
                             }}
                             src={more}
                             width={25}

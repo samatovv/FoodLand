@@ -14,7 +14,7 @@ import { TransitionGroup } from "react-transition-group";
 import empty from "../../assets/images/empty.svg";
 import emptyImg from "../../assets/images/emptyCart.svg";
 
-const Products = ({ cart, setCart }) => {
+const Products = ({ cart, setCart, setCartGlobal }) => {
   const md = useMediaQuery("(min-width:769px)");
   const [count, setCount] = useState(1);
   const deleteHandler = (id) => {
@@ -58,6 +58,7 @@ const Products = ({ cart, setCart }) => {
           onClick={() => {
             localStorage.setItem("cart", "[]");
             setCart(null);
+            setCartGlobal(false);
           }}
           sx={{
             cursor: !cart?.length ? "not-allowed" : "pointer",
@@ -123,7 +124,7 @@ const Products = ({ cart, setCart }) => {
       ) : (
         <TransitionGroup>
           {cart
-            .sort((a, b) => a.idx - b.idx)
+            .sort((a, b) => a?.idx - b?.idx)
             ?.map((item, idx) => (
               <Collapse key={idx}>
                 <Product

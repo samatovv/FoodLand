@@ -67,7 +67,7 @@ const Auth = () => {
 
     setOpen(true);
 
-    if (loginData.status == 200) {
+    if (loginData?.status == 200) {
       if (formik.values.rememberMe) {
         cookie.set("foodland_token", loginData.data.tokens.access.token, {
           expires: loginData.data.tokens.access.expires,

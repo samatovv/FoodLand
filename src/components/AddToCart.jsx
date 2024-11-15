@@ -7,7 +7,7 @@ import { useAuth } from "../shared/ProtectedRoutes";
 import { handleAuthDialog } from "../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const AddToCart = ({ details, count, id, card }) => {
+const AddToCart = ({ details, count, id, card, setCart }) => {
   const dispatch = useDispatch();
   const isAuth = useAuth();
 
@@ -17,10 +17,11 @@ const AddToCart = ({ details, count, id, card }) => {
 
   const clickHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
-    let newItem = cart?.find((item) => item.id === id);
+    let newItem = cart?.find((item) => item?.id === id);
+    setCart(true);
     if (inCart) {
       setInCart(false);
-      let filtered = cart.filter((item) => item.id !== id);
+      let filtered = cart.filter((item) => item?.id !== id);
 
       if (!newItem) {
         localStorage.setItem("cart", JSON.stringify(filtered));
@@ -48,7 +49,7 @@ const AddToCart = ({ details, count, id, card }) => {
             JSON.stringify([
               ...JSON.parse(localStorage.getItem("cart")),
               {
-                id: details.id ? details.id : details._id,
+                id: details?.id ? details?.id : details._id,
                 count: count,
                 name: details.name,
                 img: !!details.images ? details.images[0]?.url : null,
@@ -57,12 +58,12 @@ const AddToCart = ({ details, count, id, card }) => {
                   details?.prices?.find((item) =>
                     item.price._id
                       ? item.price._id
-                      : item.price.id === data?.price?.id
+                      : item.price?.id === data?.price?.id
                   )?.value * count,
                 price: details?.prices?.find((item) =>
                   item.price._id
                     ? item.price._id
-                    : item.price.id === data?.price?.id
+                    : item.price?.id === data?.price?.id
                 )?.value,
                 idx: details.customId,
                 weight: details.weight * count,
@@ -70,7 +71,7 @@ const AddToCart = ({ details, count, id, card }) => {
             ])
           );
         } else {
-          let updatedCart = cart?.filter((item) => item.id !== id);
+          let updatedCart = cart?.filter((item) => item?.id !== id);
           localStorage.setItem(
             "cart",
             JSON.stringify([
@@ -82,7 +83,7 @@ const AddToCart = ({ details, count, id, card }) => {
                   details?.prices?.find((item) =>
                     item.price._id
                       ? item.price._id
-                      : (item.price.id === data?.price?.id) === data?.price?.id
+                      : (item.price?.id === data?.price?.id) === data?.price?.id
                   )?.value *
                   (newItem?.count + count),
                 weight: (newItem?.weight + details.weight) * count,

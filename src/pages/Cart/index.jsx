@@ -14,7 +14,7 @@ import * as yup from "yup";
 import dayjs from "dayjs";
 import { handleLoading } from "../../redux/reducers/mainSlice";
 
-const Cart = () => {
+const Cart = ({ setCartGlobal }) => {
   const dispatch = useDispatch();
 
   const [cart, setCart] = useState([]);
@@ -25,6 +25,7 @@ const Cart = () => {
 
   const firstUpdate = useRef(true);
   const firstUpdate2 = useRef(true);
+  const firstUpdate3 = useRef(true);
 
   const createdOrder = useSelector((state) => state.profile.createdOrder);
 
@@ -47,7 +48,7 @@ const Cart = () => {
     },
     onSubmit: (values) => {
       let products = cart.map((item) => ({
-        product: item.id,
+        product: item?.id,
         quantity: item.count,
       }));
 
@@ -69,7 +70,7 @@ const Cart = () => {
           deliveryType: values.deliveryType,
           deliveryAddress: values.deliveryAddress,
           deliveryDate: values.deliveryDate,
-          status: values.status,
+          status: values?.status,
           comment: values.comment,
           weight: totalWeight,
           price: totalPrice,
@@ -85,13 +86,22 @@ const Cart = () => {
   }, []);
 
   useLayoutEffect(() => {
+    if (firstUpdate3.current) {
+      firstUpdate3.current = false;
+      return;
+    }
+
+    if (!cart?.length) setCartGlobal(false);
+  }, [cart]);
+
+  useLayoutEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
     dispatch(handleLoading(false));
 
-    if (createdOrder.status == 200) {
+    if (createdOrder?.status == 200) {
       setOpen(true);
       if (formik.values.deliveryType === "pickup") {
         formik.resetForm();
@@ -126,7 +136,11 @@ const Cart = () => {
       <Container maxWidth="lg" sx={{ mt: { xs: 0, md: 4 } }}>
         <Grid2 container pb="24px" spacing={{ xs: 2, lg: 2 }}>
           <Grid2 size={{ xs: 12, md: 8, lg: 7.5 }}>
-            <Products cart={cart} setCart={setCart} />
+            <Products
+              setCartGlobal={setCartGlobal}
+              cart={cart}
+              setCart={setCart}
+            />
           </Grid2>
           <Grid2 size={{ xs: 12, md: 4, lg: 4.5 }}>
             {md ? (

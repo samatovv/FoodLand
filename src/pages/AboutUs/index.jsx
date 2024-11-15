@@ -158,7 +158,7 @@ const AboutUs = () => {
               pb={1}
               borderBottom="1px solid var(--primary)"
             >
-              Приготовлено
+              Приготовили
             </Typography>
             <Typography
               fontSize={{ xs: 36, md: 48 }}
@@ -173,7 +173,7 @@ const AboutUs = () => {
               maxWidth={257}
               className="sans"
             >
-              С использыванием наших сыров было приготовлено более 1 млн суши.
+              С использованием наших сыров было приготовлено более 1 млн суши.
             </Typography>
           </Grid2>
           <Grid2 item size={{ xs: 6, md: 4 }}>

@@ -6,7 +6,7 @@ import Table from "./Table";
 import MyProducts from "./MyProducts";
 import Info from "./Info";
 
-const Profile = () => {
+const Profile = ({ setCart }) => {
   const breadcrumbs = [
     <Link key="1" to="/">
       <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
@@ -43,7 +43,7 @@ const Profile = () => {
             <Table />
           </Grid2>
         </Grid2>
-        <MyProducts />
+        <MyProducts setCart={setCart} />
       </Container>
     </>
   );

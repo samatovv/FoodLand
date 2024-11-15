@@ -10,7 +10,7 @@ const NewsCard = ({ item, idx }) => {
   };
 
   return (
-    <Link to={`/news/${item.id}`}>
+    <Link to={`/news/${item?.id}`}>
       <Box
         key={idx}
         className="news__card"

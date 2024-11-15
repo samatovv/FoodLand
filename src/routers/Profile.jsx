@@ -6,18 +6,18 @@ import Dashboard from "../pages/Profile";
 import Preview from "../pages/Preview";
 import { Box } from "@mui/material";
 
-const Profile = () => {
+const Profile = ({ cart, setCart }) => {
   return (
-    <div>
-      <Header />
-      <Box component="main">
+    <>
+      <Header cart={cart} setCart={setCart} />
+      <Box component="main" pt="66px">
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/" element={<Dashboard setCart={setCart} />} />
+          <Route path="/cart" element={<Cart setCartGlobal={setCart} />} />
         </Routes>
       </Box>
       <Preview />
-    </div>
+    </>
   );
 };
 

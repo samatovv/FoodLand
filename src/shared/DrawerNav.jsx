@@ -107,7 +107,7 @@ const DrawerNav = () => {
               </NavLink>
             </ListItemButton>
             {/* <ListItemButton>
-              {profile?.id ? (
+              {profile??.id ? (
                 <NavLink
                   style={{
                     display: "flex",
