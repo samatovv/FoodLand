@@ -20,7 +20,7 @@ export const profileSlice = createSlice({
 
     setLoginData: (state, action) => {
       state.loginData = {
-        status: action.payload.status,
+        status: action.payload?.status,
         data: action.payload.data,
       };
     },

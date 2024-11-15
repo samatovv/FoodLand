@@ -28,6 +28,11 @@ const Footer = () => {
       component="footer"
       pt={{ xs: 2, md: "60px" }}
       backgroundColor="#F4F4F4"
+      sx={{
+        "& *": {
+          fontFamily: "Open Sans!important",
+        },
+      }}
     >
       <Container maxWidth="lg">
         <Grid2 container mb={{ xs: "41px", md: 7 }}>

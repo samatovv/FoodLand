@@ -16,7 +16,7 @@ import { useDispatch } from "react-redux";
 import { handleAuthDialog } from "../../redux/reducers/mainSlice";
 import { useAuth } from "../../shared/ProtectedRoutes";
 
-const Catalog = () => {
+const Catalog = ({ setCart }) => {
   const dispatch = useDispatch();
   const isAuth = useAuth();
   const md = useMediaQuery("(min-width:900px)");
@@ -77,6 +77,7 @@ const Catalog = () => {
           )}
           <Grid2 item size={{ xs: 12, md: 9 }}>
             <Products
+            setCart={setCart}
               page={page}
               setPage={setPage}
               searchValue={searchValue}

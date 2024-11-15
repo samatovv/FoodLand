@@ -29,6 +29,7 @@ import Fuse from "fuse.js";
 import PaginationLarge from "../../components/Pagination";
 
 const Products = ({
+  setCart,
   chip,
   setChip,
   params,
@@ -136,7 +137,7 @@ const Products = ({
     if (page > 1) setPage(1);
     if (!searchValue && page === 1) {
       console.log(searchValue);
-      
+
       dispatch(
         getProducts(
           `/products/query?limit=12&page=1&search=${encodeURI(
@@ -390,7 +391,7 @@ const Products = ({
                   size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}
                   key={idx}
                 >
-                  <Card item={item} />
+                  <Card setCart={setCart} item={item} />
                 </Grid2>
               ))}
           </Grid2>

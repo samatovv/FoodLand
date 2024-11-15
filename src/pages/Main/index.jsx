@@ -8,7 +8,7 @@ import Recommendations from "./Recommendations";
 import OurClients from "./OurClients";
 import News from "./News";
 
-const Main = () => {
+const Main = ({setCart}) => {
   return (
     <>
       <First />
@@ -16,7 +16,7 @@ const Main = () => {
       <Categories />
       <WhyChooseUs />
       <Partners />
-      <Recommendations />
+      <Recommendations setCart={setCart} />
       <OurClients />
       <News />
     </>

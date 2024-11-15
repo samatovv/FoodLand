@@ -50,9 +50,9 @@ const Categories = ({
   }, [allCategories]);
 
   const handleProducts = (item) => {
-    if (params.find((el) => el.id === item.id)) {
+    if (params.find((el) => el?.id === item?.id)) {
       const filtered = chip.filter((el) => el !== item.name);
-      const filteredParams = params.filter((el) => el.id !== item.id);
+      const filteredParams = params.filter((el) => el?.id !== item?.id);
       setChip([...filtered]);
       setParams([...filteredParams]);
       if (page > 1) setPage(1);
@@ -60,19 +60,19 @@ const Categories = ({
         dispatch(
           getProducts(
             `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${filteredParams.map(
-              (item) => item.id
+              (item) => item?.id
             )}`
           )
         );
     } else {
       if (page > 1) setPage(1);
       setChip([...chip, item.name]);
-      setParams([...params, { id: item.id, name: item.name }]);
+      setParams([...params, { id: item?.id, name: item.name }]);
       dispatch(
         getProducts(
           `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-            item.id
-          }${params?.length ? `,${params.map((item) => item.id)}` : ""}`
+            item?.id
+          }${params?.length ? `,${params.map((item) => item?.id)}` : ""}`
         )
       );
     }
@@ -90,7 +90,7 @@ const Categories = ({
               backgroundColor: "transparent",
               boxShadow: "none",
               "& *": {
-                fontFamily: "Open Sans",
+                fontFamily: "Open Sans!important",
               },
             },
             "& .MuiButtonBase-root": {
@@ -167,7 +167,7 @@ const Categories = ({
                   </AccordionSummary>
                   <AccordionDetails>
                     {categories?.second
-                      ?.filter((el) => el.parent.id === item.id)
+                      ?.filter((el) => el.parent?.id === item?.id)
                       ?.map((ite) => (
                         <Accordion
                           sx={{
@@ -202,7 +202,7 @@ const Categories = ({
                           </AccordionSummary>
                           <AccordionDetails>
                             {categories?.second
-                              ?.filter((el) => el.parent.id === ite.id)
+                              ?.filter((el) => el.parent?.id === ite?.id)
                               ?.map((el) => (
                                 <FormGroup>
                                   <FormControlLabel
@@ -210,13 +210,13 @@ const Categories = ({
                                       <Checkbox
                                         checked={
                                           !!params.find(
-                                            (item) => item.id === el.id
+                                            (item) => item?.id === el?.id
                                           )
                                         }
                                       />
                                     }
                                     label={el.name}
-                                    value={el.id}
+                                    value={el?.id}
                                     onChange={() => handleProducts(el)}
                                   />
                                 </FormGroup>
@@ -236,6 +236,9 @@ const Categories = ({
             "& .MuiAccordionSummary-contentGutters": {
               fontFamily: "Open Sans",
               fontSize: 16,
+            },
+            "& *": {
+              fontFamily: "Open Sans!important",
             },
           }}
         >
@@ -275,7 +278,7 @@ const Categories = ({
                 </AccordionSummary>
                 <AccordionDetails>
                   {categories?.second
-                    ?.filter((el) => el.parent.id === item.id)
+                    ?.filter((el) => el.parent?.id === item?.id)
                     ?.map((ite) => (
                       <Accordion
                         sx={{
@@ -310,7 +313,7 @@ const Categories = ({
                         </AccordionSummary>
                         <AccordionDetails>
                           {categories?.second
-                            ?.filter((el) => el.parent.id === ite.id)
+                            ?.filter((el) => el.parent?.id === ite?.id)
                             ?.map((el) => (
                               <FormGroup>
                                 <FormControlLabel
@@ -318,13 +321,13 @@ const Categories = ({
                                     <Checkbox
                                       checked={
                                         !!params.find(
-                                          (item) => item.id === el.id
+                                          (item) => item?.id === el?.id
                                         )
                                       }
                                     />
                                   }
                                   label={el.name}
-                                  value={el.id}
+                                  value={el?.id}
                                   onChange={() => handleProducts(el)}
                                 />
                               </FormGroup>

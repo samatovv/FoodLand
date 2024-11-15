@@ -17,6 +17,9 @@ import { Link } from "react-router-dom";
 const Preview = ({ open, setOpen }) => {
   const order = useSelector((state) => state.profile.order);
   const manager = Array.isArray(order.managers) && order?.managers[0];
+
+  const data = useSelector((state) => state.profile.data);
+
   return (
     <Drawer
       anchor="bottom"
@@ -25,7 +28,8 @@ const Preview = ({ open, setOpen }) => {
         "& .MuiPaper-root": {
           p: 2,
           borderRadius: "24px 24px 0 0",
-          maxHeight: "50vh",
+          minHeight: "70vh",
+          maxHeight: "70vh",
         },
       }}
       onClose={() => setOpen(false)}
@@ -34,7 +38,7 @@ const Preview = ({ open, setOpen }) => {
         <Typography fontWeight={700} variant="h4">
           №{order?.customId}
         </Typography>
-        <IconButton>
+        <IconButton onClick={() => setOpen(false)}>
           <Close />
         </IconButton>
       </Box>
@@ -69,16 +73,16 @@ const Preview = ({ open, setOpen }) => {
             {" "}
             <Chip
               icon={
-                order?.status === "new" ? (
+                order?.status === "in_progress" ? (
                   <InProcess />
-                ) : order.status === "canceled" ? (
+                ) : order?.status === "canceled" ? (
                   <Cancelled />
-                ) : order.status === "completed" ? (
-                  <Check />
-                ) : order.status === "accepted" ? (
+                ) : order?.status === "completed" ||
+                  order?.status === "new" ||
+                  order?.status === "accepted" ? (
                   <Check />
                 ) : (
-                  order.status === "preorder" && <InProcess />
+                  order?.status === "preorder" && <InProcess />
                 )
               }
               sx={{
@@ -89,25 +93,29 @@ const Preview = ({ open, setOpen }) => {
                 maxWidth: { xs: 104, md: 129 },
                 background:
                   order?.status === "new"
-                    ? "#f3f4f6"
-                    : order.status === "canceled"
-                    ? "#FBDCDC"
-                    : order.status === "completed"
-                    ? "#EBFBDC"
-                    : order.status === "accepted"
                     ? "#DCF2FB"
-                    : order.status === "preorder" && "#DCF2FB",
+                    : order?.status === "in_progress"
+                    ? "#f3f4f6"
+                    : order?.status === "canceled"
+                    ? "#FBDCDC"
+                    : order?.status === "completed"
+                    ? "#EBFBDC"
+                    : order?.status === "accepted"
+                    ? "#DCF2FB"
+                    : order?.status === "preorder" && "#DCF2FB",
               }}
               label={
                 order?.status === "new"
-                  ? "В процессе"
-                  : order.status === "canceled"
-                  ? "Отменен"
-                  : order.status === "completed"
-                  ? "Готово"
-                  : order.status === "accepted"
                   ? "Принят"
-                  : order.status === "preorder" && "Предзаказ"
+                  : order?.status === "in_progress"
+                  ? "В процессе"
+                  : order?.status === "canceled"
+                  ? "Отменен"
+                  : order?.status === "completed"
+                  ? "Готово"
+                  : order?.status === "accepted"
+                  ? "Принят"
+                  : order?.status === "preorder" && "Предзаказ"
               }
             />
           </td>
@@ -133,7 +141,7 @@ const Preview = ({ open, setOpen }) => {
             fontFamily: "Open Sans",
             fontSize: 13,
           }}
-          onClick={() =>
+          onClick={() => {
             localStorage.setItem(
               "cart",
               JSON.stringify(
@@ -142,14 +150,19 @@ const Preview = ({ open, setOpen }) => {
                   description: item.product.description,
                   name: item.product.name,
                   img: item?.product?.images[0]?.url,
-                  sum: item.product.price * item.quantity,
-                  price: item.product.price,
-                  id: item.product.id,
+                  sum:
+                    item?.product?.prices?.find(
+                      (item) => item.price.id === data?.price?.id
+                    )?.value * item.quantity,
+                  price: item?.product?.prices?.find(
+                    (item) => item.price.id === data?.price?.id
+                  )?.value,
+                  id: item.product?.id,
                   idx: item.product.customId,
                 }))
               )
-            )
-          }
+            );
+          }}
           fullWidth
           variant="contained"
         >

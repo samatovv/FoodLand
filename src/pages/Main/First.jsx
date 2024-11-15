@@ -1,30 +1,25 @@
 import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Container,
-  TextField,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Container, TextField, Typography } from "@mui/material";
 
 import ButtonMore from "../../components/ButtonMore";
-import partners from "../../assets/images/partners.webp";
-import main from "../../assets/images/main.png";
+// import partners from "../../assets/images/partners.webp";
 import "swiper/css";
 import { useNavigate } from "react-router";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../../redux/reducers/products";
-import Carousel from "../../shared/Carousel";
-import { getBanners } from "../../redux/reducers/mainSlice";
+import { getBanner } from "../../redux/reducers/mainSlice";
 
 const First = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const md = useMediaQuery("(min-width:769px)");
 
   const [value, setValue] = useState("");
 
-  useEffect(() => dispatch(getBanners(`/banners?type=main`)), []);
+  const banner = useSelector((state) => state.main.banner);
+
+  useEffect(() => {
+    if (!banner?.results?.length) dispatch(getBanner(`/banners?type=main`));
+  }, []);
 
   return (
     <Box
@@ -34,7 +29,11 @@ const First = () => {
       maxHeight="100vh"
       minHeight="100vh"
       height="100vh"
-      backgroundColor="#f4f4f4"
+      sx={{
+        background: `url(${
+          Array.isArray(banner?.results) && banner?.results[0]?.imageUrl
+        }) center/cover no-repeat;`,
+      }}
     >
       <Container
         maxWidth="lg"

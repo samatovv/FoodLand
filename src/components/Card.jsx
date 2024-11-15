@@ -6,7 +6,7 @@ import AddToCart from "./AddToCart";
 import empty from "../assets/images/emptyCart.svg";
 import { useSelector } from "react-redux";
 
-const Card = ({ item, search, width }) => {
+const Card = ({ item, search, width, setCart }) => {
   const data = useSelector((state) => state.profile.data);
 
   const details = search ? item?.product : item;
@@ -77,7 +77,7 @@ const Card = ({ item, search, width }) => {
             details?.prices?.find((item) =>
               item.price._id
                 ? item.price._id
-                : item.price.id === data?.price?.id
+                : item.price?.id === data?.price?.id
             )?.value
           }{" "}
           c
@@ -89,8 +89,8 @@ const Card = ({ item, search, width }) => {
           price={
             details?.prices?.find((item) =>
               item.price._id
-            ? item.price._id
-            : item.price.id === data?.price?.id === data?.price?.id
+                ? item.price._id
+                : (item.price?.id === data?.price?.id) === data?.price?.id
             )?.value
           }
         />
@@ -150,7 +150,7 @@ const Card = ({ item, search, width }) => {
           </IconButton>
         </Box> */}
       </Box>
-      <AddToCart count={count} id={id} card details={details} />
+      <AddToCart setCart={setCart} count={count} id={id} card details={details} />
     </Box>
   );
 };

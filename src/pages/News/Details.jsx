@@ -96,10 +96,10 @@ const NewsDetails = () => {
             {Array.isArray(news?.results) &&
               news?.results
                 ?.slice(0, 3)
-                .filter((item) => item.id !== id)
+                .filter((item) => item?.id !== id)
                 .map((item, idx) => (
                   <Grid2 key={idx} size={{ xs: 12, sm: 6, md: 4 }}>
-                    <Link to={`/news/${item.id}`}>
+                    <Link to={`/news/${item?.id}`}>
                       <Box
                         className="news__card"
                         sx={{

@@ -37,14 +37,14 @@ const Info = () => {
 
     dispatch(handleLoading(false));
 
-    if (uploadedFile.status === 201) {
+    if (uploadedFile?.status === 201) {
       dispatch(
         updateProfileData({
           id: data?.id,
           image: uploadedFile.data,
         })
       );
-    } else if (uploadedFile.status === 200) {
+    } else if (uploadedFile?.status === 200) {
       dispatch(getProfileData());
       setOpen(true);
     }
@@ -172,12 +172,12 @@ const Info = () => {
       <Logout open={out} close={() => setOut(false)} />
       <Alert
         message={
-          uploadedFile.status === 200
+          uploadedFile?.status === 200
             ? "Ваша аватарка успешно обновлена"
             : uploadedFile?.data?.message
         }
         open={open}
-        severity={uploadedFile.status === 200 ? "success" : "error"}
+        severity={uploadedFile?.status === 200 ? "success" : "error"}
         setOpen={() => setOpen(false)}
       />
     </>

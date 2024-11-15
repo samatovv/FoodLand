@@ -68,7 +68,7 @@ const News = () => {
             <Grid2 container>
               {md && (
                 <Grid2 item size={6}>
-                  <Link to={`/news/${lastPost.id}`}>
+                  <Link to={`/news/${lastPost?.id}`}>
                     <Box
                       pr="38px"
                       className="news__card"

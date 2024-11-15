@@ -17,8 +17,8 @@ const AddOrDelete = ({
   const add = () => {
     if (cart?.length) {
       if (cartPage) {
-        let newItem = cart?.find((item) => item.id === id);
-        let updatedCart = cart.filter((item) => item.id !== id);
+        let newItem = cart?.find((item) => item?.id === id);
+        let updatedCart = cart.filter((item) => item?.id !== id);
 
         setCart([
           ...updatedCart,
@@ -49,8 +49,8 @@ const AddOrDelete = ({
     if (count > 1) {
       if (!cartPage) setCount(parseInt(count) - 1);
       else {
-        let newItem = cart?.find((item) => item.id === id);
-        let updatedCart = cart.filter((item) => item.id !== id);
+        let newItem = cart?.find((item) => item?.id === id);
+        let updatedCart = cart.filter((item) => item?.id !== id);
         localStorage.setItem(
           "cart",
           JSON.stringify([

@@ -42,7 +42,6 @@ export const Main = {
     return (
       instance
         .get(url)
-        // .get(`banners?limit=10&page=1&sortBy=createdAt:desc`)
         .then((response) => response.data)
         .catch((error) => error.response)
     );

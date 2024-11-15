@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts, getRecomendations } from "../../redux/reducers/products";
 import PaginationLarge from "../../components/Pagination";
 
-const Recomendations = ({ details, id, setPage, page }) => {
+const Recomendations = ({ setCart, details, id, setPage, page }) => {
   const dispatch = useDispatch();
 
   const products = useSelector((state) => state.products.products);
@@ -15,7 +15,7 @@ const Recomendations = ({ details, id, setPage, page }) => {
   };
 
   // useEffect(() => {
-  //   if (details?.id)
+  //   if (details??.id)
   //     dispatch(
   //       getProducts(
   //         `https://api.foodland.kg/v1/products?limit=4&page=1&category=${details?.category}`
@@ -42,10 +42,10 @@ const Recomendations = ({ details, id, setPage, page }) => {
       <Grid2 container spacing={1.2} mt={2}>
         {Array.isArray(products?.results) &&
           products?.results
-            // ?.filter((item) => item.id !== id)
+            // ?.filter((item) => item?.id !== id)
             .map((item, idx) => (
               <Grid2 item size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
-                <Card item={item} />
+                <Card setCart={setCart} item={item} />
               </Grid2>
             ))}
       </Grid2>

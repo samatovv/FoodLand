@@ -18,7 +18,7 @@ import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
 import empty from "../../assets/images/emptyCart.svg";
 
-const Details = () => {
+const Details = ({setCart}) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:768px)");
 
@@ -182,7 +182,7 @@ const Details = () => {
                     >
                       {
                         details?.prices?.find(
-                          (item) => item.price.id === data?.price?.id
+                          (item) => item.price?.id === data?.price?.id
                         )?.value
                       }
                       c
@@ -225,6 +225,7 @@ const Details = () => {
         </Typography>
         <Recomendations
           id={id}
+          setCart={setCart}
           details={details}
           page={page}
           setPage={setPage}
