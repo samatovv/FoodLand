@@ -193,10 +193,10 @@ const Table = () => {
               >
                 <tr>
                   <th>Номер заказа</th>
-                  <th>Цена</th>
+                  <th>Сумма</th>
                   {md && (
                     <>
-                      <th>Кол-во товаров</th>
+                      <th>Вес</th>
                     </>
                   )}
                   <th>Статус</th>
@@ -230,7 +230,7 @@ const Table = () => {
                     <tr key={idx}>
                       <td>{item?.customId}</td>
                       <td>{item?.price}</td>
-                      {md && <td>{item?.products?.length}</td>}
+                      {md && <td>{item?.weight}</td>}
                       <td>
                         <Chip
                           icon={
@@ -290,36 +290,14 @@ const Table = () => {
                               : "-"}
                           </td>
                           <td>
-                            <Link to="/profile/cart/">
-                              <Button
-                                onClick={() =>
-                                  localStorage.setItem(
-                                    "cart",
-                                    JSON.stringify(
-                                      item.products.map((item) => ({
-                                        count: item.quantity,
-                                        description: item.product.description,
-                                        name: item.product.name,
-                                        img: item?.product?.images[0]?.url,
-                                        sum:
-                                          item?.product?.prices?.find(
-                                            (item) =>
-                                              item.price.id === data?.price?.id
-                                          )?.value * item.quantity,
-                                        price: item?.product?.prices?.find(
-                                          (item) =>
-                                            item.price.id === data?.price?.id
-                                        )?.value,
-                                        id: item.product?.id,
-                                        idx: item.product.customId,
-                                      }))
-                                    )
-                                  )
-                                }
-                              >
-                                Повторить заказ
-                              </Button>
-                            </Link>
+                            <Button
+                              onClick={() => {
+                                setOpenDrawer(true);
+                                dispatch(getOrder(item?.id));
+                              }}
+                            >
+                              Посмотреть заказ
+                            </Button>
                           </td>
                         </>
                       ) : (

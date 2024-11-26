@@ -27,7 +27,7 @@ const DrawerNav = () => {
         "& .MuiPaper-root": {
           width: "100%",
           pt: "25px",
-          pb:'50px'
+          pb: "50px",
         },
       }}
       open={open}
@@ -43,7 +43,11 @@ const DrawerNav = () => {
         }}
       >
         <div>
-          <Box display="flex" alignItems='center' justifyContent="space-between">
+          <Box
+            display="flex"
+            alignItems="center"
+            justifyContent="space-between"
+          >
             <img src={logo} width={108} height={44} alt="" />
             <IconButton onClick={() => dispatch(handleDrawer(false))}>
               <Close />
@@ -161,6 +165,7 @@ const DrawerNav = () => {
           txt="Заказать звонок"
           color="primary"
           variant="contained"
+          href="tel:+996 550 114 477"
         />
       </Container>
     </Drawer>

@@ -94,16 +94,18 @@ const Products = ({
   };
 
   useEffect(() => {
-    dispatch(getProductsNames());
+    if (!names) dispatch(getProductsNames());
     if (location.search) {
       if (!location.search.includes("category")) {
         setValueSearch(decodeURI(location.search.split("=")[1]));
         dispatch(setSearch(decodeURI(location.search.split("=")[1])));
         dispatch(
           getProducts(
-            `/products/query?limit=12&page=1&search=${decodeURI(
-              location.search.split("=")[1]
-            )}&categoryIds=${
+            `/products/query?limit=12&page=1&search=${
+              location.search.includes("searchmain")
+                ? location.search.split("=")[1]
+                : decodeURI(location.search.split("=")[1])
+            }&categoryIds=${
               params?.length ? `${params.map((item) => item.id)}` : ""
             }`
           )
@@ -123,7 +125,7 @@ const Products = ({
         getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
       );
     }
-  }, []);
+  }, [location.search]);
 
   useEffect(() => {
     if (Array.isArray(names)) setSearched(names);

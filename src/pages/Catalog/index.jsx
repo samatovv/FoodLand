@@ -46,7 +46,7 @@ const Catalog = ({ setCart }) => {
   return (
     <>
       <Container
-        maxWidth="xl"
+        maxWidth="lg"
         sx={{
           mt: 4.3,
           mb: 4,
@@ -77,7 +77,7 @@ const Catalog = ({ setCart }) => {
           )}
           <Grid2 item size={{ xs: 12, md: 9 }}>
             <Products
-            setCart={setCart}
+              setCart={setCart}
               page={page}
               setPage={setPage}
               searchValue={searchValue}
