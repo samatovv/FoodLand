@@ -3,10 +3,10 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
-import empty from "../assets/images/emptyCart.svg";
+import empty from "../assets/images/empty-img.png";
 import { useSelector } from "react-redux";
 
-const Card = ({ item, search, width, setCart }) => {
+const Card = ({ item, search, width, setCart, preview }) => {
   const data = useSelector((state) => state.profile.data);
 
   const details = search ? item?.product : item;
@@ -16,7 +16,10 @@ const Card = ({ item, search, width, setCart }) => {
     <Box
       sx={{
         "&:hover img": {
-          transform: "scale(1.3)",
+          transform:
+            Array.isArray(details?.images) &&
+            details?.images[0]?.url &&
+            "scale(1.3)",
         },
       }}
       minWidth={width}
@@ -39,7 +42,10 @@ const Card = ({ item, search, width, setCart }) => {
           sx={{
             borderRadius: "12px",
             height: { xs: 142, md: 178 },
-            objectFit: "scale-down",
+            objectFit:
+              Array.isArray(details?.images) && !details?.images[0]?.url
+                ? "cover"
+                : "scale-down",
             transition: "all 800ms ease",
           }}
           width="100%"
@@ -82,18 +88,20 @@ const Card = ({ item, search, width, setCart }) => {
           }{" "}
           c
         </Typography>
-        <AddOrDelete
-          count={count}
-          setCount={setCount}
-          id={item?.id}
-          price={
-            details?.prices?.find((item) =>
-              item.price._id
-                ? item.price._id
-                : (item.price?.id === data?.price?.id) === data?.price?.id
-            )?.value
-          }
-        />
+        {!preview && (
+          <AddOrDelete
+            count={count}
+            setCount={setCount}
+            id={item?.id}
+            price={
+              details?.prices?.find((item) =>
+                item.price._id
+                  ? item.price._id
+                  : (item.price?.id === data?.price?.id) === data?.price?.id
+              )?.value
+            }
+          />
+        )}
         {/* <Box
           p="4px"
           border="1px solid #EEEEEE"
@@ -150,7 +158,15 @@ const Card = ({ item, search, width, setCart }) => {
           </IconButton>
         </Box> */}
       </Box>
-      <AddToCart setCart={setCart} count={count} id={id} card details={details} />
+      {!preview && (
+        <AddToCart
+          setCart={setCart}
+          count={count}
+          id={id}
+          card
+          details={details}
+        />
+      )}
     </Box>
   );
 };

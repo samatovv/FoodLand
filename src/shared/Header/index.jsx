@@ -286,7 +286,9 @@ const Header = ({ cart, setCart }) => {
                     onClick={() => {
                       setOpen(false);
                       setValue(item.name);
-                      navigate(`/catalog/?search=${encodeURI(item.name)}`);
+                      navigate(
+                        `/catalog/?searchmain=${encodeURI(item.name)}`
+                      );
                     }}
                     mb={0.8}
                   >

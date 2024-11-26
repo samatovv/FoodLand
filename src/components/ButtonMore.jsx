@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import Cart from "../assets/images/Cart";
 
-const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart, radius }) => {
+const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart, radius, href }) => {
   return (
     <Button
       onClick={onClick}
@@ -12,6 +12,7 @@ const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart, radius }) => {
       sx={sx}
       className={inCart ? "more in_cart_btn" : "more"}
       size="none"
+      href={href}
     >
       <Box
         width="100%"
