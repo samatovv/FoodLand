@@ -52,11 +52,11 @@ const Cart = ({ setCartGlobal }) => {
         quantity: item.count,
       }));
 
-      const totalWeight = cart.reduce(
+      const totalWeight = cart?.reduce(
         (total, amount) => total + parseInt(amount.weight),
         0
       );
-      const totalPrice = cart.reduce(
+      const totalPrice = cart?.reduce(
         (total, amount) => total + parseInt(amount.sum),
         0
       );

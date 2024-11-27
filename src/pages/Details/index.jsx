@@ -18,7 +18,7 @@ import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
 import empty from "../../assets/images/emptyCart.svg";
 
-const Details = ({setCart}) => {
+const Details = ({ setCart }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:768px)");
 
@@ -196,7 +196,7 @@ const Details = ({setCart}) => {
                       padding="8px 13px"
                     />
                   </Box>
-                  <AddToCart count={count} id={id} details={details} />
+                  <AddToCart count={count} setCart={setCart} id={id} details={details} />
                 </Box>
               </Box>
             </Box>

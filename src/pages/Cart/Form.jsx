@@ -148,19 +148,27 @@ const Form = ({ formik, cart, close }) => {
           fullWidth
         />
       </Box>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        mt={4}
-        alignItems="baseline"
-      >
-        <Typography className="sans" fontSize={17} fontWeight="600">
-          Итоговая сумма:
-        </Typography>
-        <Typography fontSize={20} fontWeight="600">
-          {cart.reduce((total, amount) => total + parseInt(amount.sum), 0)} c
-        </Typography>
-      </Box>
+      {cart && (
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          mt={4}
+          alignItems="baseline"
+        >
+          <Typography className="sans" fontSize={17} fontWeight="600">
+            Итоговая сумма:
+          </Typography>
+          <Typography fontSize={20} fontWeight="600">
+            {cart &&
+              cart?.reduce(
+                (total, amount) => total + parseInt(amount.sum),
+                0
+              )}{" "}
+            c
+          </Typography>
+        </Box>
+      )}
+
       <Box
         display="flex"
         flexDirection={{ xs: "column", md: "row" }}
