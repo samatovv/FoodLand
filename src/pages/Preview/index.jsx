@@ -184,6 +184,10 @@ const Preview = ({ open, setOpen }) => {
           </Box>
           <Box display="flex" width="100%" columnGap={2}>
             <Button
+              href={order?.document?.url}
+            disabled={!order?.document?.url}
+
+              target="_blank"
               sx={{
                 borderRadius: "10px",
                 background: "#E7E7E7",
@@ -366,6 +370,9 @@ const Preview = ({ open, setOpen }) => {
             }}
             fullWidth
             variant="contained"
+            disabled={!order?.document?.url}
+            href={order?.document?.url}
+            target="_blank"
           >
             Посмотреть накладную
           </Button>
