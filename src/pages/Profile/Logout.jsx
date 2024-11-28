@@ -6,9 +6,9 @@ import { useNavigate } from "react-router";
 const Logout = ({ open, close }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    cookie.removeSpecific("foodland_token");
-    sessionStorage.clear();
     navigate("/");
+    cookie.remove("foodland_token");
+    sessionStorage.clear();
     localStorage.clear();
   };
   return (
