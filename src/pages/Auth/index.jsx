@@ -78,7 +78,7 @@ const Auth = () => {
       instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
 
       dispatch(handleAuthDialog());
-      navigate("/profile");
+      // navigate("/profile");
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps

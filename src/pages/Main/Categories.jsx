@@ -127,7 +127,9 @@ const Categories = () => {
                       >
                         {item.title}
                       </Typography>
-                      <Link to={`/catalog/?category=${item?.id}`}>
+                      <Link
+                        to={`/catalog/?search=&categoryIds=${item.id}&page=1`}
+                      >
                         <ButtonMore
                           txt="Подробнее "
                           sx={{

@@ -225,7 +225,9 @@ const Header = ({ cart, setCart }) => {
               action=""
               onSubmit={(e) => {
                 e.preventDefault();
-                navigate(`/catalog/?search=${encodeURI(value)}`);
+                navigate(
+                  `/catalog/?search=${encodeURI(value)}&categoryIds=&page=1`
+                );
               }}
             >
               <svg
@@ -275,7 +277,9 @@ const Header = ({ cart, setCart }) => {
                 <ListItemButton
                   onClick={() => {
                     setOpen(false);
-                    navigate(`/catalog/?search=${encodeURI(value)}`);
+                    navigate(
+                      `/catalog/?search=${encodeURI(value)}&categoryIds=&page=1`
+                    );
                   }}
                   mb={0.8}
                 >
@@ -287,7 +291,9 @@ const Header = ({ cart, setCart }) => {
                       setOpen(false);
                       setValue(item.name);
                       navigate(
-                        `/catalog/?searchmain=${encodeURI(item.name)}`
+                        `/catalog/?search=${encodeURI(
+                          item.name
+                        )}&categoryIds=&page=1`
                       );
                     }}
                     mb={0.8}

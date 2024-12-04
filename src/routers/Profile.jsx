@@ -16,7 +16,6 @@ const Profile = ({ cart, setCart }) => {
           <Route path="/cart" element={<Cart setCartGlobal={setCart} />} />
         </Routes>
       </Box>
-      <Preview />
     </>
   );
 };

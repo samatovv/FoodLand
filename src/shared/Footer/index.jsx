@@ -185,7 +185,10 @@ const Footer = () => {
                     flexDirection="column"
                     rowGap={1}
                   >
-                    <Link className="link" to="/catalog/?search=Шоколад">
+                    <Link
+                      className="link"
+                      to="/catalog/?search=Шоколад&categoryIds=&page=1"
+                    >
                       <Typography
                         className="link"
                         variant="subtitle2"
@@ -195,7 +198,7 @@ const Footer = () => {
                         Шоколад
                       </Typography>
                     </Link>
-                    <Link to="/catalog/?search=Сливки">
+                    <Link to="/catalog/?search=Сливки&categoryIds=&page=1">
                       <Typography
                         className="link"
                         variant="subtitle2"
@@ -205,7 +208,7 @@ const Footer = () => {
                         Сливки{" "}
                       </Typography>
                     </Link>
-                    <Link to="/catalog/?search=Сыр">
+                    <Link to="/catalog/?search=Сыр&categoryIds=&page=1">
                       <Typography
                         className="link"
                         variant="subtitle2"
@@ -215,7 +218,7 @@ const Footer = () => {
                         Сыр
                       </Typography>
                     </Link>
-                    <Link to="/catalog/?search=Декор">
+                    <Link to="/catalog/?search=Декор&categoryIds=&page=1">
                       <Typography
                         className="link"
                         variant="subtitle2"
@@ -225,7 +228,7 @@ const Footer = () => {
                         Декор{" "}
                       </Typography>
                     </Link>
-                    <Link to="/catalog/?search=Орехи">
+                    <Link to="/catalog/?search=Орехи&categoryIds=&page=1">
                       <Typography
                         className="link"
                         variant="subtitle2"

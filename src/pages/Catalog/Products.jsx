@@ -15,10 +15,11 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Find from "../../assets/images/Find";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import {
   getProducts,
   getProductsNames,
+  setProducts,
   setSearch,
 } from "../../redux/reducers/products";
 import filter from "../../assets/images/filter.svg";
@@ -35,12 +36,14 @@ const Products = ({
   params,
   setParams,
   searchValue,
+  category,
   setValueSearch,
   page,
   setPage,
 }) => {
   const dispatch = useDispatch();
   const location = useLocation();
+  const navigate = useNavigate();
   const md = useMediaQuery("(min-width:900px)");
 
   const products = useSelector((state) => state.products.products);
@@ -91,41 +94,27 @@ const Products = ({
 
   const handleChange = (event, value) => {
     setPage(value);
+    navigate(
+      `/catalog/?search=${
+        location.search.split("&")[0].split("=")[1]
+          ? decodeURI(location.search.split("&")[0].split("=")[1])
+          : ""
+      }&categoryIds=&page=${value}`
+    );
   };
 
   useEffect(() => {
     if (!names) dispatch(getProductsNames());
-    if (location.search) {
-      if (!location.search.includes("category")) {
-        setValueSearch(decodeURI(location.search.split("=")[1]));
-        dispatch(setSearch(decodeURI(location.search.split("=")[1])));
-        dispatch(
-          getProducts(
-            `/products/query?limit=12&page=1&search=${
-              location.search.includes("searchmain")
-                ? location.search.split("=")[1]
-                : decodeURI(location.search.split("=")[1])
-            }&categoryIds=${
-              params?.length ? `${params.map((item) => item.id)}` : ""
-            }`
-          )
-        );
-      } else {
-        dispatch(
-          getProducts(
-            `/products/query?limit=12&page=1&search=&categoryIds=${
-              location.search.split("=")[1]
-            }`
-          )
-        );
-      }
-    } else if (!products?.products?.length) {
+
+    if (!location.search && !products?.products?.length) {
       dispatch(handleLoading(true));
       dispatch(
         getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
       );
     }
-  }, [location.search]);
+
+    // if (location.search) setPage(location.search.split("&")[2].split("=")[1]);
+  }, []);
 
   useEffect(() => {
     if (Array.isArray(names)) setSearched(names);
@@ -138,8 +127,6 @@ const Products = ({
     }
     if (page > 1) setPage(1);
     if (!searchValue && page === 1) {
-      console.log(searchValue);
-
       dispatch(
         getProducts(
           `/products/query?limit=12&page=1&search=${encodeURI(
@@ -158,6 +145,7 @@ const Products = ({
     }
 
     window.scrollTo(0, 0);
+    dispatch(setProducts([]));
     dispatch(
       getProducts(
         `/products/query?limit=12&page=${page}&search=${encodeURI(
@@ -179,6 +167,32 @@ const Products = ({
     dispatch(handleLoading(false));
   }, [products]);
 
+  useEffect(() => {
+    if (location.search) {
+      setPage(+location.search.split("&")[2].split("=")[1]);
+      setValueSearch(decodeURI(location.search.split("&")[0].split("=")[1]));
+      dispatch(
+        setSearch(decodeURI(location.search.split("&")[0].split("=")[1]))
+      );
+
+      dispatch(
+        getProducts(
+          `/products/query?limit=12&page=${
+            location.search.split("&")[2].split("=")[1]
+          }&search=${
+            location.search.includes("searchmain")
+              ? location.search.split("&")[0].split("=")[1]
+              : decodeURI(location.search.split("&")[0].split("=")[1])
+          }&categoryIds=${
+            params?.length
+              ? `${params.map((item) => item.id)}`
+              : location.search.split("&")[1].split("=")[1]
+          }`
+        )
+      );
+    }
+  }, [location.search]);
+
   return (
     <Box component="section">
       <Box
@@ -195,7 +209,7 @@ const Products = ({
           width="100%"
         >
           <Typography variant="h4" fontWeight={700}>
-            Каталог
+            {category.title ? category.title : "Каталог"}
           </Typography>
           {!md && (
             <IconButton onClick={() => dispatch(handleFilter(true))}>
@@ -317,13 +331,7 @@ const Products = ({
                 onClick={() => {
                   setOpen(false);
                   setValueSearch(item.name);
-                  dispatch(
-                    getProducts(
-                      `/products/query?limit=12&page=1&search=${encodeURI(
-                        item.name
-                      )}&categoryIds=${params.map((item) => item.id)}`
-                    )
-                  );
+                  navigate(`/catalog/details/${item.id}`);
                 }}
                 mb={0.8}
               >
