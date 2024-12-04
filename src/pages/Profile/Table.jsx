@@ -13,7 +13,7 @@ import Check from "../../assets/images/Check";
 import InProcess from "../../assets/images/InProcess";
 import Success from "../Cart/Success";
 import Cancelled from "../../assets/images/Cancelled";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import more from "../../assets/images/more.svg";
 import Preview from "../Preview";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -26,6 +26,7 @@ import empty from "../../assets/images/emptyCart.svg";
 
 const Table = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const md = useMediaQuery("(min-width:769px)");
 
   const id = useSelector((state) => state.profile.data?.id);
@@ -292,6 +293,7 @@ const Table = () => {
                           <td>
                             <Button
                               onClick={() => {
+                                navigate(`?${item.id}`);
                                 setOpenDrawer(true);
                                 dispatch(getOrder(item?.id));
                               }}

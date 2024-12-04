@@ -103,7 +103,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 variant="body1"
-                mb={{ xs: 5, lg: 12 }}
+                mb={{ xs: 5, lg: "76px" }}
                 color="#707070"
               >
                 Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь
@@ -173,7 +173,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 variant="body1"
-                mb={{ xs: 3, lg: '110px' }}
+                mb={{ xs: 3, lg: "110px" }}
                 color="#707070"
               >
                 Наша экспертность в сфере применения кондитерского сырья.
@@ -202,7 +202,7 @@ const WhyChooseUs = () => {
               <Typography
                 className="sans"
                 // fontSize={{ xs: 13, md: 11 }}
-                whiteSpace='nowrap'
+                whiteSpace="nowrap"
                 mb={{ xs: 1, lg: "33px" }}
                 color="#707070"
               >

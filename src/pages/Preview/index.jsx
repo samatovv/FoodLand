@@ -8,17 +8,21 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Close from "../../assets/images/Close";
 import InProcess from "../../assets/images/InProcess";
 import Cancelled from "../../assets/images/Cancelled";
 import Check from "../../assets/images/Check";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Card from "../../components/Card";
 import emptyImg from "../../assets/images/empty-img.png";
+import { setOrder } from "../../redux/reducers/profile";
 
 const Preview = ({ open, setOpen }) => {
+  const location = useLocation();
+  const dispatch = useDispatch();
+
   const order = useSelector((state) => state.profile.order);
   const manager = Array.isArray(order.managers) && order?.managers[0];
 
@@ -42,8 +46,8 @@ const Preview = ({ open, setOpen }) => {
               },
             },
           }}
-          open={open}
-          onClose={() => setOpen(false)}
+          open={location.search && order?.id === location.search.split("?")[1]}
+          onClose={() => dispatch(setOrder([]))}
         >
           <Box
             display="flex"
@@ -53,7 +57,7 @@ const Preview = ({ open, setOpen }) => {
             <Typography fontWeight={700} fontSize={20}>
               №{order?.customId}
             </Typography>
-            <IconButton onClick={() => setOpen(false)}>
+            <IconButton onClick={() => dispatch(setOrder([]))}>
               <Close />
             </IconButton>
           </Box>
@@ -61,7 +65,7 @@ const Preview = ({ open, setOpen }) => {
             {order?.createdAt &&
               new Intl.DateTimeFormat("ru", {
                 dateStyle: "short",
-                // timeStyle: "short",
+                timeStyle: "short",
               }).format(new Date(order?.createdAt))}
           </Typography>
           <Box

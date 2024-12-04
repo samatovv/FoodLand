@@ -62,7 +62,7 @@ const First = () => {
             style={{ display: "inline" }}
             action=""
             onSubmit={() => {
-              navigate(`/catalog/?search=${value}`);
+              navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
             }}
           >
             <TextField

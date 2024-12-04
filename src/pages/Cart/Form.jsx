@@ -96,7 +96,6 @@ const Form = ({ formik, cart, close }) => {
               error={formik.errors.deliveryAddress}
               onChange={formik.handleChange}
               value={formik.values.deliveryAddress}
-              required
               helperText={formik.errors.deliveryAddress && "Заполните поле*"}
               placeholder="Ваш адрес"
               fullWidth
