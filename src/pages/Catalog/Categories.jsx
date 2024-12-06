@@ -111,9 +111,6 @@ const Categories = ({
               fontFamily: "Open Sans",
               fontSize: 16,
             },
-            "& .MuiAccordionDetails-root:first-child": {
-              // p: 0,
-            },
           }}
         >
           <AccordionSummary
@@ -132,9 +129,9 @@ const Categories = ({
             }}
           >
             {Array.isArray(allCategories) &&
-              categories?.first?.map((item) => (
+              categories?.first?.map((item, idx) => (
                 <Accordion
-                  key={item}
+                  key={idx}
                   sx={{
                     "&.MuiPaper-root ": {
                       backgroundColor: "transparent",
@@ -168,8 +165,9 @@ const Categories = ({
                   <AccordionDetails>
                     {categories?.second
                       ?.filter((el) => el.parent?.id === item?.id)
-                      ?.map((ite) => (
+                      ?.map((ite, idx) => (
                         <Accordion
+                          key={idx}
                           sx={{
                             "&.MuiPaper-root ": {
                               backgroundColor: "transparent",
@@ -203,8 +201,8 @@ const Categories = ({
                           <AccordionDetails>
                             {categories?.second
                               ?.filter((el) => el.parent?.id === ite?.id)
-                              ?.map((el) => (
-                                <FormGroup>
+                              ?.map((el, idx) => (
+                                <FormGroup key={idx}>
                                   <FormControlLabel
                                     control={
                                       <Checkbox
@@ -243,9 +241,9 @@ const Categories = ({
           }}
         >
           {Array.isArray(allCategories) &&
-            categories?.first?.map((item) => (
+            categories?.first?.map((item, idx) => (
               <Accordion
-                key={item}
+                key={idx}
                 sx={{
                   "&.MuiPaper-root ": {
                     backgroundColor: "transparent",
@@ -279,8 +277,9 @@ const Categories = ({
                 <AccordionDetails>
                   {categories?.second
                     ?.filter((el) => el.parent?.id === item?.id)
-                    ?.map((ite) => (
+                    ?.map((ite, idx) => (
                       <Accordion
+                        key={idx}
                         sx={{
                           "&.MuiPaper-root ": {
                             backgroundColor: "transparent",
@@ -314,7 +313,7 @@ const Categories = ({
                         <AccordionDetails>
                           {categories?.second
                             ?.filter((el) => el.parent?.id === ite?.id)
-                            ?.map((el) => (
+                            ?.map((el, idx) => (
                               <FormGroup>
                                 <FormControlLabel
                                   control={

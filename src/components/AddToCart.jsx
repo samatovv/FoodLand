@@ -18,6 +18,9 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
   const clickHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     let newItem = cart?.find((item) => item?.id === id);
+
+    console.log(newItem);
+    
     setCart(true);
     if (inCart) {
       setInCart(false);

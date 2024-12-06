@@ -112,9 +112,9 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
                 <path
                   d="M10 4L7.41421 6.58579C6.63316 7.36684 6.63317 8.63316 7.41421 9.41421L10 12"
                   stroke="#D2D2D2"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
               </svg>
               Вернуться в Каталог

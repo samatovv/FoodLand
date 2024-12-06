@@ -64,7 +64,7 @@ const Catalog = ({ setCart }) => {
       Каталог
     </Typography>,
     <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
-      {category.title}
+      {category?.title}
     </Typography>,
   ];
   return (
@@ -84,7 +84,7 @@ const Catalog = ({ setCart }) => {
         </Breadcrumbs>
         <Grid2 container mt={{ xs: "35px", md: 2 }} spacing={6}>
           {md && (
-            <Grid2 item size={{ xs: 12, md: 3 }}>
+            <Grid2 size={{ xs: 12, md: 3 }}>
               <Categories
                 searchValue={searchValue}
                 setValueSearch={setValueSearch}
@@ -99,7 +99,7 @@ const Catalog = ({ setCart }) => {
               />
             </Grid2>
           )}
-          <Grid2 item size={{ xs: 12, md: 9 }}>
+          <Grid2 size={{ xs: 12, md: 9 }}>
             <Products
               category={category}
               setCart={setCart}

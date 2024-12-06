@@ -36,7 +36,7 @@ const Footer = () => {
     >
       <Container maxWidth="lg">
         <Grid2 container mb={{ xs: "41px", md: 7 }}>
-          <Grid2 item size={{ xs: 12, md: 6 }}>
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <Link to="/">
               {md ? (
                 <Box component="img" src={logo} alt="" />
@@ -73,7 +73,7 @@ const Footer = () => {
               </a>
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 12, md: 6 }} sx={{}}>
+          <Grid2 size={{ xs: 12, md: 6 }} sx={{}}>
             <Box
               mt={{ xs: "22px", md: 0 }}
               display="flex"

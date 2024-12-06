@@ -73,7 +73,7 @@ const Partners = () => {
         }}
       >
         {arr.map((item, idx) => (
-          <img src={item} alt="" />
+          <img src={item} key={idx} alt="" />
         ))}
       </Box>
     </Box>

@@ -240,7 +240,7 @@ const Header = ({ cart, setCart }) => {
                 <path
                   d="M15.7333 15.7333L20 20M17.8667 10.9333C17.8667 14.7625 14.7625 17.8667 10.9333 17.8667C7.10416 17.8667 4 14.7625 4 10.9333C4 7.10416 7.10416 4 10.9333 4C14.7625 4 17.8667 7.10416 17.8667 10.9333Z"
                   stroke="black"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                 />
               </svg>
               <input
@@ -285,8 +285,9 @@ const Header = ({ cart, setCart }) => {
                 >
                   <Typography>{value}</Typography>
                 </ListItemButton>
-                {searched?.map((item) => (
+                {searched?.map((item, idx) => (
                   <ListItemButton
+                    key={idx}
                     onClick={() => {
                       setOpen(false);
                       setValue(item.name);

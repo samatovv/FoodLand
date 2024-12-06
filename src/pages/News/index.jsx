@@ -53,9 +53,9 @@ const News = () => {
               <path
                 d="M9 3L6.41421 5.58579C5.63316 6.36684 5.63317 7.63316 6.41421 8.41421L9 11"
                 stroke="#D2D2D2"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
             </svg>
             Вернуться назад
@@ -63,7 +63,9 @@ const News = () => {
         </center>
       ) : (
         Array.isArray(news?.results) &&
-        news?.results?.map((item, idx) => <NewsCard item={item} idx={idx} />)
+        news?.results?.map((item, idx) => (
+          <NewsCard key={idx} item={item} idx={idx} />
+        ))
       )}
     </Container>
   );
