@@ -29,7 +29,6 @@ const MyProducts = ({ setCart }) => {
         {Array.isArray(products?.results) &&
           products?.results?.map((item, idx) => (
             <Grid2
-              item
               size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}
               key={idx}
             >

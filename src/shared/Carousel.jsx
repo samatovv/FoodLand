@@ -53,28 +53,16 @@ const Carousel = () => {
         }}
       >
         {banners?.results?.map((item, idx) => (
-          <>
-            <SwiperSlide key={idx}>
-              <Box
-                component="img"
-                width={{ xs: "100%", md: 428, lg: 428 }}
-                height={280}
-                sx={{ objectFit: "cover!important" }}
-                src={item.imageUrl ? item.imageUrl : emptyImg}
-                alt=""
-              />
-            </SwiperSlide>{" "}
-            <SwiperSlide key={idx}>
-              <Box
-                component="img"
-                width={{ xs: "100%", md: 428, lg: 428 }}
-                height={280}
-                sx={{ objectFit: "cover!important" }}
-                src={item.imageUrl ? item.imageUrl : emptyImg}
-                alt=""
-              />
-            </SwiperSlide>
-          </>
+          <SwiperSlide key={idx}>
+            <Box
+              component="img"
+              width={{ xs: "100%", md: 428, lg: 428 }}
+              height={280}
+              sx={{ objectFit: "cover!important" }}
+              src={item.imageUrl ? item.imageUrl : emptyImg}
+              alt=""
+            />
+          </SwiperSlide>
         ))}
       </Swiper>
     </Box>

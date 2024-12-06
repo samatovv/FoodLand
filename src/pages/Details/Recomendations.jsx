@@ -27,7 +27,7 @@ const Recomendations = ({ setCart, details, id, setPage, page }) => {
     if (details?.id)
       dispatch(
         getRecomendations(
-          `products?limit=5&category=${details?.category}&page=${page}`
+          `products?limit=5&category=${details?.category?.id}&page=${page}`
         )
       );
   }, [id, page, details]);
@@ -41,13 +41,11 @@ const Recomendations = ({ setCart, details, id, setPage, page }) => {
       )}
       <Grid2 container spacing={1.2} mt={2}>
         {Array.isArray(products?.results) &&
-          products?.results
-            // ?.filter((item) => item?.id !== id)
-            .map((item, idx) => (
-              <Grid2 item size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
-                <Card setCart={setCart} item={item} />
-              </Grid2>
-            ))}
+          products?.results.map((item, idx) => (
+            <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
+              <Card setCart={setCart} item={item} />
+            </Grid2>
+          ))}
       </Grid2>
       {products?.results?.length && (
         <PaginationLarge

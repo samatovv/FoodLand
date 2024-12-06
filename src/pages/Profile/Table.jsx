@@ -181,7 +181,7 @@ const Table = () => {
                     p: { xs: "10px", md: "12px 0" },
                     background: "#F7F7F7",
                     textAlign: { xs: "start", md: "center" },
-                    "&:first-child": {
+                    "&:first-of-type": {
                       borderTopLeftRadius: { xs: 0, md: "10px" },
                       borderBottomLeftRadius: { xs: 0, md: "10px" },
                     },

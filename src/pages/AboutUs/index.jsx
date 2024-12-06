@@ -58,7 +58,7 @@ const AboutUs = () => {
           </Box>
         </Box>
         <Grid2 container spacing={{ xs: 1, lg: 9 }} mt={{ xs: "28px", md: 11 }}>
-          <Grid2 item size={{ xs: 6, md: 4 }}>
+          <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -88,7 +88,7 @@ const AboutUs = () => {
               С нашей мукой создали более 50 млн макаронс.
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, md: 4 }}>
+          <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -118,7 +118,7 @@ const AboutUs = () => {
               С нашим сыром испекли более 130 тыс пицц.
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, md: 4 }}>
+          <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -131,8 +131,8 @@ const AboutUs = () => {
               Продали
             </Typography>
             <Typography
-             mt={1}
-             mb={2}
+              mt={1}
+              mb={2}
               fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
@@ -148,7 +148,7 @@ const AboutUs = () => {
               Мы продали около 500 тонн шоколада.
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, md: 4 }}>
+          <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -176,7 +176,7 @@ const AboutUs = () => {
               С использованием наших сыров было приготовлено более 1 млн суши.
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, md: 4 }}>
+          <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -204,7 +204,7 @@ const AboutUs = () => {
               Наименований товаров, адаптированных под ваши потребности
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 6, md: 4 }}>
+          <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
               fontSize={{ xs: 16, md: "24px" }}
               fontWeight={300}
@@ -237,7 +237,7 @@ const AboutUs = () => {
           <Carousel />
         </Box>
         <Grid2 container spacing={{ xs: 2, lg: 4 }} mt={6}>
-          <Grid2 item size={{ xs: 12, md: 6 }}>
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <Typography fontSize={36} mb={3} fontWeight={700} color="#93A27C">
               Наша компания
             </Typography>
@@ -264,7 +264,7 @@ const AboutUs = () => {
               жизнь свои самые смелые кулинарные задумки.
             </Typography>
           </Grid2>
-          <Grid2 item size={{ xs: 12, md: 6 }}>
+          <Grid2 size={{ xs: 12, md: 6 }}>
             <Typography fontSize={36} mb={3} color="#93A27C" fontWeight={700}>
               Нам доверяют
             </Typography>
@@ -380,9 +380,9 @@ const AboutUs = () => {
                 width="100%"
                 height={!md ? "389px" : "100%"}
                 style={{ border: "0", borderRadius: "20px" }}
-                allowfullscreen=""
+                allowFullScreen=""
                 loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
+                referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </Grid2>
           )}
@@ -394,9 +394,9 @@ const AboutUs = () => {
           width="100%"
           height={!md ? "389px" : "100%"}
           style={{ border: "0", borderRadius: "0", marginTop: 32 }}
-          allowfullscreen=""
+          allowFullScreen=""
           loading="lazy"
-          referrerpolicy="no-referrer-when-downgrade"
+          referrerPolicy="no-referrer-when-downgrade"
         ></iframe>
       )}
     </Box>

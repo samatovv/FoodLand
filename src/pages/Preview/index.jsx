@@ -182,8 +182,8 @@ const Preview = ({ open, setOpen }) => {
             display="flex"
             flexWrap="nowrap"
           >
-            {order?.products?.map((item) => (
-              <Card preview item={item.product} />
+            {order?.products?.map((item, idx) => (
+              <Card key={idx} preview item={item.product} />
             ))}
           </Box>
           <Box display="flex" width="100%" columnGap={2}>

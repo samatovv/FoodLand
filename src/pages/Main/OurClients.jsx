@@ -82,8 +82,8 @@ const OurClients = () => {
                 },
               }}
             >
-              {clients.map((item) => (
-                <SwiperSlide>
+              {clients.map((item,idx) => (
+                <SwiperSlide key={idx}>
                   <Box
                     className="clients__card"
                     p={{ xs: "12px", md: "24px" }}

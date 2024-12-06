@@ -17,14 +17,17 @@ const Site = ({ cart, setCart }) => {
   return (
     <>
       <Header cart={cart} setCart={setCart} />
-      <Box component="main" pt={location.pathname !== "/" && "66px"}>
+      <Box component="main" pt={location.pathname !== "/" ? "66px" : 0}>
         <Routes>
           <Route path="/" element={<Main setCart={setCart} />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/news" element={<News />} />
           <Route path="/news/:id" element={<NewsDetails />} />
           <Route path="/catalog" element={<Catalog setCart={setCart} />} />
-          <Route path="/catalog/details/:id" element={<Details setCart={setCart}  />} />
+          <Route
+            path="/catalog/details/:id"
+            element={<Details setCart={setCart} />}
+          />
         </Routes>
       </Box>
       <Footer />

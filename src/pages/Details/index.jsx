@@ -84,7 +84,7 @@ const Details = ({ setCart }) => {
           </Breadcrumbs>
         )}
         <Grid2 container mt={{ xs: 2, md: 0 }} spacing={4}>
-          <Grid2 item size={{ xs: 12, sm: 6, lg: 5 }}>
+          <Grid2 size={{ xs: 12, sm: 6, lg: 5 }}>
             <Box>
               <Box
                 component="img"
@@ -96,8 +96,9 @@ const Details = ({ setCart }) => {
               />
               <Box display="flex" mt={2} columnGap={2}>
                 {images?.length > 1 &&
-                  images.map((item) => (
+                  images.map((item, idx) => (
                     <Box
+                      key={idx}
                       component="img"
                       width={75}
                       onClick={() => setImage(item?.url)}
@@ -118,7 +119,7 @@ const Details = ({ setCart }) => {
               </Box>
             </Box>
           </Grid2>
-          <Grid2 item size={{ xs: 12, sm: 6, lg: 7 }}>
+          <Grid2 size={{ xs: 12, sm: 6, lg: 7 }}>
             <Box
               display="flex"
               height="100%"
@@ -196,7 +197,12 @@ const Details = ({ setCart }) => {
                       padding="8px 13px"
                     />
                   </Box>
-                  <AddToCart count={count} setCart={setCart} id={id} details={details} />
+                  <AddToCart
+                    count={count}
+                    setCart={setCart}
+                    id={id}
+                    details={details}
+                  />
                 </Box>
               </Box>
             </Box>

@@ -67,7 +67,7 @@ const News = () => {
             </Box>
             <Grid2 container>
               {md && (
-                <Grid2 item size={6}>
+                <Grid2  size={6}>
                   <Link to={`/news/${lastPost?.id}`}>
                     <Box
                       pr="38px"
@@ -181,11 +181,13 @@ const News = () => {
                   </Link>
                 </Grid2>
               )}
-              <Grid2 item size={{ xs: 12, md: 6 }}>
+              <Grid2 size={{ xs: 12, md: 6 }}>
                 {Array.isArray(news?.results) &&
                   news?.results
                     ?.slice(md ? 1 : 0, 4)
-                    .map((item, idx) => <NewsCard item={item} idx={idx} />)}
+                    .map((item, idx) => (
+                      <NewsCard key={idx} item={item} idx={idx} />
+                    ))}
               </Grid2>
             </Grid2>
           </Container>

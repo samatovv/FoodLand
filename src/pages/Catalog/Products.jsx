@@ -209,7 +209,7 @@ const Products = ({
           width="100%"
         >
           <Typography variant="h4" fontWeight={700}>
-            {category.title ? category.title : "Каталог"}
+            {category?.title ? category?.title : "Каталог"}
           </Typography>
           {!md && (
             <IconButton onClick={() => dispatch(handleFilter(true))}>
@@ -220,8 +220,9 @@ const Products = ({
         {!md && (
           <Box display="flex" overflowY="scroll" columnGap={1}>
             {chip &&
-              chip.map((item) => (
+              chip.map((item, idx) => (
                 <Chip
+                  key={idx}
                   sx={{
                     "& .MuiChip-label": {
                       fontFamily: "Open Sans",
@@ -326,8 +327,9 @@ const Products = ({
             >
               <Typography>{searchValue}</Typography>
             </ListItemButton>
-            {searched?.map((item) => (
+            {searched?.map((item, idx) => (
               <ListItemButton
+                key={idx}
                 onClick={() => {
                   setOpen(false);
                   setValueSearch(item.name);
@@ -344,8 +346,9 @@ const Products = ({
       {md && (
         <Box display="flex" mb={2.6} columnGap={1}>
           {chip &&
-            chip.map((item) => (
+            chip.map((item, idx) => (
               <Chip
+                key={idx}
                 sx={{
                   "& .MuiChip-label": {
                     fontFamily: "Open Sans",
@@ -363,7 +366,7 @@ const Products = ({
         <>
           <Grid2 container spacing={2}>
             {Array.from(Array(8).keys()).map((item, idx) => (
-              <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}>
+              <Grid2 key={idx} size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}>
                 <Skeleton
                   variant="rect"
                   sx={{ borderRadius: "20px", mb: 1 }}
@@ -396,11 +399,7 @@ const Products = ({
           <Grid2 container spacing={2}>
             {Array.isArray(prod) &&
               products?.products?.map((item, idx) => (
-                <Grid2
-                  item
-                  size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }}
-                  key={idx}
-                >
+                <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }} key={idx}>
                   <Card setCart={setCart} item={item} />
                 </Grid2>
               ))}
