@@ -11,9 +11,9 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "../../assets/images/ExpandMoreIcon";
-import { getCategories } from "../../redux/reducers/mainSlice";
+import { getCategories, handleLoading } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/reducers/products";
+import { getProducts, setProducts } from "../../redux/reducers/products";
 
 const Categories = ({
   setChip,
@@ -49,7 +49,12 @@ const Categories = ({
     setCategories(categories[0]);
   }, [allCategories]);
 
-  const handleProducts = (item) => {
+  const handleProducts = (item, single) => {
+    dispatch(handleLoading(true));
+    dispatch(setProducts([]));
+
+    single && console.log(item);
+
     if (params.find((el) => el?.id === item?.id)) {
       const filtered = chip.filter((el) => el !== item.name);
       const filteredParams = params.filter((el) => el?.id !== item?.id);
@@ -59,9 +64,9 @@ const Categories = ({
       if (page === 1)
         dispatch(
           getProducts(
-            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${filteredParams.map(
-              (item) => item?.id
-            )}`
+            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
+              single ? item.id : filteredParams.map((item) => item?.id)
+            }`
           )
         );
     } else {
@@ -72,7 +77,11 @@ const Categories = ({
         getProducts(
           `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
             item?.id
-          }${params?.length ? `,${params.map((item) => item?.id)}` : ""}`
+          }${
+            !single && params?.length
+              ? `,${params.map((item) => item?.id)}`
+              : ""
+          }`
         )
       );
     }
@@ -132,6 +141,7 @@ const Categories = ({
               categories?.first?.map((item, idx) => (
                 <Accordion
                   key={idx}
+                  // onClick={() => handleProducts(item)}
                   sx={{
                     "&.MuiPaper-root ": {
                       backgroundColor: "transparent",
@@ -192,6 +202,7 @@ const Categories = ({
                           }}
                         >
                           <AccordionSummary
+                            onClick={() => handleProducts(ite)}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
                             id="panel1-header"
@@ -215,7 +226,7 @@ const Categories = ({
                                     }
                                     label={el.name}
                                     value={el?.id}
-                                    onChange={() => handleProducts(el)}
+                                    onChange={() => handleProducts(el, true)}
                                   />
                                 </FormGroup>
                               ))}

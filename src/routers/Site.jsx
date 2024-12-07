@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Header from "../shared/Header";
 import { Route, Routes, useLocation } from "react-router";
 import Main from "../pages/Main";

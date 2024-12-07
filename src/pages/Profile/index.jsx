@@ -40,7 +40,7 @@ const Profile = ({ setCart }) => {
             <Info />
           </Grid2>
           <Grid2 size={{ xs: 12, md: 8.9 }}>
-            <Table />
+            <Table setCart={setCart} />
           </Grid2>
         </Grid2>
         <MyProducts setCart={setCart} />

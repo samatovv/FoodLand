@@ -103,12 +103,6 @@ const Cart = ({ setCartGlobal }) => {
 
     if (createdOrder?.status == 200) {
       setOpen(true);
-      if (formik.values.deliveryType === "pickup") {
-        formik.resetForm();
-        formik.setFieldValue("deliveryType", "pickup");
-      } else {
-        formik.resetForm();
-      }
       localStorage.setItem("cart", "[]");
       setCart("");
       if (drawer) handleDrawer();
@@ -171,7 +165,7 @@ const Cart = ({ setCartGlobal }) => {
         drawer={drawer}
         handleDrawer={handleDrawer}
       />
-      <Success open={open} setOpen={setOpen} />
+      <Success open={open} setOpen={setOpen} formik={formik} />
       <Alert
         // message={createdOrder?.data?.message}
         message="Ошибка"

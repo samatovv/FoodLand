@@ -1,14 +1,23 @@
-import { Box, Dialog, IconButton, Typography } from "@mui/material";
+import { Box, Button, Dialog, IconButton, Typography } from "@mui/material";
 import React from "react";
 import close from "../../assets/images/close.svg";
+import { Link } from "react-router-dom";
 
-const Success = ({ setOpen, open, reorder }) => {
-  const handleClose = () => setOpen(false);
+const Success = ({ setOpen, open, reorder, formik }) => {
+  const handleClose = () => {
+    setOpen(false);
+    if (formik.values.deliveryType === "pickup") {
+      formik.resetForm();
+      formik.setFieldValue("deliveryType", "pickup");
+    } else {
+      formik.resetForm();
+    }
+  };
   return (
     <Dialog
       sx={{
         "& .MuiPaper-root": {
-          p: { xs: "16px 12px 92px", lg: "15px 15px 138px" },
+          p: { xs: "16px 12px 92px", lg: "40px 15px 40px" },
           borderRadius: "32px",
           minWidth: { xs: "unset", lg: 453 },
         },
@@ -16,7 +25,7 @@ const Success = ({ setOpen, open, reorder }) => {
       onClose={handleClose}
       open={open}
     >
-      <IconButton
+      {/* <IconButton
         sx={{
           width: "fit-content",
           alignSelf: "end",
@@ -25,7 +34,7 @@ const Success = ({ setOpen, open, reorder }) => {
         onClick={handleClose}
       >
         <img src={close} alt="" />
-      </IconButton>
+      </IconButton> */}
       <Box
         display="flex"
         flexDirection="column"
@@ -50,18 +59,45 @@ const Success = ({ setOpen, open, reorder }) => {
           mt={{ xs: "28px", md: 6 }}
           mb={{ xs: 1, md: 2.2 }}
         >
-          {reorder ? "Ваш заказ повторно оформлен!" : "Ваш заказ оформлен!"}
+          {formik?.values?.status === "preorder"
+            ? "Ваш предзаказ оформлен!"
+            : reorder
+            ? "Ваш заказ повторно оформлен!"
+            : "Ваш заказ оформлен!"}
         </Typography>
         <Typography
           className="sans"
           variant="subtitle1"
           fontWeight={400}
+          mb={3}
           maxWidth={378}
           // lineHeight={1.2}
           textAlign="center"
         >
-          Заказ оформлен. Спасибо! Мы свяжемся с вами для подтверждения.
+          {formik?.values?.status === "preorder"
+            ? "Предзаказ оформлен."
+            : "Заказ оформлен."}
+          Спасибо! Мы свяжемся с вами для подтверждения.
         </Typography>
+
+        <Link to="/catalog">
+          <Button variant="contained" size="large">
+            В каталог
+          </Button>
+        </Link>
+
+        <Link to="/catalog">
+          <Button
+            variant="outlined"
+            size="large"
+            sx={{
+              mt: 2,
+              color: "var(--primary)",
+            }}
+          >
+            Мои заказы
+          </Button>
+        </Link>
       </Box>
     </Dialog>
   );

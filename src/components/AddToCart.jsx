@@ -19,8 +19,6 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
     let cart = JSON.parse(localStorage.getItem("cart"));
     let newItem = cart?.find((item) => item?.id === id);
 
-    console.log(newItem);
-    
     setCart(true);
     if (inCart) {
       setInCart(false);
@@ -86,7 +84,7 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
                   details?.prices?.find((item) =>
                     item.price._id
                       ? item.price._id
-                      : (item.price?.id === data?.price?.id) === data?.price?.id
+                      : item.price?.id === data?.price?.id
                   )?.value *
                   (newItem?.count + count),
                 weight: (newItem?.weight + details.weight) * count,

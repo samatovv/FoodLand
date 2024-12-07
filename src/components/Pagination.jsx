@@ -15,7 +15,7 @@ const PaginationLarge = ({ page, handleChange, products }) => {
       )}
       page={page}
       onChange={handleChange}
-      siblingCount={0}
+      siblingCount={1}
       count={products?.totalPages}
       sx={{
         mt: 5,

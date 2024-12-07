@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
-import empty from "../assets/images/empty-img.png";
+import empty from "../assets/images/empty.svg";
 import { useSelector } from "react-redux";
 
 const Card = ({ item, search, width, setCart, preview }) => {
@@ -11,19 +11,17 @@ const Card = ({ item, search, width, setCart, preview }) => {
 
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
-  const id = item?._id;
+  const id = item?._id ? item?._id : item?.product?.id;
   return (
     <Box
       sx={{
-        "&:hover img": {
-          transform:
-            Array.isArray(details?.images) &&
-            details?.images[0]?.url &&
-            "scale(1.3)",
+        "&:hover": {
+          background: "#EDEDED70",
+          transition:'all 0.2s ease'
         },
       }}
       minWidth={width}
-      p={search && { xs: "8px", md: "15px" }}
+      p={{ xs: "8px", md: "14px" }}
       maxWidth={width ? width : { xs: "unset", md: 290 }}
       backgroundColor="#FFF"
       borderRadius={3}
@@ -45,7 +43,7 @@ const Card = ({ item, search, width, setCart, preview }) => {
             objectFit:
               Array.isArray(details?.images) && !details?.images[0]?.url
                 ? "cover"
-                : "scale-down",
+                : "cover",
             transition: "all 800ms ease",
           }}
           width="100%"
@@ -102,61 +100,6 @@ const Card = ({ item, search, width, setCart, preview }) => {
             }
           />
         )}
-        {/* <Box
-          p="4px"
-          border="1px solid #EEEEEE"
-          display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          borderRadius="1000px"
-          sx={{ "& button": { padding: 0 } }}
-        >
-          <IconButton>
-            {" "}
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="24" height="24" rx="12" fill="#ECECEC" />
-              <path
-                d="M18 12H6"
-                stroke="#858585"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-            </svg>
-          </IconButton>
-          <Box component="span" m="0 12px">
-            1
-          </Box>
-          <IconButton>
-            {" "}
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect width="24" height="24" rx="12" fill="#ECECEC" />
-              <path
-                d="M12 6L12 18"
-                stroke="#858585"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-              <path
-                d="M18 12H6"
-                stroke="#858585"
-                strokeWidth="1.4"
-                strokeLinecap="round"
-              />
-            </svg>
-          </IconButton>
-        </Box> */}
       </Box>
       {!preview && (
         <AddToCart

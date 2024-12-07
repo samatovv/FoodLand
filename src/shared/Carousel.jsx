@@ -1,10 +1,10 @@
-import { Box, Skeleton, useMediaQuery } from "@mui/material";
+import { Box, useMediaQuery } from "@mui/material";
 import React, { useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import { useDispatch, useSelector } from "react-redux";
 import { getBanners } from "../redux/reducers/mainSlice";
-import emptyImg from "../assets/images/emptyCart.svg";
+import emptyImg from "../assets/images/empty.svg";
 
 const Carousel = () => {
   const dispatch = useDispatch();
@@ -12,6 +12,7 @@ const Carousel = () => {
 
   const banners = useSelector((state) => state.main.banners);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(getBanners(`/banners?type=secondary`)), []);
 
   return (

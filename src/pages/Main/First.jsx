@@ -92,9 +92,9 @@ const First = () => {
             />
           </form>
           <ButtonMore
-            radius
+            radius="15px"
             sx={{
-              width: { xs: "100%", md: 193, borderRadius: "16px" },
+              width: { xs: "100%", md: 193, borderRadius: "15px" },
               height: 52,
             }}
             txt="Заказать звонок"

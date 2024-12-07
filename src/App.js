@@ -16,7 +16,7 @@ import { setDetails } from "./redux/reducers/products";
 function App() {
   const location = useLocation();
   const dispatch = useDispatch();
-  const isAuth = useAuth;
+  const isAuth = useAuth();
 
   const loading = useSelector((state) => state.main.loading);
   const data = useSelector((state) => state.profile.data);
@@ -39,6 +39,7 @@ function App() {
       sessionStorage.clear();
     }
     if (details) dispatch(setDetails([]));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   return (

@@ -1,19 +1,12 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { getOrder, getOrders, repeatOrder } from "../../redux/reducers/profile";
+import { getOrder, getOrders } from "../../redux/reducers/profile";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Button,
-  Chip,
-  TextField,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Button, Typography, useMediaQuery } from "@mui/material";
 import Check from "../../assets/images/Check";
 import InProcess from "../../assets/images/InProcess";
 import Success from "../Cart/Success";
 import Cancelled from "../../assets/images/Cancelled";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import more from "../../assets/images/more.svg";
 import Preview from "../Preview";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
@@ -22,9 +15,9 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 import dayjs from "dayjs";
 import Calendar from "../../assets/images/Calendar";
-import empty from "../../assets/images/emptyCart.svg";
+import empty from "../../assets/images/empty.svg";
 
-const Table = () => {
+const Table = ({ setCart }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const md = useMediaQuery("(min-width:769px)");
@@ -32,7 +25,6 @@ const Table = () => {
   const id = useSelector((state) => state.profile.data?.id);
   const orders = useSelector((state) => state.profile.orders);
   const createdOrder = useSelector((state) => state.profile.createdOrder);
-  const data = useSelector((state) => state.profile.data);
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
@@ -53,6 +45,7 @@ const Table = () => {
 
   useEffect(() => {
     if (id) dispatch(getOrders(id));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useLayoutEffect(() => {
@@ -96,6 +89,11 @@ const Table = () => {
             display="flex"
             columnGap={2}
             alignItems="center"
+            sx={{
+              "& .MuiButtonBase-root.Mui-selected": {
+                color: "#FFF!important",
+              },
+            }}
             onSubmit={formik.handleSubmit}
           >
             <LocalizationProvider adapterLocale="ru" dateAdapter={AdapterDayjs}>
@@ -112,6 +110,7 @@ const Table = () => {
             —
             <LocalizationProvider adapterLocale="ru" dateAdapter={AdapterDayjs}>
               <DesktopDatePicker
+            
                 slots={{ openPickerIcon: Calendar }}
                 value={formik.values.createdTo}
                 format="YYYY-MM-DD"
@@ -139,9 +138,35 @@ const Table = () => {
               rowGap={4}
               height="100%"
             >
-              <img src={empty} alt="" />
-              <Typography variant="subtitle1" fontWeight={600} color="#AEAEAE">
-                По вашему запросу ничего не найдено
+              <svg
+                width="72"
+                height="76"
+                viewBox="0 0 72 76"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.9075 32.3752C14.7249 26.2435 19.9553 21.6641 26.1412 21.6641H47.7254C53.9113 21.6641 59.1417 26.2435 59.9591 32.3752L62.8394 53.9811C63.8257 61.3798 58.0698 67.9539 50.6056 67.9539H23.261C15.7968 67.9539 10.0409 61.3798 11.0272 53.9811L13.9075 32.3752Z"
+                  stroke="#DADADA"
+                  stroke-width="4.62823"
+                />
+                <path
+                  d="M49.2519 27.8051V18.5448C49.2519 11.7287 43.7264 6.20312 36.9103 6.20312V6.20312C30.0942 6.20312 24.5686 11.7287 24.5686 18.5448L24.5686 27.8051"
+                  stroke="#DADADA"
+                  stroke-width="4.62823"
+                  stroke-linecap="round"
+                />
+              </svg>
+
+              <Typography
+                maxWidth={304}
+                textAlign="center"
+                variant="subtitle1"
+                fontWeight={600}
+                lineHeight="24.38px"
+                color="#AEAEAE"
+              >
+                Оформленные заказы отсутсвуют
               </Typography>
             </Box>
           ) : (
@@ -158,10 +183,7 @@ const Table = () => {
                   p: "6px 12px!important",
                   minWidth: "unset",
                 },
-                "& .MuiChip-root ": {
-                  borderRadius: "6px",
-                  p: "4px 10px",
-                },
+
                 "& *": {
                   fontFamily: "Open Sans",
                 },
@@ -221,9 +243,6 @@ const Table = () => {
                     p: { xs: "7px 10px", md: "12px 0" },
                     textAlign: { xs: "start", md: "center" },
                   },
-                  "& .MuiChip-label": {
-                    p: { xs: "0 2px", md: "0 12px" },
-                  },
                 }}
               >
                 {Array.isArray(orders?.results) &&
@@ -233,23 +252,15 @@ const Table = () => {
                       <td>{item?.price}</td>
                       {md && <td>{item?.weight}</td>}
                       <td>
-                        <Chip
-                          icon={
-                            item?.status === "in_progress" ? (
-                              <InProcess />
-                            ) : item?.status === "canceled" ? (
-                              <Cancelled />
-                            ) : item?.status === "completed" ||
-                              item?.status === "new" ||
-                              item?.status === "accepted" ? (
-                              <Check />
-                            ) : (
-                              item?.status === "preorder" && <InProcess />
-                            )
-                          }
+                        <Box
                           sx={{
-                            minWidth: { xs: 104, md: 129 },
-                            maxWidth: { xs: 104, md: 129 },
+                            width: 104,
+                            height: 22,
+                            borderRadius: "4px",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            columnGap: "4px",
                             background:
                               item?.status === "new"
                                 ? "#DCF2FB"
@@ -262,21 +273,49 @@ const Table = () => {
                                 : item?.status === "accepted"
                                 ? "#DCF2FB"
                                 : item?.status === "preorder" && "#DCF2FB",
+                            color:
+                              item?.status === "new"
+                                ? "#152C68"
+                                : item?.status === "in_progress"
+                                ? "#111928"
+                                : item?.status === "canceled"
+                                ? "#ec3f3f"
+                                : item?.status === "completed"
+                                ? "#3D6815"
+                                : item?.status === "accepted"
+                                ? "#000"
+                                : item?.status === "preitem" && "#152C68",
                           }}
-                          label={
-                            item?.status === "new"
-                              ? "Принят"
-                              : item?.status === "in_progress"
-                              ? "В процессе"
-                              : item?.status === "canceled"
-                              ? "Отменен"
-                              : item?.status === "completed"
-                              ? "Готово"
-                              : item?.status === "accepted"
-                              ? "Принят"
-                              : item?.status === "preorder" && "Предзаказ"
-                          }
-                        />
+                        >
+                          {item?.status === "in_progress" ? (
+                            <InProcess />
+                          ) : item?.status === "canceled" ? (
+                            <Cancelled />
+                          ) : item?.status === "completed" ||
+                            item?.status === "new" ||
+                            item?.status === "accepted" ? (
+                            <Check
+                              color={
+                                item?.status === "completed"
+                                  ? "#3D6815"
+                                  : "#152C68"
+                              }
+                            />
+                          ) : (
+                            item?.status === "preorder" && <InProcess />
+                          )}
+                          {item?.status === "new"
+                            ? "Принят"
+                            : item?.status === "in_progress"
+                            ? "В процессе"
+                            : item?.status === "canceled"
+                            ? "Отменен"
+                            : item?.status === "completed"
+                            ? "Готово"
+                            : item?.status === "accepted"
+                            ? "Принят"
+                            : item?.status === "preorder" && "Предзаказ"}
+                        </Box>
                       </td>
                       {md ? (
                         <>
@@ -324,7 +363,7 @@ const Table = () => {
         </Box>
       </Box>
       <Success reorder open={open} setOpen={setOpen} />
-      <Preview open={openDrawer} setOpen={setOpenDrawer} />
+      <Preview setCart={setCart} open={openDrawer} setOpen={setOpenDrawer} />
     </>
   );
 };
