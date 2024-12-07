@@ -1,30 +1,22 @@
-import {
-  Box,
-  Container,
-  Grid2,
-  Pagination,
-  PaginationItem,
-  Typography,
-  useMediaQuery,
-} from "@mui/material";
+import { Box, Container, Typography } from "@mui/material";
 import React from "react";
-import img1 from "../../assets/clients/supara.png";
-import img2 from "../../assets/clients/podarimne.png";
-import img3 from "../../assets/clients/kaynar.png";
-import img4 from "../../assets/clients/wasabi.png";
-import img5 from "../../assets/clients/shirin.png";
-import img6 from "../../assets/clients/marka.png";
-import img7 from "../../assets/clients/sova.png";
-import img8 from "../../assets/clients/bublik.png";
-import img9 from "../../assets/clients/macaronnaya.png";
-import img10 from "../../assets/clients/konti.png";
+import img1 from "../../assets/clients/supara.webp";
+import img2 from "../../assets/clients/podarimne.webp";
+import img3 from "../../assets/clients/kaynar.webp";
+import img4 from "../../assets/clients/wasabi.webp";
+import img5 from "../../assets/clients/shirin.webp";
+import img6 from "../../assets/clients/marka.webp";
+import img7 from "../../assets/clients/sova.webp";
+import img8 from "../../assets/clients/bublik.webp";
+import img9 from "../../assets/clients/macaronnaya.webp";
+import img10 from "../../assets/clients/konti.webp";
 // import instagram from "../../assets/images/instagram.svg";
 // import facebook from "../../assets/images/facebook.svg";
 // import twitter from "../../assets/images/twitter.svg";
 // import ArrowForwardIcon from "../../components/ArrowForwardIcon";
 // import ArrowBackIcon from "../../components/ArrowBackIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 const clients = [
   { img: img1, name: "Supara Talkan" },
@@ -40,7 +32,6 @@ const clients = [
 ];
 
 const OurClients = () => {
-  const md = useMediaQuery("(min-width:768px)");
   return (
     <Box component="section" backgroundColor="#FFF" p="62px 0">
       <Container>
@@ -63,9 +54,13 @@ const OurClients = () => {
           <Box position="relative" mt={7}>
             <Swiper
               navigation={true}
-              modules={[Navigation]}
+              modules={[Navigation, Autoplay]}
               freeMode={true}
-              // loop={true}
+              loop={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
               // centeredSlides={true}
               // initialSlide={4}
               breakpoints={{
@@ -82,7 +77,7 @@ const OurClients = () => {
                 },
               }}
             >
-              {clients.map((item,idx) => (
+              {clients.map((item, idx) => (
                 <SwiperSlide key={idx}>
                   <Box
                     className="clients__card"

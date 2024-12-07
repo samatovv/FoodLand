@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { getNews } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NewsCard from "../../components/NewsCard";
-import empty from "../../assets/images/emptyCart.svg";
+import empty from "../../assets/images/empty.svg";
 import { useNavigate } from "react-router";
 
 const News = () => {
@@ -11,7 +11,7 @@ const News = () => {
   const navigate = useNavigate();
 
   const news = useSelector((state) => state.main.news);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(getNews()), []);
 
   return (

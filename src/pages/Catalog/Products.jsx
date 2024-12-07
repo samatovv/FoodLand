@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import {
   Box,
   Chip,
@@ -5,7 +6,6 @@ import {
   IconButton,
   InputAdornment,
   ListItemButton,
-  Popover,
   Skeleton,
   TextField,
   Typography,
@@ -23,7 +23,7 @@ import {
   setSearch,
 } from "../../redux/reducers/products";
 import filter from "../../assets/images/filter.svg";
-import empty from "../../assets/images/emptyCart.svg";
+import empty from "../../assets/images/empty.svg";
 import { handleFilter, handleLoading } from "../../redux/reducers/mainSlice";
 import CloseSearch from "../../assets/images/CloseSearch";
 import Fuse from "fuse.js";
@@ -52,7 +52,6 @@ const Products = ({
 
   const [open, setOpen] = useState(false);
   const [searched, setSearched] = useState([]);
-  const [prod, setProd] = useState([]);
 
   const firstUpdate = useRef(true);
   const firstUpdate2 = useRef(true);
@@ -164,7 +163,7 @@ const Products = ({
     }
 
     // hide linear progress
-    dispatch(handleLoading(false));
+    setTimeout(() => dispatch(handleLoading(false)), 500);
   }, [products]);
 
   useEffect(() => {
@@ -362,7 +361,7 @@ const Products = ({
             ))}
         </Box>
       )}
-      {loading && !products?.products?.length ? (
+      {loading ? (
         <>
           <Grid2 container spacing={2}>
             {Array.from(Array(8).keys()).map((item, idx) => (
@@ -397,9 +396,9 @@ const Products = ({
       ) : (
         <>
           <Grid2 container spacing={2}>
-            {Array.isArray(prod) &&
+            {Array.isArray(products?.products) &&
               products?.products?.map((item, idx) => (
-                <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 4 }} key={idx}>
+                <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 3 }} key={idx}>
                   <Card setCart={setCart} item={item} />
                 </Grid2>
               ))}

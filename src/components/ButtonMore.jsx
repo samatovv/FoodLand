@@ -37,12 +37,7 @@ const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart, radius, href }) => {
             <span className="button_txt" style={{ fontSize: 13 }}>
               {txt}
             </span>
-            <Box
-              width={40}
-              borderRadius={radius && "16px!important"}
-              height={40}
-              className="round"
-            >
+            <Box width={40} borderRadius="15px" height={40} className="round">
               <svg
                 width="40"
                 height="40"

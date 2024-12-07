@@ -1,14 +1,13 @@
 import {
   Box,
   Button,
-  Chip,
   Dialog,
   Drawer,
   IconButton,
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Close from "../../assets/images/Close";
 import InProcess from "../../assets/images/InProcess";
@@ -16,10 +15,9 @@ import Cancelled from "../../assets/images/Cancelled";
 import Check from "../../assets/images/Check";
 import { Link, useLocation } from "react-router-dom";
 import Card from "../../components/Card";
-import emptyImg from "../../assets/images/empty-img.png";
 import { setOrder } from "../../redux/reducers/profile";
 
-const Preview = ({ open, setOpen }) => {
+const Preview = ({ open, setOpen,setCart }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -54,20 +52,43 @@ const Preview = ({ open, setOpen }) => {
             justifyContent="space-between"
             alignItems="center"
           >
-            <Typography fontWeight={700} fontSize={20}>
-              №{order?.customId}
-            </Typography>
+            <Box display="flex">
+              <div>
+                <Typography
+                  fontWeight={600}
+                  color="#676767"
+                  fontSize={13}
+                  className="sans"
+                >
+                  Номер заказа:
+                </Typography>
+                <Typography fontWeight={700} fontSize={18}>
+                  {order?.customId}
+                </Typography>
+              </div>
+              <Box ml={5}>
+                <Typography
+                  fontWeight={600}
+                  color="#676767"
+                  fontSize={13}
+                  className="sans"
+                >
+                  Дата заказа:
+                </Typography>
+                <Typography fontWeight={700} fontSize={18}>
+                  {order?.createdAt &&
+                    new Intl.DateTimeFormat("ru", {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                    }).format(new Date(order?.createdAt))}
+                </Typography>
+              </Box>
+            </Box>
             <IconButton onClick={() => dispatch(setOrder([]))}>
               <Close />
             </IconButton>
           </Box>
-          <Typography className="sans" fontSize={12} fontWeight={400}>
-            {order?.createdAt &&
-              new Intl.DateTimeFormat("ru", {
-                dateStyle: "short",
-                timeStyle: "short",
-              }).format(new Date(order?.createdAt))}
-          </Typography>
+
           <Box
             p="20px 0"
             width="100%"
@@ -101,8 +122,7 @@ const Preview = ({ open, setOpen }) => {
             >
               <thead>
                 <tr>
-                  <th>Номер заказа</th>
-                  <th>Вес</th>
+                  <th>Вес(кг)</th>
                   <th>Сумма</th>
                   <th>Cтатус</th>
                   <th>Экспедитор</th>
@@ -110,27 +130,18 @@ const Preview = ({ open, setOpen }) => {
                 </tr>
               </thead>
               <tbody>
-                <td>№{order?.customId} </td>
                 <td>{order?.weight}</td>
                 <td>{order?.price}</td>
                 <td>
-                  <Chip
-                    icon={
-                      order?.status === "in_progress" ? (
-                        <InProcess />
-                      ) : order?.status === "canceled" ? (
-                        <Cancelled />
-                      ) : order?.status === "completed" ||
-                        order?.status === "new" ||
-                        order?.status === "accepted" ? (
-                        <Check />
-                      ) : (
-                        order?.status === "preorder" && <InProcess />
-                      )
-                    }
+                  <Box
                     sx={{
-                      minWidth: { xs: 104, md: 129 },
-                      maxWidth: { xs: 104, md: 129 },
+                      width: 104,
+                      height: 22,
+                      borderRadius: "4px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      columnGap: "4px",
                       background:
                         order?.status === "new"
                           ? "#DCF2FB"
@@ -143,21 +154,47 @@ const Preview = ({ open, setOpen }) => {
                           : order?.status === "accepted"
                           ? "#DCF2FB"
                           : order?.status === "preorder" && "#DCF2FB",
+                      color:
+                        order?.status === "new"
+                          ? "#152C68"
+                          : order?.status === "in_progress"
+                          ? "#111928"
+                          : order?.status === "canceled"
+                          ? "#ec3f3f"
+                          : order?.status === "completed"
+                          ? "#3D6815"
+                          : order?.status === "accepted"
+                          ? "#000"
+                          : order?.status === "preorder" && "#152C68",
                     }}
-                    label={
-                      order?.status === "new"
-                        ? "Принят"
-                        : order?.status === "in_progress"
-                        ? "В процессе"
-                        : order?.status === "canceled"
-                        ? "Отменен"
-                        : order?.status === "completed"
-                        ? "Готово"
-                        : order?.status === "accepted"
-                        ? "Принят"
-                        : order?.status === "preorder" && "Предзаказ"
-                    }
-                  />
+                  >
+                    {order?.status === "in_progress" ? (
+                      <InProcess />
+                    ) : order?.status === "canceled" ? (
+                      <Cancelled />
+                    ) : order?.status === "completed" ||
+                      order?.status === "new" ||
+                      order?.status === "accepted" ? (
+                      <Check
+                        color={
+                          order?.status === "completed" ? "#3D6815" : "#152C68"
+                        }
+                      />
+                    ) : (
+                      order?.status === "preorder" && <InProcess />
+                    )}
+                    {order?.status === "new"
+                      ? "Принят"
+                      : order?.status === "in_progress"
+                      ? "В процессе"
+                      : order?.status === "canceled"
+                      ? "Отменен"
+                      : order?.status === "completed"
+                      ? "Готово"
+                      : order?.status === "accepted"
+                      ? "Принят"
+                      : order?.status === "preorder" && "Предзаказ"}
+                  </Box>
                 </td>
                 <td>
                   {order?.managers && order?.managers[0]?.name
@@ -183,10 +220,10 @@ const Preview = ({ open, setOpen }) => {
             flexWrap="nowrap"
           >
             {order?.products?.map((item, idx) => (
-              <Card key={idx} preview item={item.product} />
+              <Card key={idx} setCart={setCart} item={item.product} />
             ))}
           </Box>
-          <Box display="flex" width="100%" columnGap={2}>
+          <Box display="flex" mt={2} width="100%" columnGap={2}>
             <Button
               href={order?.document?.url}
               disabled={!order?.document?.url}
@@ -261,9 +298,38 @@ const Preview = ({ open, setOpen }) => {
             alignItems="center"
             justifyContent="space-between"
           >
-            <Typography fontWeight={700} variant="h4">
-              №{order?.customId}
-            </Typography>
+            <Box display="flex">
+              <div>
+                <Typography
+                  fontWeight={600}
+                  color="#000000"
+                  fontSize={14}
+                  className="sans"
+                >
+                  Номер заказа:
+                </Typography>
+                <Typography fontWeight={700} fontSize={18}>
+                  {order?.customId}
+                </Typography>
+              </div>
+              <Box ml={5}>
+                <Typography
+                  fontWeight={600}
+                  color="#000000"
+                  fontSize={14}
+                  className="sans"
+                >
+                  Дата заказа:
+                </Typography>
+                <Typography fontWeight={700} fontSize={18}>
+                  {order?.createdAt &&
+                    new Intl.DateTimeFormat("ru", {
+                      dateStyle: "short",
+                      timeStyle: "short",
+                    }).format(new Date(order?.createdAt))}
+                </Typography>
+              </Box>
+            </Box>
             <IconButton onClick={() => setOpen(false)}>
               <Close />
             </IconButton>
@@ -291,11 +357,7 @@ const Preview = ({ open, setOpen }) => {
             }}
           >
             <tr>
-              <td>Номер заказа</td>
-              <td>№ {order?.customId}</td>
-            </tr>
-            <tr>
-              <td>Вес заказа </td>
+              <td>Вес заказа(кг) </td>
               <td>{order?.weight}</td>
             </tr>
             <tr>
@@ -305,27 +367,15 @@ const Preview = ({ open, setOpen }) => {
             <tr>
               <td>Статус </td>
               <td>
-                {" "}
-                <Chip
-                  icon={
-                    order?.status === "in_progress" ? (
-                      <InProcess />
-                    ) : order?.status === "canceled" ? (
-                      <Cancelled />
-                    ) : order?.status === "completed" ||
-                      order?.status === "new" ||
-                      order?.status === "accepted" ? (
-                      <Check />
-                    ) : (
-                      order?.status === "preorder" && <InProcess />
-                    )
-                  }
+                <Box
                   sx={{
-                    "& .MuiChip-label": {
-                      p: { xs: "0 2px", md: "0 12px" },
-                    },
-                    minWidth: { xs: 120, md: 129 },
-                    maxWidth: { xs: 104, md: 129 },
+                    Width: 104,
+                    height: 22,
+                    borderRadius: "4px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    columnGap: "4px",
                     background:
                       order?.status === "new"
                         ? "#DCF2FB"
@@ -339,20 +389,34 @@ const Preview = ({ open, setOpen }) => {
                         ? "#DCF2FB"
                         : order?.status === "preorder" && "#DCF2FB",
                   }}
-                  label={
-                    order?.status === "new"
-                      ? "Принят"
-                      : order?.status === "in_progress"
-                      ? "В процессе"
-                      : order?.status === "canceled"
-                      ? "Отменен"
-                      : order?.status === "completed"
-                      ? "Готово"
-                      : order?.status === "accepted"
-                      ? "Принят"
-                      : order?.status === "preorder" && "Предзаказ"
-                  }
-                />
+                >
+                  {order?.status === "in_progress" ? (
+                    <InProcess />
+                  ) : order?.status === "canceled" ? (
+                    <Cancelled />
+                  ) : order?.status === "completed" ||
+                    order?.status === "new" ||
+                    order?.status === "accepted" ? (
+                    <Check
+                      color={
+                        order?.status === "completed" ? "#3D6815" : "#152C68"
+                      }
+                    />
+                  ) : (
+                    order?.status === "preorder" && <InProcess />
+                  )}
+                  {order?.status === "new"
+                    ? "Принят"
+                    : order?.status === "in_progress"
+                    ? "В процессе"
+                    : order?.status === "canceled"
+                    ? "Отменен"
+                    : order?.status === "completed"
+                    ? "Готово"
+                    : order?.status === "accepted"
+                    ? "Принят"
+                    : order?.status === "preorder" && "Предзаказ"}
+                </Box>
               </td>
             </tr>
             <tr>

@@ -16,7 +16,7 @@ import AddOrDelete from "../../components/AddOrDelete";
 import AddToCart from "../../components/AddToCart";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
-import empty from "../../assets/images/emptyCart.svg";
+import empty from "../../assets/images/empty.svg";
 
 const Details = ({ setCart }) => {
   const dispatch = useDispatch();
@@ -35,10 +35,12 @@ const Details = ({ setCart }) => {
     dispatch(getDetails(id));
     setPage(1);
     setImage(images[0]?.url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {
     setImage(images[0]?.url);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
   const formik = useFormik({

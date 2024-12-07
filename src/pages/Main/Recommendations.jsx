@@ -11,7 +11,7 @@ import Card from "../../components/Card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationLarge from "../../components/Pagination";
-import { getProducts, getRecomendations } from "../../redux/reducers/products";
+import { getRecomendations } from "../../redux/reducers/products";
 
 const Recommendations = ({ setCart }) => {
   const dispatch = useDispatch();
@@ -26,6 +26,7 @@ const Recommendations = ({ setCart }) => {
     dispatch(
       getRecomendations(`recommendations?limit=${!sm ? 21 : 4}&page=${page}`)
     );
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const handleChange = (event, value) => {

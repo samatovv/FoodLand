@@ -1,11 +1,17 @@
-import { Box, Container, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Container,
+  Grid2,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import React, { useEffect } from "react";
-import img from "../../assets/images/category-1.png";
-import img2 from "../../assets/images/category-2.png";
-import img3 from "../../assets/images/category-3.png";
-import img4 from "../../assets/images/category-4.png";
-import img5 from "../../assets/images/category-5.png";
-import img6 from "../../assets/images/category-6.png";
+import img from "../../assets/images/category-1.webp";
+import img2 from "../../assets/images/category-2.webp";
+import img3 from "../../assets/images/category-3.webp";
+import img4 from "../../assets/images/category-4.webp";
+import img5 from "../../assets/images/category-5.webp";
+import img6 from "../../assets/images/category-6.webp";
 import ButtonMore from "../../components/ButtonMore";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -39,7 +45,7 @@ const Categories = () => {
   const md = useMediaQuery("(min-width:769px)");
 
   // const categories = useSelector((state) => state.main.categories);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => dispatch(getCategories()), []);
   return (
     <Box
@@ -59,7 +65,9 @@ const Categories = () => {
           Просмотр товаров по{" "}
           <span style={{ color: "#B89776" }}>категориям</span>
         </Typography>
-        <Box
+        <Grid2
+          spacing={2}
+          container
           sx={{
             position: "relative",
             "& .category__card": {
@@ -81,70 +89,50 @@ const Categories = () => {
             },
           }}
         >
-          <Swiper
-            navigation={true}
-            modules={[Navigation]}
-            freeMode={true}
-            loop={true}
-            centeredSlides={false}
-            initialSlide={md ? 2 : 1}
-            breakpoints={{
-              0: {
-                slidesPerView: 2,
-                slidesPerGroup: 2,
-                spaceBetween: 16,
-              },
-
-              768: {
-                slidesPerView: 4,
-                // slidesPerGroup: 2,
-                spaceBetween: 16,
-              },
-            }}
-          >
-            {Array.isArray(categories) &&
-              categories.map((item, idx) => (
-                <SwiperSlide key={idx}>
-                  <Box className="category__card">
-                    <Box
-                      component="img"
-                      width="100%"
-                      height={{ xs: 250, md: "396px" }}
-                      sx={{
-                        objectFit: "cover",
-                        minHeight: { xs: 250, md: "396px" },
-                        borderRadius: "16px",
-                      }}
-                      src={item?.img}
-                      alt=""
-                    />
-                    <Box className="category__more" width="80%">
-                      <Typography
-                        fontSize={{ xs: 16, md: 20 }}
-                        mb={{ xs: 1, md: 2.5 }}
-                        maxWidth={219}
-                        fontWeight="bold"
-                      >
-                        {item.title}
-                      </Typography>
-                      <Link
-                        to={`/catalog/?search=&categoryIds=${item.id}&page=1`}
-                      >
-                        <ButtonMore
-                          txt="Подробнее "
-                          sx={{
-                            width: "100%",
-                            p: { xs: "4px", md: "4px 4px 4px 16px;" },
-                            "& span": { color: "#000" },
-                          }}
-                        />
-                      </Link>
-                    </Box>
+          {Array.isArray(categories) &&
+            categories.map((item, idx) => (
+              <Grid2 size={{ xs: 6, md: 4 }}>
+                <Box className="category__card">
+                  <Box
+                    component="img"
+                    width="100%"
+                    height={{ xs: 250, md: "396px" }}
+                    sx={{
+                      objectFit: "cover",
+                      minHeight: { xs: 250, md: "396px" },
+                      borderRadius: "16px",
+                    }}
+                    src={item?.img}
+                    alt=""
+                  />
+                  <Box className="category__more" width="80%">
+                    <Typography
+                      fontSize={{ xs: 16, md: 20 }}
+                      mb={{ xs: 1, md: 2.5 }}
+                      maxWidth={219}
+                      fontWeight="bold"
+                    >
+                      {item.title}
+                    </Typography>
+                    <Link
+                      to={`/catalog/?search=&categoryIds=${item.id}&page=1`}
+                    >
+                      <ButtonMore
+                        txt="Подробнее "
+                        radius="15px"
+                        sx={{
+                          borderRadius: "15px",
+                          width: "100%",
+                          p: { xs: "4px", md: "4px 4px 4px 16px;" },
+                          "& span": { color: "#000" },
+                        }}
+                      />
+                    </Link>
                   </Box>
-                </SwiperSlide>
-              ))}
-          </Swiper>
-        </Box>
+                </Box>
+              </Grid2>
+            ))}
+        </Grid2>
 
         {/* <Grid2
           container

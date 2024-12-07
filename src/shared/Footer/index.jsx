@@ -11,10 +11,8 @@ import logo from "../../assets/images/logo.svg";
 import logo3 from "../../assets/images/logo3.svg";
 import { Link, useNavigate } from "react-router-dom";
 import instagram from "../../assets/images/instagram.svg";
-import facebook from "../../assets/images/facebook.svg";
-import twitter from "../../assets/images/twitter.svg";
 import { useAuth } from "../ProtectedRoutes";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { handleAuthDialog } from "../../redux/reducers/mainSlice";
 
 const Footer = () => {
@@ -23,6 +21,23 @@ const Footer = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
+  const categories = [
+    {
+      title: "Шоколад и какао продукты",
+      id: "670cfc0e8d01bf78e1ad9a6c",
+    },
+    { title: "Молочная продукция", id: "670cfc198d01bf78e1ad9b16" },
+    { title: "Ингредиенты", id: "670cfc088d01bf78e1ad9a53" },
+    { title: "Продукция для Бариста", id: "670cfc148d01bf78e1ad9ad0" },
+    {
+      title: "Покрытия и наполнители",
+      id: "670cfc0a8d01bf78e1ad9a5c",
+    },
+    {
+      title: "Пищевая печать",
+      id: "670cfc1a8d01bf78e1ad9b25",
+    },
+  ];
   return (
     <Box
       component="footer"
@@ -66,7 +81,10 @@ const Footer = () => {
               </Typography>
             )}
             <Typography variant="subtitle2" fontWeight="400" color="#707070">
-              Г.Бишкек ул. Матросова 1а/21 <br />
+              <a className="link" href="https://go.2gis.com/m1271">
+                Г.Бишкек ул. Матросова 1а/21
+              </a>
+              <br />
               <br />
               <a className="link" href="tel:+996 0550 114 477">
                 +996 0550 114 477
@@ -81,7 +99,7 @@ const Footer = () => {
               flexDirection="column"
               alignItems={{ xs: "start", md: "end" }}
             >
-              <Box display="flex" columnGap={2.5}>
+              <Box display="flex" columnGap={10}>
                 <Box>
                   <Typography
                     variant="subtitle2"
@@ -185,59 +203,21 @@ const Footer = () => {
                     flexDirection="column"
                     rowGap={1}
                   >
-                    <Link
-                      className="link"
-                      to="/catalog/?search=Шоколад&categoryIds=&page=1"
-                    >
-                      <Typography
+                    {categories.map((item) => (
+                      <Link
                         className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
+                        to={`/catalog/?search=&categoryIds=${item.id}&page=1`}
                       >
-                        Шоколад
-                      </Typography>
-                    </Link>
-                    <Link to="/catalog/?search=Сливки&categoryIds=&page=1">
-                      <Typography
-                        className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
-                      >
-                        Сливки{" "}
-                      </Typography>
-                    </Link>
-                    <Link to="/catalog/?search=Сыр&categoryIds=&page=1">
-                      <Typography
-                        className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
-                      >
-                        Сыр
-                      </Typography>
-                    </Link>
-                    <Link to="/catalog/?search=Декор&categoryIds=&page=1">
-                      <Typography
-                        className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
-                      >
-                        Декор{" "}
-                      </Typography>
-                    </Link>
-                    <Link to="/catalog/?search=Орехи&categoryIds=&page=1">
-                      <Typography
-                        className="link"
-                        variant="subtitle2"
-                        color="#707070"
-                        fontWeight={400}
-                      >
-                        Орехи
-                      </Typography>
-                    </Link>
+                        <Typography
+                          className="link"
+                          variant="subtitle2"
+                          color="#707070"
+                          fontWeight={400}
+                        >
+                          {item.title}
+                        </Typography>
+                      </Link>
+                    ))}
                   </Box>
                 </Box>
               </Box>

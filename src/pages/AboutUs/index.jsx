@@ -327,7 +327,7 @@ const AboutUs = () => {
                   >
                     Телефон
                   </Typography>
-                  <a href="tel:+996 0550 114 477">
+                  <a href="tel:+996 0550 114 477">
                     <Typography fontSize={20} className="sans" fontWeight={400}>
                       +996 0550 114 477
                     </Typography>
@@ -346,9 +346,11 @@ const AboutUs = () => {
                   >
                     Адрес
                   </Typography>
-                  <Typography fontSize={20} className="sans" fontWeight={400}>
-                    Г.Бишкек ул. Матросова 1а/21{" "}
-                  </Typography>
+                  <a href="https://go.2gis.com/m1271">
+                    <Typography fontSize={20} className="sans" fontWeight={400}>
+                      Г.Бишкек ул. Матросова 1а/21{" "}
+                    </Typography>
+                  </a>
                 </div>
               </Box>
               <Box pt={3} borderTop="1px solid #DFDFDF" mt={3}>
