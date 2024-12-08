@@ -11,6 +11,7 @@ import logo from "../../assets/images/logo.svg";
 import logo3 from "../../assets/images/logo3.svg";
 import { Link, useNavigate } from "react-router-dom";
 import instagram from "../../assets/images/instagram.svg";
+import moore from "../../assets/images/moore.svg";
 import { useAuth } from "../ProtectedRoutes";
 import { useDispatch, useSelector } from "react-redux";
 import { handleAuthDialog } from "../../redux/reducers/mainSlice";
@@ -247,13 +248,14 @@ const Footer = () => {
       </Container>
       <Box
         display="flex"
-        justifyContent="center"
-        p="20px 0"
+        justifyContent="space-between"
+        p={{ xs: "20px 10px", md: "20px 80px" }}
         backgroundColor="var(--primary)"
       >
         <Typography variant="subtitle1" color="#FFF">
           @FoodLand - 2024
         </Typography>
+        <img src={moore} alt="" />
       </Box>
     </Box>
   );

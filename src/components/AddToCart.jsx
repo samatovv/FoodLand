@@ -55,6 +55,7 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
                 name: details.name,
                 img: !!details.images ? details.images[0]?.url : null,
                 description: details.description,
+                category: details?.category[0]?.name,
                 sum:
                   details?.prices?.find((item) =>
                     item.price._id
@@ -79,6 +80,7 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
               ...updatedCart,
               {
                 ...newItem,
+                category: details?.category[0]?.name,
                 count: newItem?.count + count,
                 sum:
                   details?.prices?.find((item) =>

@@ -2,33 +2,24 @@ import {
   Box,
   Container,
   IconButton,
-  InputAdornment,
   ListItemButton,
-  TextField,
   Typography,
   useMediaQuery,
 } from "@mui/material";
 import React, { useEffect, useRef, useState } from "react";
 import logo3 from "../../assets/images/logo3.svg";
 import logo from "../../assets/images/logo1.svg";
-import cart from "../../assets/images/cart.svg";
 import auth from "../../assets/images/auth.svg";
-import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Burger from "../../assets/images/Burger";
 import { handleAuthDialog, handleDrawer } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../ProtectedRoutes";
-import {
-  getProducts,
-  getProductsNames,
-  setSearch,
-} from "../../redux/reducers/products";
-import Find from "../../assets/images/Find";
-import CloseSearch from "../../assets/images/CloseSearch";
+import { getProductsNames, setSearch } from "../../redux/reducers/products";
 import Fuse from "fuse.js";
+import Search from "../Search";
 
 const Header = ({ cart, setCart }) => {
-  const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const md = useMediaQuery("(min-width:769px)");
@@ -121,7 +112,7 @@ const Header = ({ cart, setCart }) => {
             <Box
               component="nav"
               backgroundColor="#FFF"
-              borderRadius="100px"
+              borderRadius="10px"
               p="12px 32px"
               display="flex"
               columnGap={8}
@@ -170,7 +161,8 @@ const Header = ({ cart, setCart }) => {
           alignItems="center"
           onMouseLeave={() => setOpen(false)}
         >
-          {md && (
+          {/* <Search /> */}
+          {/* {md && (
             <Box
               component="form"
               display="flex"
@@ -186,7 +178,7 @@ const Header = ({ cart, setCart }) => {
                       background: "#FFF",
                       p: "10px",
                       mr: 1,
-                      borderRadius: "100px",
+                      borderRadius: "10px",
                       transition: "all 0.3s linear",
                       position: "relative",
                       width: "7%",
@@ -304,8 +296,7 @@ const Header = ({ cart, setCart }) => {
                 ))}
               </Box>
             </Box>
-          )}
-
+          )} */}
           <IconButton
             mr={1}
             onClick={() =>
@@ -314,49 +305,81 @@ const Header = ({ cart, setCart }) => {
                 : dispatch(handleAuthDialog(true))
             }
           >
-            <svg
-              width="44"
-              height="44"
+            <Box
+              component="svg"
+              sx={{
+                "& rect": {
+                  transition: "all 0.2s ease",
+                },
+                "&:hover rect": {
+                  fill: "var(--primary)",
+                },
+              }}
+              width="44px"
+              height="44px"
               viewBox="0 0 44 44"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle
-                cx="22"
-                cy="22"
-                r="21.45"
-                fill="white"
-                stroke="#ECECEC"
-                strokeWidth="1.10003"
+              <rect width="44" height="44" rx="10" fill="white" />
+              <path
+                d="M15.3302 20.34C15.5595 18.6203 17.0265 17.3359 18.7614 17.3359H24.8151C26.55 17.3359 28.017 18.6203 28.2462 20.34L29.054 26.3998C29.3307 28.4749 27.7163 30.3187 25.6229 30.3187H17.9536C15.8601 30.3187 14.2458 28.4749 14.5224 26.3998L15.3302 20.34Z"
+                stroke="black"
+                stroke-width="1.29807"
               />
               <path
-                d="M14.636 20.5612C14.8653 18.8415 16.3322 17.5571 18.0672 17.5571H24.1208C25.8558 17.5571 27.3228 18.8415 27.552 20.5612L28.3598 26.621C28.6365 28.6961 27.0221 30.5399 24.9287 30.5399H17.2594C15.1659 30.5399 13.5516 28.6961 13.8282 26.621L14.636 20.5612Z"
+                d="M25.2432 19.0586V16.4614C25.2432 14.5497 23.6934 13 21.7817 13V13C19.8701 13 18.3203 14.5497 18.3203 16.4614L18.3203 19.0586"
                 stroke="black"
-                strokeWidth="1.29807"
-              />
-              <path
-                d="M24.549 19.2798V16.6826C24.549 14.7709 22.9992 13.2212 21.0875 13.2212V13.2212C19.1758 13.2212 17.6261 14.7709 17.6261 16.6826L17.6261 19.2798"
-                stroke="black"
-                strokeWidth="1.29807"
-                strokeLinecap="round"
+                stroke-width="1.29807"
+                stroke-linecap="round"
               />
               {cart && (
                 <ellipse
-                  cx="27.4402"
-                  cy="17.258"
+                  cx="27.1349"
+                  cy="16.0575"
                   rx="4.05679"
                   ry="4.05755"
                   fill="#FF0000"
                 />
               )}
-            </svg>
+            </Box>
           </IconButton>
           <IconButton
             onClick={() =>
               isAuth ? navigate("/profile") : dispatch(handleAuthDialog(true))
             }
           >
-            <img src={auth} width="48px" height="48px" alt="Авторизация" />
+            <Box
+              component="svg"
+              width="44px"
+              height="44px"
+              sx={{
+                "& rect": {
+                  transition: "all 0.2s ease",
+                },
+                "&:hover rect": {
+                  fill: "var(--primary)",
+                },
+              }}
+              viewBox="0 0 44 44"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="44" height="44" rx="10" fill="white" />
+              <circle
+                cx="3.80793"
+                cy="3.80793"
+                r="3.80793"
+                transform="matrix(-1 0 0 1 25.4717 14)"
+                stroke="black"
+                stroke-width="1.42797"
+              />
+              <path
+                d="M15 27.2653C15 26.4462 15.5149 25.7156 16.2862 25.4401V25.4401C19.7638 24.1981 23.564 24.1981 27.0415 25.4401V25.4401C27.8129 25.7156 28.3278 26.4462 28.3278 27.2653V28.5176C28.3278 29.648 27.3266 30.5164 26.2075 30.3565L25.2989 30.2267C22.8878 29.8823 20.44 29.8823 18.0289 30.2267L17.1203 30.3565C16.0012 30.5164 15 29.648 15 28.5176V27.2653Z"
+                stroke="black"
+                stroke-width="1.42797"
+              />
+            </Box>
           </IconButton>
           {!md && (
             <IconButton onClick={() => dispatch(handleDrawer(true))}>

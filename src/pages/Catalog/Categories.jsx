@@ -18,6 +18,8 @@ import { getProducts, setProducts } from "../../redux/reducers/products";
 const Categories = ({
   setChip,
   chip,
+  setParams2,
+  params2,
   isAuth,
   params,
   setParams,
@@ -49,11 +51,9 @@ const Categories = ({
     setCategories(categories[0]);
   }, [allCategories]);
 
-  const handleProducts = (item, single) => {
+  const handleProducts = (item) => {
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
-
-    single && console.log(item);
 
     if (params.find((el) => el?.id === item?.id)) {
       const filtered = chip.filter((el) => el !== item.name);
@@ -65,20 +65,30 @@ const Categories = ({
         dispatch(
           getProducts(
             `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-              single ? item.id : filteredParams.map((item) => item?.id)
+              params2
+                ? params2.map((item) => item?.id)
+                : filteredParams.map((item) => item?.id)
             }`
           )
         );
     } else {
       if (page > 1) setPage(1);
       setChip([...chip, item.name]);
-      setParams([...params, { id: item?.id, name: item.name }]);
+      setParams([
+        ...params,
+        { id: item?.id, name: item.name, parent: item.parent.id },
+      ]);
+
       dispatch(
         getProducts(
           `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
             item?.id
           }${
-            !single && params?.length
+            params2
+              ? params?.length
+                ? `,${params2.map((item) => item?.id)}`
+                : ""
+              : params?.length
               ? `,${params.map((item) => item?.id)}`
               : ""
           }`
@@ -87,6 +97,42 @@ const Categories = ({
     }
   };
 
+  const handleProducts2 = (item) => {
+    dispatch(handleLoading(true));
+    dispatch(setProducts([]));
+
+    if (params2.find((el) => el?.id === item?.id)) {
+      const filtered = chip.filter((el) => el !== item.name);
+      const filteredParams = params2.filter((el) => el?.id !== item?.id);
+      setChip([...filtered]);
+      setParams2([...filteredParams]);
+      if (page > 1) setPage(1);
+      if (page === 1)
+        dispatch(
+          getProducts(
+            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
+              params?.length ? `${params.map((item) => item?.id)}` : ""
+            }${
+              params.length >= 1 && filteredParams.length >= 1 ? "," : ""
+            }${filteredParams.map((item) => item?.id)}`
+          )
+        );
+    } else {
+      if (page > 1) setPage(1);
+      setChip([...chip, item.name]);
+      setParams2([
+        ...params2,
+        { id: item?.id, name: item.name, parent: item.parent.id },
+      ]);
+      dispatch(
+        getProducts(
+          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
+            item?.id
+          }${params2?.length ? `,${params2.map((item) => item?.id)}` : ""}`
+        )
+      );
+    }
+  };
   return (
     <Box component="section" pb={13}>
       {md ? (
@@ -207,7 +253,15 @@ const Categories = ({
                             aria-controls="panel1-content"
                             id="panel1-header"
                           >
-                            {ite.name}
+                            <span
+                              style={{
+                                fontWeight:
+                                  !!params.find((el) => el?.id === ite?.id) &&
+                                  700,
+                              }}
+                            >
+                              {ite.name}
+                            </span>
                           </AccordionSummary>
                           <AccordionDetails>
                             {categories?.second
@@ -218,7 +272,7 @@ const Categories = ({
                                     control={
                                       <Checkbox
                                         checked={
-                                          !!params.find(
+                                          !!params2.find(
                                             (item) => item?.id === el?.id
                                           )
                                         }
@@ -226,7 +280,7 @@ const Categories = ({
                                     }
                                     label={el.name}
                                     value={el?.id}
-                                    onChange={() => handleProducts(el, true)}
+                                    onChange={() => handleProducts2(el)}
                                   />
                                 </FormGroup>
                               ))}

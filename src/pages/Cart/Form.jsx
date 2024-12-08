@@ -32,11 +32,11 @@ const Form = ({ formik, cart, close }) => {
     >
       <Box
         display="flex"
-        mb={2.8}
+        mb="47px"
         justifyContent="space-between"
         alignItems="center"
       >
-        <Typography variant="h5" fontWeight="600">
+        <Typography fontSize={25} fontWeight="600">
           Оформление заказа
         </Typography>
         {!md && (
@@ -46,7 +46,13 @@ const Form = ({ formik, cart, close }) => {
         )}
       </Box>
       <Box borderBottom="1px solid #DDDDDD" pb="24px" mb={3}>
-        <Typography className="sans" variant="subtitle2" mb={2} color="#5B5B5B">
+        <Typography
+          className="sans"
+          fontSize={16}
+          fontWeight="500"
+          mb={2}
+          color="#5B5B5B"
+        >
           Метод доставки
         </Typography>
         <RadioGroup
@@ -64,12 +70,12 @@ const Form = ({ formik, cart, close }) => {
         >
           <FormControlLabel
             value="delivery"
-            control={<Radio required />}
+            control={<Radio required size="small" />}
             label="Доставка"
           />
           <FormControlLabel
             value="pickup"
-            control={<Radio required />}
+            control={<Radio required size="small" />}
             label="Самовывоз"
           />
         </RadioGroup>
@@ -85,8 +91,9 @@ const Form = ({ formik, cart, close }) => {
           <>
             <Typography
               className="sans"
-              variant="subtitle2"
-              mb={2}
+              fontWeight={500}
+              fontSize={16}
+              mb={0.5}
               color="#5B5B5B"
             >
               Адрес доставки
@@ -105,8 +112,9 @@ const Form = ({ formik, cart, close }) => {
         <Typography
           className="sans"
           mt={2}
-          variant="subtitle2"
-          mb={2}
+          fontSize={16}
+          mb={0.5}
+          fontWeight={500}
           color="#5B5B5B"
         >
           Дата{" "}
@@ -132,9 +140,10 @@ const Form = ({ formik, cart, close }) => {
         </LocalizationProvider>
         <Typography
           className="sans"
+          fontSize={16}
+          fontWeight={500}
           mt={2}
-          variant="subtitle2"
-          mb={2}
+          mb={0.5}
           color="#5B5B5B"
         >
           Комментарии
@@ -154,10 +163,10 @@ const Form = ({ formik, cart, close }) => {
           mt={4}
           alignItems="baseline"
         >
-          <Typography className="sans" fontSize={17} fontWeight="600">
-            Итоговая сумма:
+          <Typography className="sans" fontSize={25} fontWeight="700">
+            Итого:
           </Typography>
-          <Typography fontSize={20} fontWeight="600">
+          <Typography fontSize={25} fontWeight="700">
             {cart &&
               cart?.reduce(
                 (total, amount) => total + parseInt(amount.sum),
@@ -180,7 +189,7 @@ const Form = ({ formik, cart, close }) => {
           variant="contained"
           fullWidth
           disabled={!cart?.length}
-          sx={{ fontSize: 10 }}
+          sx={{ fontSize: 14, fontWeight: "600" }}
           onClick={() => formik.setFieldValue("status", "new")}
           color="primary"
           type="submit"
@@ -195,7 +204,7 @@ const Form = ({ formik, cart, close }) => {
           onClick={() => formik.setFieldValue("status", "preorder")}
           sx={{
             border: "1px solid #DBDBDB",
-            fontSize: 10,
+            fontSize: 14,
             color: "#000",
             p: "11px 29px!important",
           }}

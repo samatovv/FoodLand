@@ -39,6 +39,7 @@ const Catalog = ({ setCart }) => {
 
   const [chip, setChip] = useState("");
   const [category, setCategory] = useState("");
+  const [params2, setParams2] = useState([]);
   const [params, setParams] = useState([]);
   const [searchValue, setValueSearch] = useState("");
   const [page, setPage] = useState(1);
@@ -90,6 +91,8 @@ const Catalog = ({ setCart }) => {
                 setValueSearch={setValueSearch}
                 setParams={setParams}
                 params={params}
+                setParams2={setParams2}
+                params2={params2}
                 isAuth={isAuth}
                 chip={chip}
                 formik={formik}
@@ -121,6 +124,8 @@ const Catalog = ({ setCart }) => {
         searchValue={searchValue}
         setValueSearch={setValueSearch}
         setParams={setParams}
+        setParams2={setParams2}
+        params2={params2}
         params={params}
         isAuth={isAuth}
         chip={chip}

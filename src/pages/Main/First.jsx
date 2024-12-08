@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Box, Container, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Container,
+  InputAdornment,
+  TextField,
+  Typography,
+} from "@mui/material";
 
 import ButtonMore from "../../components/ButtonMore";
 // import partners from "../../assets/images/partners.webp";
@@ -8,6 +14,7 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearch } from "../../redux/reducers/products";
 import { getBanner } from "../../redux/reducers/mainSlice";
+import Search from "../../shared/Search";
 
 const First = () => {
   const dispatch = useDispatch();
@@ -58,39 +65,16 @@ const First = () => {
           flexDirection={{ xs: "column", md: "row" }}
           rowGap={2}
         >
-          <form
+          {/* <form
             style={{ display: "inline" }}
             action=""
             onSubmit={() => {
               navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
             }}
           >
-            <TextField
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                dispatch(setSearch(e.target.value));
-              }}
-              placeholder="Найти..."
-              sx={{
-                borderRadius: "16px",
-                "& input.MuiOutlinedInput-input": {
-                  p: "12.5px 14.66px",
-                  borderRadius: "16px",
-                },
-                mr: "34.5px",
-                width: { xs: "100%", md: 318 },
+            <Search />
 
-                "&.MuiFormControl-root": {
-                  borderRadius: "16px",
-                },
-
-                "& .MuiOutlinedInput-notchedOutline": {
-                  borderRadius: "16px",
-                },
-              }}
-            />
-          </form>
+          </form> */}
           <ButtonMore
             radius="15px"
             sx={{
