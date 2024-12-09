@@ -65,16 +65,8 @@ const First = () => {
           flexDirection={{ xs: "column", md: "row" }}
           rowGap={2}
         >
-          {/* <form
-            style={{ display: "inline" }}
-            action=""
-            onSubmit={() => {
-              navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
-            }}
-          >
-            <Search />
+          <Search />
 
-          </form> */}
           <ButtonMore
             sx={{
               width: { xs: "100%", md: 193, borderRadius: "15px" },

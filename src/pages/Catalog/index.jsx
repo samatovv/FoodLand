@@ -87,10 +87,12 @@ const Catalog = ({ setCart }) => {
           {md && (
             <Grid2 size={{ xs: 12, md: 3 }}>
               <Categories
+                category={category}
                 searchValue={searchValue}
                 setValueSearch={setValueSearch}
                 setParams={setParams}
                 params={params}
+                setCategory={setCategory}
                 setParams2={setParams2}
                 params2={params2}
                 isAuth={isAuth}

@@ -39,7 +39,13 @@ const Table = ({ setCart }) => {
       createdTo: now,
     },
     onSubmit: (values) => {
-      dispatch(getOrders(id, values.createdFrom, values.createdTo));
+      dispatch(
+        getOrders(
+          id,
+          dayjs(values.createdFrom).startOf("day"),
+          dayjs(values.createdTo).endOf("day")
+        )
+      );
     },
   });
 
@@ -110,7 +116,6 @@ const Table = ({ setCart }) => {
             —
             <LocalizationProvider adapterLocale="ru" dateAdapter={AdapterDayjs}>
               <DesktopDatePicker
-            
                 slots={{ openPickerIcon: Calendar }}
                 value={formik.values.createdTo}
                 format="YYYY-MM-DD"
@@ -154,7 +159,7 @@ const Table = ({ setCart }) => {
                   d="M49.2519 27.8051V18.5448C49.2519 11.7287 43.7264 6.20312 36.9103 6.20312V6.20312C30.0942 6.20312 24.5686 11.7287 24.5686 18.5448L24.5686 27.8051"
                   stroke="#DADADA"
                   strokeWidth="4.62823"
-                  strokeLinecap="round"
+                  stroke-linecap="round"
                 />
               </svg>
 

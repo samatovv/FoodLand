@@ -161,9 +161,20 @@ const Header = ({ cart, setCart }) => {
           alignItems="center"
           onMouseLeave={() => setOpen(false)}
         >
-          <svg
-            width="44"
-            height="44"
+          <Box
+            component="svg"
+            sx={{
+              cursor: "pointer",
+
+              "& rect": {
+                transition: "all 0.2s ease",
+              },
+              "&:hover rect": {
+                fill: "var(--primary)",
+              },
+            }}
+            width="44px"
+            height="44px"
             viewBox="0 0 44 44"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +193,7 @@ const Header = ({ cart, setCart }) => {
               stroke="black"
               stroke-width="1.5"
             />
-          </svg>
+          </Box>
 
           {/* <Search /> */}
           {/* {md && (
@@ -320,106 +331,107 @@ const Header = ({ cart, setCart }) => {
               </Box>
             </Box>
           )} */}
-          <IconButton
-            mr={1}
+
+          <Box
+            component="svg"
             onClick={() =>
               isAuth
                 ? navigate("/profile/cart")
                 : dispatch(handleAuthDialog(true))
             }
+            sx={{
+              cursor: "pointer",
+              mr: 2,
+              ml: 2,
+
+              "& rect": {
+                transition: "all 0.2s ease",
+              },
+              "&:hover rect": {
+                fill: "var(--primary)",
+              },
+            }}
+            width="44px"
+            height="44px"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <Box
-              component="svg"
-              sx={{
-                "& rect": {
-                  transition: "all 0.2s ease",
-                },
-                "&:hover rect": {
-                  fill: "var(--primary)",
-                },
-              }}
-              width="44px"
-              height="44px"
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="43"
-                height="43"
-                rx="9.5"
-                fill="white"
-                stroke="#ECECEC"
+            <rect
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="9.5"
+              fill="white"
+              stroke="#ECECEC"
+            />
+            <path
+              d="M15.3302 20.34C15.5595 18.6203 17.0265 17.3359 18.7614 17.3359H24.8151C26.55 17.3359 28.017 18.6203 28.2462 20.34L29.054 26.3998C29.3307 28.4749 27.7163 30.3187 25.6229 30.3187H17.9536C15.8601 30.3187 14.2458 28.4749 14.5224 26.3998L15.3302 20.34Z"
+              stroke="black"
+              stroke-width="1.29807"
+            />
+            <path
+              d="M25.2432 19.0586V16.4614C25.2432 14.5497 23.6934 13 21.7817 13V13C19.8701 13 18.3203 14.5497 18.3203 16.4614L18.3203 19.0586"
+              stroke="black"
+              stroke-width="1.29807"
+              stroke-linecap="round"
+            />
+            {cart && (
+              <ellipse
+                cx="27.1344"
+                cy="16.0575"
+                rx="4.05679"
+                ry="4.05755"
+                fill="#FF0000"
               />
-              <path
-                d="M15.3302 20.34C15.5595 18.6203 17.0265 17.3359 18.7614 17.3359H24.8151C26.55 17.3359 28.017 18.6203 28.2462 20.34L29.054 26.3998C29.3307 28.4749 27.7163 30.3187 25.6229 30.3187H17.9536C15.8601 30.3187 14.2458 28.4749 14.5224 26.3998L15.3302 20.34Z"
-                stroke="black"
-                stroke-width="1.29807"
-              />
-              <path
-                d="M25.2432 19.0586V16.4614C25.2432 14.5497 23.6934 13 21.7817 13V13C19.8701 13 18.3203 14.5497 18.3203 16.4614L18.3203 19.0586"
-                stroke="black"
-                stroke-width="1.29807"
-                stroke-linecap="round"
-              />
-              {cart && (
-                <ellipse
-                  cx="27.1344"
-                  cy="16.0575"
-                  rx="4.05679"
-                  ry="4.05755"
-                  fill="#FF0000"
-                />
-              )}
-            </Box>
-          </IconButton>
-          <IconButton
+            )}
+          </Box>
+
+          <Box
             onClick={() =>
               isAuth ? navigate("/profile") : dispatch(handleAuthDialog(true))
             }
+            component="svg"
+            width="44px"
+            height="44px"
+            sx={{
+              cursor: "pointer",
+              "& rect": {
+                transition: "all 0.2s ease",
+              },
+              "&:hover rect": {
+                fill: "var(--primary)",
+              },
+            }}
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <Box
-              component="svg"
-              width="44px"
-              height="44px"
-              sx={{
-                "& rect": {
-                  transition: "all 0.2s ease",
-                },
-                "&:hover rect": {
-                  fill: "var(--primary)",
-                },
-              }}
-              viewBox="0 0 44 44"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect
-                x="0.5"
-                y="0.5"
-                width="43"
-                height="43"
-                rx="9.5"
-                fill="white"
-                stroke="#ECECEC"
-              />
-              <circle
-                cx="3.80793"
-                cy="3.80793"
-                r="3.80793"
-                transform="matrix(-1 0 0 1 25.4717 14)"
-                stroke="black"
-                stroke-width="1.42797"
-              />
-              <path
-                d="M15 27.2653C15 26.4462 15.5149 25.7156 16.2862 25.4401V25.4401C19.7638 24.1981 23.564 24.1981 27.0415 25.4401V25.4401C27.8129 25.7156 28.3278 26.4462 28.3278 27.2653V28.5176C28.3278 29.648 27.3266 30.5164 26.2075 30.3565L25.2989 30.2267C22.8878 29.8823 20.44 29.8823 18.0289 30.2267L17.1203 30.3565C16.0012 30.5164 15 29.648 15 28.5176V27.2653Z"
-                stroke="black"
-                stroke-width="1.42797"
-              />
-            </Box>
-          </IconButton>
+            <rect
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="9.5"
+              fill="white"
+              stroke="#ECECEC"
+            />
+            <circle
+              cx="3.80793"
+              cy="3.80793"
+              r="3.80793"
+              transform="matrix(-1 0 0 1 25.4717 14)"
+              stroke="black"
+              stroke-width="1.42797"
+            />
+            <path
+              d="M15 27.2653C15 26.4462 15.5149 25.7156 16.2862 25.4401V25.4401C19.7638 24.1981 23.564 24.1981 27.0415 25.4401V25.4401C27.8129 25.7156 28.3278 26.4462 28.3278 27.2653V28.5176C28.3278 29.648 27.3266 30.5164 26.2075 30.3565L25.2989 30.2267C22.8878 29.8823 20.44 29.8823 18.0289 30.2267L17.1203 30.3565C16.0012 30.5164 15 29.648 15 28.5176V27.2653Z"
+              stroke="black"
+              stroke-width="1.42797"
+            />
+          </Box>
+
           {!md && (
             <IconButton onClick={() => dispatch(handleDrawer(true))}>
               <Burger />

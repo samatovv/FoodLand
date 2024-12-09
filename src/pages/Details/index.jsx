@@ -63,6 +63,18 @@ const Details = ({ setCart }) => {
         Каталог
       </Typography>
     </Link>,
+    <Link
+      to={`/catalog/?search=&categoryIds=${details?.category?.parent?.parent?.id}&page=1`}
+    >
+      <Typography
+        fontSize={{ xs: 14, md: 13 }}
+        className="sans"
+        key="3"
+        sx={{ color: "text.primary" }}
+      >
+        {details?.category?.parent?.parent?.name}
+      </Typography>
+    </Link>,
     <Typography
       fontSize={{ xs: 14, md: 13 }}
       className="sans"
@@ -96,6 +108,7 @@ const Details = ({ setCart }) => {
                 component="img"
                 src={!images[0]?.url ? empty : image}
                 width="100%"
+                mt={2}
                 height={{ xs: 322, sm: "auto", md: 405 }}
                 sx={{ borderRadius: 16, objectFit: "scale-down" }}
                 alt=""

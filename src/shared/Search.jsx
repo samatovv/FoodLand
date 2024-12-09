@@ -143,7 +143,7 @@ const Search = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState("");
 
   const names = useSelector((state) => state.products.names);
 
@@ -156,17 +156,15 @@ const Search = () => {
       <Autocomplete
         value={value}
         onChange={(event, newValue) => {
-          if (typeof newValue === "string") {
-            setValue({
-              name: newValue,
-            });
-          } else if (newValue && newValue.inputValue) {
+          if (newValue && newValue.inputValue) {
             // Create a new value from the user input
-            setValue({
-              name: newValue.inputValue,
-            });
-          } else {
-            setValue(newValue);
+            navigate(
+              `/catalog/?search=${newValue.inputValue}&categoryIds=&page=1`
+            );
+          } else if (newValue) {
+            console.log(newValue);
+
+            navigate(`/catalog/details/${newValue?.id}`);
           }
         }}
         filterOptions={(options, params) => {
@@ -218,24 +216,24 @@ const Search = () => {
             {...params}
             placeholder="Найти..."
             sx={{
-              borderRadius: "16px",
-              "& input.MuiOutlinedInput-input": {
-                p: "12.5px 14.66px",
-                borderRadius: "16px",
-              },
+              borderRadius: "15px",
               width: { xs: "100%", md: 318 },
 
               "&.MuiFormControl-root": {
-                borderRadius: "16px",
+                borderRadius: "15px",
                 background: "#FFF",
               },
-
+              "& .MuiInputBase-root": {
+                p: "3px 16px 3px 18px!important",
+              },
               "& .MuiOutlinedInput-notchedOutline": {
-                borderRadius: "16px",
+                borderRadius: "15px",
               },
             }}
             slotProps={{
               input: {
+                ...params.InputProps,
+                type: "search",
                 endAdornment: (
                   <InputAdornment position="end">
                     <svg
