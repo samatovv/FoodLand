@@ -1,66 +1,37 @@
 import {
+  Backdrop,
   Box,
   Container,
   IconButton,
-  ListItemButton,
-  Typography,
+  InputAdornment,
+  TextField,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import logo3 from "../../assets/images/logo3.svg";
 import logo from "../../assets/images/logo1.svg";
-import auth from "../../assets/images/auth.svg";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Burger from "../../assets/images/Burger";
 import { handleAuthDialog, handleDrawer } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../ProtectedRoutes";
-import { getProductsNames, setSearch } from "../../redux/reducers/products";
-import Fuse from "fuse.js";
-import Search from "../Search";
 
-const Header = ({ cart, setCart }) => {
+const Header = ({ cart }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const md = useMediaQuery("(min-width:769px)");
   const isAuth = useAuth();
 
   const filter = useSelector((state) => state.main.filter);
-  const names = useSelector((state) => state.products.names);
 
-  const [value, setValue] = useState("");
   const [open, setOpen] = useState(false);
-  const [full, setFull] = useState(false);
-  const [searched, setSearched] = useState([]);
 
-  const input = useRef(null);
-
-  const options = {
-    includeScore: true,
-    includeMatches: true,
-    threshold: 0.2,
-    keys: ["name"],
+  const handleClose = () => {
+    setOpen(false);
   };
-
-  const fuse = new Fuse(names, options);
-
-  const handleSearch = (event) => {
-    const { value } = event.target;
-
-    if (!value) setSearched(names);
-
-    const results = fuse.search(value);
-    const items = results.map((result) => result.item);
-    setSearched(items);
+  const handleOpen = () => {
+    setOpen(true);
   };
-
-  useEffect(() => {
-    dispatch(getProductsNames());
-  }, []);
-
-  useEffect(() => {
-    if (Array.isArray(names)) setSearched(names);
-  }, [names]);
 
   return (
     <Box
@@ -163,6 +134,7 @@ const Header = ({ cart, setCart }) => {
         >
           <Box
             component="svg"
+            onClick={handleOpen}
             sx={{
               cursor: "pointer",
 
@@ -194,144 +166,81 @@ const Header = ({ cart, setCart }) => {
               stroke-width="1.5"
             />
           </Box>
-
-          {/* <Search /> */}
-          {/* {md && (
-            <Box
-              component="form"
-              display="flex"
-              alignItems="center"
-              onClick={() => {
-                setFull(!full);
-                input.current.click();
+          <Backdrop
+            sx={{
+              "&.MuiBackdrop-root": {
+                justifyContent: "end!important",
+                alignItems: "start!important",
+              },
+            }}
+            open={open}
+            // onClick={handleClose}
+          >
+            <TextField
+              sx={{
+                width: "70%",
+                mt: "26px",
+                mr: "58px",
+                background: "#FFF",
+                "& .MuiOutlinedInput-notchedOutline": {
+                  border: "1px solid #E2E2E2",
+                  borderRadius: "10px",
+                },
+                "&.MuiFormControl-root": {
+                  background: "#FFF",
+                  borderRadius: "10px",
+                },
+                "& input": {
+                  borderRadius: "10px!important",
+                  p: "10.5px 16px 10.5px 18px!important",
+                },
               }}
-              sx={
-                md
-                  ? {
-                      border: "1px solid #ECECEC",
-                      background: "#FFF",
-                      p: "10px",
-                      mr: 1,
-                      borderRadius: "10px",
-                      transition: "all 0.3s linear",
-                      position: "relative",
-                      width: "7%",
-                      "& input": {
-                        border: "none",
-                        outline: "none",
-                        width: 0,
-                        background: "none",
-                      },
-
-                      "&:hover": {
-                        width: "60%",
-                        "& input": {
-                          width: "auto",
-                        },
-                      },
-                    }
-                  : {
-                      border: "1px solid #ECECEC",
-                      background: "#FFF",
-                      p: "10px",
-                      mr: 1,
-                      borderRadius: "100px",
-                      transition: "all 0.3s linear",
-                      position: full ? "fixed" : "relative",
-                      width: !full ? "9%" : "87%",
-                      zIndex: 10,
-                      "& input": {
-                        border: "none",
-                        outline: "none",
-                        width: full ? "100%" : "1%",
-                        background: "none",
-                      },
-                    }
-              }
-              action=""
-              onSubmit={(e) => {
-                e.preventDefault();
-                navigate(
-                  `/catalog/?search=${encodeURI(value)}&categoryIds=&page=1`
-                );
+              placeholder="Найти"
+              slotProps={{
+                input: {
+                  startAdornment: (
+                    <InputAdornment position="start" sx={{ cursor: "pointer" }}>
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 18 18"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M12.7333 12.7333L17 17M14.8667 7.93333C14.8667 11.7625 11.7625 14.8667 7.93333 14.8667C4.10416 14.8667 1 11.7625 1 7.93333C1 4.10416 4.10416 1 7.93333 1C11.7625 1 14.8667 4.10416 14.8667 7.93333Z"
+                          stroke="black"
+                          stroke-width="1.5"
+                        />
+                      </svg>
+                    </InputAdornment>
+                  ),
+                  endAdornment: (
+                    <InputAdornment
+                      onClick={handleClose}
+                      position="end"
+                      sx={{ cursor: "pointer" }}
+                    >
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M13.461 12.2484L12.4 13.3094L9.999 10.9104L7.599 13.3064L6.539 12.2454L8.938 9.85038L6.539 7.45237L7.6 6.39138L10 8.79037L12.401 6.39337L13.461 7.45538L11.061 9.85038L13.461 12.2484ZM10 0.109375C4.624 0.109375 0.25 4.48338 0.25 9.85938C0.25 15.2354 4.624 19.6094 10 19.6094C15.376 19.6094 19.75 15.2354 19.75 9.85938C19.75 4.48338 15.376 0.109375 10 0.109375Z"
+                          fill="#6E8435"
+                        />
+                      </svg>
+                    </InputAdornment>
+                  ),
+                },
               }}
-            >
-              <svg
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15.7333 15.7333L20 20M17.8667 10.9333C17.8667 14.7625 14.7625 17.8667 10.9333 17.8667C7.10416 17.8667 4 14.7625 4 10.9333C4 7.10416 7.10416 4 10.9333 4C14.7625 4 17.8667 7.10416 17.8667 10.9333Z"
-                  stroke="black"
-                  strokeWidth="1.5"
-                />
-              </svg>
-              <input
-                ref={input}
-                type="text"
-                value={value}
-                onChange={(e) => {
-                  if (!open) setOpen(!open);
-                  setValue(e.target.value);
-                  dispatch(setSearch(e.target.value));
-                  handleSearch(e);
-                }}
-                placeholder="Найти..."
-              />
-              <Box
-                onMouseEnter={() => setOpen(true)}
-                sx={{
-                  opacity: open ? "1" : "0",
-                  visibility: open ? "unset" : "hidden",
-                  height: open ? "auto" : "0px",
-                  maxHeight: 200,
-                  overflow: "scroll",
-                  transition: "height 300ms linear",
-                  backgroundColor: "#F9F9F9!important",
-                  p: "24px 0 15px",
-                  borderRadius: "0 0 20px 20px",
-                  position: "absolute",
-                  top: 28,
-                  right: 0,
-                  width: "-webkit-fill-available",
-                  zIndex: "-1!important",
-                }}
-              >
-                <ListItemButton
-                  onClick={() => {
-                    setOpen(false);
-                    navigate(
-                      `/catalog/?search=${encodeURI(value)}&categoryIds=&page=1`
-                    );
-                  }}
-                  mb={0.8}
-                >
-                  <Typography>{value}</Typography>
-                </ListItemButton>
-                {searched?.map((item, idx) => (
-                  <ListItemButton
-                    key={idx}
-                    onClick={() => {
-                      setOpen(false);
-                      setValue(item.name);
-                      navigate(
-                        `/catalog/?search=${encodeURI(
-                          item.name
-                        )}&categoryIds=&page=1`
-                      );
-                    }}
-                    mb={0.8}
-                  >
-                    <Typography>{item.name}</Typography>
-                  </ListItemButton>
-                ))}
-              </Box>
-            </Box>
-          )} */}
-
+            />
+          </Backdrop>
           <Box
             component="svg"
             onClick={() =>
