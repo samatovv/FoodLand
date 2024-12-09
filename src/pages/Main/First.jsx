@@ -1,26 +1,13 @@
-import React, { useEffect, useState } from "react";
-import {
-  Box,
-  Container,
-  InputAdornment,
-  TextField,
-  Typography,
-} from "@mui/material";
-
+import React, { useEffect } from "react";
+import { Box, Container, Typography } from "@mui/material";
 import ButtonMore from "../../components/ButtonMore";
-// import partners from "../../assets/images/partners.webp";
 import "swiper/css";
-import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
-import { setSearch } from "../../redux/reducers/products";
 import { getBanner } from "../../redux/reducers/mainSlice";
 import Search from "../../shared/Search";
 
 const First = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-
-  const [value, setValue] = useState("");
 
   const banner = useSelector((state) => state.main.banner);
 
@@ -70,7 +57,7 @@ const First = () => {
           <ButtonMore
             sx={{
               width: { xs: "100%", md: 193, borderRadius: "15px" },
-              // height: 52,
+              ml: "34.5px",
             }}
             txt="Заказать звонок"
             href="tel:+996 550 114 477"

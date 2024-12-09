@@ -2,6 +2,7 @@
 import {
   Box,
   Chip,
+  ClickAwayListener,
   Grid2,
   IconButton,
   InputAdornment,
@@ -28,6 +29,7 @@ import { handleFilter, handleLoading } from "../../redux/reducers/mainSlice";
 import CloseSearch from "../../assets/images/CloseSearch";
 import Fuse from "fuse.js";
 import PaginationLarge from "../../components/Pagination";
+import Search from "./Search";
 
 const Products = ({
   setCart,
@@ -55,25 +57,6 @@ const Products = ({
 
   const firstUpdate = useRef(true);
   const firstUpdate2 = useRef(true);
-
-  const options = {
-    includeScore: true,
-    includeMatches: true,
-    threshold: 0.2,
-    keys: ["name"],
-  };
-
-  const fuse = new Fuse(names, options);
-
-  const handleSearch = (event) => {
-    const { value } = event.target;
-
-    if (!value) setSearched(names);
-
-    const results = fuse.search(value);
-    const items = results.map((result) => result.item);
-    setSearched(items);
-  };
 
   const handleDelete = (item) => {
     setPage(1);
@@ -233,112 +216,16 @@ const Products = ({
               ))}
           </Box>
         )}
-        <Box
-          component="form"
-          onSubmit={(e) => {
-            e.preventDefault();
-            setOpen(false);
-            if (page === 1)
-              dispatch(
-                getProducts(
-                  `/products/query?limit=12&page=1&search=${encodeURI(
-                    searchValue
-                  )}&categoryIds=${params.map((item) => item.id)}`
-                )
-              );
-          }}
-          width="100%"
-          position="relative"
-        >
-          <TextField
-            placeholder="Найти на Foodland..."
-            fullWidth
-            value={searchValue}
-            onChange={(e) => {
-              if (!open) setOpen(!open);
-              setValueSearch(e.target.value);
-              handleSearch(e);
-            }}
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Find />
-                  </InputAdornment>
-                ),
-                endAdornment: searchValue && (
-                  <InputAdornment position="start">
-                    <IconButton
-                      onClick={() => {
-                        setOpen(false);
-                        setValueSearch("");
-                      }}
-                    >
-                      <CloseSearch open={open} />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              },
-            }}
-            sx={{
-              mt: 1.5,
-              zIndex: 4,
-              background: "#FFF",
-              "& .MuiOutlinedInput-notchedOutline": {
-                border: "1px solid #E2E2E2",
-              },
-              "& input": {
-                p: "9px 4px!important",
-              },
-            }}
-          />
-          <Box
-            sx={{
-              opacity: open ? "1" : "0",
-              visibility: open ? "unset" : "hidden",
-              height: open ? "auto" : "0px",
-              maxHeight: 200,
-              overflow: "scroll",
-              transition: "height 300ms linear",
-              backgroundColor: "#F9F9F9",
-              p: "24px 0 15px",
-              borderRadius: "0 0 20px 20px",
-              position: "absolute",
-              top: 40,
-              width: "-webkit-fill-available",
-              zIndex: 3,
-            }}
-          >
-            <ListItemButton
-              onClick={() => {
-                setOpen(false);
-                dispatch(
-                  getProducts(
-                    `/products/query?limit=12&page=1&search=${encodeURI(
-                      searchValue
-                    )}&categoryIds=${params.map((item) => item.id)}`
-                  )
-                );
-              }}
-              mb={0.8}
-            >
-              <Typography>{searchValue}</Typography>
-            </ListItemButton>
-            {searched?.map((item, idx) => (
-              <ListItemButton
-                key={idx}
-                onClick={() => {
-                  setOpen(false);
-                  setValueSearch(item.name);
-                  navigate(`/catalog/details/${item.id}`);
-                }}
-                mb={0.8}
-              >
-                <Typography>{item.name}</Typography>
-              </ListItemButton>
-            ))}
-          </Box>
-        </Box>
+        <Search
+          setSearched={setSearched}
+          setOpen={setOpen}
+          open={open}
+          searched={searched}
+          page={page}
+          searchValue={searchValue}
+          setValueSearch={setValueSearch}
+          params={params}
+        />
       </Box>
       {md && (
         <Box display="flex" mb={2.6} columnGap={1}>
