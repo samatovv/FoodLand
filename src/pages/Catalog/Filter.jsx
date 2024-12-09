@@ -10,6 +10,8 @@ const Filter = ({
   setPage,
   setChip,
   searchValue,
+  setParams2,
+  params2,
   setValueSearch,
   setParams,
   params,
@@ -28,7 +30,7 @@ const Filter = ({
           p: "8px 8px 24px 15px",
           width: "80vw",
           height: "100vh",
-          pt:'58px'
+          pt: "58px",
         },
       }}
       open={filter}
@@ -50,6 +52,8 @@ const Filter = ({
       </Box>
       <Categories
         setPage={setPage}
+        setParams2={setParams2}
+        params2={params2}
         searchValue={searchValue}
         setValueSearch={setValueSearch}
         setParams={setParams}

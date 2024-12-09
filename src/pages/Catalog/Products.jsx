@@ -174,21 +174,21 @@ const Products = ({
         setSearch(decodeURI(location.search.split("&")[0].split("=")[1]))
       );
 
-      dispatch(
-        getProducts(
-          `/products/query?limit=12&page=${
-            location.search.split("&")[2].split("=")[1]
-          }&search=${
-            location.search.includes("searchmain")
-              ? location.search.split("&")[0].split("=")[1]
-              : decodeURI(location.search.split("&")[0].split("=")[1])
-          }&categoryIds=${
-            params?.length
-              ? `${params.map((item) => item.id)}`
-              : location.search.split("&")[1].split("=")[1]
-          }`
-        )
-      );
+      // dispatch(
+      //   getProducts(
+      //     `/products/query?limit=12&page=${
+      //       location.search.split("&")[2].split("=")[1]
+      //     }&search=${
+      //       location.search.includes("searchmain")
+      //         ? location.search.split("&")[0].split("=")[1]
+      //         : decodeURI(location.search.split("&")[0].split("=")[1])
+      //     }&categoryIds=${
+      //       params?.length
+      //         ? `${params.map((item) => item.id)}`
+      //         : location.search.split("&")[1].split("=")[1]
+      //     }`
+      //   )
+      // );
     }
   }, [location.search]);
 

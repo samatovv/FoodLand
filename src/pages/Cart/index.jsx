@@ -127,16 +127,16 @@ const Cart = ({ setCartGlobal }) => {
 
   return (
     <>
-      <Container maxWidth="lg" sx={{ mt: { xs: 0, md: 4 } }}>
+      <Container  sx={{ mt: { xs: 0, md: 4 } }}>
         <Grid2 container pb="24px" spacing={{ xs: 2, lg: 2 }}>
-          <Grid2 size={{ xs: 12, md: 8, lg: 7.5 }}>
+          <Grid2 size={{ xs: 12, md: 8, lg: 7.3 }}>
             <Products
               setCartGlobal={setCartGlobal}
               cart={cart}
               setCart={setCart}
             />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4, lg: 4.5 }}>
+          <Grid2 size={{ xs: 12, md: 4, lg: 4.7 }}>
             {md ? (
               <Form formik={formik} cart={cart} />
             ) : (

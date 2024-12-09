@@ -89,7 +89,7 @@ const AddOrDelete = ({
       <IconButton onClick={deleteHandler}>
         <Inc />
       </IconButton>
-      <Box component="span" className="sans" m="0 12px">
+      <Box component="span" fontWeight={300} className="sans" m="0 12px">
         {count}
       </Box>
       <IconButton onClick={add}>

@@ -11,8 +11,8 @@ import Delete from "../../assets/images/Delete";
 import AddOrDelete from "../../components/AddOrDelete";
 import { Link } from "react-router-dom";
 import { TransitionGroup } from "react-transition-group";
-import empty from "../../assets/images/empty.svg";
-import emptyImg from "../../assets/images/empryCart.svg";
+import emptyImg from "../../assets/images/empty.svg";
+import empty from "../../assets/images/empty-cart.svg";
 
 const Products = ({ cart, setCart, setCartGlobal }) => {
   const md = useMediaQuery("(min-width:769px)");
@@ -39,12 +39,12 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
         justifyContent="space-between"
       >
         <div>
-          <Typography fontSize={{ xs: 26, md: 20 }} fontWeight="600">
+          <Typography fontSize={{ xs: 26, md: 25 }} fontWeight="600">
             Товары
           </Typography>
           <Typography
             className="sans"
-            variant="subtitle2"
+            fontSize={15}
             fontWeight="400"
             color="#888888"
           >
@@ -52,7 +52,7 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
           </Typography>
         </div>
         <Typography
-          variant="subtitle2"
+          fontSize={15}
           className="sans"
           color={!cart?.length ? "#666" : "#960000"}
           onClick={() => {
@@ -98,7 +98,7 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
           </Typography>
           <Link to="/catalog">
             <Button
-              sx={{ borderRadius: 2 }}
+              sx={{ borderRadius: "44px", p: "16px 90px!important" }}
               variant="contained"
               color="primary"
             >
@@ -162,7 +162,7 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
         src={item?.img ? item?.img : emptyImg}
         minWidth={{ xs: 80, md: "90px" }}
         width={{ xs: 80, md: "90px" }}
-        sx={{ borderRadius: "12px", objectFit: "scale-down" }}
+        sx={{ borderRadius: "12px", objectFit: "cover" }}
         height={{ xs: 80, md: "90px" }}
         alt=""
       />
@@ -173,7 +173,7 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
         width={{ xs: "100%", md: "60%" }}
         ml={{ xs: 1, md: 2 }}
       >
-        <Box maxWidth="80%">
+        <Box maxWidth="100%">
           <Typography
             className="sans"
             variant="subtitle2"
@@ -200,10 +200,11 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
               WebkitBoxOrient: "vertical",
               wordWrap: "break-word",
             }}
+            fontWeight={600}
             color="#797979"
             className="sans"
           >
-            {item?.description}
+            {item?.category}
           </Typography>
         </Box>
         {/* <Typography
@@ -238,7 +239,7 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
         setCart={setCart}
         price={item?.price}
       />
-      <Typography variant="h5" className="sans" fontWeight={700}>
+      <Typography fontSize={18} className="sans" fontWeight={700}>
         {item?.sum?.toFixed(2)}с
       </Typography>
       {md && (

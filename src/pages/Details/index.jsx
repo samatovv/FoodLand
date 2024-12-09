@@ -5,6 +5,7 @@ import {
   Grid2,
   Typography,
   useMediaQuery,
+  Skeleton,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
@@ -17,10 +18,13 @@ import AddToCart from "../../components/AddToCart";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link } from "react-router-dom";
 import empty from "../../assets/images/empty.svg";
+import { useAuth } from "../../shared/ProtectedRoutes";
 
 const Details = ({ setCart }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:768px)");
+
+  const isAuth = useAuth();
 
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
@@ -130,20 +134,42 @@ const Details = ({ setCart }) => {
               sx={{ height: "calc(100% - 95px)" }}
             >
               <div>
-                {md && (
-                  <Typography
-                    className="sans"
-                    variant="subtitle1"
-                    mb={0.5}
-                    color="var(--primary)"
-                    fontWeight="700"
-                  >
-                    {details.group}
+                {md &&
+                  (!details?.category?.name ? (
+                    <Skeleton
+                      variant="rect"
+                      sx={{
+                        borderRadius: "10px",
+                        mb: 2,
+                      }}
+                      width="70%"
+                      height={40}
+                    />
+                  ) : (
+                    <Typography
+                      className="sans"
+                      variant="subtitle1"
+                      mb={0.5}
+                      color="var(--primary)"
+                      fontWeight="700"
+                    >
+                      {details?.category?.name}
+                    </Typography>
+                  ))}
+                {!details?.name ? (
+                  <Skeleton
+                    variant="rect"
+                    sx={{
+                      borderRadius: "10px",
+                    }}
+                    width="100%"
+                    height={40}
+                  />
+                ) : (
+                  <Typography className="sans" variant="h4" fontWeight={700}>
+                    {details?.name}
                   </Typography>
                 )}
-                <Typography className="sans" variant="h4" fontWeight={700}>
-                  {details?.name}
-                </Typography>
               </div>
               <Box component="form" onSubmit={formik.handleSubmit}>
                 {/* <Box
@@ -170,42 +196,56 @@ const Details = ({ setCart }) => {
                   <Chip label="BX10S" variant="outlined" />
                   <Chip label="BS" variant="outlined" />
                 </Box> */}
-                <Box width={{ xs: "100%", md: "50%" }}>
-                  <Box
-                    mt={4}
-                    mb={3}
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="space-between"
-                  >
-                    <Typography
-                      className="sans"
-                      fontSize={{ xs: 40, md: 48 }}
-                      fontWeight="600"
+                {!!isAuth && (
+                  <Box width={{ xs: "100%", md: "50%" }}>
+                    <Box
+                      mt={4}
+                      mb={3}
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="space-between"
                     >
-                      {
-                        details?.prices?.find(
-                          (item) => item.price?.id === data?.price?.id
-                        )?.value
-                      }
-                      c
-                    </Typography>
-                    <AddOrDelete
+                      {!details?.prices ? (
+                        <Skeleton
+                          variant="rect"
+                          sx={{
+                            borderRadius: "10px",
+                            mr: 4,
+                          }}
+                          width={166}
+                          height={40}
+                        />
+                      ) : (
+                        <Typography
+                          className="sans"
+                          fontSize={{ xs: 40, md: 48 }}
+                          fontWeight="600"
+                        >
+                          {
+                            details?.prices?.find(
+                              (item) => item.price?.id === data?.price?.id
+                            )?.value
+                          }
+                          c
+                        </Typography>
+                      )}
+                      <AddOrDelete
+                        count={count}
+                        setCount={setCount}
+                        id={id}
+                        price={details.price}
+                        width={md ? "40%" : 121}
+                        padding="8px 13px"
+                      />
+                    </Box>
+                    <AddToCart
                       count={count}
-                      setCount={setCount}
+                      setCart={setCart}
                       id={id}
-                      price={details.price}
-                      width={md ? "40%" : 121}
-                      padding="8px 13px"
+                      details={details}
                     />
                   </Box>
-                  <AddToCart
-                    count={count}
-                    setCart={setCart}
-                    id={id}
-                    details={details}
-                  />
-                </Box>
+                )}
               </Box>
             </Box>
           </Grid2>
