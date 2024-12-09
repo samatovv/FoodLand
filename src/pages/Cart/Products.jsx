@@ -30,7 +30,8 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
       p={{ xs: "32px 0 0 0", md: "15px" }}
       maxHeight={{ xs: "70vh", md: 609 }}
       minHeight={{ xs: "unset", md: 609 }}
-      overflow={!cart?.length ? "auto" : "scroll"}
+      height='100%'
+      // overflow={!cart?.length ? "auto" : "scroll"}
     >
       <Box
         display="flex"
@@ -70,11 +71,11 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
       </Box>
       {!cart?.length ? (
         <Box
-          height="100%"
           display="flex"
           justifyContent="center"
           alignItems="center"
           flexDirection="column"
+          height="90%"
         >
           <img src={empty} alt="" />
           <Typography

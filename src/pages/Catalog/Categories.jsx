@@ -17,7 +17,9 @@ import { getProducts, setProducts } from "../../redux/reducers/products";
 
 const Categories = ({
   setChip,
+  setCategory,
   chip,
+  category,
   setParams2,
   params2,
   isAuth,
@@ -212,11 +214,25 @@ const Categories = ({
                   }}
                 >
                   <AccordionSummary
+                    onClick={() => {
+                      dispatch(
+                        getProducts(
+                          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
+                        )
+                      );
+                      setCategory({ title: item.name });
+                    }}
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
                   >
-                    {item?.name}
+                    <span
+                      style={{
+                        fontWeight: category?.title === item.name && 700,
+                      }}
+                    >
+                      {item?.name}
+                    </span>
                   </AccordionSummary>
                   <AccordionDetails>
                     {categories?.second
