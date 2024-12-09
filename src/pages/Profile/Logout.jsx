@@ -6,10 +6,16 @@ import { useNavigate } from "react-router";
 const Logout = ({ open, close }) => {
   const navigate = useNavigate();
   const handleLogout = () => {
-    navigate("/");
-    cookie.remove("foodland_token");
     sessionStorage.clear();
     localStorage.clear();
+    cookie.removeSpecific("foodland_token", {
+      path: "/",
+      domain: "foodland.kg",
+    });
+    navigate("/");
+    setTimeout(() => {
+      window.location.reload();
+    }, 200);
   };
   return (
     <Dialog

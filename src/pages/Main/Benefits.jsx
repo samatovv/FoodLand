@@ -71,6 +71,10 @@ const Benefits = () => {
 
                     right: 30,
                     border: "1px solid #B4B4B4",
+
+                    "& .round": {
+                      top: 3,
+                    },
                     "& span": {
                       fontSize: "12px!important",
                     },

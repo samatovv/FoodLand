@@ -69,7 +69,7 @@ const Details = ({ setCart }) => {
       key="3"
       sx={{ color: "text.primary" }}
     >
-      {details?.group}
+      {details?.category?.name}
     </Typography>,
   ];
 
@@ -81,7 +81,7 @@ const Details = ({ setCart }) => {
           pt: { xs: 5, md: "60px" },
         }}
       >
-        {!md && (
+        {md && (
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
             aria-label="breadcrumb"
@@ -148,10 +148,10 @@ const Details = ({ setCart }) => {
                   ) : (
                     <Typography
                       className="sans"
-                      variant="subtitle1"
+                      fontSize={16}
                       mb={0.5}
                       color="var(--primary)"
-                      fontWeight="700"
+                      fontWeight="400"
                     >
                       {details?.category?.name}
                     </Typography>
@@ -166,7 +166,7 @@ const Details = ({ setCart }) => {
                     height={40}
                   />
                 ) : (
-                  <Typography className="sans" variant="h4" fontWeight={700}>
+                  <Typography className="sans" variant="h4" fontWeight={600}>
                     {details?.name}
                   </Typography>
                 )}
@@ -196,8 +196,8 @@ const Details = ({ setCart }) => {
                   <Chip label="BX10S" variant="outlined" />
                   <Chip label="BS" variant="outlined" />
                 </Box> */}
-                {!!isAuth && (
-                  <Box width={{ xs: "100%", md: "50%" }}>
+                <Box width={{ xs: "100%", md: "45%" }}>
+                  {!!isAuth && (
                     <Box
                       mt={4}
                       mb={3}
@@ -218,8 +218,8 @@ const Details = ({ setCart }) => {
                       ) : (
                         <Typography
                           className="sans"
-                          fontSize={{ xs: 40, md: 48 }}
-                          fontWeight="600"
+                          fontSize={{ xs: 40, md: 40 }}
+                          fontWeight="700"
                         >
                           {
                             details?.prices?.find(
@@ -234,18 +234,18 @@ const Details = ({ setCart }) => {
                         setCount={setCount}
                         id={id}
                         price={details.price}
-                        width={md ? "40%" : 121}
+                        width={md ? "24%" : 121}
                         padding="8px 13px"
                       />
                     </Box>
-                    <AddToCart
-                      count={count}
-                      setCart={setCart}
-                      id={id}
-                      details={details}
-                    />
-                  </Box>
-                )}
+                  )}
+                  <AddToCart
+                    count={count}
+                    setCart={setCart}
+                    id={id}
+                    details={details}
+                  />
+                </Box>
               </Box>
             </Box>
           </Grid2>

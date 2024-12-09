@@ -66,13 +66,13 @@ const OurClients = () => {
               breakpoints={{
                 0: {
                   slidesPerView: 2,
-                  slidesPerGroup: 2,
+                  slidesPerGroup: 1,
                   spaceBetween: 16,
                 },
 
                 768: {
                   slidesPerView: 4,
-                  slidesPerGroup: 4,
+                  slidesPerGroup: 1,
                   spaceBetween: 30,
                 },
               }}
@@ -93,7 +93,7 @@ const OurClients = () => {
                       border: "1px solid #E6E6E6",
                       "&:hover": {
                         borderColor: "transparent",
-                        boxShadow: "0px 0px 4px 4px #00000010",
+                        background: "#EDEDED",
                       },
                     }}
                   >

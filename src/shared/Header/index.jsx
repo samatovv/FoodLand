@@ -161,6 +161,29 @@ const Header = ({ cart, setCart }) => {
           alignItems="center"
           onMouseLeave={() => setOpen(false)}
         >
+          <svg
+            width="44"
+            height="44"
+            viewBox="0 0 44 44"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect
+              x="0.5"
+              y="0.5"
+              width="43"
+              height="43"
+              rx="9.5"
+              fill="white"
+              stroke="#ECECEC"
+            />
+            <path
+              d="M25.7333 25.7333L30 30M27.8667 20.9333C27.8667 24.7625 24.7625 27.8667 20.9333 27.8667C17.1042 27.8667 14 24.7625 14 20.9333C14 17.1042 17.1042 14 20.9333 14C24.7625 14 27.8667 17.1042 27.8667 20.9333Z"
+              stroke="black"
+              stroke-width="1.5"
+            />
+          </svg>
+
           {/* <Search /> */}
           {/* {md && (
             <Box
@@ -321,7 +344,15 @@ const Header = ({ cart, setCart }) => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect width="44" height="44" rx="10" fill="white" />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="43"
+                height="43"
+                rx="9.5"
+                fill="white"
+                stroke="#ECECEC"
+              />
               <path
                 d="M15.3302 20.34C15.5595 18.6203 17.0265 17.3359 18.7614 17.3359H24.8151C26.55 17.3359 28.017 18.6203 28.2462 20.34L29.054 26.3998C29.3307 28.4749 27.7163 30.3187 25.6229 30.3187H17.9536C15.8601 30.3187 14.2458 28.4749 14.5224 26.3998L15.3302 20.34Z"
                 stroke="black"
@@ -335,7 +366,7 @@ const Header = ({ cart, setCart }) => {
               />
               {cart && (
                 <ellipse
-                  cx="27.1349"
+                  cx="27.1344"
                   cy="16.0575"
                   rx="4.05679"
                   ry="4.05755"
@@ -365,7 +396,15 @@ const Header = ({ cart, setCart }) => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <rect width="44" height="44" rx="10" fill="white" />
+              <rect
+                x="0.5"
+                y="0.5"
+                width="43"
+                height="43"
+                rx="9.5"
+                fill="white"
+                stroke="#ECECEC"
+              />
               <circle
                 cx="3.80793"
                 cy="3.80793"

@@ -33,18 +33,16 @@ export const formData = axios.create({
   headers: {
     Accept: "application/json",
     "Content-Type": "multipart/form-data",
-    Authorization: `Bearer ${get_token()}`,
+    Authorization: `Bearer ${get_token() || sessionStorage.getItem("token")}`,
   },
 });
 
 export const Main = {
   getBanners(url) {
-    return (
-      instance
-        .get(url)
-        .then((response) => response.data)
-        .catch((error) => error.response)
-    );
+    return instance
+      .get(url)
+      .then((response) => response.data)
+      .catch((error) => error.response);
   },
   getCategories() {
     return instance

@@ -204,8 +204,9 @@ const Footer = () => {
                     flexDirection="column"
                     rowGap={1}
                   >
-                    {categories.map((item) => (
+                    {categories.map((item, idx) => (
                       <Link
+                        key={idx}
                         className="link"
                         to={`/catalog/?search=&categoryIds=${item.id}&page=1`}
                       >

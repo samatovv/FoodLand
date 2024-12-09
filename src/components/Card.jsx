@@ -5,9 +5,12 @@ import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
 import empty from "../assets/images/empty.svg";
 import { useSelector } from "react-redux";
+import { useAuth } from "../shared/ProtectedRoutes";
 
 const Card = ({ item, search, width, setCart, preview }) => {
   const data = useSelector((state) => state.profile.data);
+
+  const isAuth = useAuth();
 
   const details = search ? item?.product : item;
   const [count, setCount] = useState(1);
@@ -16,8 +19,8 @@ const Card = ({ item, search, width, setCart, preview }) => {
     <Box
       sx={{
         "&:hover": {
-          background: "#EDEDED70",
-          transition:'all 0.2s ease'
+          background: search ? "#E4E9DD" : "#EDEDED70",
+          transition: "all 0.2s ease",
         },
       }}
       minWidth={width}
@@ -70,37 +73,39 @@ const Card = ({ item, search, width, setCart, preview }) => {
         Вес : {details?.weight}
         {details?.unitCode}
       </Typography>
-      <Box
-        display="flex"
-        alignItems="center"
-        mb={2}
-        justifyContent="space-between"
-      >
-        <Typography fontWeight={700} variant="h5">
-          {
-            details?.prices?.find((item) =>
-              item.price._id
-                ? item.price._id
-                : item.price?.id === data?.price?.id
-            )?.value
-          }{" "}
-          c
-        </Typography>
-        {!preview && (
-          <AddOrDelete
-            count={count}
-            setCount={setCount}
-            id={item?.id}
-            price={
+      {isAuth && (
+        <Box
+          display="flex"
+          alignItems="center"
+          mb={2}
+          justifyContent="space-between"
+        >
+          <Typography fontWeight={700} variant="h5">
+            {
               details?.prices?.find((item) =>
                 item.price._id
                   ? item.price._id
-                  : (item.price?.id === data?.price?.id) === data?.price?.id
+                  : item.price?.id === data?.price?.id
               )?.value
-            }
-          />
-        )}
-      </Box>
+            }{" "}
+            c
+          </Typography>
+          {!preview && (
+            <AddOrDelete
+              count={count}
+              setCount={setCount}
+              id={item?.id}
+              price={
+                details?.prices?.find((item) =>
+                  item.price._id
+                    ? item.price._id
+                    : (item.price?.id === data?.price?.id) === data?.price?.id
+                )?.value
+              }
+            />
+          )}
+        </Box>
+      )}
       {!preview && (
         <AddToCart
           setCart={setCart}

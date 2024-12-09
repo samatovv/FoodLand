@@ -17,7 +17,7 @@ const Success = ({ setOpen, open, reorder, formik }) => {
     <Dialog
       sx={{
         "& .MuiPaper-root": {
-          p: { xs: "16px 12px 92px", lg: "40px 15px 40px" },
+          p: { xs: "40px 15px 40px", lg: "40px 15px 40px" },
           borderRadius: "32px",
           minWidth: { xs: "unset", lg: 453 },
         },
@@ -86,7 +86,7 @@ const Success = ({ setOpen, open, reorder, formik }) => {
           </Button>
         </Link>
 
-        <Link to="/catalog">
+        <Link to="/profile/">
           <Button
             variant="outlined"
             size="large"
