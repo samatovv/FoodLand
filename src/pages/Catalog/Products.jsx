@@ -23,7 +23,7 @@ import {
   setSearch,
 } from "../../redux/reducers/products";
 import filter from "../../assets/images/filter.svg";
-import empty from "../../assets/images/empty.svg";
+import empty from "../../assets/images/empty-no-bg.svg";
 import { handleFilter, handleLoading } from "../../redux/reducers/mainSlice";
 import CloseSearch from "../../assets/images/CloseSearch";
 import Fuse from "fuse.js";
@@ -105,12 +105,10 @@ const Products = ({
   useEffect(() => {
     if (!names) dispatch(getProductsNames());
 
-    if (!location.search && !products?.products?.length) {
-      dispatch(handleLoading(true));
-      dispatch(
-        getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
-      );
-    }
+    dispatch(handleLoading(true));
+    dispatch(
+      getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
+    );
 
     // if (location.search) setPage(location.search.split("&")[2].split("=")[1]);
   }, []);
@@ -174,21 +172,21 @@ const Products = ({
         setSearch(decodeURI(location.search.split("&")[0].split("=")[1]))
       );
 
-      // dispatch(
-      //   getProducts(
-      //     `/products/query?limit=12&page=${
-      //       location.search.split("&")[2].split("=")[1]
-      //     }&search=${
-      //       location.search.includes("searchmain")
-      //         ? location.search.split("&")[0].split("=")[1]
-      //         : decodeURI(location.search.split("&")[0].split("=")[1])
-      //     }&categoryIds=${
-      //       params?.length
-      //         ? `${params.map((item) => item.id)}`
-      //         : location.search.split("&")[1].split("=")[1]
-      //     }`
-      //   )
-      // );
+      dispatch(
+        getProducts(
+          `/products/query?limit=12&page=${
+            location.search.split("&")[2].split("=")[1]
+          }&search=${
+            location.search.includes("searchmain")
+              ? location.search.split("&")[0].split("=")[1]
+              : decodeURI(location.search.split("&")[0].split("=")[1])
+          }&categoryIds=${
+            params?.length
+              ? `${params.map((item) => item.id)}`
+              : location.search.split("&")[1].split("=")[1]
+          }`
+        )
+      );
     }
   }, [location.search]);
 

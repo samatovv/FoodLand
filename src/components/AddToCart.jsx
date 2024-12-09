@@ -118,7 +118,10 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
           color="primary"
         >
           {!inCart && <Cart />}
-          <span className={inCart ? "cart_txt in_cart_txt" : "cart_txt"}>
+          <span
+            style={{ fontWeight: 700 }}
+            className={inCart ? "cart_txt in_cart_txt" : "cart_txt"}
+          >
             {inCart ? "В корзине!" : "В корзину"}
           </span>
           <InCart inCart={inCart} />
@@ -131,6 +134,11 @@ const AddToCart = ({ details, count, id, card, setCart }) => {
           fullWidth
           sx={{
             border: "1px solid #F0F0F0",
+
+            "& .round": {
+              top: 3,
+            },
+
             "&.Mui-disabled": {
               color: "#fff!important",
             },

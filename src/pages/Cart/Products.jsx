@@ -12,7 +12,7 @@ import AddOrDelete from "../../components/AddOrDelete";
 import { Link } from "react-router-dom";
 import { TransitionGroup } from "react-transition-group";
 import emptyImg from "../../assets/images/empty.svg";
-import empty from "../../assets/images/empty-cart.svg";
+import empty from "../../assets/images/empty-no-bg.svg";
 
 const Products = ({ cart, setCart, setCartGlobal }) => {
   const md = useMediaQuery("(min-width:769px)");

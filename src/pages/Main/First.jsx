@@ -76,10 +76,9 @@ const First = () => {
 
           </form> */}
           <ButtonMore
-            radius="15px"
             sx={{
               width: { xs: "100%", md: 193, borderRadius: "15px" },
-              height: 52,
+              // height: 52,
             }}
             txt="Заказать звонок"
             href="tel:+996 550 114 477"

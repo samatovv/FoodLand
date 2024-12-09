@@ -68,13 +68,15 @@ const Auth = () => {
     setOpen(true);
 
     if (loginData?.status == 200) {
-      if (formik.values.rememberMe) {
+      if (!!formik.values.rememberMe) {
         cookie.set("foodland_token", loginData.data.tokens.access.token, {
           expires: loginData.data.tokens.access.expires,
+          path: "/",
+          domain: "foodland.kg",
         });
-        instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
-      } else
+      } else {
         sessionStorage.setItem("token", loginData.data.tokens.access.token);
+      }
       instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
 
       dispatch(handleAuthDialog());
