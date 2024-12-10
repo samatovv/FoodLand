@@ -108,7 +108,7 @@ const OurClients = () => {
                       mt={3}
                       mb={1.7}
                       textAlign="center"
-                      variant="h5"
+                      fontSize={{ xs: 13, md: 20 }}
                       fontWeight="700"
                       sx={{
                         overflow: "hidden",

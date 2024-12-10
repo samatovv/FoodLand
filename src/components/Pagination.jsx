@@ -1,9 +1,11 @@
-import { Pagination, PaginationItem } from "@mui/material";
+import { Pagination, PaginationItem, useMediaQuery } from "@mui/material";
 import React from "react";
 import ArrowBackIcon from "./ArrowBackIcon";
 import ArrowForwardIcon from "./ArrowForwardIcon";
 
 const PaginationLarge = ({ page, handleChange, products }) => {
+  const md = useMediaQuery("(min-width:900px)");
+
   return (
     <Pagination
       size="large"
@@ -15,7 +17,7 @@ const PaginationLarge = ({ page, handleChange, products }) => {
       )}
       page={page}
       onChange={handleChange}
-      siblingCount={1}
+      siblingCount={md ? 1 : 0}
       count={products?.totalPages}
       sx={{
         mt: 5,

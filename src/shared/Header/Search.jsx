@@ -1,8 +1,6 @@
 import {
-  Backdrop,
   Box,
   Button,
-  ClickAwayListener,
   Dialog,
   InputAdornment,
   ListItemButton,
@@ -68,7 +66,9 @@ const SearchHeader = ({ open, setOpen }) => {
         },
         "& .MuiPaper-root": {
           maxWidth: "unset",
-          width: "70%",
+          width: { xs: "100%", md: "70%" },
+          m: { xs: "11px 15px", md: "25px 15px" },
+          borderRadius: "10px",
         },
       }}
       open={open}
@@ -95,14 +95,25 @@ const SearchHeader = ({ open, setOpen }) => {
             background: "#FFF",
             "& .MuiOutlinedInput-notchedOutline": {
               border: "1px solid #E2E2E2",
-              borderRadius: !value ? "10px" : "10px 10px 0 0!important",
+              borderRadius: !value
+                ? "10px!important"
+                : "10px 10px 0 0!important",
+            },
+            "& .MuiInputBase-root": {
+              borderRadius: !value
+                ? "10px!important"
+                : "10px 10px 0 0!important",
             },
             "&.MuiFormControl-root": {
               background: "#FFF",
-              borderRadius: !value ? "10px" : "10px 10px 0 0!important",
+              borderRadius: !value
+                ? "10px!important"
+                : "10px 10px 0 0!important",
             },
             "& input": {
-              borderRadius: !value ? "10px" : "10px 10px 0 0!important",
+              borderRadius: !value
+                ? "10px!important"
+                : "10px 10px 0 0!important",
               p: "10.5px 16px 10.5px 0px!important",
             },
             "& fieldset": {
@@ -220,7 +231,7 @@ const SearchHeader = ({ open, setOpen }) => {
                   </ListItemButton>
                 ))}
             {searched.length ? (
-              <Box p="30px 40px 0">
+              <Box p={{ xs: "20px 17px 10px 17px", md: "30px 40px 0" }}>
                 <Button
                   onClick={() => setAll(!all)}
                   variant="outlined"

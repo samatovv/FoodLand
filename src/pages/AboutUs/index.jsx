@@ -329,7 +329,7 @@ const AboutUs = () => {
                   </Typography>
                   <a href="tel:+996 0550 114 477">
                     <Typography fontSize={20} className="sans" fontWeight={400}>
-                      +996 0550 114 477
+                      +996 0550 114 477
                     </Typography>
                   </a>
                 </div>
