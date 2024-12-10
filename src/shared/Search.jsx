@@ -102,6 +102,7 @@ const Search = () => {
           },
         }}
         sx={{
+          width: { xs: "100%", md: "auto" },
           zIndex: 4,
           background: "#FFF",
           "& .MuiOutlinedInput-notchedOutline": {

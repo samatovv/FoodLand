@@ -32,7 +32,7 @@ const Form = ({ formik, cart, close }) => {
     >
       <Box
         display="flex"
-        mb="47px"
+        mb={{ xs: "0", md: "47px" }}
         justifyContent="space-between"
         alignItems="center"
       >

@@ -139,7 +139,8 @@ const Categories = ({
     <Box component="section" pb={13}>
       {md ? (
         <Accordion
-          expanded={expanded}
+          expanded={false}
+          disabled
           onChange={() => setExpanded(!expanded)}
           className="sans"
           sx={{
@@ -352,22 +353,8 @@ const Categories = ({
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"
                   id="panel1-header"
-                  onClick={() => {
-                    dispatch(
-                      getProducts(
-                        `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
-                      )
-                    );
-                    setCategory({ title: item.name });
-                  }}
                 >
-                  <span
-                    style={{
-                      fontWeight: category?.title === item.name && 700,
-                    }}
-                  >
-                    {item?.name}
-                  </span>
+                  {item?.name}
                 </AccordionSummary>
                 <AccordionDetails>
                   {categories?.second
@@ -399,20 +386,11 @@ const Categories = ({
                         }}
                       >
                         <AccordionSummary
-                          onClick={() => handleProducts(ite)}
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1-content"
                           id="panel1-header"
                         >
-                          <span
-                            style={{
-                              fontWeight:
-                                !!params.find((el) => el?.id === ite?.id) &&
-                                700,
-                            }}
-                          >
-                            {ite.name}
-                          </span>
+                          {ite.name}
                         </AccordionSummary>
                         <AccordionDetails>
                           {categories?.second

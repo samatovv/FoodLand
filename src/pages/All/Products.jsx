@@ -51,26 +51,10 @@ const Products = ({
   const firstUpdate = useRef(true);
   const firstUpdate2 = useRef(true);
 
-  const handleDelete = (item) => {
-    setPage(1);
-    setChip(chip.filter((el) => el !== item));
-    setParams(params.filter((el) => el.name !== item));
-    if (page === 1)
-      dispatch(
-        getProducts(
-          `/products/query?limit=12&page=1&search=${encodeURI(
-            searchValue
-          )}&categoryIds=${params
-            .filter((el) => el.name !== item)
-            .map((item) => item.id)}`
-        )
-      );
-  };
-
   const handleChange = (event, value) => {
     setPage(value);
     navigate(
-      `/catalog/?search=${
+      `/catalog/recomendations?search=${
         location.search.split("&")[0].split("=")[1]
           ? decodeURI(location.search.split("&")[0].split("=")[1])
           : ""
@@ -84,7 +68,7 @@ const Products = ({
     dispatch(handleLoading(true));
     if (!products.length && !location.search)
       dispatch(
-        getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
+        getProducts(`/recommendations/?limit=12&page=1&search=&categoryIds=670cfc088d01bf78e1ad9a53`)
       );
 
     // if (location.search) setPage(location.search.split("&")[2].split("=")[1]);
@@ -118,7 +102,7 @@ const Products = ({
     dispatch(setProducts([]));
     dispatch(
       getProducts(
-        `/products/query?limit=12&page=${page}&search=${encodeURI(
+        `/recommendations/?limit=12&page=${page}&search=${encodeURI(
           searchValue
         )}&categoryIds=${
           params?.length ? `${params.map((item) => item.id)}` : ""
@@ -147,7 +131,7 @@ const Products = ({
 
       dispatch(
         getProducts(
-          `/products/query?limit=12&page=${
+          `/recommendations/?limit=12&page=${
             location.search.split("&")[2].split("=")[1]
           }&search=${
             location.search.includes("searchmain")
@@ -179,7 +163,7 @@ const Products = ({
           width="100%"
         >
           <Typography variant="h4" fontWeight={700}>
-            {category?.title ? category?.title : "Каталог"}
+            {category?.title ? category?.title : "Рекомендуемые товары"}
           </Typography>
           {!md && (
             <IconButton onClick={() => dispatch(handleFilter(true))}>
@@ -187,26 +171,8 @@ const Products = ({
             </IconButton>
           )}
         </Box>
-        {!md && (
-          <Box display="flex" overflowY="scroll" columnGap={1}>
-            {chip &&
-              chip.map((item, idx) => (
-                <Chip
-                  key={idx}
-                  sx={{
-                    "& .MuiChip-label": {
-                      fontFamily: "Open Sans",
-                      color: "#959595",
-                    },
-                  }}
-                  label={item}
-                  variant="outlined"
-                  onDelete={() => handleDelete(item)}
-                />
-              ))}
-          </Box>
-        )}
-        <Search
+
+        {/* <Search
           setSearched={setSearched}
           setOpen={setOpen}
           open={open}
@@ -215,27 +181,8 @@ const Products = ({
           searchValue={searchValue}
           setValueSearch={setValueSearch}
           params={params}
-        />
+        /> */}
       </Box>
-      {md && (
-        <Box display="flex" mb={2.6} columnGap={1}>
-          {chip &&
-            chip.map((item, idx) => (
-              <Chip
-                key={idx}
-                sx={{
-                  "& .MuiChip-label": {
-                    fontFamily: "Open Sans",
-                    color: "#959595",
-                  },
-                }}
-                label={item}
-                variant="outlined"
-                onDelete={() => handleDelete(item)}
-              />
-            ))}
-        </Box>
-      )}
       {loading ? (
         <>
           <Grid2 container spacing={2}>
@@ -254,7 +201,7 @@ const Products = ({
             ))}
           </Grid2>
         </>
-      ) : !products?.products?.length ? (
+      ) : !products?.results?.length ? (
         <Box
           display="flex"
           flexDirection="column"
@@ -271,10 +218,10 @@ const Products = ({
       ) : (
         <>
           <Grid2 container spacing={2}>
-            {Array.isArray(products?.products) &&
-              products?.products?.map((item, idx) => (
+            {Array.isArray(products?.results) &&
+              products?.results?.map((item, idx) => (
                 <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 3 }} key={idx}>
-                  <Card setCart={setCart} item={item} />
+                  <Card search setCart={setCart} item={item} />
                 </Grid2>
               ))}
           </Grid2>

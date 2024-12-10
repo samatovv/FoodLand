@@ -20,9 +20,9 @@ const First = () => {
       component="section"
       className="first"
       p="0 0 0"
-      maxHeight="100vh"
-      minHeight="100vh"
-      height="100vh"
+      // maxHeight="100vh"
+      // minHeight="100vh"
+      height="100rem"
       sx={{
         background: `url(${
           Array.isArray(banner?.results) && banner?.results[0]?.imageUrl
@@ -57,7 +57,7 @@ const First = () => {
           <ButtonMore
             sx={{
               width: { xs: "100%", md: 193, borderRadius: "15px" },
-              ml: "34.5px",
+              ml: { xs: 0, md: "34.5px" },
             }}
             txt="Заказать звонок"
             href="tel:+996 550 114 477"

@@ -75,7 +75,6 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
           justifyContent="center"
           alignItems="center"
           flexDirection="column"
-          height="90%"
         >
           <img src={empty} alt="" />
           <Typography
@@ -99,7 +98,7 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
           </Typography>
           <Link to="/catalog">
             <Button
-              sx={{ borderRadius: "44px", p: "16px 90px!important" }}
+              sx={{ borderRadius: "44px", p: "16px 50px!important" }}
               variant="contained"
               color="primary"
             >
@@ -182,7 +181,7 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
               textOverflow: "ellipsis",
               overflow: "hidden",
               display: "-webkit-box",
-              WebkitLineClamp: 2,
+              WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
               wordWrap: "break-word",
             }}

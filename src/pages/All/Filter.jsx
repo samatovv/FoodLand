@@ -6,9 +6,7 @@ import { handleFilter } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Filter = ({
-  setCategory,
   formik,
-  category,
   setPage,
   setChip,
   searchValue,
@@ -53,8 +51,6 @@ const Filter = ({
         </IconButton>
       </Box>
       <Categories
-        setCategory={setCategory}
-        category={category}
         setPage={setPage}
         setParams2={setParams2}
         params2={params2}

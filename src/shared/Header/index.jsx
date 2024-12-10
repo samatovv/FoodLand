@@ -64,17 +64,11 @@ const Header = ({ cart }) => {
           width="69%"
           alignItems="center"
         >
-          <Link to="/">
+          <Link to="/" style={{ height: 44 }}>
             {md ? (
               <Box component="img" src={logo} alt="" />
             ) : (
-              <Box
-                component="img"
-                width="97px"
-                height="38px"
-                src={logo3}
-                alt=""
-              />
+              <Box component="img" src={logo3} alt="" />
             )}
           </Link>
           {md && (
@@ -173,8 +167,8 @@ const Header = ({ cart }) => {
             }
             sx={{
               cursor: "pointer",
-              mr: 2,
-              ml: 2,
+              mr: { xs: "5px", md: 2 },
+              ml: { xs: "5px", md: 2 },
 
               "& rect": {
                 transition: "all 0.2s ease",
@@ -263,7 +257,10 @@ const Header = ({ cart }) => {
             />
           </Box>
           {!md && (
-            <IconButton onClick={() => dispatch(handleDrawer(true))}>
+            <IconButton
+              sx={{ p: 0, ml:'5px' }}
+              onClick={() => dispatch(handleDrawer(true))}
+            >
               <Burger />
             </IconButton>
           )}

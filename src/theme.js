@@ -88,6 +88,14 @@ export const theme = createTheme({
           boxShadow: "none",
           textTransform: "none",
           color: "#FFF",
+
+          "&:hover": {
+            backgroundColor: "var(--primary)",
+            color: "#FFF",
+            boxShadow: "none",
+            textTransform: "none",
+          },
+
           "&.MuiButton-sizeLarge": {
             padding: "13px 35px",
           },

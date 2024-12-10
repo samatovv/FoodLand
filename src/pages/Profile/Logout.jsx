@@ -13,9 +13,9 @@ const Logout = ({ open, close }) => {
       domain: "foodland.kg",
     });
     navigate("/");
-    setTimeout(() => {
-      window.location.reload();
-    }, 200);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 200);
   };
   return (
     <Dialog

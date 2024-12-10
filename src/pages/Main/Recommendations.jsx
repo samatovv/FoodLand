@@ -26,7 +26,7 @@ const Recommendations = ({ setCart }) => {
     dispatch(
       getRecomendations(`recommendations?limit=${!sm ? 21 : 4}&page=${page}`)
     );
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
   const handleChange = (event, value) => {
@@ -60,7 +60,7 @@ const Recommendations = ({ setCart }) => {
             </Typography>
           </div>
           {md && (
-            <Link to="/catalog">
+            <Link to="/catalog/recomendations">
               <ButtonMore sx={{ width: 157 }} txt="Все товары" />
             </Link>
           )}

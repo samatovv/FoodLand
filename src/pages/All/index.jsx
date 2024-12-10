@@ -32,7 +32,7 @@ const categories = [
   },
 ];
 
-const Catalog = ({ setCart }) => {
+const All = ({ setCart }) => {
   const location = useLocation();
   const isAuth = useAuth();
   const md = useMediaQuery("(min-width:900px)");
@@ -65,7 +65,7 @@ const Catalog = ({ setCart }) => {
       Каталог
     </Typography>,
     <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
-      {category?.title}
+      Рекомендуемые товары
     </Typography>,
   ];
   return (
@@ -84,27 +84,7 @@ const Catalog = ({ setCart }) => {
           {breadcrumbs}
         </Breadcrumbs>
         <Grid2 container mt={{ xs: "35px", md: 2 }} spacing={6}>
-          {md && (
-            <Grid2 size={{ xs: 12, md: 3 }}>
-              <Categories
-                category={category}
-                searchValue={searchValue}
-                setValueSearch={setValueSearch}
-                setParams={setParams}
-                params={params}
-                setCategory={setCategory}
-                setParams2={setParams2}
-                params2={params2}
-                isAuth={isAuth}
-                chip={chip}
-                formik={formik}
-                setChip={setChip}
-                page={page}
-                setPage={setPage}
-              />
-            </Grid2>
-          )}
-          <Grid2 size={{ xs: 12, md: 9 }}>
+          <Grid2 size={{ xs: 12, md: 12 }}>
             <Products
               category={category}
               setCart={setCart}
@@ -123,8 +103,6 @@ const Catalog = ({ setCart }) => {
       </Container>
       <Filter
         setPage={setPage}
-        setCategory={setCategory}
-        category={category}
         searchValue={searchValue}
         setValueSearch={setValueSearch}
         setParams={setParams}
@@ -141,4 +119,4 @@ const Catalog = ({ setCart }) => {
   );
 };
 
-export default Catalog;
+export default All;

@@ -221,11 +221,14 @@ const Table = ({ setCart }) => {
               >
                 <tr>
                   <th>Номер заказа</th>
-                  <th>Сумма</th>
-                  {md && (
+
+                  {md ? (
                     <>
+                      <th>Сумма</th>
                       <th>Вес</th>
                     </>
+                  ) : (
+                    <th>Дата заказа</th>
                   )}
                   <th>Статус</th>
                   {md && (
@@ -254,8 +257,21 @@ const Table = ({ setCart }) => {
                   orders?.results?.map((item, idx) => (
                     <tr key={idx}>
                       <td>{item?.customId}</td>
-                      <td>{item?.price}</td>
-                      {md && <td>{item?.weight}</td>}
+
+                      {md ? (
+                        <>
+                          <td>{item?.price}</td>
+                          <td>{item?.weight}</td>
+                        </>
+                      ) : (
+                        <td>
+                          {item?.createdAt &&
+                            new Intl.DateTimeFormat("ru", {
+                              dateStyle: "short",
+                              // timeStyle: "short",
+                            }).format(new Date(item?.createdAt))}
+                        </td>
+                      )}
                       <td>
                         <Box
                           sx={{
