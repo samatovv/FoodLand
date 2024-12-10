@@ -1,19 +1,20 @@
 import {
   Box,
   ClickAwayListener,
-  IconButton,
   InputAdornment,
   ListItemButton,
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fuse from "fuse.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { getProductsNames } from "../redux/reducers/products";
 
 const Search = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const names = useSelector((state) => state.products.names);
 
@@ -39,6 +40,19 @@ const Search = () => {
     const items = results.map((result) => result.item);
     setSearched(items);
   };
+
+  const handleClose = () => {
+    setOpen(false);
+    setValue("");
+  };
+
+  useEffect(() => {
+    dispatch(getProductsNames());
+  }, []);
+
+  useEffect(() => {
+    if (Array.isArray(names)) setSearched(names);
+  }, [names]);
 
   return (
     <Box
@@ -92,20 +106,23 @@ const Search = () => {
           background: "#FFF",
           "& .MuiOutlinedInput-notchedOutline": {
             border: "1px solid #E2E2E2",
-            borderRadius: "15px",
+            borderRadius: !value ? "15px" : "15px 15px 0 0!important",
           },
           "&.MuiFormControl-root": {
             background: "#FFF",
-            borderRadius: "15px",
+            borderRadius: !value ? "15px" : "15px 15px 0 0!important",
           },
           "& input": {
-            borderRadius: "15px!important",
+            borderRadius: !value ? "15px" : "15px 15px 0 0!important",
             p: "10.5px 16px 10.5px 18px!important",
+          },
+          "& fieldset": {
+            display: "none",
           },
         }}
       />
       {value && (
-        <ClickAwayListener onClickAway={() => setOpen(false)}>
+        <ClickAwayListener onClickAway={handleClose}>
           <Box
             sx={{
               opacity: open ? "1" : "0",
@@ -114,9 +131,9 @@ const Search = () => {
               maxHeight: 140,
               overflow: "scroll",
               transition: "height 300ms linear",
-              backgroundColor: "#F9F9F9",
+              backgroundColor: "#FFF",
               p: "24px 0 15px",
-              borderRadius: "0 0 20px 20px",
+              borderRadius: "0 0 15px 15px",
               position: "absolute",
               top: 35,
               width: "-webkit-fill-available",

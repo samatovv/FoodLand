@@ -15,6 +15,7 @@ import Burger from "../../assets/images/Burger";
 import { handleAuthDialog, handleDrawer } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../ProtectedRoutes";
+import SearchHeader from "./Search";
 
 const Header = ({ cart }) => {
   const dispatch = useDispatch();
@@ -26,9 +27,6 @@ const Header = ({ cart }) => {
 
   const [open, setOpen] = useState(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
   const handleOpen = () => {
     setOpen(true);
   };
@@ -130,7 +128,6 @@ const Header = ({ cart }) => {
           justifyContent="end"
           width={{ xs: "100%", md: "31%" }}
           alignItems="center"
-          onMouseLeave={() => setOpen(false)}
         >
           <Box
             component="svg"
@@ -166,81 +163,7 @@ const Header = ({ cart }) => {
               stroke-width="1.5"
             />
           </Box>
-          <Backdrop
-            sx={{
-              "&.MuiBackdrop-root": {
-                justifyContent: "end!important",
-                alignItems: "start!important",
-              },
-            }}
-            open={open}
-            // onClick={handleClose}
-          >
-            <TextField
-              sx={{
-                width: "70%",
-                mt: "26px",
-                mr: "58px",
-                background: "#FFF",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #E2E2E2",
-                  borderRadius: "10px",
-                },
-                "&.MuiFormControl-root": {
-                  background: "#FFF",
-                  borderRadius: "10px",
-                },
-                "& input": {
-                  borderRadius: "10px!important",
-                  p: "10.5px 16px 10.5px 18px!important",
-                },
-              }}
-              placeholder="Найти"
-              slotProps={{
-                input: {
-                  startAdornment: (
-                    <InputAdornment position="start" sx={{ cursor: "pointer" }}>
-                      <svg
-                        width="18"
-                        height="18"
-                        viewBox="0 0 18 18"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12.7333 12.7333L17 17M14.8667 7.93333C14.8667 11.7625 11.7625 14.8667 7.93333 14.8667C4.10416 14.8667 1 11.7625 1 7.93333C1 4.10416 4.10416 1 7.93333 1C11.7625 1 14.8667 4.10416 14.8667 7.93333Z"
-                          stroke="black"
-                          stroke-width="1.5"
-                        />
-                      </svg>
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment
-                      onClick={handleClose}
-                      position="end"
-                      sx={{ cursor: "pointer" }}
-                    >
-                      <svg
-                        width="20"
-                        height="20"
-                        viewBox="0 0 20 20"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          fill-rule="evenodd"
-                          clip-rule="evenodd"
-                          d="M13.461 12.2484L12.4 13.3094L9.999 10.9104L7.599 13.3064L6.539 12.2454L8.938 9.85038L6.539 7.45237L7.6 6.39138L10 8.79037L12.401 6.39337L13.461 7.45538L11.061 9.85038L13.461 12.2484ZM10 0.109375C4.624 0.109375 0.25 4.48338 0.25 9.85938C0.25 15.2354 4.624 19.6094 10 19.6094C15.376 19.6094 19.75 15.2354 19.75 9.85938C19.75 4.48338 15.376 0.109375 10 0.109375Z"
-                          fill="#6E8435"
-                        />
-                      </svg>
-                    </InputAdornment>
-                  ),
-                },
-              }}
-            />
-          </Backdrop>
+          <SearchHeader open={open} setOpen={setOpen} />
           <Box
             component="svg"
             onClick={() =>
@@ -296,7 +219,6 @@ const Header = ({ cart }) => {
               />
             )}
           </Box>
-
           <Box
             onClick={() =>
               isAuth ? navigate("/profile") : dispatch(handleAuthDialog(true))
@@ -340,7 +262,6 @@ const Header = ({ cart }) => {
               stroke-width="1.42797"
             />
           </Box>
-
           {!md && (
             <IconButton onClick={() => dispatch(handleDrawer(true))}>
               <Burger />

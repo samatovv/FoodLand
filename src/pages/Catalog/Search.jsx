@@ -55,7 +55,8 @@ const Search = ({
       onSubmit={(e) => {
         e.preventDefault();
         setOpen(false);
-        if (page === 1)
+        if (page === 1) {
+          navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
           dispatch(
             getProducts(
               `/products/query?limit=12&page=1&search=${encodeURI(
@@ -63,6 +64,7 @@ const Search = ({
               )}&categoryIds=${params.map((item) => item.id)}`
             )
           );
+        }
       }}
       width="100%"
       position="relative"
@@ -130,6 +132,7 @@ const Search = ({
           <ListItemButton
             onClick={() => {
               setOpen(false);
+              navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
               dispatch(
                 getProducts(
                   `/products/query?limit=12&page=1&search=${encodeURI(

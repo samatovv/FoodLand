@@ -89,16 +89,13 @@ const Products = ({
     if (!names) dispatch(getProductsNames());
 
     dispatch(handleLoading(true));
-    dispatch(
-      getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
-    );
+    if (!products.length && !location.search)
+      dispatch(
+        getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
+      );
 
     // if (location.search) setPage(location.search.split("&")[2].split("=")[1]);
   }, []);
-
-  useEffect(() => {
-    if (Array.isArray(names)) setSearched(names);
-  }, [names]);
 
   useLayoutEffect(() => {
     if (firstUpdate.current) {
