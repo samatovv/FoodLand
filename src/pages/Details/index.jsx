@@ -101,14 +101,13 @@ const Details = ({ setCart }) => {
             {breadcrumbs}
           </Breadcrumbs>
         )}
-        <Grid2 container mt={{ xs: 2, md: 0 }} spacing={4}>
+        <Grid2 container mt={{ xs: 2, md: 3 }} spacing={4}>
           <Grid2 size={{ xs: 12, sm: 6, lg: 5 }}>
             <Box>
               <Box
                 component="img"
                 src={!images[0]?.url ? empty : image}
                 width="100%"
-                mt={2}
                 height={{ xs: 322, sm: "auto", md: 405 }}
                 sx={{ borderRadius: 16, objectFit: "scale-down" }}
                 alt=""
