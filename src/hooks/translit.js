@@ -35,10 +35,10 @@ export function translit(word) {
     я: "ya",
   };
 
-  word = word.toLowerCase();
+  word = word?.toString()?.toLowerCase();
 
   var answer = "";
-  for (var i = 0; i < word.length; ++i) {
+  for (var i = 0; i < word?.length; ++i) {
     if (converter[word[i]] == undefined) {
       answer += word[i];
     } else {

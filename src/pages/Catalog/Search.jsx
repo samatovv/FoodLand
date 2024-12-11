@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/reducers/products";
 import Find from "../../assets/images/Find";
 import { useNavigate } from "react-router";
+import { translit } from "../../hooks/translit";
 
 const Search = ({
   setSearched,
@@ -61,7 +62,7 @@ const Search = ({
             getProducts(
               `/products/query?limit=12&page=1&search=${encodeURI(
                 searchValue
-              )}&categoryIds=${params.map((item) => item.id)}`
+              )}&categoryIds=${params?.id}`
             )
           );
         }
@@ -137,7 +138,7 @@ const Search = ({
                 getProducts(
                   `/products/query?limit=12&page=1&search=${encodeURI(
                     searchValue
-                  )}&categoryIds=${params.map((item) => item.id)}`
+                  )}&categoryIds=${params?.id}`
                 )
               );
             }}
@@ -151,7 +152,7 @@ const Search = ({
               onClick={() => {
                 setOpen(false);
                 setValueSearch(item.name);
-                navigate(`/catalog/details/${item.id}`);
+                navigate(`/catalog/${translit(item.name)}/${item.id}`);
               }}
               mb={0.8}
             >

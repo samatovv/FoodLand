@@ -12,6 +12,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { getProductsNames } from "../../redux/reducers/products";
+import { translit } from "../../hooks/translit";
 
 const SearchHeader = ({ open, setOpen }) => {
   const navigate = useNavigate();
@@ -211,7 +212,7 @@ const SearchHeader = ({ open, setOpen }) => {
                     key={idx}
                     onClick={() => {
                       handleClose();
-                      navigate(`/catalog/details/${item.id}`);
+                      navigate(`/catalog/${translit(item.name)}/${item.id}`);
                     }}
                     mb={0.8}
                   >
@@ -223,7 +224,7 @@ const SearchHeader = ({ open, setOpen }) => {
                     key={idx}
                     onClick={() => {
                       handleClose();
-                      navigate(`/catalog/details/${item.id}`);
+                      navigate(`/catalog/${translit(item.name)}/${item.id}`);
                     }}
                     mb={0.8}
                   >

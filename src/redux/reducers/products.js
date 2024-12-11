@@ -16,6 +16,12 @@ export const productsSlice = createSlice({
     setProducts: (state, action) => {
       state.products = action.payload;
     },
+    setProd: (state, action) => {
+      state.products = {
+        ...state.products,
+        products: action.payload.results,
+      };
+    },
 
     setRecomendations: (state, action) => {
       state.recomendations = action.payload;
@@ -39,6 +45,10 @@ export const getProducts = (data) => (dispatch) => {
   Products.getProducts(data).then((res) => dispatch(setProducts(res)));
 };
 
+export const getProd = (data) => (dispatch) => {
+  Products.getProducts(data).then((res) => dispatch(setProd(res)));
+};
+
 export const getRecomendations = (data) => (dispatch) => {
   Products.getProducts(data).then((res) => dispatch(setRecomendations(res)));
 };
@@ -57,6 +67,7 @@ export const {
   setDetails,
   setProductsNames,
   setRecomendations,
+  setProd,
 } = productsSlice.actions;
 
 export default productsSlice.reducer;

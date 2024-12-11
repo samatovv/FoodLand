@@ -13,7 +13,11 @@ import React, { useEffect, useState } from "react";
 import ExpandMoreIcon from "../../assets/images/ExpandMoreIcon";
 import { getCategories, handleLoading } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts, setProducts } from "../../redux/reducers/products";
+import {
+  getProd,
+  getProducts,
+  setProducts,
+} from "../../redux/reducers/products";
 
 const Categories = ({
   setChip,
@@ -22,7 +26,6 @@ const Categories = ({
   category,
   setParams2,
   params2,
-  isAuth,
   params,
   setParams,
   searchValue,
@@ -57,43 +60,21 @@ const Categories = ({
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
 
-    if (params.find((el) => el?.id === item?.id)) {
-      const filtered = chip.filter((el) => el !== item.name);
-      const filteredParams = params.filter((el) => el?.id !== item?.id);
-      setChip([...filtered]);
-      setParams([...filteredParams]);
+    if (params?.id === item?.id) {
+      setParams({});
       if (page > 1) setPage(1);
       if (page === 1)
         dispatch(
           getProducts(
-            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-              params2
-                ? params2.map((item) => item?.id)
-                : filteredParams.map((item) => item?.id)
-            }`
+            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.parent.id}`
           )
         );
     } else {
       if (page > 1) setPage(1);
-      setChip([...chip, item.name]);
-      setParams([
-        ...params,
-        { id: item?.id, name: item.name, parent: item.parent.id },
-      ]);
-
+      setParams({ id: item?.id, name: item.name, parent: item.parent.id });
       dispatch(
         getProducts(
-          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-            item?.id
-          }${
-            params2
-              ? params?.length
-                ? `,${params2.map((item) => item?.id)}`
-                : ""
-              : params?.length
-              ? `,${params.map((item) => item?.id)}`
-              : ""
-          }`
+          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item?.id}`
         )
       );
     }
@@ -103,38 +84,30 @@ const Categories = ({
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
 
-    if (params2.find((el) => el?.id === item?.id)) {
-      const filtered = chip.filter((el) => el !== item.name);
-      const filteredParams = params2.filter((el) => el?.id !== item?.id);
-      setChip([...filtered]);
-      setParams2([...filteredParams]);
+    if (params2?.id === item?.id) {
+      setParams2({});
       if (page > 1) setPage(1);
       if (page === 1)
         dispatch(
           getProducts(
-            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-              params?.length ? `${params.map((item) => item?.id)}` : ""
-            }${
-              params.length >= 1 && filteredParams.length >= 1 ? "," : ""
-            }${filteredParams.map((item) => item?.id)}`
+            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.parent.id}`
           )
         );
     } else {
+      setParams2({ id: item?.id, name: item.name, parent: item.parent.id });
       if (page > 1) setPage(1);
-      setChip([...chip, item.name]);
-      setParams2([
-        ...params2,
-        { id: item?.id, name: item.name, parent: item.parent.id },
-      ]);
       dispatch(
         getProducts(
-          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${
-            item?.id
-          }${params2?.length ? `,${params2.map((item) => item?.id)}` : ""}`
+          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item?.id}`
         )
       );
     }
   };
+
+  useEffect(() => {
+    console.log(params2.name);
+  }, [params2]);
+
   return (
     <Box component="section" pb={13}>
       {md ? (
@@ -189,7 +162,6 @@ const Categories = ({
               categories?.first?.map((item, idx) => (
                 <Accordion
                   key={idx}
-                  // onClick={() => handleProducts(item)}
                   sx={{
                     "&.MuiPaper-root ": {
                       backgroundColor: "transparent",
@@ -215,12 +187,26 @@ const Categories = ({
                 >
                   <AccordionSummary
                     onClick={() => {
-                      dispatch(
-                        getProducts(
-                          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
-                        )
-                      );
-                      setCategory({ title: item.name });
+                      if (category.title === item.name) {
+                        dispatch(setProducts([]));
+                        dispatch(handleLoading(true));
+                        dispatch(
+                          getProducts(
+                            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=`
+                          )
+                        );
+                        setCategory({ title: "" });
+                        setParams({});
+                      } else {
+                        dispatch(setProducts([]));
+                        dispatch(handleLoading(true));
+                        dispatch(
+                          getProducts(
+                            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
+                          )
+                        );
+                        setCategory({ title: item.name });
+                      }
                     }}
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
@@ -262,18 +248,22 @@ const Categories = ({
                               color: "#626262",
                             },
                           }}
+                          expanded={params.name === ite.name}
                         >
                           <AccordionSummary
-                            onClick={() => handleProducts(ite)}
+                            onClick={() => {
+                              handleProducts(ite);
+                              if (category.title === ite.name)
+                                setCategory({ title: ite.parent.name });
+                              else setCategory({ title: ite.name });
+                            }}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
                             id="panel1-header"
                           >
                             <span
                               style={{
-                                fontWeight:
-                                  !!params.find((el) => el?.id === ite?.id) &&
-                                  700,
+                                fontWeight: params?.id === ite?.id && 700,
                               }}
                             >
                               {ite.name}
@@ -283,22 +273,21 @@ const Categories = ({
                             {categories?.second
                               ?.filter((el) => el.parent?.id === ite?.id)
                               ?.map((el, idx) => (
-                                <FormGroup key={idx}>
-                                  <FormControlLabel
-                                    control={
-                                      <Checkbox
-                                        checked={
-                                          !!params2.find(
-                                            (item) => item?.id === el?.id
-                                          )
-                                        }
-                                      />
-                                    }
-                                    label={el.name}
-                                    value={el?.id}
-                                    onChange={() => handleProducts2(el)}
-                                  />
-                                </FormGroup>
+                                <Typography
+                                  sx={{
+                                    cursor: "pointer",
+                                    m: "8px 0",
+                                    pl: "17px",
+                                    fontWeight:
+                                      params2.name === el.name &&
+                                      "700!important",
+                                    color: params2.name === el.name && "#000!important",
+                                  }}
+                                  key={idx}
+                                  onClick={() => handleProducts2(el)}
+                                >
+                                  {el.name}
+                                </Typography>
                               ))}
                           </AccordionDetails>
                         </Accordion>
@@ -306,6 +295,22 @@ const Categories = ({
                   </AccordionDetails>
                 </Accordion>
               ))}
+            <div
+              onClick={() => {
+                dispatch(handleLoading(true));
+                dispatch(setProducts({}));
+                setCategory({ title: "Рекомендуемые товары" });
+                dispatch(getProd(`recommendations?limit=12&page=${page}`));
+              }}
+              style={{
+                paddingLeft: "17px",
+                margin: "17px 0",
+                fontWeight: category?.title === "Рекомендуемые товары" && 700,
+                cursor: "pointer",
+              }}
+            >
+              Рекомендуемые товары
+            </div>
           </AccordionDetails>
         </Accordion>
       ) : (
@@ -406,9 +411,7 @@ const Categories = ({
                         >
                           <span
                             style={{
-                              fontWeight:
-                                !!params.find((el) => el?.id === ite?.id) &&
-                                700,
+                              fontWeight: !!params?.id === ite?.id && 700,
                             }}
                           >
                             {ite.name}
@@ -422,11 +425,7 @@ const Categories = ({
                                 <FormControlLabel
                                   control={
                                     <Checkbox
-                                      checked={
-                                        !!params.find(
-                                          (item) => item?.id === el?.id
-                                        )
-                                      }
+                                      checked={!!params.id === el?.id}
                                     />
                                   }
                                   label={el.name}

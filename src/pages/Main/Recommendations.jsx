@@ -24,7 +24,7 @@ const Recommendations = ({ setCart }) => {
 
   useEffect(() => {
     dispatch(
-      getRecomendations(`recommendations?limit=${!sm ? 21 : 4}&page=${page}`)
+      getRecomendations(`recommendations?limit=${sm ? 4 : 21}&page=${page}`)
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
@@ -37,7 +37,7 @@ const Recommendations = ({ setCart }) => {
     <Box
       component="section"
       p={{ xs: "56px 0", md: "76px 0" }}
-      overflow="scroll"
+      // overflow="scroll"
       backgroundColor="#f4f4f4"
     >
       <Container maxWidth="lg">
@@ -60,7 +60,7 @@ const Recommendations = ({ setCart }) => {
             </Typography>
           </div>
           {md && (
-            <Link to="/catalog/recomendations">
+            <Link to="/catalog/?search=&categoryIds=&page=1&recomendations">
               <ButtonMore sx={{ width: 157 }} txt="Все товары" />
             </Link>
           )}
