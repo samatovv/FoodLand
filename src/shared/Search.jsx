@@ -11,6 +11,7 @@ import Fuse from "fuse.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { getProductsNames } from "../redux/reducers/products";
+import { translit } from "../hooks/translit";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -157,7 +158,7 @@ const Search = () => {
                 onClick={() => {
                   setOpen(false);
                   setValue(item.name);
-                  navigate(`/catalog/details/${item.id}`);
+                  navigate(`/catalog/${translit(item.name)}/${item.id}`);
                 }}
                 mb={0.8}
               >

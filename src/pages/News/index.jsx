@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { getNews } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NewsCard from "../../components/NewsCard";
-import empty from "../../assets/images/empty.svg";
+import empty from "../../assets/images/empty-no-bg.svg";
 import { useNavigate } from "react-router";
 
 const News = () => {

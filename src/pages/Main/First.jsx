@@ -20,9 +20,9 @@ const First = () => {
       component="section"
       className="first"
       p="0 0 0"
-      // maxHeight="100vh"
-      // minHeight="100vh"
-      height="100rem"
+      maxHeight="100vh"
+      minHeight="100vh"
+      height="100%"
       sx={{
         background: `url(${
           Array.isArray(banner?.results) && banner?.results[0]?.imageUrl

@@ -120,9 +120,7 @@ const Products = ({
       getProducts(
         `/products/query?limit=12&page=${page}&search=${encodeURI(
           searchValue
-        )}&categoryIds=${
-          params?.length ? `${params.map((item) => item.id)}` : ""
-        }`
+        )}&categoryIds=${params.id}`
       )
     );
   }, [page]);
@@ -134,7 +132,8 @@ const Products = ({
     }
 
     // hide linear progress
-    setTimeout(() => dispatch(handleLoading(false)), 500);
+    if (products.products)
+      setTimeout(() => dispatch(handleLoading(false)), 500);
   }, [products]);
 
   useEffect(() => {
@@ -155,7 +154,7 @@ const Products = ({
               : decodeURI(location.search.split("&")[0].split("=")[1])
           }&categoryIds=${
             params?.length
-              ? `${params.map((item) => item.id)}`
+              ? `${params?.id}`
               : location.search.split("&")[1].split("=")[1]
           }`
         )
@@ -274,7 +273,11 @@ const Products = ({
             {Array.isArray(products?.products) &&
               products?.products?.map((item, idx) => (
                 <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 3 }} key={idx}>
-                  <Card setCart={setCart} item={item} />
+                  {category?.title === "Рекомендуемые товары" ? (
+                    <Card search setCart={setCart} item={item} />
+                  ) : (
+                    <Card setCart={setCart} item={item} />
+                  )}
                 </Grid2>
               ))}
           </Grid2>

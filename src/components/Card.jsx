@@ -6,6 +6,7 @@ import AddToCart from "./AddToCart";
 import empty from "../assets/images/empty.svg";
 import { useSelector } from "react-redux";
 import { useAuth } from "../shared/ProtectedRoutes";
+import { translit } from "../hooks/translit";
 
 const Card = ({ item, search, width, setCart, preview }) => {
   const data = useSelector((state) => state.profile.data);
@@ -13,8 +14,10 @@ const Card = ({ item, search, width, setCart, preview }) => {
   const isAuth = useAuth();
 
   const details = search ? item?.product : item;
+  const category = Array.isArray(details?.category) && details?.category[0]?.name;
   const [count, setCount] = useState(1);
   const id = item?._id ? item?._id : item?.product?.id;
+  
   return (
     <Box
       sx={{
@@ -30,7 +33,9 @@ const Card = ({ item, search, width, setCart, preview }) => {
       borderRadius={3}
     >
       <Link
-        to={`/catalog/details/${details?.id ? details?.id : details?._id}`}
+        to={`/catalog/${translit(category)}/${translit(details?.name)}/${
+          details?.id ? details?.id : details?._id
+        }`}
         style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
       >
         <Box
@@ -53,7 +58,11 @@ const Card = ({ item, search, width, setCart, preview }) => {
           alt=""
         />
       </Link>
-      <Link to={`/catalog/details/${details?.id ? details?.id : details?._id}`}>
+      <Link
+        to={`/catalog/${translit(category)}/${translit(details?.name)}/${
+          details?.id ? details?.id : details?._id
+        }`}
+      >
         <Typography
           color="#000"
           mt={2}

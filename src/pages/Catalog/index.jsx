@@ -13,6 +13,8 @@ import Products from "./Products";
 import { useFormik } from "formik";
 import Filter from "./Filter";
 import { useAuth } from "../../shared/ProtectedRoutes";
+import { getProd } from "../../redux/reducers/products";
+import { useDispatch } from "react-redux";
 
 const categories = [
   {
@@ -35,6 +37,7 @@ const categories = [
 const Catalog = ({ setCart }) => {
   const location = useLocation();
   const isAuth = useAuth();
+  const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
 
   const [chip, setChip] = useState("");
@@ -50,10 +53,15 @@ const Catalog = ({ setCart }) => {
 
   useEffect(() => {
     if (location.search) {
-      const category = categories.find(
-        (item) => item.id === location?.search?.split("&")[1].split("=")[1]
-      );
-      setCategory(category);
+      if (location.search.includes("recomendations")) {
+        setCategory({ title: "Рекомендуемые товары" });
+        dispatch(getProd(`recommendations?limit=12&page=${page}`));
+      } else {
+        const category = categories.find(
+          (item) => item.id === location?.search?.split("&")[1].split("=")[1]
+        );
+        setCategory(category);
+      }
     }
   }, []);
 

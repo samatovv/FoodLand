@@ -10,7 +10,6 @@ import AboutUs from "../pages/AboutUs";
 import NewsDetails from "../pages/News/Details";
 import { Box } from "@mui/material";
 import WhatsApp from "../shared/WhatsApp";
-import All from "../pages/All";
 
 const Site = ({ cart, setCart }) => {
   const location = useLocation();
@@ -26,11 +25,11 @@ const Site = ({ cart, setCart }) => {
           <Route path="/news/:id" element={<NewsDetails />} />
           <Route path="/catalog" element={<Catalog setCart={setCart} />} />
           <Route
-            path="/catalog/recomendations"
-            element={<All setCart={setCart} />}
+            path="/catalog/:name/:id"
+            element={<Details setCart={setCart} />}
           />
           <Route
-            path="/catalog/details/:id"
+            path="/catalog/:category/:name/:id"
             element={<Details setCart={setCart} />}
           />
         </Routes>
