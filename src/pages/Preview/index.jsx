@@ -17,7 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 import Card from "../../components/Card";
 import { setOrder } from "../../redux/reducers/profile";
 
-const Preview = ({ open, setOpen, setCart, setOrderId }) => {
+const Preview = ({ open, setOpen, setCart }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -29,9 +29,9 @@ const Preview = ({ open, setOpen, setCart, setOrderId }) => {
   const md = useMediaQuery("(min-width:769px)");
 
   const handleClose = () => {
-    setOrderId(false);
+    // setOrderId(false);
     dispatch(setOrder([]));
-    setOpen(false)
+    setOpen(false);
   };
 
   return (
