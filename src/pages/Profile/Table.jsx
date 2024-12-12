@@ -27,7 +27,7 @@ const Table = ({ setCart }) => {
   const createdOrder = useSelector((state) => state.profile.createdOrder);
 
   const [openDrawer, setOpenDrawer] = useState(false);
-  const [orderId, setOrderId] = useState(false);
+  // const [orderId, setOrderId] = useState(false);
 
   const [open, setOpen] = useState(false);
   const firstUpdate = useRef(true);
@@ -259,12 +259,9 @@ const Table = ({ setCart }) => {
                     <tr
                       key={idx}
                       onClick={() => {
-                        if (!md) {
-                          if (orderId) {
-                            setOrderId(false);
-                            setTimeout(() => setOrderId(item.id), 500);
-                          } else setOrderId(item.id);
-                        }
+                        navigate(`?${item.id}`);
+                        setOpenDrawer(true);
+                        dispatch(getOrder(item.id));
                       }}
                     >
                       <td>{item?.customId}</td>
@@ -380,7 +377,7 @@ const Table = ({ setCart }) => {
             </Box>
           )}
         </Box>
-        {orderId && (
+        {/* {orderId && (
           <Box m="24px 16px 18px">
             <Button
               onClick={() => {
@@ -411,11 +408,11 @@ const Table = ({ setCart }) => {
               </svg>
             </Button>
           </Box>
-        )}
+        )} */}
       </Box>
       <Success reorder open={open} setOpen={setOpen} />
       <Preview
-        setOrderId={setOrderId}
+        // setOrderId={setOrderId}
         setCart={setCart}
         open={openDrawer}
         setOpen={setOpenDrawer}
