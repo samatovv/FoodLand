@@ -112,7 +112,7 @@ const Categories = () => {
                       maxWidth={219}
                       fontWeight="bold"
                     >
-                      {item.title}
+                      {item?.title}
                     </Typography>
                     <Link
                       to={`/catalog/?search=&categoryIds=${item.id}&page=1`}

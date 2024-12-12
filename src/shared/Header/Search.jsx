@@ -91,6 +91,7 @@ const SearchHeader = ({ open, setOpen }) => {
             setValue(e.target.value);
             handleSearch(e);
           }}
+          autoFocus
           sx={{
             width: "100%",
             background: "#FFF",
@@ -234,7 +235,10 @@ const SearchHeader = ({ open, setOpen }) => {
             {searched.length ? (
               <Box p={{ xs: "20px 17px 10px 17px", md: "30px 40px 0" }}>
                 <Button
-                  onClick={() => setAll(!all)}
+                  onClick={() => {
+                    navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
+                    handleClose();
+                  }}
                   variant="outlined"
                   sx={{
                     color: "var(--primary)",

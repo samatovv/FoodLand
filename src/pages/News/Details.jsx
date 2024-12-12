@@ -68,7 +68,7 @@ const NewsDetails = () => {
             alt=""
           />
           <Typography fontSize={{ xs: 25, md: "35px" }} fontWeight="700">
-            {details.title}
+            {details?.title}
           </Typography>
           <Typography
             mt={2.5}
@@ -164,7 +164,7 @@ const NewsDetails = () => {
                             variant="h5"
                             fontWeight="700"
                           >
-                            {item.title}
+                            {item?.title}
                           </Typography>
                           <Typography color="#666" variant="body2">
                             {item &&

@@ -14,10 +14,11 @@ const Card = ({ item, search, width, setCart, preview }) => {
   const isAuth = useAuth();
 
   const details = search ? item?.product : item;
-  const category = Array.isArray(details?.category) && details?.category[0]?.name;
+  const category =
+    Array.isArray(details?.category) && details?.category[0]?.name;
   const [count, setCount] = useState(1);
   const id = item?._id ? item?._id : item?.product?.id;
-  
+
   return (
     <Box
       sx={{
@@ -89,14 +90,14 @@ const Card = ({ item, search, width, setCart, preview }) => {
           mb={2}
           justifyContent="space-between"
         >
-          <Typography fontWeight={700} variant="h5">
+          <Typography fontWeight={700} fontSize={{ xs: 19, md: 20 }}>
             {
               details?.prices?.find((item) =>
                 item.price._id
                   ? item.price._id
                   : item.price?.id === data?.price?.id
               )?.value
-            }{" "}
+            }
             c
           </Typography>
           {!preview && (
@@ -117,6 +118,7 @@ const Card = ({ item, search, width, setCart, preview }) => {
       )}
       {!preview && (
         <AddToCart
+          search={search}
           setCart={setCart}
           count={count}
           id={id}

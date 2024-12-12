@@ -216,7 +216,7 @@ const Footer = () => {
                           color="#707070"
                           fontWeight={400}
                         >
-                          {item.title}
+                          {item?.title}
                         </Typography>
                       </Link>
                     ))}

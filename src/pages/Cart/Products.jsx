@@ -30,8 +30,8 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
       p={{ xs: "32px 0 0 0", md: "15px" }}
       maxHeight={{ xs: "70vh", md: 609 }}
       minHeight={{ xs: "unset", md: 609 }}
-      height='100%'
-      // overflow={!cart?.length ? "auto" : "scroll"}
+      height="100%"
+      overflow={!cart?.length ? "auto" : "scroll"}
     >
       <Box
         display="flex"
@@ -75,6 +75,7 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
           justifyContent="center"
           alignItems="center"
           flexDirection="column"
+          height="100%"
         >
           <img src={empty} alt="" />
           <Typography
@@ -173,7 +174,13 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
         width={{ xs: "100%", md: "60%" }}
         ml={{ xs: 1, md: 2 }}
       >
-        <Box maxWidth="100%">
+        <Box
+          maxWidth="100%"
+          height="100%"
+          display="flex"
+          flexDirection="column"
+          justifyContent="space-between"
+        >
           <Typography
             className="sans"
             variant="subtitle2"
@@ -184,6 +191,7 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
               WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
               wordWrap: "break-word",
+              lineHeight: "19.07px",
             }}
             mb={{ xs: 1, md: 2 }}
             fontWeight="600"

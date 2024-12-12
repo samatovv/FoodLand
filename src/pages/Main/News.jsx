@@ -123,7 +123,7 @@ const News = () => {
                         justifyContent="space-between"
                       >
                         <Typography variant="h5" fontWeight="700">
-                          {lastPost.title}
+                          {lastPost?.title}
                         </Typography>
                         <Typography color="#666" variant="body2">
                           {lastPost &&
