@@ -75,7 +75,7 @@ const Categories = ({
           )
         );
     } else {
-      navigate(`/catalog/${translit(item.name)}`);
+      // navigate(`/catalog/${translit(item.name)}`);
       if (page > 1) setPage(1);
       setParams({ id: item?.id, name: item.name, parent: item.parent.id });
       dispatch(
@@ -101,7 +101,7 @@ const Categories = ({
           )
         );
     } else {
-      navigate(`/catalog/${translit(item.name)}`);
+      // navigate(`/catalog/${translit(item.name)}`);
       setParams2({ id: item?.id, name: item.name, parent: item.parent.id });
       if (page > 1) setPage(1);
       dispatch(
@@ -376,7 +376,7 @@ const Categories = ({
                       setCategory({ title: "" });
                       setParams({});
                     } else {
-                      navigate(`/catalog/${translit(item.name)}`);
+                      // navigate(`/catalog/${translit(item.name)}`);
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
                       dispatch(
