@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProfileData, login } from "../../redux/reducers/profile";
 import cookie from "cookie_js";
 import { useLocation, useNavigate } from "react-router";
-import { instance } from "../../api";
+import { formData, instance } from "../../api";
 import {
   handleAuthDialog,
   handleLoading,
@@ -69,7 +69,6 @@ const Auth = () => {
 
     if (loginData?.status == 200) {
       if (formik.values.rememberMe) {
-        
         cookie.set("foodland_token", loginData.data.tokens.access.token, {
           expires: loginData.data.tokens.access.expires,
           path: "/",
@@ -79,6 +78,8 @@ const Auth = () => {
         sessionStorage.setItem("token", loginData.data.tokens.access.token);
       }
       instance.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
+      formData.defaults.headers.Authorization = `Bearer ${loginData.data.tokens.access.token}`;
+
       dispatch(getProfileData());
 
       dispatch(handleAuthDialog());

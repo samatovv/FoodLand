@@ -16,14 +16,14 @@ const Profile = ({ setCart }) => {
     <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
       Мой профиль
     </Typography>,
-    <Typography
-      fontSize={{ xs: 14, md: 13 }}
-      className="sans"
-      key="3"
-      sx={{ color: "text.primary" }}
-    >
-      Мои заказы
-    </Typography>,
+    // <Typography
+    //   fontSize={{ xs: 14, md: 13 }}
+    //   className="sans"
+    //   key="3"
+    //   sx={{ color: "text.primary" }}
+    // >
+    //   Мои заказы
+    // </Typography>,
   ];
 
   return (

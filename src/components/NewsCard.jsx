@@ -93,7 +93,7 @@ const NewsCard = ({ item, idx }) => {
               variant="h5"
               fontWeight="700"
             >
-              {item.title}
+              {item?.title}
             </Typography>
             <Typography color="#666" variant="body2">
               {item.createdAt &&

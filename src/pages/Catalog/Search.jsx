@@ -62,7 +62,7 @@ const Search = ({
             getProducts(
               `/products/query?limit=12&page=1&search=${encodeURI(
                 searchValue
-              )}&categoryIds=${params?.id}`
+              )}&categoryIds=`
             )
           );
         }
@@ -78,6 +78,7 @@ const Search = ({
           if (!open) setOpen(!open);
           setValueSearch(e.target.value);
           handleSearch(e);
+          // navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
         }}
         slotProps={{
           input: {
@@ -92,6 +93,7 @@ const Search = ({
                   onClick={() => {
                     setOpen(false);
                     setValueSearch("");
+                    navigate(`/catalog/?search=&categoryIds=&page=1`);
                   }}
                 >
                   <CloseSearch open={open} />

@@ -18,6 +18,8 @@ import {
   getProducts,
   setProducts,
 } from "../../redux/reducers/products";
+import { useNavigate, useParams } from "react-router";
+import { translit, translitAgain } from "../../hooks/translit";
 
 const Categories = ({
   setChip,
@@ -28,17 +30,21 @@ const Categories = ({
   params2,
   params,
   setParams,
+  setValueSearch,
   searchValue,
   page,
   setPage,
 }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const md = useMediaQuery("(min-width:900px)");
 
   const [expanded, setExpanded] = useState(true);
   const [categories, setCategories] = useState([]);
 
   const allCategories = useSelector((state) => state.main.categories);
+
+  const { name } = useParams();
 
   useEffect(() => {
     if (!allCategories.length) dispatch(getCategories());
@@ -70,6 +76,7 @@ const Categories = ({
           )
         );
     } else {
+      navigate(`/catalog/${translit(item.name)}`);
       if (page > 1) setPage(1);
       setParams({ id: item?.id, name: item.name, parent: item.parent.id });
       dispatch(
@@ -94,6 +101,7 @@ const Categories = ({
           )
         );
     } else {
+      navigate(`/catalog/${translit(item.name)}`);
       setParams2({ id: item?.id, name: item.name, parent: item.parent.id });
       if (page > 1) setPage(1);
       dispatch(
@@ -103,10 +111,6 @@ const Categories = ({
       );
     }
   };
-
-  useEffect(() => {
-    console.log(params2.name);
-  }, [params2]);
 
   return (
     <Box component="section" pb={13}>
@@ -161,6 +165,7 @@ const Categories = ({
             {Array.isArray(allCategories) &&
               categories?.first?.map((item, idx) => (
                 <Accordion
+                  expanded={category?.title === item.name}
                   key={idx}
                   sx={{
                     "&.MuiPaper-root ": {
@@ -187,7 +192,7 @@ const Categories = ({
                 >
                   <AccordionSummary
                     onClick={() => {
-                      if (category.title === item.name) {
+                      if (category?.title === item.name) {
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
                         dispatch(
@@ -198,6 +203,7 @@ const Categories = ({
                         setCategory({ title: "" });
                         setParams({});
                       } else {
+                        navigate(`/catalog/${translit(item.name)}`);
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
                         dispatch(
@@ -253,9 +259,9 @@ const Categories = ({
                           <AccordionSummary
                             onClick={() => {
                               handleProducts(ite);
-                              if (category.title === ite.name)
-                                setCategory({ title: ite.parent.name });
-                              else setCategory({ title: ite.name });
+                              // if (category.title === ite.name)
+                              //   setCategory({ title: ite.parent.name });
+                              // else setCategory({ title: ite.name });
                             }}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
@@ -281,7 +287,9 @@ const Categories = ({
                                     fontWeight:
                                       params2.name === el.name &&
                                       "700!important",
-                                    color: params2.name === el.name && "#000!important",
+                                    color:
+                                      params2.name === el.name &&
+                                      "#000!important",
                                   }}
                                   key={idx}
                                   onClick={() => handleProducts2(el)}
@@ -329,6 +337,7 @@ const Categories = ({
           {Array.isArray(allCategories) &&
             categories?.first?.map((item, idx) => (
               <Accordion
+                expanded={category.title === item.name}
                 key={idx}
                 sx={{
                   "&.MuiPaper-root ": {
@@ -354,17 +363,32 @@ const Categories = ({
                 }}
               >
                 <AccordionSummary
+                  onClick={() => {
+                    if (category?.title === item.name) {
+                      dispatch(setProducts([]));
+                      dispatch(handleLoading(true));
+                      dispatch(
+                        getProducts(
+                          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=`
+                        )
+                      );
+                      setCategory({ title: "" });
+                      setParams({});
+                    } else {
+                      navigate(`/catalog/${translit(item.name)}`);
+                      dispatch(setProducts([]));
+                      dispatch(handleLoading(true));
+                      dispatch(
+                        getProducts(
+                          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
+                        )
+                      );
+                      setCategory({ title: item.name });
+                    }
+                  }}
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"
                   id="panel1-header"
-                  onClick={() => {
-                    dispatch(
-                      getProducts(
-                        `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
-                      )
-                    );
-                    setCategory({ title: item.name });
-                  }}
                 >
                   <span
                     style={{
@@ -402,16 +426,22 @@ const Categories = ({
                             color: "#626262",
                           },
                         }}
+                        expanded={params.name === ite.name}
                       >
                         <AccordionSummary
-                          onClick={() => handleProducts(ite)}
+                          onClick={() => {
+                            handleProducts(ite);
+                            // if (category.title === ite.name)
+                            //   setCategory({ title: ite.parent.name });
+                            // else setCategory({ title: ite.name });
+                          }}
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1-content"
                           id="panel1-header"
                         >
                           <span
                             style={{
-                              fontWeight: !!params?.id === ite?.id && 700,
+                              fontWeight: params?.id === ite?.id && 700,
                             }}
                           >
                             {ite.name}
@@ -421,18 +451,22 @@ const Categories = ({
                           {categories?.second
                             ?.filter((el) => el.parent?.id === ite?.id)
                             ?.map((el, idx) => (
-                              <FormGroup>
-                                <FormControlLabel
-                                  control={
-                                    <Checkbox
-                                      checked={!!params.id === el?.id}
-                                    />
-                                  }
-                                  label={el.name}
-                                  value={el?.id}
-                                  onChange={() => handleProducts(el)}
-                                />
-                              </FormGroup>
+                              <Typography
+                                sx={{
+                                  cursor: "pointer",
+                                  m: "8px 0",
+                                  pl: "17px",
+                                  fontWeight:
+                                    params2.name === el.name && "700!important",
+                                  color:
+                                    params2.name === el.name &&
+                                    "#000!important",
+                                }}
+                                key={idx}
+                                onClick={() => handleProducts2(el)}
+                              >
+                                {el.name}
+                              </Typography>
                             ))}
                         </AccordionDetails>
                       </Accordion>
@@ -440,6 +474,22 @@ const Categories = ({
                 </AccordionDetails>
               </Accordion>
             ))}
+          <div
+            onClick={() => {
+              dispatch(handleLoading(true));
+              dispatch(setProducts({}));
+              setCategory({ title: "Рекомендуемые товары" });
+              dispatch(getProd(`recommendations?limit=12&page=${page}`));
+            }}
+            style={{
+              paddingLeft: "17px",
+              margin: "17px 0",
+              fontWeight: category?.title === "Рекомендуемые товары" && 700,
+              cursor: "pointer",
+            }}
+          >
+            Рекомендуемые товары
+          </div>
         </Box>
       )}
     </Box>

@@ -13,6 +13,7 @@ import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router";
 import {
+  getProd,
   getProducts,
   getProductsNames,
   setProducts,
@@ -69,6 +70,8 @@ const Products = ({
 
   const handleChange = (event, value) => {
     setPage(value);
+    dispatch(handleLoading(true));
+    dispatch(setProducts([]));
     navigate(
       `/catalog/?search=${
         location.search.split("&")[0].split("=")[1]
@@ -116,13 +119,15 @@ const Products = ({
 
     window.scrollTo(0, 0);
     dispatch(setProducts([]));
-    dispatch(
-      getProducts(
-        `/products/query?limit=12&page=${page}&search=${encodeURI(
-          searchValue
-        )}&categoryIds=${params.id}`
-      )
-    );
+    category?.title === "Рекомендуемые товары"
+      ? dispatch(getProd(`recommendations?limit=12&page=${page}`))
+      : dispatch(
+          getProducts(
+            `/products/query?limit=12&page=${page}&search=${encodeURI(
+              searchValue
+            )}&categoryIds=${params.id ? params.id : ""}`
+          )
+        );
   }, [page]);
 
   useLayoutEffect(() => {
@@ -137,7 +142,7 @@ const Products = ({
   }, [products]);
 
   useEffect(() => {
-    if (location.search) {
+    if (location.search && category?.title !== "Рекомендуемые товары") {
       setPage(+location.search.split("&")[2].split("=")[1]);
       setValueSearch(decodeURI(location.search.split("&")[0].split("=")[1]));
       dispatch(
@@ -153,9 +158,7 @@ const Products = ({
               ? location.search.split("&")[0].split("=")[1]
               : decodeURI(location.search.split("&")[0].split("=")[1])
           }&categoryIds=${
-            params?.length
-              ? `${params?.id}`
-              : location.search.split("&")[1].split("=")[1]
+            params.id ? params.id : location.search.split("&")[1].split("=")[1]
           }`
         )
       );
