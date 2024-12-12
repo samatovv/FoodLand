@@ -157,7 +157,7 @@ input:-webkit-autofill:focus {
   transform: rotate(45deg);
   position: absolute;
   top: 4px;
-  left: 8px;
+  left: 0px;
 }
 
 .more {
@@ -204,7 +204,7 @@ input:-webkit-autofill:focus {
   transform: rotate(45deg);
   position: absolute;
   top: 4px;
-  left: 8px;
+  left: 0px;
 }
 
 .more .button_txt.none {

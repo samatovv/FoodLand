@@ -58,13 +58,13 @@ const Search = ({
         setOpen(false);
         if (page === 1) {
           navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
-          dispatch(
-            getProducts(
-              `/products/query?limit=12&page=1&search=${encodeURI(
-                searchValue
-              )}&categoryIds=`
-            )
-          );
+          // dispatch(
+          //   getProducts(
+          //     `/products/query?limit=12&page=1&search=${encodeURI(
+          //       searchValue
+          //     )}&categoryIds=`
+          //   )
+          // );
         }
       }}
       width="100%"
@@ -136,13 +136,6 @@ const Search = ({
             onClick={() => {
               setOpen(false);
               navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
-              dispatch(
-                getProducts(
-                  `/products/query?limit=12&page=1&search=${encodeURI(
-                    searchValue
-                  )}&categoryIds=${params?.id}`
-                )
-              );
             }}
             mb={0.8}
           >

@@ -221,6 +221,7 @@ const Header = ({ cart }) => {
             width="44px"
             height="44px"
             sx={{
+            
               cursor: "pointer",
               "& rect": {
                 transition: "all 0.2s ease",
@@ -258,7 +259,7 @@ const Header = ({ cart }) => {
           </Box>
           {!md && (
             <IconButton
-              sx={{ p: 0, ml:'5px' }}
+              sx={{ p: 0, ml: "5px" }}
               onClick={() => dispatch(handleDrawer(true))}
             >
               <Burger />

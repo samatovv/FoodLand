@@ -24,7 +24,6 @@ const Site = ({ cart, setCart }) => {
           <Route path="/news" element={<News />} />
           <Route path="/news/:id" element={<NewsDetails />} />
           <Route path="/catalog" element={<Catalog setCart={setCart} />} />
-          <Route path="/catalog/:name" element={<Catalog setCart={setCart} />} />
           <Route
             path="/catalog/:name/:id"
             element={<Details setCart={setCart} />}

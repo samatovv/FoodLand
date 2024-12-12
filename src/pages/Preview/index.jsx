@@ -17,7 +17,7 @@ import { Link, useLocation } from "react-router-dom";
 import Card from "../../components/Card";
 import { setOrder } from "../../redux/reducers/profile";
 
-const Preview = ({ open, setOpen,setCart }) => {
+const Preview = ({ open, setOpen, setCart, setOrderId }) => {
   const location = useLocation();
   const dispatch = useDispatch();
 
@@ -27,6 +27,12 @@ const Preview = ({ open, setOpen,setCart }) => {
   const data = useSelector((state) => state.profile.data);
 
   const md = useMediaQuery("(min-width:769px)");
+
+  const handleClose = () => {
+    setOrderId(false);
+    dispatch(setOrder([]));
+    setOpen(false)
+  };
 
   return (
     <>
@@ -45,7 +51,7 @@ const Preview = ({ open, setOpen,setCart }) => {
             },
           }}
           open={location.search && order?.id === location.search.split("?")[1]}
-          onClose={() => dispatch(setOrder([]))}
+          onClose={handleClose}
         >
           <Box
             display="flex"
@@ -84,7 +90,7 @@ const Preview = ({ open, setOpen,setCart }) => {
                 </Typography>
               </Box>
             </Box>
-            <IconButton onClick={() => dispatch(setOrder([]))}>
+            <IconButton onClick={handleClose}>
               <Close />
             </IconButton>
           </Box>
@@ -290,7 +296,7 @@ const Preview = ({ open, setOpen,setCart }) => {
               maxHeight: "90vh",
             },
           }}
-          onClose={() => setOpen(false)}
+          onClose={handleClose}
         >
           <Box
             mt={3}
@@ -330,7 +336,7 @@ const Preview = ({ open, setOpen,setCart }) => {
                 </Typography>
               </Box>
             </Box>
-            <IconButton onClick={() => setOpen(false)}>
+            <IconButton onClick={handleClose}>
               <Close />
             </IconButton>
           </Box>
