@@ -65,14 +65,13 @@ const Categories = ({
   const handleProducts = (item) => {
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
-
     if (params?.id === item?.id) {
       setParams({});
       if (page > 1) setPage(1);
       if (page === 1)
         dispatch(
           getProducts(
-            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.parent.id}`
+            `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
           )
         );
     } else {
@@ -81,13 +80,14 @@ const Categories = ({
       setParams({ id: item?.id, name: item.name, parent: item.parent.id });
       dispatch(
         getProducts(
-          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item?.id}`
+          `/products/query?limit=12&page=${page}&search=&categoryIds=${item?.id}`
         )
       );
     }
   };
 
   const handleProducts2 = (item) => {
+    setCategory({ ...category, title2: item.name });
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
 
@@ -97,7 +97,7 @@ const Categories = ({
       if (page === 1)
         dispatch(
           getProducts(
-            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.parent.id}`
+            `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
           )
         );
     } else {
@@ -106,7 +106,7 @@ const Categories = ({
       if (page > 1) setPage(1);
       dispatch(
         getProducts(
-          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item?.id}`
+          `/products/query?limit=12&page=${page}&search=&categoryIds=${item?.id}`
         )
       );
     }
@@ -197,18 +197,19 @@ const Categories = ({
                         dispatch(handleLoading(true));
                         dispatch(
                           getProducts(
-                            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=`
+                            `/products/query?limit=12&page=${page}&search=&categoryIds=`
                           )
                         );
                         setCategory({ title: "" });
                         setParams({});
                       } else {
-                        navigate(`/catalog/${translit(item.name)}`);
+                        setValueSearch("");
+                        // navigate(`/catalog/${translit(item.name)}`);
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
                         dispatch(
                           getProducts(
-                            `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
+                            `/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`
                           )
                         );
                         setCategory({ title: item.name });
@@ -369,7 +370,7 @@ const Categories = ({
                       dispatch(handleLoading(true));
                       dispatch(
                         getProducts(
-                          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=`
+                          `/products/query?limit=12&page=${page}&search=&categoryIds=`
                         )
                       );
                       setCategory({ title: "" });
@@ -380,7 +381,7 @@ const Categories = ({
                       dispatch(handleLoading(true));
                       dispatch(
                         getProducts(
-                          `/products/query?limit=12&page=${page}&search=${searchValue}&categoryIds=${item.id}`
+                          `/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`
                         )
                       );
                       setCategory({ title: item.name });

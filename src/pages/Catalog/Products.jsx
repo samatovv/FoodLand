@@ -99,7 +99,7 @@ const Products = ({
       return;
     }
     if (page > 1) setPage(1);
-    if (!searchValue && page === 1) {
+    if (!searchValue && !category?.title && page === 1) {
       dispatch(
         getProducts(
           `/products/query?limit=12&page=1&search=${encodeURI(
@@ -181,7 +181,11 @@ const Products = ({
           width="100%"
         >
           <Typography variant="h4" fontWeight={700}>
-            {category?.title ? category?.title : "Каталог"}
+            {category?.title2
+              ? category?.title2
+              : category?.title
+              ? category?.title
+              : "Каталог"}
           </Typography>
           {!md && (
             <IconButton onClick={() => dispatch(handleFilter(true))}>

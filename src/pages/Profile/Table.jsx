@@ -27,6 +27,7 @@ const Table = ({ setCart }) => {
   const createdOrder = useSelector((state) => state.profile.createdOrder);
 
   const [openDrawer, setOpenDrawer] = useState(false);
+  const [orderId, setOrderId] = useState(false);
 
   const [open, setOpen] = useState(false);
   const firstUpdate = useRef(true);
@@ -237,7 +238,7 @@ const Table = ({ setCart }) => {
                       <th>Номер экспедитора</th>
                     </>
                   )}
-                  <th></th>
+                  {/* <th></th> */}
                 </tr>
               </Box>
               <Box
@@ -255,7 +256,17 @@ const Table = ({ setCart }) => {
               >
                 {Array.isArray(orders?.results) &&
                   orders?.results?.map((item, idx) => (
-                    <tr key={idx}>
+                    <tr
+                      key={idx}
+                      onClick={() => {
+                        if (!md) {
+                          if (orderId) {
+                            setOrderId(false);
+                            setTimeout(() => setOrderId(item.id), 500);
+                          } else setOrderId(item.id);
+                        }
+                      }}
+                    >
                       <td>{item?.customId}</td>
 
                       {md ? (
@@ -338,7 +349,7 @@ const Table = ({ setCart }) => {
                             : item?.status === "preorder" && "Предзаказ"}
                         </Box>
                       </td>
-                      {md ? (
+                      {md && (
                         <>
                           <td>
                             {item?.managers[0]?.name
@@ -362,19 +373,6 @@ const Table = ({ setCart }) => {
                             </Button>
                           </td>
                         </>
-                      ) : (
-                        <td>
-                          <img
-                            onClick={() => {
-                              setOpenDrawer(true);
-                              dispatch(getOrder(item?.id));
-                            }}
-                            src={more}
-                            width={25}
-                            height={25}
-                            alt=""
-                          />
-                        </td>
                       )}
                     </tr>
                   ))}
@@ -382,9 +380,46 @@ const Table = ({ setCart }) => {
             </Box>
           )}
         </Box>
+        {orderId && (
+          <Box m="24px 16px 18px">
+            <Button
+              onClick={() => {
+                navigate(`?${orderId}`);
+                setOpenDrawer(true);
+                dispatch(getOrder(orderId));
+              }}
+              sx={{
+                p: "8px 10px!important",
+              }}
+              fullWidth
+              size="small"
+              variant="contained"
+              color="primary"
+            >
+              <span style={{ marginRight: 10 }}>Подробнее</span>
+              <svg
+                width="21"
+                height="8"
+                viewBox="0 0 21 8"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M20.6036 4.35355C20.7988 4.15829 20.7988 3.84171 20.6036 3.64645L17.4216 0.464466C17.2263 0.269204 16.9097 0.269204 16.7145 0.464466C16.5192 0.659728 16.5192 0.976311 16.7145 1.17157L19.5429 4L16.7145 6.82843C16.5192 7.02369 16.5192 7.34027 16.7145 7.53553C16.9097 7.7308 17.2263 7.7308 17.4216 7.53553L20.6036 4.35355ZM0.75 4.5H20.25V3.5H0.75V4.5Z"
+                  fill="white"
+                />
+              </svg>
+            </Button>
+          </Box>
+        )}
       </Box>
       <Success reorder open={open} setOpen={setOpen} />
-      <Preview setCart={setCart} open={openDrawer} setOpen={setOpenDrawer} />
+      <Preview
+        setOrderId={setOrderId}
+        setCart={setCart}
+        open={openDrawer}
+        setOpen={setOpenDrawer}
+      />
     </>
   );
 };

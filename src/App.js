@@ -28,18 +28,18 @@ function App() {
     if (!localStorage.getItem("cart")) localStorage.setItem("cart", "[]");
     if (JSON.parse(localStorage.getItem("cart")).length) setCart(true);
     else setCart(false);
+    if (isAuth) dispatch(getProfileData());
   }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
     dispatch(handleDrawer(false));
-    if (isAuth) dispatch(getProfileData());
     if (data?.status === 401) {
       dispatch(setProfile(null));
       sessionStorage.clear();
     }
     if (details) dispatch(setDetails([]));
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   return (
