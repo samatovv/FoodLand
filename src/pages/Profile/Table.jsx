@@ -107,7 +107,7 @@ const Table = ({ setCart }) => {
               <DesktopDatePicker
                 slots={{ openPickerIcon: Calendar }}
                 value={formik.values.createdFrom}
-                format="YYYY-MM-DD"
+                format="MM-DD-YYYY"
                 onChange={(value) => {
                   formik.setFieldValue("createdFrom", value);
                   formik.handleSubmit();
@@ -119,7 +119,7 @@ const Table = ({ setCart }) => {
               <DesktopDatePicker
                 slots={{ openPickerIcon: Calendar }}
                 value={formik.values.createdTo}
-                format="YYYY-MM-DD"
+                format="MM-DD-YYYY"
                 onChange={(value) => {
                   formik.setFieldValue("createdTo", value);
                   formik.handleSubmit();

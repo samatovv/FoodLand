@@ -127,7 +127,7 @@ const Form = ({ formik, cart, close }) => {
             disablePast
             value={formik.values.deliveryDate}
             onChange={(value) => formik.setFieldValue("deliveryDate", value)}
-            format="YYYY-MM-DD"
+            format="MM-DD-YYYY"
             slots={{ openPickerIcon: Calendar }}
             slotProps={{
               textField: {

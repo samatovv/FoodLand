@@ -24,7 +24,7 @@ const Recommendations = ({ setCart }) => {
 
   useEffect(() => {
     dispatch(
-      getRecomendations(`recommendations?limit=${sm ? 4 : 21}&page=${page}`)
+      getRecomendations(`recommendations?limit=${sm ? 4 : 4}&page=${page}`)
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
@@ -66,24 +66,23 @@ const Recommendations = ({ setCart }) => {
           )}
         </Box>
         <Grid2
-          sx={{ width: { xs: "3000px", md: "unset" }, overflowX: "scroll" }}
+          // sx={{ width: { xs: "3000px", md: "unset" }, overflowX: "scroll" }}
           container
-          spacing={{ xs: 2, lg: 5 }}
+          spacing={{ xs: 1, lg: 4 }}
         >
           {Array.isArray(products?.results) &&
             products?.results?.map((item, idx) => (
-              <Grid2 size={{ xs: 1, md: 3 }} key={idx}>
+              <Grid2 size={{ xs: 6, md: 3 }} key={idx}>
                 <Card setCart={setCart} search item={item} />
               </Grid2>
             ))}
         </Grid2>
-        {sm && (
-          <PaginationLarge
-            page={page}
-            handleChange={handleChange}
-            products={products}
-          />
-        )}
+
+        <PaginationLarge
+          page={page}
+          handleChange={handleChange}
+          products={products}
+        />
       </Container>
     </Box>
   );

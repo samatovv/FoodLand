@@ -183,6 +183,8 @@ const Products = ({
           <Typography variant="h4" fontWeight={700}>
             {category?.title2
               ? category?.title2
+              : category?.title3
+              ? category?.title3
               : category?.title
               ? category?.title
               : "Каталог"}

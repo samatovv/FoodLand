@@ -13,8 +13,9 @@ import Products from "./Products";
 import { useFormik } from "formik";
 import Filter from "./Filter";
 import { useAuth } from "../../shared/ProtectedRoutes";
-import { getProd } from "../../redux/reducers/products";
+import { getProd, getProducts, setProducts } from "../../redux/reducers/products";
 import { useDispatch } from "react-redux";
+import { handleLoading } from "../../redux/reducers/mainSlice";
 
 const categories = [
   {
@@ -69,7 +70,19 @@ const Catalog = ({ setCart }) => {
     <Link className="sans" key="1" to="/">
       Главная
     </Link>,
-    <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
+    <Typography
+      onClick={() => {
+        dispatch(handleLoading(true));
+        dispatch(setProducts([]));
+        setCategory({ title: "" });
+        dispatch(
+          getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
+        );
+      }}
+      className="sans"
+      key="2"
+      sx={{ color: "text.primary", cursor: "pointer" }}
+    >
       Каталог
     </Typography>,
     <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
