@@ -30,7 +30,7 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
       p={{ xs: "32px 0 0 0", md: "15px" }}
       maxHeight={{ xs: "70vh", md: 609 }}
       minHeight={{ xs: "unset", md: 609 }}
-      height="100%"
+      height={{ xs: "auto", md: "100%" }}
       overflow={!cart?.length ? "hidden" : "scroll"}
     >
       <Box

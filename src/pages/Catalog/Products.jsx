@@ -27,6 +27,7 @@ import Search from "./Search";
 
 const Products = ({
   setCart,
+  setCategory,
   chip,
   setChip,
   params,
@@ -158,7 +159,9 @@ const Products = ({
               ? location.search.split("&")[0].split("=")[1]
               : decodeURI(location.search.split("&")[0].split("=")[1])
           }&categoryIds=${
-            params.id ? params.id : location.search.split("&")[1].split("=")[1]
+            params.id && !category?.search
+              ? params.id
+              : location.search.split("&")[1].split("=")[1]
           }`
         )
       );
@@ -218,6 +221,7 @@ const Products = ({
           setSearched={setSearched}
           setOpen={setOpen}
           open={open}
+          setCategory={setCategory}
           searched={searched}
           page={page}
           searchValue={searchValue}
