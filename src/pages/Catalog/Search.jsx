@@ -17,6 +17,7 @@ import { useNavigate } from "react-router";
 import { translit } from "../../hooks/translit";
 
 const Search = ({
+  setCategory,
   setSearched,
   setOpen,
   open,
@@ -57,6 +58,7 @@ const Search = ({
         e.preventDefault();
         setOpen(false);
         if (page === 1) {
+          setCategory({ title: "", search: true });
           navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
           // dispatch(
           //   getProducts(
@@ -76,6 +78,7 @@ const Search = ({
         value={searchValue}
         onChange={(e) => {
           if (!open) setOpen(!open);
+          setCategory({ title: "", search: true });
           setValueSearch(e.target.value);
           handleSearch(e);
           // navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
@@ -134,6 +137,7 @@ const Search = ({
         >
           <ListItemButton
             onClick={() => {
+              setCategory({ title: "", search: true });
               setOpen(false);
               navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
             }}
@@ -145,6 +149,8 @@ const Search = ({
             <ListItemButton
               key={idx}
               onClick={() => {
+                setCategory({ title: "", search: true });
+
                 setOpen(false);
                 setValueSearch(item.name);
                 navigate(`/catalog/${translit(item.name)}/${item.id}`);

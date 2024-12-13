@@ -263,7 +263,7 @@ const Categories = ({
                           <AccordionSummary
                             onClick={() => {
                               handleProducts(ite);
-                              if (category.title3 === ite.name)
+                              if (category?.title3 === ite.name)
                                 setCategory({ title: item.name });
                               else
                                 setCategory({ ...category, title3: ite.name });
@@ -342,7 +342,7 @@ const Categories = ({
           {Array.isArray(allCategories) &&
             categories?.first?.map((item, idx) => (
               <Accordion
-                expanded={category.title === item.name}
+                expanded={category?.title === item.name}
                 key={idx}
                 sx={{
                   "&.MuiPaper-root ": {
@@ -380,6 +380,7 @@ const Categories = ({
                       setCategory({ title: "" });
                       setParams({});
                     } else {
+                      setValueSearch("");
                       // navigate(`/catalog/${translit(item.name)}`);
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
@@ -436,9 +437,9 @@ const Categories = ({
                         <AccordionSummary
                           onClick={() => {
                             handleProducts(ite);
-                            // if (category.title === ite.name)
-                            //   setCategory({ title: ite.parent.name });
-                            // else setCategory({ title: ite.name });
+                            if (category?.title3 === ite.name)
+                              setCategory({ title: item.name });
+                            else setCategory({ ...category, title3: ite.name });
                           }}
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1-content"

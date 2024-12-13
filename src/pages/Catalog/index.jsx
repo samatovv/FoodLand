@@ -13,7 +13,11 @@ import Products from "./Products";
 import { useFormik } from "formik";
 import Filter from "./Filter";
 import { useAuth } from "../../shared/ProtectedRoutes";
-import { getProd, getProducts, setProducts } from "../../redux/reducers/products";
+import {
+  getProd,
+  getProducts,
+  setProducts,
+} from "../../redux/reducers/products";
 import { useDispatch } from "react-redux";
 import { handleLoading } from "../../redux/reducers/mainSlice";
 
@@ -130,6 +134,7 @@ const Catalog = ({ setCart }) => {
               category={category}
               setCart={setCart}
               page={page}
+              setCategory={setCategory}
               setPage={setPage}
               searchValue={searchValue}
               setValueSearch={setValueSearch}

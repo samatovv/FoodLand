@@ -293,7 +293,7 @@ const Preview = ({ open, setOpen, setCart }) => {
             "& .MuiPaper-root": {
               p: 2,
               borderRadius: "24px 24px 0 0",
-              maxHeight: "90vh",
+              maxHeight: "80vh",
             },
           }}
           onClose={handleClose}
