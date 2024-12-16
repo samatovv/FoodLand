@@ -11,10 +11,11 @@ import React from "react";
 import CloseSearch from "../../assets/images/CloseSearch";
 import Fuse from "fuse.js";
 import { useDispatch, useSelector } from "react-redux";
-import { getProducts } from "../../redux/reducers/products";
+import { getProducts, setProducts } from "../../redux/reducers/products";
 import Find from "../../assets/images/Find";
 import { useNavigate } from "react-router";
 import { translit } from "../../hooks/translit";
+import { handleLoading } from "../../redux/reducers/mainSlice";
 
 const Search = ({
   setCategory,
@@ -25,6 +26,7 @@ const Search = ({
   page,
   searchValue,
   setValueSearch,
+  category,
   params,
 }) => {
   const dispatch = useDispatch();
@@ -57,6 +59,8 @@ const Search = ({
       onSubmit={(e) => {
         e.preventDefault();
         setOpen(false);
+        dispatch(handleLoading(true));
+        dispatch(setProducts([]));
         if (page === 1) {
           setCategory({ title: "", search: true });
           navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
@@ -78,7 +82,12 @@ const Search = ({
         value={searchValue}
         onChange={(e) => {
           if (!open) setOpen(!open);
-          setCategory({ title: "", search: true });
+          if (category?.title === "Рекомендуемые товары") {
+            dispatch(handleLoading(true));
+            dispatch(setProducts([]));
+            getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`);
+            setCategory({ title: "", search: true });
+          }
           setValueSearch(e.target.value);
           handleSearch(e);
           // navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);

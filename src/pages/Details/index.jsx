@@ -44,6 +44,7 @@ const Details = ({ setCart }) => {
 
   useEffect(() => {
     setImage(images[0]?.url);
+    setCount(1);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
