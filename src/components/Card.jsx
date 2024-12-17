@@ -13,9 +13,13 @@ const Card = ({ item, search, width, setCart, preview }) => {
 
   const isAuth = useAuth();
 
+  const [inCart, setInCart] = useState(null);
+
   const details = search ? item?.product : item;
   const category =
-    Array.isArray(details?.category) && details?.category[0]?.name;
+    Array.isArray(details?.category) && details?.category[0]
+      ? details?.category[0]?.name
+      : details?.category?.name;
   const [count, setCount] = useState(1);
   const id = item?._id ? item?._id : item?.product?.id;
 
@@ -118,6 +122,8 @@ const Card = ({ item, search, width, setCart, preview }) => {
       )}
       {!preview && (
         <AddToCart
+          setInCart={setInCart}
+          inCart={inCart}
           search={search}
           setCart={setCart}
           count={count}

@@ -7,13 +7,20 @@ import { useAuth } from "../shared/ProtectedRoutes";
 import { handleAuthDialog } from "../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 
-const AddToCart = ({ details, count, id, card, setCart, search }) => {
+const AddToCart = ({
+  details,
+  count,
+  id,
+  card,
+  setCart,
+  search,
+  setInCart,
+  inCart,
+}) => {
   const dispatch = useDispatch();
   const isAuth = useAuth();
 
   const data = useSelector((state) => state.profile.data);
-
-  const [inCart, setInCart] = useState(null);
 
   const clickHandler = () => {
     let cart = JSON.parse(localStorage.getItem("cart"));
