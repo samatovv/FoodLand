@@ -9,7 +9,7 @@ const Burger = () => {
       height="44px"
       sx={{
         border: "1px solid #ECECEC",
-        borderRadius: "10px",
+        borderRadius: "13px",
         cursor: "pointer",
         "& rect": {
           transition: "all 0.2s ease",

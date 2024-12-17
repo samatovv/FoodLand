@@ -34,25 +34,31 @@ const Recomendations = ({ setCart, details, id, setPage, page }) => {
 
   return (
     <Box component="section" mt={6}>
-      {recomendations?.results?.length && (
+      {recomendations?.results?.filter((item) => item.id !== id)?.length ? (
         <Typography fontSize={{ xs: 26, md: 20 }} mt={4} fontWeight={600}>
           Вам могут понравиться{" "}
         </Typography>
+      ) : (
+        ""
       )}
       <Grid2 container spacing={1.2} mt={2}>
         {Array.isArray(recomendations?.results) &&
-          recomendations?.results.map((item, idx) => (
-            <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
-              <Card setCart={setCart} item={item} />
-            </Grid2>
-          ))}
+          recomendations?.results
+            .filter((item) => item.id !== id)
+            .map((item, idx) => (
+              <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
+                <Card setCart={setCart} item={item} />
+              </Grid2>
+            ))}
       </Grid2>
-      {recomendations?.results?.length && (
+      {recomendations?.results?.filter((item) => item.id !== id)?.length ? (
         <PaginationLarge
           page={page}
           handleChange={handleChange}
           products={recomendations}
         />
+      ) : (
+        ""
       )}
     </Box>
   );

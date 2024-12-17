@@ -34,11 +34,13 @@ const Details = ({ setCart }) => {
   const [count, setCount] = useState(1);
   const [page, setPage] = useState(1);
   const [image, setImage] = useState(1);
+  const [inCart, setInCart] = useState(null);
 
   useEffect(() => {
     dispatch(getDetails(id));
     setPage(1);
     setImage(images[0]?.url);
+    setInCart(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
@@ -253,6 +255,8 @@ const Details = ({ setCart }) => {
                     </Box>
                   )}
                   <AddToCart
+                    setInCart={setInCart}
+                    inCart={inCart}
                     count={count}
                     setCart={setCart}
                     id={id}
