@@ -40,7 +40,7 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
         justifyContent="space-between"
       >
         <div>
-          <Typography fontSize={{ xs: 26, md: 25 }} fontWeight="600">
+          <Typography className="sans" fontSize={{ xs: 26, md: 25 }} fontWeight="600">
             Товары
           </Typography>
           <Typography

@@ -13,8 +13,8 @@ const Benefits = () => {
     >
       <Container maxWidth="lg">
         <Typography variant="h3" mb={{ xs: 4, md: "47px" }} fontWeight="bold">
-          <span className="primary">FOODLAND</span> — Ваш путеводитель в области
-          сырья и ингредиентов для пищевой промышленности
+          Ваш путеводитель в области сырья <br />и ингредиентов для пищевой
+          промышленности
         </Typography>
         <Grid2 container spacing={1.5}>
           <Grid2 minHeight="100%" size={{ xs: 12, md: 5 }}>
@@ -54,12 +54,16 @@ const Benefits = () => {
             </Box>
           </Grid2>
           <Grid2 size={{ xs: 12, md: 7 }}>
-            <Box position="relative">
+            <Box
+              height="100%"
+              minHeight={{ xs: 275, md: "503px" }}
+              position="relative"
+            >
               <Box
                 component="img"
                 src={img}
                 width="100%"
-                height={{ xs: 275, md: "503px" }}
+                height="100%"
                 alt="Повар накладывает орешки в формочки"
               />
               <Link to="/about-us">

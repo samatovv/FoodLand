@@ -1,4 +1,4 @@
-import { Box, Grid2, Typography } from "@mui/material";
+import { Box, Grid2, Typography, useMediaQuery } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import Card from "../../components/Card";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import PaginationLarge from "../../components/Pagination";
 
 const Recomendations = ({ setCart, details, id, setPage, page }) => {
   const dispatch = useDispatch();
+  const md = useMediaQuery("(min-width:768px)");
 
   const recomendations = useSelector((state) => state.products.recomendations);
 
@@ -27,7 +28,9 @@ const Recomendations = ({ setCart, details, id, setPage, page }) => {
     if (details?.id)
       dispatch(
         getRecomendations(
-          `products?limit=5&category=${details?.category?.id}&page=${page}`
+          `products?limit=${md ? 6 : 7}&category=${
+            details?.category?.id
+          }&page=${page}`
         )
       );
   }, [id, page, details]);

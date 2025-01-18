@@ -107,6 +107,24 @@ const Details = ({ setCart }) => {
         <Grid2 container mt={{ xs: 2, md: 3 }} spacing={4}>
           <Grid2 size={{ xs: 12, sm: 6, lg: 5 }}>
             <Box>
+              {!md ? (
+                !details?.name ? (
+                  <Skeleton
+                    variant="rect"
+                    sx={{
+                      borderRadius: "10px",
+                    }}
+                    width="100%"
+                    height={40}
+                  />
+                ) : (
+                  <Typography className="sans" variant="h4" fontWeight={600}>
+                    {details?.name}
+                  </Typography>
+                )
+              ) : (
+                ""
+              )}
               <Box
                 component="img"
                 src={!images[0]?.url ? empty : image}
@@ -171,21 +189,49 @@ const Details = ({ setCart }) => {
                       {details?.category?.name}
                     </Typography>
                   ))}
-                {!details?.name ? (
-                  <Skeleton
-                    variant="rect"
-                    sx={{
-                      borderRadius: "10px",
-                    }}
-                    width="100%"
-                    height={40}
-                  />
+                {md ? (
+                  !details?.name ? (
+                    <Skeleton
+                      variant="rect"
+                      sx={{
+                        borderRadius: "10px",
+                      }}
+                      width="100%"
+                      height={40}
+                    />
+                  ) : (
+                    <Typography className="sans" variant="h4" fontWeight={600}>
+                      {details?.name}
+                    </Typography>
+                  )
                 ) : (
-                  <Typography className="sans" variant="h4" fontWeight={600}>
-                    {details?.name}
+                  ""
+                )}
+                {details.description && (
+                  <Typography
+                    fontSize={20}
+                    mb={1}
+                    mt={4}
+                    className="sans"
+                    fontWeight="600"
+                    color="var(--primary)"
+                  >
+                    Описание
                   </Typography>
                 )}
+
+                <Typography
+                  className="sans"
+                  fontSize={16}
+                  whiteSpace="pre-wrap"
+                  color="#767676"
+                  mb={2}
+                  fontWeight="400"
+                >
+                  {details.description}
+                </Typography>
               </div>
+
               <Box component="form" onSubmit={formik.handleSubmit}>
                 {/* <Box
                   display="flex"
@@ -267,27 +313,7 @@ const Details = ({ setCart }) => {
             </Box>
           </Grid2>
         </Grid2>
-        {details.description && (
-          <Typography
-            variant="h5"
-            mb={1}
-            mt={3}
-            className="sans"
-            fontWeight="600"
-            color="var(--primary)"
-          >
-            Описание
-          </Typography>
-        )}
-        <Typography
-          className="sans"
-          variant="subtitle1"
-          whiteSpace="pre-wrap"
-          color="#767676"
-          fontWeight="400"
-        >
-          {details.description}
-        </Typography>
+
         <Recomendations
           id={id}
           setCart={setCart}

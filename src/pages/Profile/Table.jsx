@@ -225,7 +225,7 @@ const Table = ({ setCart }) => {
 
                   {md ? (
                     <>
-                      <th>Сумма</th>
+                      <th>Сумма (сом)</th>
                       <th>Вес</th>
                     </>
                   ) : (
@@ -268,7 +268,7 @@ const Table = ({ setCart }) => {
 
                       {md ? (
                         <>
-                          <td>{item?.price}</td>
+                          <td>{item?.price} сом</td>
                           <td>{item?.weight}</td>
                         </>
                       ) : (
