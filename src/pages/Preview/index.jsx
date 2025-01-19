@@ -503,7 +503,7 @@ const Preview = ({ open, setOpen, setCart }) => {
                   c
                 </Typography>
                 <Typography className="sans" fontWeight={700} fontSize={18}>
-                  {item?.quantity} шт
+                  {item?.quantity} кг
                 </Typography>
               </Box>
             </Box>

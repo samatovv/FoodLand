@@ -92,7 +92,7 @@ const Categories = ({
     dispatch(setProducts([]));
 
     if (params2?.id === item?.id) {
-      setCategory({ ...category, title2: item.parent.name });
+      setCategory({ ...category, title2: item.parent.name, title4: "" });
 
       setParams2({});
       if (page > 1) setPage(1);
@@ -103,7 +103,7 @@ const Categories = ({
           )
         );
     } else {
-      setCategory({ ...category, title2: item.name });
+      setCategory({ ...category, title2: item.name, title4: item.name });
       // navigate(`/catalog/${translit(item.name)}`);
       setParams2({ id: item?.id, name: item.name, parent: item.parent.id });
       if (page > 1) setPage(1);

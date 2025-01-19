@@ -119,6 +119,8 @@ const AddToCart = ({
           sx={{
             height: 50,
             position: "relative",
+            color: inCart ? "black" : "white",
+            border: inCart ? "1px solid #666" : "",
             // "&.Mui-disabled": {
             //   background: "transparent",
             //   color: "#000",
@@ -126,7 +128,7 @@ const AddToCart = ({
             // },
           }}
           variant="contained"
-          color="primary"
+          color={inCart ? "secondary" : "primary"}
         >
           {!inCart && <Cart />}
           <span

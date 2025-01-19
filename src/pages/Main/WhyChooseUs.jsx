@@ -12,7 +12,7 @@ import img1 from "../../assets/images/why.webp";
 import img2 from "../../assets/images/why2.webp";
 
 const WhyChooseUs = () => {
-  const md = useMediaQuery("(min-width:769px)");
+  const md = useMediaQuery("(min-width:992px)");
   return (
     <Box
       component="section"
@@ -45,10 +45,10 @@ const WhyChooseUs = () => {
               <Box
                 p="27px"
                 border="1px solid #E6E6E6"
-                borderLeft="none"
+                // borderLeft="none"
                 borderRadius="10px"
                 position="relative"
-                className="none_border_left"
+                // className="none_border_left"
                 maxHeight={350}
                 maxWidth={335}
                 left="2px"
@@ -88,27 +88,33 @@ const WhyChooseUs = () => {
               borderRadius="10px"
               maxHeight={350}
               position="relative"
+              display="flex"
+              justifyContent="space-between"
+              flexDirection="column"
+              alignItems="baseline"
               top="1px"
               left="1px"
             >
-              <Typography
-                className="sans"
-                variant="h4"
-                mb={{ xs: 2, md: 4.6 }}
-                maxWidth={276}
-                fontWeight="600"
-              >
-                Нам можно доверять.
-              </Typography>
-              <Typography
-                className="sans"
-                variant="body1"
-                mb={{ xs: 5, lg: "76px" }}
-                color="#707070"
-              >
-                Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь
-                нашим клиентам становиться ещё лучше
-              </Typography>
+              <div>
+                <Typography
+                  className="sans"
+                  variant="h4"
+                  mb={{ xs: 2, md: 4.6 }}
+                  maxWidth={276}
+                  fontWeight="600"
+                >
+                  Нам можно доверять.
+                </Typography>
+                <Typography
+                  className="sans"
+                  variant="body1"
+                  mb={{ xs: "22px", lg: "0" }}
+                  color="#707070"
+                >
+                  Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб
+                  помочь нашим клиентам становиться ещё лучше
+                </Typography>
+              </div>
               <img src={star} alt="" />
             </Grid2>
             <Grid2
@@ -116,9 +122,9 @@ const WhyChooseUs = () => {
               p={{ xs: 0, md: "27px" }}
               width={{ xs: "100%", md: "50%" }}
               border={{ xs: "none", md: "1px solid #E6E6E6" }}
-              borderRight="none"
+              // borderRight="none"
               borderRadius="10px"
-              className="none_border_right"
+              // className="none_border_right"
               position="relative"
               top="1px"
               maxHeight={{ xs: 210, md: 350 }}
@@ -154,31 +160,38 @@ const WhyChooseUs = () => {
             <Grid2
               size={{ xs: 12, md: 6 }}
               p="27px"
+              height={{ xs: "auto", md: "350px" }}
               backgroundColor="#FFF5E8"
               border="1px solid #E6E6E6"
               borderRadius="10px"
               maxHeight={350}
               position="relative"
+              display="flex"
+              justifyContent="space-between"
+              flexDirection="column"
+              alignItems="baseline"
               left="1px"
             >
-              <Typography
-                className="sans"
-                variant="h4"
-                mb={{ xs: 2, md: 4.6 }}
-                maxWidth={276}
-                fontWeight="600"
-              >
-                Экспертность{" "}
-              </Typography>
-              <Typography
-                className="sans"
-                variant="body1"
-                mb={{ xs: 3, lg: "110px" }}
-                color="#707070"
-              >
-                Наша экспертность в сфере применения кондитерского сырья.
-                Возможность предоставления технологической поддержки.
-              </Typography>
+              <div>
+                <Typography
+                  className="sans"
+                  variant="h4"
+                  mb={{ xs: 2, md: "73px" }}
+                  maxWidth={276}
+                  fontWeight="600"
+                >
+                  Экспертность{" "}
+                </Typography>
+                <Typography
+                  className="sans"
+                  variant="body1"
+                  mb={{ xs: "22px", lg: "0" }}
+                  color="#707070"
+                >
+                  Наша экспертность в сфере применения кондитерского сырья.
+                  Возможность предоставления технологической поддержки.
+                </Typography>
+              </div>
               <img src={shield} alt="" />
             </Grid2>
             <Grid2
@@ -187,36 +200,42 @@ const WhyChooseUs = () => {
               backgroundColor="#FCFCF1"
               border="1px solid #E6E6E6"
               borderRadius="10px"
+              display="flex"
+              justifyContent="space-between"
+              flexDirection="column"
+              alignItems="baseline"
               maxHeight={350}
             >
-              <Typography
-                variant="h4"
-                mb={{ xs: 2, lg: "34px" }}
-                maxWidth={276}
-                fontWeight="600"
-                className="sans"
-              >
-                Гарантия качества
-              </Typography>
-
-              <Typography
-                className="sans"
-                // fontSize={{ xs: 13, md: 11 }}
-                whiteSpace="nowrap"
-                mb={{ xs: 1, lg: "33px" }}
-                color="#707070"
-              >
-                Высокий уровень поставляемых услуг
-              </Typography>
-              <Typography
-                className="sans"
-                variant="body1"
-                mb={{ xs: 3, lg: "31px" }}
-                color="#707070"
-              >
-                Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб помочь
-                нашим клиентам становиться ещё лучше
-              </Typography>
+              <div>
+                {" "}
+                <Typography
+                  variant="h4"
+                  mb={{ xs: 2, lg: "34px" }}
+                  maxWidth={250}
+                  fontWeight="600"
+                  className="sans"
+                >
+                  Гарантия качества
+                </Typography>
+                <Typography
+                  className="sans"
+                  // fontSize={{ xs: 13, md: 11 }}
+                  whiteSpace="nowrap"
+                  mb={{ xs: 1, lg: "33px" }}
+                  color="#707070"
+                >
+                  Высокий уровень поставляемых услуг
+                </Typography>
+                <Typography
+                  className="sans"
+                  variant="body1"
+                  mb={{ xs: '22px', lg: "0" }}
+                  color="#707070"
+                >
+                  Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб
+                  помочь нашим клиентам становиться ещё лучше
+                </Typography>
+              </div>
               <img src={star} alt="" />
             </Grid2>
           </Grid2>

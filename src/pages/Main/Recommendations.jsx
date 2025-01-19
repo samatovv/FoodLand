@@ -53,7 +53,7 @@ const Recommendations = ({ setCart }) => {
               color="var(--primary-light)"
               fontWeight="medium"
             >
-              Вам могут понравится
+              Вам могут понравиться
             </Typography>
             <Typography variant="h2" fontWeight="bold" maxWidth={681} mt={1}>
               Рекомендуемые товары

@@ -254,7 +254,7 @@ const Footer = () => {
         backgroundColor="var(--primary)"
       >
         <Typography variant="subtitle1" color="#FFF">
-          @FoodLand - 2024
+          @FOODLAND - 2024
         </Typography>
         <a target="_blank" rel="noreferrer" href="https://to-moore.com/">
           <img src={moore} alt="" />

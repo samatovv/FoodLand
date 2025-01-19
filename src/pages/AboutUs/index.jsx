@@ -37,8 +37,8 @@ const AboutUs = () => {
           {breadcrumbs}
         </Breadcrumbs>
         <Box display="flex" flexDirection={{ xs: "column", md: "row" }} mt={3}>
-          <img src={logo} width={116} height={40} alt="" />
-          <Box mt={{ xs: 2, md: 0 }} ml={{ xs: 0, md: "101px" }}>
+          {/* <img src={logo} width={116} height={40} alt="" /> */}
+          <Box mt={{ xs: 2, md: 0 }} >
             <Typography
               fontSize={{ xs: 16, md: 24 }}
               fontWeight={700}
@@ -60,17 +60,6 @@ const AboutUs = () => {
         <Grid2 container spacing={{ xs: 1, lg: 9 }} mt={{ xs: "28px", md: 11 }}>
           <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
-              fontSize={{ xs: 16, md: "24px" }}
-              fontWeight={300}
-              className="sans"
-              color="var(--primary)"
-              width="fit-content"
-              pb={1}
-              borderBottom="1px solid var(--primary)"
-            >
-              Создали
-            </Typography>
-            <Typography
               mt={1}
               mb={2}
               fontSize={{ xs: 36, md: 48 }}
@@ -89,17 +78,6 @@ const AboutUs = () => {
             </Typography>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              fontSize={{ xs: 16, md: "24px" }}
-              fontWeight={300}
-              className="sans"
-              color="var(--primary)"
-              width="fit-content"
-              pb={1}
-              borderBottom="1px solid var(--primary)"
-            >
-              Испекли
-            </Typography>
             <Typography
               mt={1}
               mb={2}
@@ -120,17 +98,6 @@ const AboutUs = () => {
           </Grid2>
           <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
-              fontSize={{ xs: 16, md: "24px" }}
-              fontWeight={300}
-              className="sans"
-              color="var(--primary)"
-              width="fit-content"
-              pb={1}
-              borderBottom="1px solid var(--primary)"
-            >
-              Продали
-            </Typography>
-            <Typography
               mt={1}
               mb={2}
               fontSize={{ xs: 36, md: 48 }}
@@ -150,17 +117,6 @@ const AboutUs = () => {
           </Grid2>
           <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
-              fontSize={{ xs: 16, md: "24px" }}
-              fontWeight={300}
-              className="sans"
-              color="var(--primary)"
-              width="fit-content"
-              pb={1}
-              borderBottom="1px solid var(--primary)"
-            >
-              Приготовили
-            </Typography>
-            <Typography
               fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
@@ -178,17 +134,6 @@ const AboutUs = () => {
           </Grid2>
           <Grid2 size={{ xs: 6, md: 4 }}>
             <Typography
-              fontSize={{ xs: 16, md: "24px" }}
-              fontWeight={300}
-              className="sans"
-              color="var(--primary)"
-              width="fit-content"
-              pb={1}
-              borderBottom="1px solid var(--primary)"
-            >
-              Более
-            </Typography>
-            <Typography
               fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
             >
@@ -205,17 +150,6 @@ const AboutUs = () => {
             </Typography>
           </Grid2>
           <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              fontSize={{ xs: 16, md: "24px" }}
-              fontWeight={300}
-              className="sans"
-              color="var(--primary)"
-              width="fit-content"
-              pb={1}
-              borderBottom="1px solid var(--primary)"
-            >
-              Доставок
-            </Typography>
             <Typography
               fontSize={{ xs: 36, md: 48 }}
               fontWeight={{ xs: 600, md: 400 }}
@@ -380,7 +314,6 @@ const AboutUs = () => {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
                 width="100%"
-                
                 height={!md ? "389px" : "100%"}
                 style={{ border: "0", borderRadius: "20px" }}
                 allowFullScreen=""

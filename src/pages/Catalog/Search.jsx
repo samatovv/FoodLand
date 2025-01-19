@@ -77,7 +77,7 @@ const Search = ({
       position="relative"
     >
       <TextField
-        placeholder="Найти на Foodland..."
+        placeholder="Найти на FOODLAND..."
         fullWidth
         value={searchValue}
         onChange={(e) => {

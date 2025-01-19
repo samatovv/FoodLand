@@ -52,11 +52,12 @@ const Card = ({ item, search, width, setCart, preview }) => {
           }
           sx={{
             borderRadius: "12px",
+            // width: search ? "278px" : "204px",
             height: { xs: 142, md: 178 },
             objectFit:
               Array.isArray(details?.images) && !details?.images[0]?.url
                 ? "cover"
-                : "cover",
+                : "contain",
             transition: "all 800ms ease",
           }}
           width="100%"
@@ -73,9 +74,13 @@ const Card = ({ item, search, width, setCart, preview }) => {
           mt={2}
           fontWeight="400"
           sx={{
-            whiteSpace: "nowrap",
-            overflow: "hidden",
             textOverflow: "ellipsis",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: "vertical",
+            wordWrap: "break-word",
+            fontFamily: "Nunito Sans",
           }}
           variant="subtitle1"
           lineHeight={1}

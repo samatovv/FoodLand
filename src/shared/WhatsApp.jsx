@@ -6,19 +6,19 @@ const WhatsApp = () => {
   return (
     <Box
       component="a"
-			target="_blank"
+      target="_blank"
       sx={{
         display: "block",
         position: "fixed",
-        bottom: 30,
+        bottom: 80,
         right: 30,
-        p: 1,
-        borderRadius: 100,
+        p: '16px 18px',
+        borderRadius: "100%",
         zIndex: 2,
         background: "var(--primary-light)",
         transition: "all 600ms cubic-bezier(0.47, 1.64, 0.41, 0.8)",
         "&:hover": {
-          p: 2,
+          p: 3,
         },
       }}
       href="https://wa.me/9960550114477"
