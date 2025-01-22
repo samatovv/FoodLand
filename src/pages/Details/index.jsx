@@ -78,6 +78,15 @@ const Details = ({ setCart }) => {
         {details?.category?.parent?.parent?.name}
       </Typography>
     </Link>,
+
+    <Typography
+      fontSize={{ xs: 14, md: 13 }}
+      className="sans"
+      key="3"
+      sx={{ color: "text.primary" }}
+    >
+      {details?.category?.parent?.name}
+    </Typography>,
     <Typography
       fontSize={{ xs: 14, md: 13 }}
       className="sans"

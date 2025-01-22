@@ -270,11 +270,17 @@ input:-webkit-autofill:focus {
   }
 
   .swiper-button-next {
-    right: 8px;
+    right: 41%;
+    bottom: -46px;
+    transform: rotate(180deg) translate(-50%);
+    top: unset;
   }
 
   .swiper-button-prev {
-    right: 58px;
+    right: 51%;
+    transform: translate(-50%);
+    bottom: -46px;
+    top: unset;
   }
 }
 

@@ -92,12 +92,12 @@ const Catalog = ({ setCart }) => {
     <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
       {category?.title}
     </Typography>,
-    category.title3 && (
+    category?.title3 && (
       <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
         {category?.title3}
       </Typography>
     ),
-    category.title4 && (
+    category?.title4 && (
       <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
         {category?.title4}
       </Typography>
