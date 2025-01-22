@@ -41,10 +41,10 @@ const First = () => {
           variant="h1"
           m={{ xs: "0 auto", md: "unset" }}
           color="#FFFFFF"
-          maxWidth={{ xs: 299, md: 657 }}
+          maxWidth={{ xs: 299, md: 620 }}
           textAlign={{ xs: "center", md: "start" }}
         >
-          Ваш надежный поставщик сладкого и не только
+          Ваш путеводитель в области сырья
         </Typography>
         <Box
           mt={{ xs: 5, md: 6 }}
@@ -58,6 +58,7 @@ const First = () => {
             sx={{
               width: { xs: "100%", md: 193, borderRadius: "15px" },
               ml: { xs: 0, md: "34.5px" },
+              fontFamily: "Open Sans",
             }}
             txt="Заказать звонок"
             href="tel:+996 550 114 477"

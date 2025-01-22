@@ -48,6 +48,7 @@ const Recomendations = ({ setCart, details, id, setPage, page }) => {
         {Array.isArray(recomendations?.results) &&
           recomendations?.results
             .filter((item) => item.id !== id)
+            .slice(0, 5)
             .map((item, idx) => (
               <Grid2 size={{ xs: 6, sm: 4, md: 3, lg: 2.4, xl: 2.4 }}>
                 <Card setCart={setCart} item={item} />
