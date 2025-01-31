@@ -84,8 +84,8 @@ input:-webkit-autofill:focus {
   width: 30px;
   height: 10px;
   position: absolute;
-  top: -46px;
-  right: 10px;
+  top: -40px;
+  right: 44%;
   z-index: 1;
   cursor: pointer;
 }
@@ -106,7 +106,7 @@ input:-webkit-autofill:focus {
 }
 
 .swiper-button-prev {
-  right: 100px;
+  right: 54%;
 }
 
 .category__card {

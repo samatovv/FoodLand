@@ -18,17 +18,17 @@ import {
   getProducts,
   setProducts,
 } from "../../redux/reducers/products";
-import { useDispatch } from "react-redux";
-import { handleLoading } from "../../redux/reducers/mainSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategories, handleLoading } from "../../redux/reducers/mainSlice";
 
-const categories = [
+const mainCategories = [
   {
     title: "Шоколад и какао продукты",
     id: "670cfc0e8d01bf78e1ad9a6c",
   },
   { title: "Молочная продукция", id: "670cfc198d01bf78e1ad9b16" },
   { title: "Ингредиенты", id: "670cfc088d01bf78e1ad9a53" },
-  { title: "Продукция для Бариста", id: "670cfc148d01bf78e1ad9ad0" },
+  { title: "Продукция для бариста", id: "670cfc148d01bf78e1ad9ad0" },
   {
     title: "Покрытия и наполнители",
     id: "670cfc0a8d01bf78e1ad9a5c",
@@ -51,6 +51,25 @@ const Catalog = ({ setCart }) => {
   const [params, setParams] = useState([]);
   const [searchValue, setValueSearch] = useState("");
   const [page, setPage] = useState(1);
+  const [categories, setCategories] = useState([]);
+
+  const allCategories = useSelector((state) => state.main.categories);
+
+  useEffect(() => {
+    if (!allCategories.length) dispatch(getCategories());
+  }, [allCategories.length, dispatch]);
+
+  useEffect(() => {
+    const categories = allCategories
+      ?.filter((item) => !item?.parent?.name)
+      .map((el) => ({
+        first: allCategories
+          .map((item) => item.parent?.name === el.parent?.name && item)
+          .filter((item) => item),
+        second: allCategories.filter((item) => item.parent).map((item) => item),
+      }));
+    setCategories(categories[0]);
+  }, [allCategories]);
 
   const formik = useFormik({
     initialValues: { category: "" },
@@ -62,13 +81,25 @@ const Catalog = ({ setCart }) => {
         setCategory({ title: "Рекомендуемые товары" });
         dispatch(getProd(`recommendations?limit=12&page=${page}`));
       } else {
-        const category = categories.find(
+        const category = mainCategories.find(
           (item) => item.id === location?.search?.split("&")[1].split("=")[1]
         );
         setCategory(category);
       }
     }
-  }, []);
+  }, [dispatch, location.search, page]);
+
+  const handleProducts2 = (item) => {
+      dispatch(handleLoading(true));
+      dispatch(setProducts([]));
+        setParams2({ id: item?.id, name: item.name, parent: item.parent.id });
+        if (page > 1) setPage(1);
+        dispatch(
+          getProducts(
+            `/products/query?limit=12&page=${page}&search=&categoryIds=${item?.id}`
+          )
+        );
+    };
 
   const breadcrumbs = [
     <Link className="sans" key="1" to="/">
@@ -89,16 +120,42 @@ const Catalog = ({ setCart }) => {
     >
       Каталог
     </Typography>,
-    <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
-      {category?.title}
-    </Typography>,
+    category?.title && (
+      <Typography
+       className="sans" key="2" sx={{ color: "text.primary", cursor: category?.title3 ? "pointer" : "default" }}
+       onClick={() => {
+        dispatch(handleLoading(true));
+        dispatch(setProducts([]));
+        setCategory({ title: category?.title, title2: "", title3: "", title4: "" });
+        dispatch(
+          getProducts(`/products/query?limit=12&page=1&search=&categoryIds=${mainCategories.find((item) => item.title === category?.title).id}`)
+        );
+       }}
+       >
+        {category?.title}
+      </Typography>
+    ),
     category?.title3 && (
-      <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
+      <Typography className="sans" key="3" sx={{ color: "text.primary", cursor: category?.title3 ? "pointer" : "default" }}
+      onClick={() => {
+        const foundCategory = categories?.second.find(
+          (item) => item.name === category?.title3
+        );
+      
+        if (foundCategory) {
+          dispatch(handleLoading(true));
+          dispatch(setProducts([]));
+          setCategory({ ...category, title3: foundCategory.name, title2: "" , title4: "" });
+          handleProducts2(foundCategory);
+        }
+      }}
+      >
         {category?.title3}
       </Typography>
     ),
     category?.title4 && (
-      <Typography className="sans" key="2" sx={{ color: "text.primary" }}>
+      <Typography className="sans" key="4" sx={{ color: "text.primary"}}
+      >
         {category?.title4}
       </Typography>
     ),
@@ -112,6 +169,7 @@ const Catalog = ({ setCart }) => {
           mb: 4,
         }}
       >
+        {/* breadcrumbs */}
         <Breadcrumbs
           separator={<NavigateNextIcon fontSize="small" />}
           aria-label="breadcrumb"

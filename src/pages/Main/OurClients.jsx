@@ -40,7 +40,7 @@ const OurClients = () => {
             "& .clients__card ": {
               "& img": {
                 filter: { xs: "none", md: "grayscale(1)" },
-                transition: "all 800ms ease",
+                transition: "all 300ms ease",
               },
               "&:hover img": {
                 filter: "none",
@@ -51,18 +51,18 @@ const OurClients = () => {
           <Typography variant="h2" textAlign="center" fontWeight="700" mb={5}>
             Нам доверяют
           </Typography>
-          <Box position="relative" mt={7}>
+          <Box position="relative" mt={7}
+              >
             <Swiper
               navigation={true}
               modules={[Navigation, Autoplay]}
               freeMode={true}
               loop={true}
+              speed={1100}
               autoplay={{
                 delay: 3500,
                 disableOnInteraction: false,
               }}
-              // centeredSlides={true}
-              // initialSlide={4}
               breakpoints={{
                 0: {
                   slidesPerView: 2,

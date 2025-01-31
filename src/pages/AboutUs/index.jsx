@@ -1,7 +1,9 @@
+/* eslint-disable jsx-a11y/iframe-has-title */
 import {
   Box,
   Breadcrumbs,
   Container,
+  Grid,
   Grid2,
   Typography,
   useMediaQuery,
@@ -9,13 +11,11 @@ import {
 import React from "react";
 import { Link } from "react-router-dom";
 import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
-import logo from "../../assets/images/logo2.svg";
 import call from "../../assets/images/call.svg";
 import map from "../../assets/images/map.svg";
 import Carousel from "../../shared/Carousel";
 import instagram from "../../assets/images/instagram.svg";
-import facebook from "../../assets/images/facebook.svg";
-import twitter from "../../assets/images/twitter.svg";
+import CountUp from "react-countup";
 
 const AboutUs = () => {
   const md = useMediaQuery("(min-width:768px)");
@@ -27,6 +27,14 @@ const AboutUs = () => {
       О нас
     </Typography>,
   ];
+  const stats = [
+    { value: 50, suffix: " млн", label: "С нашей мукой создали более 50 млн макаронс." },
+    { value: 130, suffix: " тыс", label: "С нашим сыром испекли более 130 тыс пицц." },
+    { value: 500, suffix: " т", label: "Мы продали около 500 тонн шоколада." },
+    { value: 1, suffix: " млн", label: "С использованием наших сыров было приготовлено более 1 млн суши." },
+    { value: 200, label: "Наименований товаров, адаптированных под ваши потребности." },
+    { value: 10000, label: "Мы осуществили более 10 000 доставок." }
+  ];
   return (
     <Box component="section" p="40px 0 80px">
       <Container>
@@ -37,7 +45,6 @@ const AboutUs = () => {
           {breadcrumbs}
         </Breadcrumbs>
         <Box display="flex" flexDirection={{ xs: "column", md: "row" }} mt={3}>
-          {/* <img src={logo} width={116} height={40} alt="" /> */}
           <Box mt={{ xs: 2, md: 0 }} >
             <Typography
               fontSize={{ xs: 16, md: 24 }}
@@ -47,126 +54,26 @@ const AboutUs = () => {
             >
               Ваш путеводитель в области:
             </Typography>
-            <Typography
-              fontSize={{ xs: 20, md: 40 }}
-              fontWeight={800}
-              textTransform="uppercase"
-              maxWidth={1059}
-            >
-              Сырья и ингредиентов для пищевой промышленности
-            </Typography>
           </Box>
         </Box>
-        <Grid2 container spacing={{ xs: 1, lg: 9 }} mt={{ xs: "28px", md: 11 }}>
-          <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              mt={1}
-              mb={2}
-              fontSize={{ xs: 36, md: 48 }}
-              fontWeight={{ xs: 600, md: 400 }}
-            >
-              50млн
-            </Typography>
-            <Typography
-              fontSize={{ xs: 12, md: 16 }}
-              color="#465659"
-              fontWeight={400}
-              maxWidth={257}
-              className="sans"
-            >
-              С нашей мукой создали более 50 млн макаронс.
-            </Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              mt={1}
-              mb={2}
-              fontSize={{ xs: 36, md: 48 }}
-              fontWeight={{ xs: 600, md: 400 }}
-            >
-              130тыс
-            </Typography>
-            <Typography
-              fontSize={{ xs: 12, md: 16 }}
-              color="#465659"
-              fontWeight={400}
-              className="sans"
-              maxWidth={257}
-            >
-              С нашим сыром испекли более 130 тыс пицц.
-            </Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              mt={1}
-              mb={2}
-              fontSize={{ xs: 36, md: 48 }}
-              fontWeight={{ xs: 600, md: 400 }}
-            >
-              500т
-            </Typography>
-            <Typography
-              fontSize={{ xs: 12, md: 16 }}
-              color="#465659"
-              fontWeight={400}
-              className="sans"
-              maxWidth={257}
-            >
-              Мы продали около 500 тонн шоколада.
-            </Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              fontSize={{ xs: 36, md: 48 }}
-              fontWeight={{ xs: 600, md: 400 }}
-            >
-              1млн
-            </Typography>
-            <Typography
-              fontSize={{ xs: 12, md: 16 }}
-              color="#465659"
-              fontWeight={400}
-              maxWidth={257}
-              className="sans"
-            >
-              С использованием наших сыров было приготовлено более 1 млн суши.
-            </Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              fontSize={{ xs: 36, md: 48 }}
-              fontWeight={{ xs: 600, md: 400 }}
-            >
-              200
-            </Typography>
-            <Typography
-              fontSize={{ xs: 12, md: 16 }}
-              color="#465659"
-              fontWeight={400}
-              maxWidth={257}
-              className="sans"
-            >
-              Наименований товаров, адаптированных под ваши потребности
-            </Typography>
-          </Grid2>
-          <Grid2 size={{ xs: 6, md: 4 }}>
-            <Typography
-              fontSize={{ xs: 36, md: 48 }}
-              fontWeight={{ xs: 600, md: 400 }}
-            >
-              10 000
-            </Typography>
-            <Typography
-              fontSize={{ xs: 12, md: 16 }}
-              color="#465659"
-              fontWeight={400}
-              maxWidth={257}
-              className="sans"
-            >
-              Мы осуществили более 10 000 доставок
-            </Typography>
-          </Grid2>
-        </Grid2>
+        <Grid container spacing={{ xs: 1, lg: 9 }} mt={{ xs: "28px", md: 0 }}>
+          {stats.map((stat, idx) => (
+            <Grid key={idx} item xs={6} md={4}>
+              <Typography mt={1} mb={2} fontSize={{ xs: 36, md: 48 }} fontWeight={{ xs: 600, md: 400 }}>
+                <CountUp 
+                  start={0} 
+                  end={stat.value} 
+                  duration={3} 
+                  separator=" " 
+                  suffix={stat.suffix || ""}
+                />
+              </Typography>
+              <Typography fontSize={{ xs: 12, md: 16 }} color="#465659" fontWeight={400} maxWidth={257} className="sans">
+                {stat.label}
+              </Typography>
+            </Grid>
+          ))}
+        </Grid>
         <Box mt={10}>
           <Carousel />
         </Box>
@@ -299,12 +206,6 @@ const AboutUs = () => {
                   >
                     <img src={instagram} alt="" />
                   </a>
-                  {/* <a href="https://facebook.com">
-                    <img src={facebook} alt="" />
-                  </a>
-                  <a href="https://twiiter.com">
-                    <img src={twitter} alt="" />
-                  </a> */}
                 </Box>
               </Box>
             </Box>
@@ -325,6 +226,7 @@ const AboutUs = () => {
         </Grid2>
       </Container>
       {!md && (
+        // eslint-disable-next-line jsx-a11y/iframe-has-title
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
           width="100%"

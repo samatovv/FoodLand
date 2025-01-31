@@ -3,9 +3,6 @@ import {
   AccordionDetails,
   AccordionSummary,
   Box,
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -18,8 +15,7 @@ import {
   getProducts,
   setProducts,
 } from "../../redux/reducers/products";
-import { useNavigate, useParams } from "react-router";
-import { translit, translitAgain } from "../../hooks/translit";
+// import { useParams } from "react-router";
 
 const Categories = ({
   setChip,
@@ -36,7 +32,6 @@ const Categories = ({
   setPage,
 }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const md = useMediaQuery("(min-width:900px)");
 
   const [expanded, setExpanded] = useState(true);
@@ -44,11 +39,9 @@ const Categories = ({
 
   const allCategories = useSelector((state) => state.main.categories);
 
-  const { name } = useParams();
-
   useEffect(() => {
     if (!allCategories.length) dispatch(getCategories());
-  }, []);
+  }, [allCategories.length, dispatch]);
 
   useEffect(() => {
     const categories = allCategories
@@ -76,7 +69,6 @@ const Categories = ({
           )
         );
     } else {
-      // navigate(`/catalog/${translit(item.name)}`);
       if (page > 1) setPage(1);
       setParams({ id: item?.id, name: item.name, parent: item.parent.id });
       dispatch(
@@ -104,7 +96,6 @@ const Categories = ({
         );
     } else {
       setCategory({ ...category, title2: item.name, title4: item.name });
-      // navigate(`/catalog/${translit(item.name)}`);
       setParams2({ id: item?.id, name: item.name, parent: item.parent.id });
       if (page > 1) setPage(1);
       dispatch(
@@ -138,11 +129,9 @@ const Categories = ({
             },
             "& .MuiAccordionSummary-content": {
               m: "12px 0!important",
-              // p: "9px 4px",
             },
             "& .MuiAccordion-root::before": { display: "none" },
             "& .MuiFormGroup-root ": {
-              // ml: "15px",
             },
             "& .MuiAccordionSummary-contentGutters": {
               fontFamily: "Open Sans",
@@ -179,11 +168,8 @@ const Categories = ({
                       backgroundColor: "transparent",
                       borderRadius: "8px",
                       minHeight: "0!important",
-                      // m: "0!important",
                     },
                     "& .MuiAccordionSummary-content": {
-                      // m: "0!important",
-                      // p: "9px 15px",
                     },
 
                     "& .MuiTypography-body1": {
@@ -207,7 +193,6 @@ const Categories = ({
                         setParams({});
                       } else {
                         setValueSearch("");
-                        // navigate(`/catalog/${translit(item.name)}`);
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
                         dispatch(
@@ -245,11 +230,8 @@ const Categories = ({
                               backgroundColor: "transparent",
                               borderRadius: "8px",
                               minHeight: "0!important",
-                              // m: "0!important",
                             },
                             "& .MuiAccordionSummary-content": {
-                              // m: "0!important",
-                              // p: "9px 15px",
                             },
 
                             "& .MuiTypography-body1": {
@@ -264,7 +246,7 @@ const Categories = ({
                             onClick={() => {
                               handleProducts(ite);
                               if (category?.title3 === ite.name)
-                                setCategory({ title: item.name });
+                                setCategory({ title: item.name, id: item.id });
                               else
                                 setCategory({ ...category, title3: ite.name });
                             }}
