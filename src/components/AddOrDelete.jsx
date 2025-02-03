@@ -1,5 +1,5 @@
-import { Box, IconButton } from "@mui/material";
-import React from "react";
+import { Box, IconButton, TextField } from "@mui/material";
+import React, { useState } from "react";
 import Inc from "../assets/images/Inc";
 import Dec from "../assets/images/Dec";
 
@@ -14,63 +14,41 @@ const AddOrDelete = ({
   cartPage,
 }) => {
   const cart = JSON.parse(localStorage.getItem("cart"));
-  const add = () => {
-    if (cart?.length) {
-      if (cartPage) {
-        let newItem = cart?.find((item) => item?.id === id);
-        let updatedCart = cart.filter((item) => item?.id !== id);
 
-        setCart([
-          ...updatedCart,
-          {
-            ...newItem,
-            count: parseInt(count) + 1,
-            sum: parseInt(price) * (parseInt(count) + 1),
-          },
-        ]);
+  const updateCart = (newCount) => {
+    let newItem = cart?.find((item) => item?.id === id);
+    let updatedCart = cart.filter((item) => item?.id !== id);
+    const updatedItem = {
+      ...newItem,
+      count: newCount,
+      sum: parseInt(price) * newCount,
+    };
+    localStorage.setItem("cart", JSON.stringify([...updatedCart, updatedItem]));
+    setCart([...updatedCart, updatedItem]);
+  };
 
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([
-            ...updatedCart,
-            {
-              ...newItem,
-              count: parseInt(count) + 1,
-              sum: parseInt(price) * (parseInt(count) + 1),
-            },
-          ])
-        );
-      }
+  const handleChange = (event) => {
+    let value = event.target.value;
+    if (value === "") {
+      setCount("");
+      return;
     }
-    if (!cartPage) setCount(count + 1);
+    value = Math.max(1, parseInt(value) || 1);
+    setCount(value);
+    if (cartPage) updateCart(value);
+  };
+
+  const add = () => {
+    const newCount = parseInt(count) + 1;
+    setCount(newCount);
+    if (cartPage) updateCart(newCount);
   };
 
   const deleteHandler = () => {
     if (count > 1) {
-      if (!cartPage) setCount(parseInt(count) - 1);
-      else {
-        let newItem = cart?.find((item) => item?.id === id);
-        let updatedCart = cart.filter((item) => item?.id !== id);
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([
-            ...updatedCart,
-            {
-              ...newItem,
-              count: parseInt(count) - 1,
-              sum: (parseInt(count) - 1) * parseInt(price),
-            },
-          ])
-        );
-        setCart([
-          ...updatedCart,
-          {
-            ...newItem,
-            count: parseInt(count) - 1,
-            sum: (parseInt(count) - 1) * parseInt(price),
-          },
-        ]);
-      }
+      const newCount = parseInt(count) - 1;
+      setCount(newCount);
+      if (cartPage) updateCart(newCount);
     }
   };
 
@@ -89,9 +67,17 @@ const AddOrDelete = ({
       <IconButton onClick={deleteHandler}>
         <Inc />
       </IconButton>
-      <Box component="span" fontWeight={300} className="sans" m="0 12px">
-        {count}
-      </Box>
+      <input
+        value={count}
+        onChange={handleChange}
+        style={{ textAlign: "center", minWidth: "25px",maxWidth:"50px", outline: "none", background: "none", border: "none" }}
+        inputProps={{
+          style: { textAlign: "center", width: "30px" },
+          min: 1,
+          type: "number",
+        }}
+        variant="standard"
+      />
       <IconButton onClick={add}>
         <Dec />
       </IconButton>

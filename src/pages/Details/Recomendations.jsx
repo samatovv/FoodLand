@@ -9,30 +9,42 @@ const Recomendations = ({ setCart, details, id, setPage, page }) => {
   const dispatch = useDispatch();
   const recomendations = useSelector((state) => state.products.recomendations);
   const [allRecommendations, setAllRecommendations] = useState([]);
+  const [extraQueryDone, setExtraQueryDone] = useState(false);
 
-  useEffect(() => {
-    if (details?.id) {
+useEffect(() => {
+  if (details?.id) {
+    dispatch(
+      getRecomendations(
+        `/products/query?categoryIds=${details?.category?.parent?.id}&limit=5&page=${page}`
+      )
+    );
+    setExtraQueryDone(false); 
+  }
+}, [id, page, details, dispatch]);
+
+useEffect(() => {
+  if (recomendations?.products) {
+    setAllRecommendations(recomendations.products);
+
+    if (
+      recomendations?.totalResults < 5 &&
+      details?.category?.parent?.parent?.id &&
+      !extraQueryDone
+    ) {
       dispatch(
         getRecomendations(
-          `/products/query?categoryIds=${details?.category?.parent?.id}&limit=5&page=${page}`
+          `/products/query?categoryIds=${details?.category?.parent?.parent?.id}&limit=5&page=${page}`
         )
       );
+      setExtraQueryDone(true);
     }
-  }, [id, page, details, dispatch]);
+  }
+}, [recomendations, extraQueryDone, details?.category?.parent?.parent?.id]);
 
-  useEffect(() => {
-    if (recomendations?.products) {
-      setAllRecommendations(recomendations.products);
+useEffect(() => {
+  setExtraQueryDone(false);
+}, [details?.category?.parent?.id]);
 
-      if (recomendations?.totalResults < 5 && details?.category?.parent?.parent?.id) {
-        dispatch(
-          getRecomendations(
-            `/products/query?categoryIds=${details?.category?.parent?.parent?.id}&limit=5&page=${page}`
-          )
-        );
-      }
-    }
-  }, [recomendations, dispatch]);
 
   return (
     <Box component="section" mt={6}>

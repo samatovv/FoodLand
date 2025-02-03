@@ -35,7 +35,6 @@ const Details = ({ setCart }) => {
   const [page, setPage] = useState(1);
   const [image, setImage] = useState(1);
   const [inCart, setInCart] = useState(null);
-  console.log('Details : ',details)
 
   useEffect(() => {
     dispatch(getDetails(id));

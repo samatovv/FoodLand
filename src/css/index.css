@@ -245,7 +245,7 @@ input:-webkit-autofill:focus {
   transform: translateX(-100px);
 }
 .in_cart_txt2 {
-  transform: translateX(-50px);
+  transform: translateX(-30px);
 }
 
 .cart {
@@ -259,6 +259,13 @@ input:-webkit-autofill:focus {
   position: absolute;
   top: 6px;
   right: 8px;
+  transform: scale(1) !important;
+  display: block;
+}
+.in_cart2 {
+  position: absolute;
+  top: 2.5px;
+  right: 3px;
   transform: scale(1) !important;
   display: block;
 }

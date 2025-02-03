@@ -6,6 +6,7 @@ import InCart from "../assets/images/InCart";
 import { useAuth } from "../shared/ProtectedRoutes";
 import { handleAuthDialog } from "../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
+import InCart2 from "../assets/images/InCart2";
 
 const AddToCart = ({
   details,
@@ -145,7 +146,7 @@ const AddToCart = ({
           fullWidth
           // disabled={inCart}
           sx={{
-            height: 50,
+            height: 42,
             position: "relative",
             color: inCart ? "black" : "white",
             border: inCart ? "1px solid #666" : "",
@@ -166,7 +167,7 @@ const AddToCart = ({
           >
             {inCart ? "В корзине!" : "В корзину"}
           </span>
-          <InCart inCart={inCart} />
+          <InCart2 inCart={inCart} />
         </Button>
         // <ButtonMore
         //   card

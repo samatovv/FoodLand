@@ -179,7 +179,7 @@ const Products = ({
               ? category?.title3
               : category?.title
               ? category?.title
-              : "Каталог"}
+              : typeof category == "string" ? category : "Каталог"}
           </Typography>
           {!md && (
             <IconButton onClick={() => dispatch(handleFilter(true))}>

@@ -66,7 +66,7 @@ const Catalog = ({ setCart }) => {
   
     const queryParams = new URLSearchParams(location.search);
     const queryId = queryParams.get("categoryIds"); 
-    console.log("Extracted queryId:", queryId);
+    // console.log("Extracted queryId:", queryId);
   
     if (queryId) {
       const foundCategory =
@@ -75,9 +75,9 @@ const Catalog = ({ setCart }) => {
   
       if (foundCategory) {
         setCategory(foundCategory.name);
-        console.log("Found category:", foundCategory.name);
+        // console.log("Found category:", foundCategory.name);
       } else {
-        console.log("Category not found for ID:", queryId);
+        // console.log("Category not found for ID:", queryId);
       }
     }
   }, [categories, location.search]);

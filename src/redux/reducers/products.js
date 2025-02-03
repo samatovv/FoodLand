@@ -54,9 +54,26 @@ export const getRecomendations = (data) => (dispatch) => {
   Products.getProducts(data).then((res) => dispatch(setRecomendations(res)));
 };
 
-export const getDetails = (id) => (dispatch) => {
-  Products.getDetails(id).then((res) => dispatch(setDetails(res)));
+export const getDetails = (id) => async (dispatch, getState) => {
+  const state = getState();
+  const currentDetails = state.products.details;
+
+  // Проверяем, загружены ли уже данные, и не обновляем, если они совпадают
+  if (currentDetails?.id === id) return;
+
+  try {
+    const res = await Products.getDetails(id);
+
+    // Проверяем, действительно ли данные изменились (глубокое сравнение)
+    if (JSON.stringify(currentDetails) !== JSON.stringify(res)) {
+      dispatch(setDetails(res));
+    }
+  } catch (error) {
+    console.error("Ошибка загрузки деталей продукта:", error);
+  }
 };
+
+
 
 export const getProductsNames = () => (dispatch) => {
   Products.getProductsNames().then((res) => dispatch(setProductsNames(res)));
