@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   Grid2,
-  IconButton,
   Typography,
   useMediaQuery,
 } from "@mui/material";
@@ -13,7 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import instagram from "../../assets/images/instagram.svg";
 import moore from "../../assets/images/moore.svg";
 import { useAuth } from "../ProtectedRoutes";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { handleAuthDialog } from "../../redux/reducers/mainSlice";
 
 const Footer = () => {
@@ -187,6 +186,19 @@ const Footer = () => {
                         О нас
                       </Typography>
                     </Link>
+                    <Box
+                      display="flex"
+                      alignItems="center"
+                      mt={{ xs: 2.5, md: 5 }}
+                    >
+                        <a
+                        href="https://www.instagram.com/foodland_ingredients/"
+                        >
+                          <div style={{ width: "32px", height: "32px", borderRadius: "50%", padding: "3px", background: "#93A27C",display: "flex",alignItems: "center",justifyContent: "center" }}>
+                            <img src={instagram} alt="" />
+                          </div>
+                        </a>
+                    </Box>
                   </Box>
                 </Box>
                 <Box>
@@ -222,26 +234,6 @@ const Footer = () => {
                     ))}
                   </Box>
                 </Box>
-              </Box>
-              <Box
-                display="flex"
-                width="219px"
-                columnGap={2}
-                alignItems="center"
-                mt={{ xs: 2.5, md: 7 }}
-              >
-                <IconButton
-                  target="_blank"
-                  href="https://www.instagram.com/foodland_ingredients/"
-                >
-                  <img src={instagram} alt="" />
-                </IconButton>
-                {/* <IconButton target="_blank" href="https://facebook.com">
-                  <img src={facebook} alt="" />
-                </IconButton>
-                <IconButton target="_blank" href="https://twitter.com">
-                  <img src={twitter} alt="" />
-                </IconButton> */}
               </Box>
             </Box>
           </Grid2>

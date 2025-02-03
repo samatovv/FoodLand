@@ -41,13 +41,14 @@ const Details = ({ setCart }) => {
     setPage(1);
     setImage(images[0]?.url);
     setInCart(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [id]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch]);
 
   useEffect(() => {
     setImage(images[0]?.url);
     setCount(1);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [details]);
 
   const formik = useFormik({
@@ -55,47 +56,64 @@ const Details = ({ setCart }) => {
     onSubmit: () => {},
   });
 
-  const breadcrumbs = [
-    <Link key="1" to="/">
-      <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
-        Главная
-      </Typography>
-    </Link>,
-    <Link key="1" to="/catalog">
-      <Typography fontSize={{ xs: 14, md: 13 }} className="sans" key="2">
-        Каталог
-      </Typography>
-    </Link>,
-    <Link
-      to={`/catalog/?search=&categoryIds=${details?.category?.parent?.parent?.id}&page=1`}
-    >
-      <Typography
-        fontSize={{ xs: 14, md: 13 }}
-        className="sans"
-        key="3"
-        sx={{ color: "text.primary" }}
-      >
-        {details?.category?.parent?.parent?.name}
-      </Typography>
-    </Link>,
+  // console.log(details)
 
+const breadcrumbs = [
+  <Link key="1" to="/">
+    <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
+      Главная
+    </Typography>
+  </Link>,
+  <Link key="2" to="/catalog">
+    <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
+      Каталог
+    </Typography>
+  </Link>,
+  <Link
+    key="3"
+    to={`/catalog/?search=&categoryIds=${details?.category?.parent?.parent?.id}&page=1`}
+  >
     <Typography
       fontSize={{ xs: 14, md: 13 }}
       className="sans"
-      key="3"
       sx={{ color: "text.primary" }}
     >
-      {details?.category?.parent?.name}
-    </Typography>,
+      {details?.category?.parent?.parent?.name}
+    </Typography>
+  </Link>,
+  <Link
+    key="4"
+    to={
+      details?.category?.parent?.id
+        ? `/catalog/?search=&categoryIds=${details?.category?.parent.id}&page=1`
+        : "#"
+    }
+  >
     <Typography
       fontSize={{ xs: 14, md: 13 }}
       className="sans"
-      key="3"
+      sx={{ color: "text.primary" }}
+    >
+      {details?.category?.parent?.name || "Неизвестная категория"}
+    </Typography>
+  </Link>,
+  <Link
+    key="5"
+    to={
+      details?.category?.id
+        ? `/catalog/?search=&categoryIds=${details?.category?.id}&page=1`
+        : "#"
+    }
+  >
+    <Typography
+      fontSize={{ xs: 14, md: 13 }}
+      className="sans"
       sx={{ color: "text.primary" }}
     >
       {details?.category?.name}
-    </Typography>,
-  ];
+    </Typography>
+  </Link>,
+];
 
   return (
     <>

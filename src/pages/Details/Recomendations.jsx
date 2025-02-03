@@ -7,52 +7,38 @@ import PaginationLarge from "../../components/Pagination";
 
 const Recomendations = ({ setCart, details, id, setPage, page }) => {
   const dispatch = useDispatch();
-
   const recomendations = useSelector((state) => state.products.recomendations);
   const [allRecommendations, setAllRecommendations] = useState([]);
-  const [isFallback, setIsFallback] = useState(false);
-
-  useEffect(() => {
-    setAllRecommendations([]);
-    setIsFallback(false);
-  }, [details, page]);
 
   useEffect(() => {
     if (details?.id) {
       dispatch(
         getRecomendations(
-          `products?category=${details?.category?.id}&page=${page}`
+          `/products/query?categoryIds=${details?.category?.parent?.id}&limit=5&page=${page}`
         )
       );
     }
   }, [id, page, details, dispatch]);
 
   useEffect(() => {
-    if (recomendations?.results) {
-      setAllRecommendations((prev) => {
-        const newItems = recomendations.results.filter(
-          (item) => !prev.some((existing) => existing.id === item.id)
+    if (recomendations?.products) {
+      setAllRecommendations(recomendations.products);
+
+      if (recomendations?.totalResults < 5 && details?.category?.parent?.parent?.id) {
+        dispatch(
+          getRecomendations(
+            `/products/query?categoryIds=${details?.category?.parent?.parent?.id}&limit=5&page=${page}`
+          )
         );
-        if(recomendations.results.length < 5) setIsFallback(true);
-        return [...prev, ...newItems];
-      });
+      }
     }
-  }, [recomendations]);
-  // console.log(recomendations.results.length)
-  console.log(isFallback)
-
-  useEffect(() => {
-    if (isFallback === true) {
-      dispatch(getRecomendations(`products?page=${page}`));
-    }
-  }, [allRecommendations.length, isFallback, dispatch, page]);
-
+  }, [recomendations, dispatch]);
 
   return (
     <Box component="section" mt={6}>
       {allRecommendations.length > 0 && (
         <Typography fontSize={{ xs: 26, md: 20 }} mt={4} fontWeight={600}>
-          Вам могут понравиться{" "}
+          Вам могут понравиться
         </Typography>
       )}
       <Grid container spacing={1.2} mt={2}>

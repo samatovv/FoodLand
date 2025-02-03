@@ -15,7 +15,7 @@ import { useLocation, useNavigate } from "react-router";
 import {
   getProd,
   getProducts,
-  getProductsNames,
+  // getProductsNames,
   setProducts,
   setSearch,
 } from "../../redux/reducers/products";
@@ -45,7 +45,7 @@ const Products = ({
 
   const products = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.main.loading);
-  const names = useSelector((state) => state.products.names);
+  // const names = useSelector((state) => state.products.names);
 
   const [open, setOpen] = useState(false);
   const [searched, setSearched] = useState([]);
@@ -83,16 +83,8 @@ const Products = ({
   };
 
   useEffect(() => {
-    if (!names) dispatch(getProductsNames());
-
-    dispatch(handleLoading(true));
-    if (!products.length && !location.search)
-      dispatch(
-        getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`)
-      );
-
-    // if (location.search) setPage(location.search.split("&")[2].split("=")[1]);
-  }, []);
+    dispatch(getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`));
+  }, [dispatch]);
 
   useLayoutEffect(() => {
     if (firstUpdate.current) {

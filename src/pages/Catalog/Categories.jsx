@@ -15,26 +15,26 @@ import {
   getProducts,
   setProducts,
 } from "../../redux/reducers/products";
-// import { useParams } from "react-router";
 
 const Categories = ({
-  setChip,
   setCategory,
-  chip,
   category,
   setParams2,
   params2,
   params,
   setParams,
   setValueSearch,
-  searchValue,
   page,
   setPage,
 }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
 
-  const [expanded, setExpanded] = useState(true);
+  const [expanded, setExpanded] = useState({
+    category: true,
+    "category.title": false,
+    "category.title3": false,
+  });
   const [categories, setCategories] = useState([]);
 
   const allCategories = useSelector((state) => state.main.categories);
@@ -105,7 +105,6 @@ const Categories = ({
       );
     }
   };
-
   return (
     <Box component="section" pb={13}>
       {md ? (
@@ -191,6 +190,7 @@ const Categories = ({
                         );
                         setCategory({ title: "" });
                         setParams({});
+                        setExpanded({category: true, "category.title": true, "category.title3": false});
                       } else {
                         setValueSearch("");
                         dispatch(setProducts([]));
@@ -249,6 +249,11 @@ const Categories = ({
                                 setCategory({ title: item.name, id: item.id });
                               else
                                 setCategory({ ...category, title3: ite.name });
+                                setExpanded({
+                                  category: true,
+                                  "category.title": true,
+                                  "category.title3": true,
+                                });
                             }}
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"

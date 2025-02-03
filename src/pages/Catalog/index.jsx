@@ -58,6 +58,7 @@ const Catalog = ({ setCart }) => {
   useEffect(() => {
     if (!allCategories.length) dispatch(getCategories());
   }, [allCategories.length, dispatch]);
+  console.log(categories)
 
   useEffect(() => {
     const categories = allCategories
@@ -80,9 +81,16 @@ const Catalog = ({ setCart }) => {
       if (location.search.includes("recomendations")) {
         setCategory({ title: "Рекомендуемые товары" });
         dispatch(getProd(`recommendations?limit=12&page=${page}`));
-      } else {
+      } else if (location.search.includes("category")) {
         const category = mainCategories.find(
           (item) => item.id === location?.search?.split("&")[1].split("=")[1]
+        );
+        setCategory(category);
+      } else {
+        const category = categories.find(
+          (item) =>
+            item.first?.id === location?.search?.split("&")[1].split("=")[1] ||
+            item.second?.id === location?.search?.split("&")[1].split("=")[1]
         );
         setCategory(category);
       }

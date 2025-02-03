@@ -135,6 +135,12 @@ const Header = ({ cart }) => {
               "&:hover rect": {
                 fill: "var(--primary)",
               },
+              "& path, & circle": {
+                transition: "all 0.2s ease",
+              },
+              "&:hover path, &:hover circle": {
+                stroke: "white", 
+              },
             }}
             width="44px"
             height="44px"
@@ -176,6 +182,12 @@ const Header = ({ cart }) => {
               "&:hover rect": {
                 fill: "var(--primary)",
               },
+              "& path, & circle": {
+                transition: "all 0.2s ease",
+              },
+              "&:hover path, &:hover circle": {
+                stroke: "white", 
+              },  
             }}
             width="44px"
             height="44px"
@@ -228,6 +240,12 @@ const Header = ({ cart }) => {
               },
               "&:hover rect": {
                 fill: "var(--primary)",
+              },
+              "& path, & circle": {
+                transition: "all 0.2s ease",
+              },
+              "&:hover path, &:hover circle": {
+                stroke: "white", 
               },
             }}
             viewBox="0 0 44 44"

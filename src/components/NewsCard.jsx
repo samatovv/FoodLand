@@ -1,8 +1,11 @@
 import { Box, IconButton, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import emptySvg from "../assets/images/not-image.svg";
 
-const NewsCard = ({ item, idx }) => {
+const NewsCard = ({ item }) => {
+  const [imgSrc, setImgSrc] = useState(item.imageUrl || emptySvg);
+
   const htmlDecode = (content) => {
     const e = document.createElement("div");
     e.innerHTML = content;
@@ -12,7 +15,7 @@ const NewsCard = ({ item, idx }) => {
   return (
     <Link to={`/news/${item?.id}`}>
       <Box
-        key={idx}
+        key={item.id}
         className="news__card"
         display="flex"
         flexDirection={{ xs: "column", sm: "row" }}
@@ -27,12 +30,10 @@ const NewsCard = ({ item, idx }) => {
               transition: "all 800ms ease",
             },
           },
-
           "& img": {
             objectFit: "cover",
             transition: "all 800ms ease",
           },
-
           "&:hover": {
             "& svg": {
               transform: "translate(10px)",
@@ -47,7 +48,6 @@ const NewsCard = ({ item, idx }) => {
               transform: "scale(1.1)",
             },
           },
-
           "& .img": {
             display: "block",
             overflow: "hidden",
@@ -62,26 +62,28 @@ const NewsCard = ({ item, idx }) => {
             width: { xs: "100%", sm: "250px" },
           }}
         >
-          <Box
-            component="img"
-            style={{ borderRadius: "15px" }}
-            src={item.imageUrl}
-            width={{ xs: "100%", sm: "250px" }}
-            height={{ xs: "196px", sm: "146px" }}
-            alt=""
-          />
+          {item.imageUrl ? (
+            <Box
+              component="img"
+              style={{ borderRadius: "15px" }}
+              src={imgSrc}
+              width={{ xs: "100%", sm: "250px" }}
+              height={{ xs: "196px", sm: "146px" }}
+              alt="news image"
+              onError={() => setImgSrc(emptySvg)}
+            />
+          ) : (
+            <Box
+              component="img"
+              src={emptySvg}
+              width={{ xs: "100%", sm: "250px" }}
+              height={{ xs: "196px", sm: "146px" }}
+              alt="placeholder"
+            />
+          )}
         </Box>
-        <Box
-          sx={{
-            width: { xs: "100%", md: "76%" },
-          }}
-        >
-          <Box
-            display="flex"
-            mt={{ xs: 1, sm: 0 }}
-            alignItems="end"
-            justifyContent="space-between"
-          >
+        <Box sx={{ width: { xs: "100%", md: "76%" } }}>
+          <Box display="flex" mt={{ xs: 1, sm: 0 }} alignItems="end" justifyContent="space-between">
             <Typography
               sx={{
                 overflow: "hidden",
@@ -116,6 +118,7 @@ const NewsCard = ({ item, idx }) => {
               WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
               wordWrap: "break-word",
+              height: "45px"
             }}
             dangerouslySetInnerHTML={{
               __html: htmlDecode(item.content),
