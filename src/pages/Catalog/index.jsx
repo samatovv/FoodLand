@@ -14,7 +14,6 @@ import { useFormik } from "formik";
 import Filter from "./Filter";
 import { useAuth } from "../../shared/ProtectedRoutes";
 import {
-  getProd,
   getProducts,
   setProducts,
 } from "../../redux/reducers/products";
@@ -40,10 +39,10 @@ const mainCategories = [
 ];
 
 const Catalog = ({ setCart }) => {
-  const location = useLocation();
   const isAuth = useAuth();
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
+  const location = useLocation();
 
   const [chip, setChip] = useState("");
   const [category, setCategory] = useState("");
@@ -51,14 +50,42 @@ const Catalog = ({ setCart }) => {
   const [params, setParams] = useState([]);
   const [searchValue, setValueSearch] = useState("");
   const [page, setPage] = useState(1);
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState({ first: [], second: [] });
 
   const allCategories = useSelector((state) => state.main.categories);
 
   useEffect(() => {
+    if (allCategories) {
+      setCategories(allCategories);
+    }
+  }, [allCategories]);
+
+  useEffect(() => {
+    if (!categories || !categories.first || !categories.second) return;
+    if (!location.search) return;
+  
+    const queryParams = new URLSearchParams(location.search);
+    const queryId = queryParams.get("categoryIds"); 
+    console.log("Extracted queryId:", queryId);
+  
+    if (queryId) {
+      const foundCategory =
+        categories.first.find((item) => item.id === queryId) ||
+        categories.second.find((item) => item.id === queryId);
+  
+      if (foundCategory) {
+        setCategory(foundCategory.name);
+        console.log("Found category:", foundCategory.name);
+      } else {
+        console.log("Category not found for ID:", queryId);
+      }
+    }
+  }, [categories, location.search]);
+
+
+  useEffect(() => {
     if (!allCategories.length) dispatch(getCategories());
   }, [allCategories.length, dispatch]);
-  console.log(categories)
 
   useEffect(() => {
     const categories = allCategories
@@ -75,28 +102,6 @@ const Catalog = ({ setCart }) => {
   const formik = useFormik({
     initialValues: { category: "" },
   });
-
-  useEffect(() => {
-    if (location.search) {
-      if (location.search.includes("recomendations")) {
-        setCategory({ title: "Рекомендуемые товары" });
-        dispatch(getProd(`recommendations?limit=12&page=${page}`));
-      } else if (location.search.includes("category")) {
-        const category = mainCategories.find(
-          (item) => item.id === location?.search?.split("&")[1].split("=")[1]
-        );
-        setCategory(category);
-      } else {
-        const category = categories.find(
-          (item) =>
-            item.first?.id === location?.search?.split("&")[1].split("=")[1] ||
-            item.second?.id === location?.search?.split("&")[1].split("=")[1]
-        );
-        setCategory(category);
-      }
-    }
-  }, [dispatch, location.search, page]);
-  // put
 
   const handleProducts2 = (item) => {
       dispatch(handleLoading(true));

@@ -244,6 +244,9 @@ input:-webkit-autofill:focus {
 .in_cart_txt {
   transform: translateX(-100px);
 }
+.in_cart_txt2 {
+  transform: translateX(-50px);
+}
 
 .cart {
   transform: scale(0);

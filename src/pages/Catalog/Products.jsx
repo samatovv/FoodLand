@@ -15,7 +15,6 @@ import { useLocation, useNavigate } from "react-router";
 import {
   getProd,
   getProducts,
-  // getProductsNames,
   setProducts,
   setSearch,
 } from "../../redux/reducers/products";
@@ -45,8 +44,6 @@ const Products = ({
 
   const products = useSelector((state) => state.products.products);
   const loading = useSelector((state) => state.main.loading);
-  // const names = useSelector((state) => state.products.names);
-
   const [open, setOpen] = useState(false);
   const [searched, setSearched] = useState([]);
 

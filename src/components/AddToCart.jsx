@@ -140,24 +140,52 @@ const AddToCart = ({
           <InCart inCart={inCart} />
         </Button>
       ) : (
-        <ButtonMore
-          card
-          inCart={inCart}
+        <Button
           onClick={clickHandler}
           fullWidth
+          // disabled={inCart}
           sx={{
-            border: "1px solid #F0F0F0",
-
-            "& .round": {
-              top: 3,
-            },
-
-            "&.Mui-disabled": {
-              color: "#fff!important",
-            },
+            height: 50,
+            position: "relative",
+            color: inCart ? "black" : "white",
+            border: inCart ? "1px solid #666" : "",
+            borderRadius: "15px",
+            // "&.Mui-disabled": {
+            //   background: "transparent",
+            //   color: "#000",
+            //   border: "1px solid #F0F0F0",
+            // },
           }}
-          txt="В корзину"
-        />
+          variant="contained"
+          color={inCart ? "secondary" : "primary"}
+        >
+          {!inCart && <Cart />}
+          <span
+            style={{ fontWeight: 700 }}
+            className={inCart ? "cart_txt in_cart_txt2" : "cart_txt"}
+          >
+            {inCart ? "В корзине!" : "В корзину"}
+          </span>
+          <InCart inCart={inCart} />
+        </Button>
+        // <ButtonMore
+        //   card
+        //   inCart={inCart}
+        //   onClick={clickHandler}
+        //   fullWidth
+        //   sx={{
+        //     border: "1px solid #F0F0F0",
+
+        //     "& .round": {
+        //       top: 3,
+        //     },
+
+        //     "&.Mui-disabled": {
+        //       color: "#fff!important",
+        //     },
+        //   }}
+        //   txt="В корзину"
+        // />
       )}
     </>
   );

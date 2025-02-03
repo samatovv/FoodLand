@@ -22,7 +22,6 @@ const Card = ({ item, search, width, setCart, preview }) => {
       : details?.category?.name;
   const [count, setCount] = useState(1);
   const id = item?._id ? item?._id : item?.product?.id;
-
   return (
     <Box
       sx={{
@@ -41,7 +40,7 @@ const Card = ({ item, search, width, setCart, preview }) => {
         to={`/catalog/${translit(category)}/${translit(details?.name)}/${
           details?.id ? details?.id : details?._id
         }`}
-        style={{ overflow: "hidden", display: "block", borderRadius: "12px" }}
+        style={{ overflow: "hidden", display: "block", borderRadius: "12px"}}
       >
         <Box
           component="img"

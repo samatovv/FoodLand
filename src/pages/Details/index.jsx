@@ -35,6 +35,7 @@ const Details = ({ setCart }) => {
   const [page, setPage] = useState(1);
   const [image, setImage] = useState(1);
   const [inCart, setInCart] = useState(null);
+  console.log('Details : ',details)
 
   useEffect(() => {
     dispatch(getDetails(id));
@@ -42,7 +43,7 @@ const Details = ({ setCart }) => {
     setImage(images[0]?.url);
     setInCart(false);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, [id]);
 
   useEffect(() => {
     setImage(images[0]?.url);
@@ -56,64 +57,62 @@ const Details = ({ setCart }) => {
     onSubmit: () => {},
   });
 
-  // console.log(details)
-
-const breadcrumbs = [
-  <Link key="1" to="/">
-    <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
-      Главная
-    </Typography>
-  </Link>,
-  <Link key="2" to="/catalog">
-    <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
-      Каталог
-    </Typography>
-  </Link>,
-  <Link
-    key="3"
-    to={`/catalog/?search=&categoryIds=${details?.category?.parent?.parent?.id}&page=1`}
-  >
-    <Typography
-      fontSize={{ xs: 14, md: 13 }}
-      className="sans"
-      sx={{ color: "text.primary" }}
+  const breadcrumbs = [
+    <Link key="1" to="/">
+      <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
+        Главная
+      </Typography>
+    </Link>,
+    <Link key="2" to="/catalog">
+      <Typography fontSize={{ xs: 14, md: 13 }} className="sans">
+        Каталог
+      </Typography>
+    </Link>,
+    <Link
+      key="3"
+      to={`/catalog/?search=&categoryIds=${details?.category?.parent?.parent?.id}&page=1`}
     >
-      {details?.category?.parent?.parent?.name}
-    </Typography>
-  </Link>,
-  <Link
-    key="4"
-    to={
-      details?.category?.parent?.id
-        ? `/catalog/?search=&categoryIds=${details?.category?.parent.id}&page=1`
-        : "#"
-    }
-  >
-    <Typography
-      fontSize={{ xs: 14, md: 13 }}
-      className="sans"
-      sx={{ color: "text.primary" }}
+      <Typography
+        fontSize={{ xs: 14, md: 13 }}
+        className="sans"
+        sx={{ color: "text.primary" }}
+      >
+        {details?.category?.parent?.parent?.name}
+      </Typography>
+    </Link>,
+    <Link
+      key="4"
+      to={
+        details?.category?.parent?.id
+          ? `/catalog/?search=&categoryIds=${details?.category?.parent?.id}&page=1`
+          : "#"
+      }
     >
-      {details?.category?.parent?.name || "Неизвестная категория"}
-    </Typography>
-  </Link>,
-  <Link
-    key="5"
-    to={
-      details?.category?.id
-        ? `/catalog/?search=&categoryIds=${details?.category?.id}&page=1`
-        : "#"
-    }
-  >
-    <Typography
-      fontSize={{ xs: 14, md: 13 }}
-      className="sans"
-      sx={{ color: "text.primary" }}
+      <Typography
+        fontSize={{ xs: 14, md: 13 }}
+        className="sans"
+        sx={{ color: "text.primary" }}
+      >
+        {details?.category?.parent?.name || "Неизвестная категория"}
+      </Typography>
+    </Link>,
+    <Link
+      key="5"
+      to={
+        details?.category?.id
+          ? `/catalog/?search=&categoryIds=${details?.category?.id}&page=1`
+          : "#"
+      }
     >
-      {details?.category?.name}
-    </Typography>
-  </Link>,
-];
+      <Typography
+        fontSize={{ xs: 14, md: 13 }}
+        className="sans"
+        sx={{ color: "text.primary" }}
+      >
+        {details?.category?.name}
+      </Typography>
+    </Link>,
+  ];
 
   return (
     <>
@@ -260,30 +259,6 @@ const breadcrumbs = [
               </div>
 
               <Box component="form" onSubmit={formik.handleSubmit}>
-                {/* <Box
-                  display="flex"
-                  sx={{
-                    "& .MuiChip-root": {
-                      p: "8.5px 13.5px",
-                      height: 39,
-                      borderRadius: 100,
-                    },
-                    "& .MuiChip-outlined": {
-                      color: "#727272",
-                      borderColor: "#E8E8E8",
-                    },
-                    "& .MuiChip-label": {
-                      fontSize: 16,
-                      p: 0,
-                    },
-                  }}
-                  columnGap={1.5}
-                >
-                  <Chip label="BX103" color="primary" />
-                  <Chip label="BX104" variant="outlined" />
-                  <Chip label="BX10S" variant="outlined" />
-                  <Chip label="BS" variant="outlined" />
-                </Box> */}
                 <Box width={{ xs: "100%", md: "45%" }}>
                   {!!isAuth && (
                     <Box
