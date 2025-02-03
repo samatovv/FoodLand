@@ -96,6 +96,7 @@ const Catalog = ({ setCart }) => {
       }
     }
   }, [dispatch, location.search, page]);
+  // put
 
   const handleProducts2 = (item) => {
       dispatch(handleLoading(true));
