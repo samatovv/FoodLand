@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
-import React, { useState } from "react";
+import React from "react";
 import Cart from "../assets/images/Cart";
-import ButtonMore from "./ButtonMore";
+// import ButtonMore from "./ButtonMore";
 import InCart from "../assets/images/InCart";
 import { useAuth } from "../shared/ProtectedRoutes";
 import { handleAuthDialog } from "../redux/reducers/mainSlice";
@@ -144,18 +144,16 @@ const AddToCart = ({
         <Button
           onClick={clickHandler}
           fullWidth
-          // disabled={inCart}
+          disableRipple
+          disableElevation
           sx={{
             height: 42,
             position: "relative",
             color: inCart ? "black" : "white",
             border: inCart ? "1px solid #666" : "",
             borderRadius: "15px",
-            // "&.Mui-disabled": {
-            //   background: "transparent",
-            //   color: "#000",
-            //   border: "1px solid #F0F0F0",
-            // },
+            padding: "0px !important", 
+            minWidth: "unset", 
           }}
           variant="contained"
           color={inCart ? "secondary" : "primary"}
@@ -169,27 +167,28 @@ const AddToCart = ({
           </span>
           <InCart2 inCart={inCart} />
         </Button>
-        // <ButtonMore
-        //   card
-        //   inCart={inCart}
-        //   onClick={clickHandler}
-        //   fullWidth
-        //   sx={{
-        //     border: "1px solid #F0F0F0",
-
-        //     "& .round": {
-        //       top: 3,
-        //     },
-
-        //     "&.Mui-disabled": {
-        //       color: "#fff!important",
-        //     },
-        //   }}
-        //   txt="В корзину"
-        // />
       )}
     </>
   );
 };
 
 export default AddToCart;
+
+// <ButtonMore
+//   card
+//   inCart={inCart}
+//   onClick={clickHandler}
+//   fullWidth
+//   sx={{
+//     border: "1px solid #F0F0F0",
+
+//     "& .round": {
+//       top: 3,
+//     },
+
+//     "&.Mui-disabled": {
+//       color: "#fff!important",
+//     },
+//   }}
+//   txt="В корзину"
+// />
