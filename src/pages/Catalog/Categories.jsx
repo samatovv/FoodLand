@@ -36,7 +36,6 @@ const Categories = ({
     categoryTitle3: false,
   });
   const [categories, setCategories] = useState([]);
-
   const allCategories = useSelector((state) => state.main.categories);
 
   useEffect(() => {
@@ -58,16 +57,38 @@ const Categories = ({
   const handleProducts = (item) => {
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
+  
     if (params?.id === item?.id) {
+      if (params2 && Object.keys(params2).length > 0) {
+        setCategory({ ...category, title2: item.parent.name, title4: "" });
+
+        setParams2({});
+        if (page > 1) setPage(1);
+        if (page === 1)
+          dispatch(
+            getProducts(
+              `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
+            )
+          );
+      }
       setParams({});
-      setParams2({});
+      setCategory((prev) => ({
+        ...prev,
+        title2: prev.title2 === item.name ? "" : item.name,
+      }));
+      setExpanded((prev) => ({
+        ...prev,
+        categoryTitle3: true,
+      }));
+  
       if (page > 1) setPage(1);
-      if (page === 1)
+      if (page === 1) {
         dispatch(
           getProducts(
             `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
           )
         );
+      }
     } else {
       if (page > 1) setPage(1);
       setParams({ id: item?.id, name: item.name, parent: item.parent.id });
@@ -77,7 +98,7 @@ const Categories = ({
         )
       );
     }
-  };
+  };  
 
   const handleProducts2 = (item) => {
     dispatch(handleLoading(true));
@@ -185,7 +206,6 @@ const Categories = ({
                         dispatch(handleLoading(true));
                         dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=`));
                         setCategory({ title: "", title2: "" });
-                    
                         setParams({});
                         setExpanded((prev) => ({
                           ...prev,
@@ -203,9 +223,7 @@ const Categories = ({
                           [item.name]: true,
                         }));
                       }
-                    }}
-                    
-                                        
+                    }}             
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
@@ -248,13 +266,10 @@ const Categories = ({
                           <AccordionSummary
                             onClick={() => {
                               handleProducts(ite);
-                              setCategory({ ...category, title2: ite.name });
-                            
-                              setExpanded((prev) => ({
-                                ...prev,
-                                categoryTitle3: prev.categoryTitle3 ? false : true,
-                              }));
-                            }}                            
+                              if (category?.title3 === ite.name)
+                                setCategory({ title: item.name });
+                              else setCategory({ ...category, title3: ite.name });
+                            }}                                                   
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
                             id="panel1-header"
@@ -350,28 +365,26 @@ const Categories = ({
               >
                 <AccordionSummary
                   onClick={() => {
-                    if (category?.title2 === item.name) {
+                    if (category?.title === item.name) {
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
-                      dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=`));
-                      setCategory({ title: "", title2: "" });
-                  
+                      dispatch(
+                        getProducts(
+                          `/products/query?limit=12&page=${page}&search=&categoryIds=`
+                        )
+                      );
+                      setCategory({ title: "" });
                       setParams({});
-                      setExpanded((prev) => ({
-                        ...prev,
-                        [item.name]: !prev[item.name], 
-                      }));
                     } else {
                       setValueSearch("");
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
-                      dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`));
-                  
-                      setCategory({ title: item.name, title2: item.name }); 
-                      setExpanded((prev) => ({
-                        ...prev,
-                        [item.name]: true,
-                      }));
+                      dispatch(
+                        getProducts(
+                          `/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`
+                        )
+                      );
+                      setCategory({ title: item.name });
                     }
                   }}
                   expandIcon={<ExpandMoreIcon />}
@@ -413,13 +426,10 @@ const Categories = ({
                         <AccordionSummary
                           onClick={() => {
                             handleProducts(ite);
-                            setCategory({ ...category, title2: ite.name });
-                          
-                            setExpanded((prev) => ({
-                              ...prev,
-                              categoryTitle3: prev.categoryTitle3 ? false : true,
-                            }));
-                          }}     
+                            if (category?.title3 === ite.name)
+                              setCategory({ title: item.name });
+                            else setCategory({ ...category, title3: ite.name });
+                          }}
                           expandIcon={<ExpandMoreIcon />}
                           aria-controls="panel1-content"
                           id="panel1-header"
