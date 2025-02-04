@@ -31,9 +31,9 @@ const Categories = ({
   const md = useMediaQuery("(min-width:900px)");
 
   const [expanded, setExpanded] = useState({
-    category: true,
-    "category.title": false,
-    "category.title3": false,
+    categoryTitle: true,
+    categoryTitle2: false,
+    categoryTitle3: false,
   });
   const [categories, setCategories] = useState([]);
 
@@ -180,29 +180,32 @@ const Categories = ({
                 >
                   <AccordionSummary
                     onClick={() => {
-                      if (category?.title === item.name) {
+                      if (category?.title2 === item.name) {
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
-                        dispatch(
-                          getProducts(
-                            `/products/query?limit=12&page=${page}&search=&categoryIds=`
-                          )
-                        );
-                        setCategory({ title: "" });
+                        dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=`));
+                        setCategory({ title: "", title2: "" });
+                    
                         setParams({});
-                        setExpanded({category: true, "category.title": true, "category.title3": false});
+                        setExpanded((prev) => ({
+                          ...prev,
+                          [item.name]: !prev[item.name], 
+                        }));
                       } else {
                         setValueSearch("");
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
-                        dispatch(
-                          getProducts(
-                            `/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`
-                          )
-                        );
-                        setCategory({ title: item.name });
+                        dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`));
+                    
+                        setCategory({ title: item.name, title2: item.name }); 
+                        setExpanded((prev) => ({
+                          ...prev,
+                          [item.name]: true,
+                        }));
                       }
                     }}
+                    
+                                        
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1-content"
                     id="panel1-header"
@@ -245,16 +248,13 @@ const Categories = ({
                           <AccordionSummary
                             onClick={() => {
                               handleProducts(ite);
-                              if (category?.title3 === ite.name)
-                                setCategory({ title: item.name, id: item.id });
-                              else
-                                setCategory({ ...category, title3: ite.name });
-                                setExpanded({
-                                  category: true,
-                                  "category.title": true,
-                                  "category.title3": true,
-                                });
-                            }}
+                              setCategory({ ...category, title2: ite.name });
+                            
+                              setExpanded((prev) => ({
+                                ...prev,
+                                categoryTitle3: prev.categoryTitle3 ? false : true,
+                              }));
+                            }}                            
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
                             id="panel1-header"
@@ -340,13 +340,7 @@ const Categories = ({
                     backgroundColor: "transparent",
                     borderRadius: "8px",
                     minHeight: "0!important",
-                    // m: "0!important",
                   },
-                  "& .MuiAccordionSummary-content": {
-                    // m: "0!important",
-                    // p: "9px 15px",
-                  },
-
                   "& .MuiTypography-body1": {
                     fontSize: 15,
                     fontWeight: 400,
@@ -368,7 +362,6 @@ const Categories = ({
                       setParams({});
                     } else {
                       setValueSearch("");
-                      // navigate(`/catalog/${translit(item.name)}`);
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
                       dispatch(
@@ -406,13 +399,7 @@ const Categories = ({
                             backgroundColor: "transparent",
                             borderRadius: "8px",
                             minHeight: "0!important",
-                            // m: "0!important",
                           },
-                          "& .MuiAccordionSummary-content": {
-                            // m: "0!important",
-                            // p: "9px 15px",
-                          },
-
                           "& .MuiTypography-body1": {
                             fontSize: 15,
                             fontWeight: 400,
