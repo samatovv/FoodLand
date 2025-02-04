@@ -266,10 +266,13 @@ const Categories = ({
                           <AccordionSummary
                             onClick={() => {
                               handleProducts(ite);
-                              if (category?.title3 === ite.name)
-                                setCategory({ title: item.name });
-                              else setCategory({ ...category, title3: ite.name });
-                            }}                                                   
+                              setCategory({ ...category, title2: ite.name, title3: ite.name, title4: "" });
+                            
+                              setExpanded((prev) => ({
+                                ...prev,
+                                categoryTitle3: prev.categoryTitle3 ? false : true,
+                              }));
+                            }}                            
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
                             id="panel1-header"
