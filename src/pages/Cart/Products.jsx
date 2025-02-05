@@ -147,7 +147,14 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
 
 export default Products;
 
-const Product = ({ item, deleteHandler, cart, setCart, md }) => (
+const Product = ({
+  item,
+  deleteHandler,
+  cart,
+  setCart,
+  md,
+  setCount,
+}) => (
   <Box
     borderBottom="1px solid #F1F1F1"
     display="flex"
@@ -243,6 +250,7 @@ const Product = ({ item, deleteHandler, cart, setCart, md }) => (
         cart={cart}
         count={item?.count}
         id={item?.id}
+        setCount={setCount}
         cartPage
         setCart={setCart}
         price={item?.price}
