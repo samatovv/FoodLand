@@ -30,11 +30,10 @@ const Categories = ({
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
 
-  const [expanded, setExpanded] = useState({
-    categoryTitle: true,
-    categoryTitle2: false,
-    categoryTitle3: false,
+  const [expanded, setExpanded] = useState(() => {
+    return {};
   });
+  
   const [categories, setCategories] = useState([]);
   const allCategories = useSelector((state) => state.main.categories);
 
@@ -53,52 +52,55 @@ const Categories = ({
       }));
     setCategories(categories[0]);
   }, [allCategories]);
-
   const handleProducts = (item) => {
     dispatch(handleLoading(true));
     dispatch(setProducts([]));
   
     if (params?.id === item?.id) {
-      if (params2 && Object.keys(params2).length > 0) {
-        setCategory({ ...category, title2: item.parent.name, title4: "" });
-
+      if (!!params2.name) {
         setParams2({});
-        if (page > 1) setPage(1);
-        if (page === 1)
-          dispatch(
-            getProducts(
-              `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
-            )
-          );
+        dispatch(
+          getProducts(
+            `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
+          )
+        );
+        return;
       }
       setParams({});
       setCategory((prev) => ({
         ...prev,
         title2: prev.title2 === item.name ? "" : item.name,
       }));
-      setExpanded((prev) => ({
-        ...prev,
-        categoryTitle3: true,
-      }));
   
+      setExpanded((prev) => {
+        const isExpanded = !prev[item.name];
+  
+        const newState = {
+          ...prev,
+          [item.name]: isExpanded,
+        };
+  
+        if (item.name === "Красители") {
+          newState.categoryTitle3 = isExpanded;
+        }
+  
+        if (prev["Красители"] && !newState.categoryTitle3) {
+          newState.categoryTitle3 = true;
+        }
+        return newState;
+      });
+      console.log("if");
+      console.log(item.name);
       if (page > 1) setPage(1);
       if (page === 1) {
-        dispatch(
-          getProducts(
-            `/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`
-          )
-        );
+        dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`));
       }
     } else {
       if (page > 1) setPage(1);
       setParams({ id: item?.id, name: item.name, parent: item.parent.id });
-      dispatch(
-        getProducts(
-          `/products/query?limit=12&page=${page}&search=&categoryIds=${item?.id}`
-        )
-      );
+      dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=${item?.id}`));
     }
-  };  
+  };
 
   const handleProducts2 = (item) => {
     dispatch(handleLoading(true));
@@ -212,6 +214,7 @@ const Categories = ({
                           [item.name]: !prev[item.name], 
                         }));
                       } else {
+                        setParams({});
                         setValueSearch("");
                         dispatch(setProducts([]));
                         dispatch(handleLoading(true));
@@ -266,12 +269,30 @@ const Categories = ({
                           <AccordionSummary
                             onClick={() => {
                               handleProducts(ite);
-                              setCategory({ ...category, title2: ite.name, title3: ite.name, title4: "" });
-                            
-                              setExpanded((prev) => ({
+                              setCategory((prev) => ({
                                 ...prev,
-                                categoryTitle3: prev.categoryTitle3 ? false : true,
+                                title2: ite.name,
+                                title3: ite.name,
+                                title4: "",
                               }));
+                            
+                              setExpanded((prev) => {
+                                const isExpanded = !prev[ite.name];
+                            
+                                const newState = {
+                                  ...prev,
+                                  [ite.name]: isExpanded,
+                                };
+                            
+                                if (ite.name === "Красители") {
+                                  newState.categoryTitle3 = isExpanded;
+                                }
+                            
+                                if (prev["Красители"] && !newState.categoryTitle3) {
+                                  newState.categoryTitle3 = true;
+                                }
+                                return newState;
+                              });
                             }}                            
                             expandIcon={<ExpandMoreIcon />}
                             aria-controls="panel1-content"
