@@ -108,18 +108,16 @@ const NewsCard = ({ item }) => {
             variant="body2"
             fontWeight={400}
             maxWidth="375px"
-            mt={1.5}
-            mb={3}
+            maxHeight={"60px"}
+            height={"auto"}
             className="sans"
             sx={{
               textOverflow: "ellipsis",
               overflow: "hidden",
               display: "-webkit-box",
-              // WebkitLineClamp: 4,
               WebkitBoxOrient: "vertical",
-              // paddingBottom: 3,
               wordBreak: "break-word", 
-              // height: "4.5em", 
+              
             }}
             dangerouslySetInnerHTML={{
               __html: htmlDecode(item.content),
