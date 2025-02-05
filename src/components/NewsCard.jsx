@@ -118,6 +118,8 @@ const NewsCard = ({ item }) => {
               WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
               wordWrap: "break-word",
+              border: "1px solid #000",
+              height: "auto"
             }}
             dangerouslySetInnerHTML={{
               __html: htmlDecode(item.content),
