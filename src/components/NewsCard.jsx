@@ -115,10 +115,11 @@ const NewsCard = ({ item }) => {
               textOverflow: "ellipsis",
               overflow: "hidden",
               display: "-webkit-box",
-              WebkitLineClamp: 3,
+              // WebkitLineClamp: 4,
               WebkitBoxOrient: "vertical",
-              wordBreak: "break-word", // Исправлено с wordWrap на wordBreak
-              height: "4.5em", // Ограничиваем высоту вручную, 3 строки * 1.5em (примерный line-height)
+              // paddingBottom: 3,
+              wordBreak: "break-word", 
+              // height: "4.5em", 
             }}
             dangerouslySetInnerHTML={{
               __html: htmlDecode(item.content),
