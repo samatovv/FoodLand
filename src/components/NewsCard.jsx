@@ -109,6 +109,7 @@ const NewsCard = ({ item }) => {
             fontWeight={400}
             maxWidth="375px"
             maxHeight={"60px"}
+            fontSize={10}
             height={"auto"}
             className="sans"
             sx={{
