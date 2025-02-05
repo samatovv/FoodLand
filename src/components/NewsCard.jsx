@@ -117,9 +117,8 @@ const NewsCard = ({ item }) => {
               display: "-webkit-box",
               WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
-              wordWrap: "break-word",
-              border: "1px solid #000",
-              height: "auto"
+              wordBreak: "break-word", // Исправлено с wordWrap на wordBreak
+              height: "4.5em", // Ограничиваем высоту вручную, 3 строки * 1.5em (примерный line-height)
             }}
             dangerouslySetInnerHTML={{
               __html: htmlDecode(item.content),
