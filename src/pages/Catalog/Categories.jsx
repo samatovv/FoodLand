@@ -389,28 +389,30 @@ const Categories = ({
               >
                 <AccordionSummary
                   onClick={() => {
-                    if (category?.title === item.name) {
+                    if (category?.title2 === item.name) {
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
-                      dispatch(
-                        getProducts(
-                          `/products/query?limit=12&page=${page}&search=&categoryIds=`
-                        )
-                      );
-                      setCategory({ title: "" });
+                      dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=`));
+                      setCategory({ title: "", title2: "" });
                       setParams({});
+                      setExpanded((prev) => ({
+                        ...prev,
+                        [item.name]: !prev[item.name], 
+                      }));
                     } else {
+                      setParams({});
                       setValueSearch("");
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
-                      dispatch(
-                        getProducts(
-                          `/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`
-                        )
-                      );
-                      setCategory({ title: item.name });
+                      dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=${item.id}`));
+                  
+                      setCategory({ title: item.name, title2: item.name }); 
+                      setExpanded((prev) => ({
+                        ...prev,
+                        [item.name]: true,
+                      }));
                     }
-                  }}
+                  }} 
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1-content"
                   id="panel1-header"
