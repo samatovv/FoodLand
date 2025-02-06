@@ -71,7 +71,6 @@ const Categories = ({
         ...prev,
         title2: prev.title2 === item.name ? "" : item.name,
       }));
-  
       setExpanded((prev) => {
         const isExpanded = !prev[item.name];
   
