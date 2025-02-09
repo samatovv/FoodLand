@@ -44,7 +44,7 @@ const AboutUs = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={{ sm: 0, md: 20, lg: 30 }} mt={3}>
+        <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={{ sm: 0, md: 15, lg: 30 }} mt={3}>
           <Box 
             sx={{ background: " #93A27C", width: "116px",height: "40px",borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
           >
@@ -62,7 +62,7 @@ const AboutUs = () => {
               </Typography>
             </Box>
             <Box>
-              <Typography fontSize={{ xs: 24, md: 48 }} width={{ xs: '100%', md: '80%', lg: '70%' }} fontWeight={800} >
+              <Typography fontSize={{ xs: 24, md: 38, lg: 48 }} width={{ xs: '100%', md: '80%', lg: '70%' }} fontWeight={800} >
                 Сырья и ингредиентов для пищевой промышленности
               </Typography>
             </Box>
