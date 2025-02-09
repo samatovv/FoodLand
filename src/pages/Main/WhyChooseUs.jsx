@@ -5,15 +5,40 @@ import {
   Grid2,
   useMediaQuery,
 } from "@mui/material";
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import star from "../../assets/images/star.svg";
 import shield from "../../assets/images/shield.svg";
 import img1 from "../../assets/images/why.webp";
 import img2 from "../../assets/images/why2.webp";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const WhyChooseUs = () => {
   const md = useMediaQuery("(min-width:992px)");
-  return (
+
+  const categoryRefs = useRef([]);
+  useEffect(() => {
+    categoryRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          }          
+        }
+      );
+    });
+  }, []);
+    return (
     <Box
       component="section"
       p={{ xs: "56px 0", md: "43px 0 106px" }}
@@ -22,6 +47,7 @@ const WhyChooseUs = () => {
       <Container maxWidth="lg">
         <Grid2 container>
           <Grid2
+            ref={(el) => (categoryRefs.current[0] = el)}
             size={{ xs: 12, md: 6 }}
             sx={{
               display: "flex",
@@ -45,10 +71,8 @@ const WhyChooseUs = () => {
               <Box
                 p="27px"
                 border="1px solid #E6E6E6"
-                // borderLeft="none"
                 borderRadius="10px"
                 position="relative"
-                // className="none_border_left"
                 maxHeight={350}
                 maxWidth={335}
                 left="2px"
@@ -63,7 +87,6 @@ const WhyChooseUs = () => {
                     position: "absolute",
                     top: 42,
                     left: 52,
-                    // borderTopLeftRadius: "0px",
                   }}
                 >
                   <Typography
@@ -79,7 +102,7 @@ const WhyChooseUs = () => {
               </Box>
             )}
           </Grid2>
-          <Grid2 container size={{ xs: 12, md: 6 }} spacing={{ xs: 3, md: 0 }}>
+          <Grid2 ref={(el) => (categoryRefs.current[0] = el)} container size={{ xs: 12, md: 6 }} spacing={{ xs: 3, md: 0 }}>
             <Grid2
               size={{ xs: 12, md: 6 }}
               p="27px"
@@ -122,9 +145,7 @@ const WhyChooseUs = () => {
               p={{ xs: 0, md: "27px" }}
               width={{ xs: "100%", md: "50%" }}
               border={{ xs: "none", md: "1px solid #E6E6E6" }}
-              // borderRight="none"
               borderRadius="10px"
-              // className="none_border_right"
               position="relative"
               top="1px"
               maxHeight={{ xs: 210, md: 350 }}
@@ -219,7 +240,6 @@ const WhyChooseUs = () => {
                 </Typography>
                 <Typography
                   className="sans"
-                  // fontSize={{ xs: 13, md: 11 }}
                   whiteSpace="nowrap"
                   mb={{ xs: 1, lg: "33px" }}
                   color="#707070"

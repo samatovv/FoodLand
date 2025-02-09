@@ -8,7 +8,6 @@ import {
   uploadFile,
 } from "../../redux/reducers/profile";
 import auth from "../../assets/images/auth.svg";
-import logout from "../../assets/images/logout.svg";
 import Alert from "../../components/Alert";
 import Logout from "./Logout";
 import { handleLoading } from "../../redux/reducers/mainSlice";
@@ -74,6 +73,7 @@ const Info = () => {
         borderRadius="16px"
         mt={{ xs: 4, md: 0 }}
         border="1px solid #BABABA"
+        height={"89%"}
       >
         <Box
           display="flex"

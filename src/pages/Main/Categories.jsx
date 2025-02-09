@@ -1,11 +1,11 @@
 import {
   Box,
   Container,
-  Grid2,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img from "../../assets/images/category-1.webp";
 import img2 from "../../assets/images/category-2.webp";
 import img3 from "../../assets/images/category-3.webp";
@@ -16,8 +16,8 @@ import ButtonMore from "../../components/ButtonMore";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getCategories } from "../../redux/reducers/mainSlice";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const categories = [
   {
@@ -42,17 +42,34 @@ const categories = [
 
 const Categories = () => {
   const dispatch = useDispatch();
-  const md = useMediaQuery("(min-width:769px)");
+  const categoryRefs = useRef([]);
 
-  // const categories = useSelector((state) => state.main.categories);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => dispatch(getCategories()), []);
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  useEffect(() => {
+    categoryRefs.current.forEach((el, idx) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+  }, []);
+
   return (
-    <Box
-      component="section"
-      backgroundColor="#FAF5F1"
-      p={{ xs: "56px 0", md: "72px 0 152px" }}
-    >
+    <Box component="section" backgroundColor="#FAF5F1" p={{ xs: "56px 0", md: "72px 0 152px" }}>
       <Container maxWidth="lg">
         <Typography
           color="#493829"
@@ -62,136 +79,45 @@ const Categories = () => {
           maxWidth={681}
           mb={{ xs: 3, md: 5 }}
         >
-          Просмотр товаров по{" "}
-          <span style={{ color: "#B89776" }}>категориям</span>
+          Просмотр товаров по <span style={{ color: "#B89776" }}>категориям</span>
         </Typography>
-        <Grid2
-          spacing={2}
-          container
-          sx={{
-            position: "relative",
-            "& .category__card": {
-              borderRadius: "16px",
-              overflow: "hidden",
-            },
-            "& .category__more": {
-              position: "absolute",
-              overflow: "hidden",
-              bottom: { xs: 16, lg: 20 },
-              left: { xs: 16, lg: 20 },
-              color: "#FFF",
-              zIndex: 3,
-            },
-            "& .swiper": {
-              position: "static!important",
-              overflow: "hidden!important",
-              p: "0!important",
-            },
-          }}
-        >
+        <Box display="grid" gridTemplateColumns={{ xs: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }} gap={2}>
           {Array.isArray(categories) &&
             categories.map((item, idx) => (
-              <Grid2 size={{ xs: 6, md: 4 }}>
-                <Box className="category__card">
-                  <Box
-                    component="img"
-                    width="100%"
-                    height={{ xs: 250, md: "396px" }}
-                    sx={{
-                      objectFit: "cover",
-                      minHeight: { xs: 250, md: "396px" },
-                      borderRadius: "16px",
-                    }}
-                    src={item?.img}
-                    alt=""
-                  />
-                  <Box className="category__more" width="80%">
-                    <Typography
-                      fontSize={{ xs: 16, md: 20 }}
-                      mb={{ xs: 1, md: 2.5 }}
-                      maxWidth={219}
-                      fontWeight="bold"
-                    >
-                      {item?.title}
-                    </Typography>
-                    <Link
-                      to={`/catalog/?search=&categoryIds=${item.id}&page=1`}
-                    >
-                      <ButtonMore
-                        txt="Подробнее "
-                        radius="15px"
-                        sx={{
-                          borderRadius: "15px",
-                          width: "100%",
-                          p: { xs: "4px", md: "4px 4px 4px 16px;" },
-                          "& span": { color: "#000" },
-                        }}
-                      />
-                    </Link>
-                  </Box>
+              <Box
+                key={item.id}
+                ref={(el) => (categoryRefs.current[idx] = el)}
+                className="category__card"
+                sx={{ borderRadius: "16px", overflow: "hidden" }}
+              >
+                <Box
+                  component="img"
+                  width="100%"
+                  height={{ xs: 250, md: "396px" }}
+                  sx={{ objectFit: "cover", minHeight: { xs: 250, md: "396px" }, borderRadius: "16px" }}
+                  src={item?.img}
+                  alt={item?.title}
+                />
+                <Box className="category__more" width="80%" sx={{ position: "absolute", bottom: 20, left: 20, color: "#FFF", zIndex: 3 }}>
+                  <Typography fontSize={{ xs: 16, md: 20 }} mb={{ xs: 1, md: 2.5 }} maxWidth={219} fontWeight="bold">
+                    {item?.title}
+                  </Typography>
+                  <Link to={`/catalog/?search=&categoryIds=${item.id}&page=1`}>
+                    <ButtonMore
+                      txt="Подробнее "
+                      radius="15px"
+                      sx={{
+                        borderRadius: "15px",
+                        width: "100%",
+                        p: { xs: "4px", md: "4px 4px 4px 16px;" },
+                        "& span": { color: "#000" },
+                      }}
+                    />
+                  </Link>
                 </Box>
-              </Grid2>
+              </Box>
             ))}
-        </Grid2>
-
-        {/* <Grid2
-          container
-          spacing={{ xs: 2, lg: 5 }}
-          sx={{
-            "& .category__card": {
-              borderRadius: "16px",
-              overflow: "hidden",
-            },
-            "& .category__more": {
-              position: "absolute",
-              overflow: "hidden",
-              bottom: { xs: 16, lg: 20 },
-              left: { xs: 16, lg: 20 },
-              color: "#FFF",
-              zIndex: 3,
-            },
-          }}
-        >
-          {Array.isArray(categories) &&
-            categories.map((item, idx) => (
-              <Grid2 item size={{ xs: 6, md: 2 }} key={idx}>
-                <Box className="category__card">
-                  <Box
-                    component="img"
-                    width="100%"
-                    height={{ xs: 250, md: "396px" }}
-                    sx={{
-                      objectFit: "cover",
-                      minHeight: { xs: 250, md: "396px" },
-                      borderRadius: "16px",
-                    }}
-                    src={item?.img}
-                    alt=""
-                  />
-                  <Box className="category__more" width="80%">
-                    <Typography
-                      fontSize={{ xs: 16, md: 20 }}
-                      mb={{ xs: 1, md: 2.5 }}
-                      maxWidth={219}
-                      fontWeight="bold"
-                    >
-                      {item.title}
-                    </Typography>
-                    <Link to={`/catalog/?category=${item?.id}`}>
-                      <ButtonMore
-                        txt="Подробнее "
-                        sx={{
-                          width: "100%",
-                          p: { xs: "4px", md: "4px 4px 4px 16px;" },
-                          "& span": { color: "#000" },
-                        }}
-                      />
-                    </Link>
-                  </Box>
-                </Box>
-              </Grid2>
-            ))}
-        </Grid2> */}
+        </Box>
       </Container>
     </Box>
   );

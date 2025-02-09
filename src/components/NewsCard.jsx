@@ -82,7 +82,7 @@ const NewsCard = ({ item }) => {
             />
           )}
         </Box>
-        <Box sx={{ width: { xs: "100%", md: "76%", height: "130px", display: "flex", flexDirection: "column", justifyContent: "space-between" } }}>
+        <Box sx={{ width: { xs: "100%", md: "76%", height: "150px", display: "flex", flexDirection: "column", justifyContent: "space-between" } }}>
           <Box display="flex" mt={{ xs: 1, sm: 0 }} alignItems="end" justifyContent="space-between">
             <Typography
               sx={{

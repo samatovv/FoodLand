@@ -39,12 +39,6 @@ const AddToCart = ({
           "cart",
           JSON.stringify([
             ...filtered,
-            // {
-            //   ...newItem,
-            //   count: newItem?.count - count,
-            //   sum: details.price * (newItem?.count - count),
-            //   weight: newItem?.weight - details.weight * count,
-            // },
           ])
         );
       }
@@ -116,17 +110,11 @@ const AddToCart = ({
         <Button
           onClick={clickHandler}
           fullWidth
-          // disabled={inCart}
           sx={{
             height: 50,
             position: "relative",
             color: inCart ? "black" : "white",
-            border: inCart ? "1px solid #666" : "",
-            // "&.Mui-disabled": {
-            //   background: "transparent",
-            //   color: "#000",
-            //   border: "1px solid #F0F0F0",
-            // },
+            border: "1px solid #666",
           }}
           variant="contained"
           color={inCart ? "secondary" : "primary"}
@@ -150,7 +138,7 @@ const AddToCart = ({
             height: 42,
             position: "relative",
             color: inCart ? "black" : "white",
-            border: inCart ? "1px solid #666" : "",
+            border: "1px solid #666",
             borderRadius: "15px",
             padding: "0px !important", 
             minWidth: "unset", 

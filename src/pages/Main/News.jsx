@@ -6,19 +6,30 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import ButtonMore from "../../components/ButtonMore";
 import { Link } from "react-router-dom";
 import { getNews } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import NewsCard from "../../components/NewsCard";
+import emptySvg from "../../assets/images/not-image.svg";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const News = () => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:769px)");
 
   const news = useSelector((state) => state.main.news);
-  const lastPost = Array.isArray(news?.results) && news?.results[0];
+  const sortedNews = Array.isArray(news?.results)
+    ? [...news.results].sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      )
+    : [];
+
+  const lastPost = sortedNews[0];
 
   const htmlDecode = (content) => {
     const e = document.createElement("div");
@@ -26,7 +37,50 @@ const News = () => {
     return e.childNodes.length === 0 ? "" : e.childNodes[0].nodeValue;
   };
 
-  useEffect(() => dispatch(getNews()), []);
+  const newsRefs = useRef([]);
+  useEffect(() => {
+    gsap.fromTo(
+      newsRefs.current[0],
+      { opacity: 0, x: 100 },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 1,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: newsRefs.current[0],
+          start: "top 90%",
+          toggleActions: "play none none none",
+        },
+      }
+    );
+  
+    newsRefs.current.forEach((el, idx) => {
+      if (idx > 0) {
+        gsap.fromTo(
+          el,
+          { opacity: 0, x: -100 }, 
+          {
+            opacity: 1,
+            x: 0, 
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: {
+              trigger: el,
+              start: "top 90%",
+              toggleActions: "play none none none",
+            },
+          }
+        );
+      }
+    });
+  }, [news]);
+  
+
+  useEffect(() => {
+    dispatch(getNews());
+  }, [dispatch]);
+
   return (
     <>
       {news?.results?.length && (
@@ -67,7 +121,7 @@ const News = () => {
             </Box>
             <Grid2 container>
               {md && (
-                <Grid2  size={6}>
+                <Grid2 size={6} ref={(el) => (newsRefs.current[1] = el)}>
                   <Link to={`/news/${lastPost?.id}`}>
                     <Box
                       pr="38px"
@@ -110,7 +164,7 @@ const News = () => {
                       <div className="img">
                         <img
                           style={{ borderRadius: "15px" }}
-                          src={lastPost?.imageUrl}
+                          src={lastPost?.imageUrl || emptySvg}
                           width="100%"
                           height="375px"
                           alt=""
@@ -129,7 +183,6 @@ const News = () => {
                           {lastPost &&
                             new Intl.DateTimeFormat("ru", {
                               dateStyle: "short",
-                              // timeStyle: "short",
                             }).format(new Date(lastPost?.createdAt))}
                         </Typography>
                       </Box>
@@ -181,12 +234,16 @@ const News = () => {
                   </Link>
                 </Grid2>
               )}
-              <Grid2 size={{ xs: 12, md: 6 }}>
-                {Array.isArray(news?.results) &&
-                  news?.results
+              <Grid2 ref={(el) => (newsRefs.current[0] = el)} size={{ xs: 12, md: 6 }}>
+                {Array.isArray(sortedNews) &&
+                  sortedNews
                     ?.slice(md ? 1 : 0, 4)
                     .map((item, idx) => (
-                      <NewsCard key={idx} item={item} idx={idx} />
+                      <NewsCard
+                        key={idx}
+                        item={item}
+                        idx={idx}
+                      />
                     ))}
               </Grid2>
             </Grid2>

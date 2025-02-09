@@ -28,10 +28,10 @@ const AboutUs = () => {
     </Typography>,
   ];
   const stats = [
-    { value: 50, suffix: " млн", label: "С нашей мукой создали более 50 млн макаронс." },
-    { value: 130, suffix: " тыс", label: "С нашим сыром испекли более 130 тыс пицц." },
-    { value: 500, suffix: " т", label: "Мы продали около 500 тонн шоколада." },
-    { value: 1, suffix: " млн", label: "С использованием наших сыров было приготовлено более 1 млн суши." },
+    { value: 50000000, label: "С нашей мукой создали более 50 млн макаронс." },
+    { value: 130000, label: "С нашим сыром испекли более 130 тыс пицц." },
+    { value: 500,label: "Мы продали около 500 тонн шоколада." },
+    { value: 1000000, label: "С использованием наших сыров было приготовлено более 1 млн суши." },
     { value: 200, label: "Наименований товаров, адаптированных под ваши потребности." },
     { value: 10000, label: "Мы осуществили более 10 000 доставок." }
   ];
@@ -44,22 +44,34 @@ const AboutUs = () => {
         >
           {breadcrumbs}
         </Breadcrumbs>
-        <Box display="flex" flexDirection={{ xs: "column", md: "row" }} mt={3}>
-          <Box mt={{ xs: 2, md: 0 }} >
-            <Typography
-              fontSize={{ xs: 16, md: 24 }}
-              fontWeight={700}
-              color="var(--primary)"
-              mb={1}
-            >
-              Ваш путеводитель в области:
-            </Typography>
+        <Box display="flex" flexDirection={{ xs: "column", md: "row" }} gap={{ sm: 0, md: 20, lg: 30 }} mt={3}>
+          <Box 
+            sx={{ background: " #93A27C", width: "116px",height: "40px",borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center" }}
+          >
+            <Typography fontSize={16} fontWeight={600} fontFamily={"Montserrat Alternates"} color="white">FoodLand</Typography>
+          </Box>
+          <Box display="flex" flexDirection={{ xs: "column" }}>
+            <Box mt={{ xs: 2, md: 0 }} >
+              <Typography
+                fontSize={{ xs: 16, md: 24 }}
+                fontWeight={700}
+                color="var(--primary)"
+                mb={1}
+              >
+                Ваш путеводитель в области:
+              </Typography>
+            </Box>
+            <Box>
+              <Typography fontSize={{ xs: 24, md: 48 }} width={{ xs: '100%', md: '80%', lg: '70%' }} fontWeight={800} >
+                Сырья и ингредиентов для пищевой промышленности
+              </Typography>
+            </Box>
           </Box>
         </Box>
         <Grid container spacing={{ xs: 1, lg: 9 }} mt={{ xs: "28px", md: 0 }}>
           {stats.map((stat, idx) => (
             <Grid key={idx} item xs={6} md={4}>
-              <Typography mt={1} mb={2} fontSize={{ xs: 36, md: 48 }} fontWeight={{ xs: 600, md: 400 }}>
+              <Typography mt={1} mb={2} fontSize={{ xs: 30, md: 48 }} fontWeight={{ xs: 600, md: 400 }}>
                 <CountUp 
                   start={0} 
                   end={stat.value} 
@@ -199,13 +211,23 @@ const AboutUs = () => {
                   Подписывайтесь на нас:
                 </Typography>
                 <Box display="flex" alignItems="center" columnGap="12px">
-                  <a
-                    href="https://www.instagram.com/foodland_ingredients/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img src={instagram} alt="" />
-                  </a>
+                <a
+                  href="https://www.instagram.com/foodland_ingredients/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    width: "25px",
+                    height: "25px", 
+                    borderRadius: "50%",
+                    background: "#93A27C",
+                    padding: "6px",
+                  }}
+                >
+                  <img src={instagram} alt="Instagram" style={{ width: "20px", height: "20px" }} />
+                </a>
                 </Box>
               </Box>
             </Box>
@@ -213,7 +235,7 @@ const AboutUs = () => {
           {md && (
             <Grid2 size={{ xs: 12, md: 6 }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.951928123764!2d74.631668!3d42.863779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDUxJzQ5LjYiTiA3NMKwMzcnNTQuMCJF!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
                 width="100%"
                 height={!md ? "389px" : "100%"}
                 style={{ border: "0", borderRadius: "20px" }}
@@ -228,7 +250,7 @@ const AboutUs = () => {
       {!md && (
         // eslint-disable-next-line jsx-a11y/iframe-has-title
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5457.859234571664!2d74.61607174322945!3d42.85472220021446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x389eb648647b605d%3A0x262167cc7c751796!2zMdCwLCAyMSDRg9C7LiDQnNCw0YLRgNC-0YHQvtCy0LAsINCR0LjRiNC60LXQug!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.951928123764!2d74.631668!3d42.863779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDUxJzQ5LjYiTiA3NMKwMzcnNTQuMCJF!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
           width="100%"
           height={!md ? "389px" : "100%"}
           style={{ border: "0", borderRadius: "0", marginTop: 32 }}

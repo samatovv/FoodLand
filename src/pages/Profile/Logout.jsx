@@ -5,7 +5,7 @@ import { useNavigate } from "react-router";
 
 const Logout = ({ open, close }) => {
   const navigate = useNavigate();
-  const handleLogout = () => {
+  const handleLogout = async () => {
     sessionStorage.clear();
     localStorage.clear();
     cookie.removeSpecific("foodland_token", {
@@ -13,9 +13,7 @@ const Logout = ({ open, close }) => {
       domain: "foodland.kg",
     });
     navigate("/");
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 200);
+    await window.location.reload();
   };
   return (
     <Dialog

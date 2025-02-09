@@ -232,29 +232,33 @@ const Details = ({ setCart }) => {
                 ) : (
                   ""
                 )}
-                {details.description && (
-                  <Typography
-                    fontSize={20}
-                    mb={1}
-                    mt={4}
-                    className="sans"
-                    fontWeight="600"
-                    color="var(--primary)"
-                  >
-                    Описание
-                  </Typography>
-                )}
-
-                <Typography
-                  className="sans"
-                  fontSize={16}
-                  whiteSpace="pre-wrap"
-                  color="#767676"
-                  mb={2}
-                  fontWeight="400"
+                <Box
+                  sx={{ marginTop: "15px", }}
                 >
-                  {details.description}
-                </Typography>
+                  {details.description && (
+                    <Typography
+                      fontSize={20}
+                      mb={1}
+                      mt={4}
+                      className="sans"
+                      fontWeight="600"
+                      color="var(--primary)"
+                    >
+                      Описание
+                    </Typography>
+                  )}
+
+                  <Typography
+                    className="sans"
+                    fontSize={16}
+                    whiteSpace="pre-wrap"
+                    color="#767676"
+                    mb={2}
+                    fontWeight="400"
+                  >
+                    {details.description}
+                  </Typography>
+                </Box>
               </div>
 
               <Box component="form" onSubmit={formik.handleSubmit}>
@@ -265,7 +269,7 @@ const Details = ({ setCart }) => {
                       mb={3}
                       display="flex"
                       alignItems="center"
-                      justifyContent="space-between"
+                      justifyContent="space-around"
                     >
                       {!details?.prices ? (
                         <Skeleton

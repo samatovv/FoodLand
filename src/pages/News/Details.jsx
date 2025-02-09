@@ -11,6 +11,7 @@ import NavigateNextIcon from "../../assets/images/NavigateNextIcon";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { getNews, getNewsDetails } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
+import emptySvg from "../../assets/images/not-image.svg"
 
 const NewsDetails = () => {
   const dispatch = useDispatch();
@@ -60,13 +61,18 @@ const NewsDetails = () => {
               mt: 3,
               mb: { xs: 3, md: 4 },
               borderRadius: 2,
-              objectFit: "cover",
+              objectFit: details.imageUrl ? "cover" : "contain",
+              maxHeight: details.imageUrl ? { xs: 146, md: "351px" } : "200px",
+              width: "100%",
+              display: "block",
+              background: "#F4F4F4"
             }}
             width="100%"
-            height={{ xs: 146, md: "351px" }}
-            src={details.imageUrl}
-            alt=""
+            height={details.imageUrl ? { xs: 146, md: "351px" } : "auto"} 
+            src={details.imageUrl || emptySvg}
+            alt="Новость"
           />
+
           <Typography fontSize={{ xs: 25, md: "35px" }} fontWeight="700">
             {details?.title}
           </Typography>
@@ -140,7 +146,7 @@ const NewsDetails = () => {
                         <div className="div">
                           <img
                             style={{ borderRadius: "15px" }}
-                            src={item?.imageUrl}
+                            src={item?.imageUrl || emptySvg}
                             width="100%"
                             height="256px"
                             alt=""

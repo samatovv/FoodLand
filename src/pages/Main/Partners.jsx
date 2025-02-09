@@ -9,7 +9,6 @@ import img7 from "../../assets/images/partner7.webp";
 import {
   Box,
   Container,
-  Grid2,
   Typography,
   useMediaQuery,
 } from "@mui/material";

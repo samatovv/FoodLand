@@ -10,11 +10,6 @@ import img7 from "../../assets/clients/sova.webp";
 import img8 from "../../assets/clients/bublik.webp";
 import img9 from "../../assets/clients/macaronnaya.webp";
 import img10 from "../../assets/clients/konti.webp";
-// import instagram from "../../assets/images/instagram.svg";
-// import facebook from "../../assets/images/facebook.svg";
-// import twitter from "../../assets/images/twitter.svg";
-// import ArrowForwardIcon from "../../components/ArrowForwardIcon";
-// import ArrowBackIcon from "../../components/ArrowBackIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 
@@ -58,7 +53,7 @@ const OurClients = () => {
               modules={[Navigation, Autoplay]}
               freeMode={true}
               loop={true}
-              speed={1100}
+              speed={1700}
               autoplay={{
                 delay: 3500,
                 disableOnInteraction: false,
@@ -119,51 +114,11 @@ const OurClients = () => {
                     >
                       {item.name}
                     </Typography>
-                    {/* <Typography
-                  variant="subtitle1"
-                  lineHeight="140%"
-                  textAlign="center"
-                  color="#666"
-                  mb={3}
-                >
-                  Объявление о запуске новых вкусов шоколада или какао-порошка
-                </Typography>
-                <Box display="flex" alignItems="center" columnGap="12px">
-                  <a href="https://instagram.com">
-                    <img src={instagram} alt="" />
-                  </a>
-                  <a href="https://facebook.com">
-                    <img src={facebook} alt="" />
-                  </a>
-                  <a href="https://twiiter.com">
-                    <img src={twitter} alt="" />
-                  </a>
-                </Box> */}
                   </Box>
                 </SwiperSlide>
               ))}
             </Swiper>
           </Box>
-          {/* <Box
-          className="roulette"
-          sx={{
-            display: "flex",
-            flexWrap: "nowrap",
-            columnGap: 3,
-            "& img": {
-              filter: { xs: "none", md: "grayscale(1)" },
-              transition: "all 800ms ease",
-              width: { xs: 120, sm: 210 },
-              "&:hover": {
-                filter: "none",
-              },
-            },
-          }}
-        >
-          {clients.map((item, idx) => (
-            <img src={item.img} key={idx} alt="" />
-          ))}
-        </Box> */}
         </Box>
       </Container>
     </Box>

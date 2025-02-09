@@ -1,22 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import ButtonMore from "../../components/ButtonMore";
 import "swiper/css";
 import { useDispatch, useSelector } from "react-redux";
 import { getBanner } from "../../redux/reducers/mainSlice";
 import Search from "../../shared/Search";
+import gsap from "gsap";
 
 const First = () => {
   const dispatch = useDispatch();
-
   const banner = useSelector((state) => state.main.banner);
+  const containerRef = useRef(null);
+  const titleRef = useRef(null);
+  const buttonRef = useRef(null);
+  const searchRef = useRef(null);
 
   useEffect(() => {
     if (!banner?.results?.length) dispatch(getBanner(`/banners?type=main`));
   }, []);
 
+  useEffect(() => {
+    gsap.fromTo(
+      containerRef.current,
+      { opacity: 0 },
+      { opacity: 1, duration: 1.5, ease: "power2.out" }
+    );
+    gsap.fromTo(
+      titleRef.current,
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power2.out", delay: 0.5 }
+    );
+    gsap.fromTo(
+      [searchRef.current, buttonRef.current],
+      { y: 30, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power2.out", stagger: 0.3, delay: 1 }
+    );
+  }, [banner]);
+
   return (
     <Box
+      ref={containerRef}
       component="section"
       className="first"
       p="0 0 0"
@@ -24,9 +47,7 @@ const First = () => {
       minHeight="100vh"
       height="100%"
       sx={{
-        background: `url(${
-          Array.isArray(banner?.results) && banner?.results[0]?.imageUrl
-        }) center/cover no-repeat;`,
+        background: `url(${Array.isArray(banner?.results) && banner?.results[0]?.imageUrl}) center/cover no-repeat;`,
       }}
     >
       <Container
@@ -36,6 +57,7 @@ const First = () => {
         }}
       >
         <Typography
+          ref={titleRef}
           fontWeight="bold"
           lineHeight="110%"
           variant="h1"
@@ -52,39 +74,22 @@ const First = () => {
           flexDirection={{ xs: "column", md: "row" }}
           rowGap={2}
         >
-          <Search />
-
-          <ButtonMore
-            sx={{
-              width: { xs: "100%", md: 193, borderRadius: "15px" },
-              ml: { xs: 0, md: "34.5px" },
-              fontFamily: "Open Sans",
-            }}
-            txt="Заказать звонок"
-            href="tel:+996 550 114 477"
-          />
-        </Box>
-        {/* {!md && (
-          <Box
-            mt={5}
-            justifyContent="center"
-            display="flex"
-            alignItems="center"
-            columnGap={3}
-          >
-            <img src={partners} width="152px" height="40px" alt="Партнеры" />
-            <Typography
-              className="sans"
-              variant="subtitle2"
-              color="#737373"
-              fontWeight="regular"
-            >
-              +50 компаний
-            </Typography>
+          <Box ref={searchRef}>
+            <Search />
           </Box>
-        )} */}
+          <Box ref={buttonRef}>
+            <ButtonMore
+              sx={{
+                width: { xs: "100%", md: 193, borderRadius: "15px" },
+                ml: { xs: 0, md: "34.5px" },
+                fontFamily: "Open Sans",
+              }}
+              txt="Заказать звонок"
+              href="tel:+996 550 114 477"
+            />
+          </Box>
+        </Box>
       </Container>
-      {/* <Carousel /> */}
     </Box>
   );
 };

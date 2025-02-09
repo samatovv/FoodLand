@@ -5,13 +5,17 @@ import {
   Typography,
   useMediaQuery,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ButtonMore from "../../components/ButtonMore";
 import Card from "../../components/Card";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import PaginationLarge from "../../components/Pagination";
 import { getRecomendations } from "../../redux/reducers/products";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Recommendations = ({ setCart }) => {
   const dispatch = useDispatch();
@@ -21,6 +25,7 @@ const Recommendations = ({ setCart }) => {
   const [page, setPage] = useState(1);
 
   const products = useSelector((state) => state.products.recomendations);
+  const productRefs = useRef([]);
 
   useEffect(() => {
     dispatch(
@@ -28,6 +33,26 @@ const Recommendations = ({ setCart }) => {
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
+
+  useEffect(() => {
+    productRefs.current.forEach((el) => {
+      gsap.fromTo(
+        el,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 1,
+          ease: "power2.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    });
+  }, []);
 
   const handleChange = (event, value) => {
     setPage(value);
@@ -37,7 +62,6 @@ const Recommendations = ({ setCart }) => {
     <Box
       component="section"
       p={{ xs: "56px 0", md: "76px 0" }}
-      // overflow="scroll"
       backgroundColor="#f4f4f4"
     >
       <Container maxWidth="lg">
@@ -66,13 +90,12 @@ const Recommendations = ({ setCart }) => {
           )}
         </Box>
         <Grid2
-          // sx={{ width: { xs: "3000px", md: "unset" }, overflowX: "scroll" }}
           container
           spacing={{ xs: 1, lg: 4 }}
         >
           {Array.isArray(products?.results) &&
             products?.results?.map((item, idx) => (
-              <Grid2 size={{ xs: 6, md: 3 }} key={idx}>
+              <Grid2 ref={(el) => (productRefs.current[idx] = el)} size={{ xs: 6, md: 3 }} key={idx}>
                 <Card setCart={setCart} search item={item} />
               </Grid2>
             ))}

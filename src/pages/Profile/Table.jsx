@@ -7,7 +7,6 @@ import InProcess from "../../assets/images/InProcess";
 import Success from "../Cart/Success";
 import Cancelled from "../../assets/images/Cancelled";
 import { useNavigate } from "react-router-dom";
-import more from "../../assets/images/more.svg";
 import Preview from "../Preview";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -15,7 +14,6 @@ import { DesktopDatePicker } from "@mui/x-date-pickers";
 import { useFormik } from "formik";
 import dayjs from "dayjs";
 import Calendar from "../../assets/images/Calendar";
-import empty from "../../assets/images/empty.svg";
 
 const Table = ({ setCart }) => {
   const dispatch = useDispatch();
@@ -74,6 +72,7 @@ const Table = ({ setCart }) => {
         border="1px solid #BABABA"
         borderRadius="16px"
         p={{ xs: "0", md: "0px 20px" }}
+        height={"100%"}
       >
         <Box
           display="flex"
