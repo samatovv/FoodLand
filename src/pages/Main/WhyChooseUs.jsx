@@ -18,9 +18,9 @@ gsap.registerPlugin(ScrollTrigger);
 const WhyChooseUs = () => {
   const md = useMediaQuery("(min-width:992px)");
 
-  const categoryRefs = useRef([]);
+  const cardsRef = useRef([]);
   useEffect(() => {
-    categoryRefs.current.forEach((el) => {
+    cardsRef.current.forEach((el) => {
       gsap.fromTo(
         el,
         { opacity: 0, y: 50 },
@@ -47,7 +47,7 @@ const WhyChooseUs = () => {
       <Container maxWidth="lg">
         <Grid2 container>
           <Grid2
-            ref={(el) => (categoryRefs.current[0] = el)}
+            ref={(el) => (cardsRef.current[0] = el)}
             size={{ xs: 12, md: 6 }}
             sx={{
               display: "flex",
@@ -69,6 +69,7 @@ const WhyChooseUs = () => {
             </Typography>
             {md && (
               <Box
+                ref={(el) => (cardsRef.current[1] = el)}
                 p="27px"
                 border="1px solid #E6E6E6"
                 borderRadius="10px"
@@ -76,7 +77,7 @@ const WhyChooseUs = () => {
                 maxHeight={350}
                 maxWidth={335}
                 left="2px"
-                top="1px`"
+                top="1px"
               >
                 <Box
                   sx={{
@@ -102,8 +103,9 @@ const WhyChooseUs = () => {
               </Box>
             )}
           </Grid2>
-          <Grid2 ref={(el) => (categoryRefs.current[0] = el)} container size={{ xs: 12, md: 6 }} spacing={{ xs: 3, md: 0 }}>
+          <Grid2 container size={{ xs: 12, md: 6 }} spacing={{ xs: 3, md: 0 }}>
             <Grid2
+              ref={(el) => (cardsRef.current[2] = el)}
               size={{ xs: 12, md: 6 }}
               p="27px"
               backgroundColor="#FCFCF1"
@@ -141,6 +143,7 @@ const WhyChooseUs = () => {
               <img src={star} alt="" />
             </Grid2>
             <Grid2
+              ref={(el) => (cardsRef.current[3] = el)}
               size={{ xs: 12, md: 6 }}
               p={{ xs: 0, md: "27px" }}
               width={{ xs: "100%", md: "50%" }}
@@ -179,6 +182,7 @@ const WhyChooseUs = () => {
               />
             </Grid2>
             <Grid2
+              ref={(el) => (cardsRef.current[4] = el)}
               size={{ xs: 12, md: 6 }}
               p="27px"
               height={{ xs: "auto", md: "350px" }}
@@ -216,6 +220,7 @@ const WhyChooseUs = () => {
               <img src={shield} alt="" />
             </Grid2>
             <Grid2
+              ref={(el) => (cardsRef.current[5] = el)}
               size={{ xs: 12, md: 6 }}
               p="27px"
               backgroundColor="#FCFCF1"

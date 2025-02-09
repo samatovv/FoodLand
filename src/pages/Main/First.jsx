@@ -19,7 +19,11 @@ const First = () => {
     if (!banner?.results?.length) dispatch(getBanner(`/banners?type=main`));
   }, []);
 
-  useEffect(() => {
+  const hasAnimated = useRef(false);
+
+useEffect(() => {
+  if (banner?.results?.length > 0 && !hasAnimated.current) {
+    hasAnimated.current = true;
     gsap.fromTo(
       containerRef.current,
       { opacity: 0 },
@@ -35,7 +39,9 @@ const First = () => {
       { y: 30, opacity: 0 },
       { y: 0, opacity: 1, duration: 1, ease: "power2.out", stagger: 0.3, delay: 1 }
     );
-  }, [banner]);
+  }
+}, [banner]);
+
 
   return (
     <Box

@@ -56,7 +56,7 @@ const Categories = () => {
         {
           opacity: 1,
           y: 0,
-          duration: 1,
+          duration: 1.2,
           ease: "power2.out",
           scrollTrigger: {
             trigger: el,
