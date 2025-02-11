@@ -28,12 +28,12 @@ const AboutUs = () => {
     </Typography>,
   ];
   const stats = [
-    { value: 50000000, label: "С нашей мукой создали более 50 млн макаронс." },
-    { value: 130000, label: "С нашим сыром испекли более 130 тыс пицц." },
-    { value: 500,label: "Мы продали около 500 тонн шоколада." },
-    { value: 1000000, label: "С использованием наших сыров было приготовлено более 1 млн суши." },
-    { value: 200, label: "Наименований товаров, адаптированных под ваши потребности." },
-    { value: 10000, label: "Мы осуществили более 10 000 доставок." }
+    { value: 50000000, label: "Макаронс было создано с нашей мукой" },
+    { value: 130000, label: "Пицц испекли с нашим сыром" },
+    { value: 500,label: "Тонн шоколада было продано" },
+    { value: 1000000, label: "Суши и роллов было приготовлено с использованием нашего сыра" },
+    { value: 200, label: "Наименований товаров, адаптированных под ваши потребности" },
+    { value: 10000, label: "Поставок мы осуществили нашим клиентам" }
   ];
   return (
     <Box component="section" p="40px 0 80px">
@@ -62,7 +62,7 @@ const AboutUs = () => {
               </Typography>
             </Box>
             <Box>
-              <Typography fontSize={{ xs: 24, md: 35, lg: 45 }} width={{ xs: '100%', md: '80%', lg: '70%' }} fontWeight={800} >
+              <Typography fontSize={{ xs: 24, md: 35, lg: 40 }} width={{ xs: '100%', md: '80%', lg: '70%' }} fontWeight={800} >
                 Сырья и ингредиентов для пищевой промышленности
               </Typography>
             </Box>
@@ -235,23 +235,20 @@ const AboutUs = () => {
           {md && (
             <Grid2 size={{ xs: 12, md: 6 }}>
               <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.951928123764!2d74.631668!3d42.863779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDUxJzQ5LjYiTiA3NMKwMzcnNTQuMCJF!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
-                width="100%"
-                height={!md ? "389px" : "100%"}
-                style={{ border: "0", borderRadius: "20px" }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d17487.545960310345!2d74.6425034748933!3d42.85946636606197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDLCsDUxJzU1LjEiTiA3NMKwMzcnNTUuNyJF!5e0!3m2!1sru!2skg!4v1739282151133!5m2!1sru!2skg"
+              width="100%"
+              height={!md ? "389px" : "100%"}
+              style={{ border: "0", borderRadius: "20px" }}
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
             </Grid2>
           )}
         </Grid2>
       </Container>
       {!md && (
-        // eslint-disable-next-line jsx-a11y/iframe-has-title
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2923.951928123764!2d74.631668!3d42.863779!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDLCsDUxJzQ5LjYiTiA3NMKwMzcnNTQuMCJF!5e0!3m2!1sru!2skg!4v1728983722836!5m2!1sru!2skg"
-          width="100%"
+          src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d17487.545960310345!2d74.6425034748933!3d42.85946636606197!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zNDLCsDUxJzU1LjEiTiA3NMKwMzcnNTUuNyJF!5e0!3m2!1sru!2skg!4v1739282151133!5m2!1sru!2skg"
           height={!md ? "389px" : "100%"}
           style={{ border: "0", borderRadius: "0", marginTop: 32 }}
           allowFullScreen=""
