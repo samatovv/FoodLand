@@ -7,7 +7,6 @@ import { getBanners } from "../redux/reducers/mainSlice";
 import emptyImg from "../assets/images/empty.svg";
 import arrowIcon from "../assets/images/arrow.webp";
 
-
 const Carousel = () => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:768px)");
@@ -27,11 +26,9 @@ const Carousel = () => {
           width: "100%",
           borderRadius: "15px",
         },
-        // md: {
-          "& .swiper-wrapper": {
-            display: "flex",
-            justifyContent: {xs: "start", md: "center"},
-          // }
+        "& .swiper-wrapper": {
+          display: "flex",
+          justifyContent: { xs: "start", md: "center" },
         },
         "& .swiper-slide": {
           minWidth: { xs: "100%", md: "428px" },
@@ -66,20 +63,17 @@ const Carousel = () => {
       <Swiper
         navigation={true}
         modules={[Navigation]}
-        freeMode={true}
-        watchSlidesProgress={true}
-        centeredSlides={md ? true : false} 
         initialSlide={md ? 1 : 0}
+        loop={true}
+        loopAdditionalSlides={banners?.results?.length}
         breakpoints={{
           0: {
             slidesPerView: 1,
-            // slidesPerGroup: 1,
             spaceBetween: 15,
           },
 
           768: {
             slidesPerView: 3,
-            // slidesPerGroup: 2,
             spaceBetween: 30,
           },
         }}
@@ -90,7 +84,7 @@ const Carousel = () => {
               component="img"
               sx={{ objectFit: "cover!important", }}
               src={item.imageUrl ? item.imageUrl : emptyImg}
-              alt=""
+              alt="photo"
             />
           </SwiperSlide>
         ))}
