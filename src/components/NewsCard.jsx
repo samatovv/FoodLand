@@ -21,7 +21,7 @@ const NewsCard = ({ item }) => {
         flexDirection={{ xs: "column", sm: "row" }}
         alignItems={{ xs: "start", sm: "end" }}
         columnGap={3}
-        mb={5}
+        mb={3}
         width="100%"
         sx={{
           "& svg": {
@@ -94,6 +94,7 @@ const NewsCard = ({ item }) => {
               }}
               variant="h5"
               fontWeight="700"
+              fontSize={{ xs: 18, md: 16 }}
             >
               {item?.title}
             </Typography>
@@ -109,7 +110,7 @@ const NewsCard = ({ item }) => {
             fontWeight={400}
             maxWidth="375px"
             maxHeight={"60px"}
-            fontSize={10}
+            fontSize={{ xs: 14, md: 16 }}
             height={"auto"}
             className="sans"
             sx={{
@@ -118,7 +119,7 @@ const NewsCard = ({ item }) => {
               display: "-webkit-box",
               WebkitBoxOrient: "vertical",
               wordBreak: "break-word", 
-              
+              color: "#000000"
             }}
             dangerouslySetInnerHTML={{
               __html: htmlDecode(item.content),

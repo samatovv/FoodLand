@@ -135,9 +135,11 @@ const WhyChooseUs = () => {
                   variant="body1"
                   mb={{ xs: "22px", lg: "0" }}
                   color="#707070"
+                  fontSize={{ xs: 14, md: 16 }}
+                  fontWeight={400}
                 >
                   Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб
-                  помочь нашим клиентам становиться ещё лучше
+                  помочь нашим клиентам становиться ещё лучше
                 </Typography>
               </div>
               <img src={star} alt="" />
@@ -212,9 +214,11 @@ const WhyChooseUs = () => {
                   variant="body1"
                   mb={{ xs: "22px", lg: "0" }}
                   color="#707070"
+                  fontSize={{ xs: 14, md: 16 }}
+                  fontWeight={400}
                 >
                   Наша экспертность в сфере применения кондитерского сырья.
-                  Возможность предоставления технологической поддержки.
+                  Возможность предоставления технологической поддержки.
                 </Typography>
               </div>
               <img src={shield} alt="" />
@@ -248,6 +252,8 @@ const WhyChooseUs = () => {
                   whiteSpace="nowrap"
                   mb={{ xs: 1, lg: "33px" }}
                   color="#707070"
+                  fontSize={{ xs: 14, md: 16 }}
+                  fontWeight={400}
                 >
                   Высокий уровень поставляемых услуг
                 </Typography>
@@ -256,9 +262,11 @@ const WhyChooseUs = () => {
                   variant="body1"
                   mb={{ xs: '22px', lg: "0" }}
                   color="#707070"
+                  fontSize={{ xs: 14, md: 16 }}
+                  fontWeight={400}
                 >
                   Мы выстраиваем долгосрочные отношения. Развиваемся, чтоб
-                  помочь нашим клиентам становиться ещё лучше
+                  помочь нашим клиентам становиться ещё лучше
                 </Typography>
               </div>
               <img src={star} alt="" />

@@ -51,7 +51,6 @@ const Card = ({ item, search, width, setCart, preview }) => {
           }
           sx={{
             borderRadius: "12px",
-            // width: search ? "278px" : "204px",
             height: { xs: 142, md: 178 },
             objectFit:
               Array.isArray(details?.images) && !details?.images[0]?.url
@@ -79,7 +78,8 @@ const Card = ({ item, search, width, setCart, preview }) => {
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
             wordWrap: "break-word",
-            fontFamily: "Nunito Sans",
+            fontFamily: "Open Sans",
+            height: "25px",
           }}
           variant="subtitle1"
           lineHeight={1}

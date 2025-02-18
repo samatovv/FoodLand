@@ -10,7 +10,6 @@ import React from "react";
 import { handleDrawer } from "../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import logo from "../assets/images/logo3.svg";
-import auth from "../assets/images/auth.svg";
 import Close from "../assets/images/Close";
 import { NavLink } from "react-router-dom";
 import ButtonMore from "../components/ButtonMore";
@@ -19,7 +18,7 @@ const DrawerNav = () => {
   const dispatch = useDispatch();
 
   const open = useSelector((state) => state.main.open);
-  const profile = useSelector((state) => state.profile.data);
+  // const profile = useSelector((state) => state.profile.data);
 
   return (
     <Drawer
@@ -85,6 +84,16 @@ const DrawerNav = () => {
                 className={({ isActive }) =>
                   isActive ? "sans active" : "sans"
                 }
+                to="/catalog"
+              >
+                Каталог
+              </NavLink>
+            </ListItemButton>
+            <ListItemButton>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "sans active" : "sans"
+                }
                 to="/about-us"
               >
                 О нас
@@ -100,63 +109,6 @@ const DrawerNav = () => {
                 Новости
               </NavLink>
             </ListItemButton>
-            <ListItemButton>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "sans active" : "sans"
-                }
-                to="/catalog"
-              >
-                Каталог
-              </NavLink>
-            </ListItemButton>
-            {/* <ListItemButton>
-              {profile??.id ? (
-                <NavLink
-                  style={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                  className={({ isActive }) =>
-                    isActive ? "sans active" : "sans"
-                  }
-                  to="/profile"
-                >
-                  <img
-                    style={{
-                      objectFit: "cover",
-                      borderRadius: "100px",
-                      marginRight: 16,
-                    }}
-                    width={40}
-                    height={40}
-                    src={!profile?.image?.url ? auth : profile?.image?.url}
-                    alt=""
-                  />
-                  {profile?.name}
-                </NavLink>
-              ) : (
-                <NavLink
-                  className={({ isActive }) =>
-                    isActive ? "sans active" : "sans secondary"
-                  }
-                  to="/login"
-                >
-                  Войти
-                </NavLink>
-              )}
-            </ListItemButton>
-            <ListItemButton>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "sans active" : "sans"
-                }
-                to="/profile/cart"
-              >
-                Корзина
-              </NavLink>
-            </ListItemButton> */}
           </List>
         </div>
         <ButtonMore

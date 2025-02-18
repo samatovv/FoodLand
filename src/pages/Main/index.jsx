@@ -1,6 +1,6 @@
 import React from "react";
 import First from "./First";
-import Benefits from "./Benefits";
+// import Benefits from "./Benefits";
 import Categories from "./Categories";
 import WhyChooseUs from "./WhyChooseUs";
 import Partners from "./Partners";
@@ -12,10 +12,10 @@ const Main = ({setCart}) => {
   return (
     <>
       <First />
-      <Benefits />
+      {/* <Benefits /> */}
+      <Partners />
       <Categories />
       <WhyChooseUs />
-      <Partners />
       <Recommendations setCart={setCart} />
       <OurClients />
       <News />

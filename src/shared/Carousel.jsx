@@ -27,6 +27,7 @@ const Carousel = () => {
           borderRadius: "15px",
         },
         "& .swiper-wrapper": {
+          
           display: "flex",
           justifyContent: { xs: "start", md: "center" },
         },

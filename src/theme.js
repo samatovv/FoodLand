@@ -11,7 +11,7 @@ export const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "Montserrat Alternates",
+    fontFamily: "Open Sans",
     lineHeight: 1,
 
     h1: {

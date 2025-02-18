@@ -1,10 +1,7 @@
 import {
-  Backdrop,
   Box,
   Container,
   IconButton,
-  InputAdornment,
-  TextField,
   useMediaQuery,
 } from "@mui/material";
 import React, { useState } from "react";
@@ -93,6 +90,14 @@ const Header = ({ cart }) => {
                 className={({ isActive }) =>
                   isActive ? "sans active" : "sans"
                 }
+                to="/catalog"
+              >
+                Каталог
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? "sans active" : "sans"
+                }
                 to="/about-us"
               >
                 О нас
@@ -104,14 +109,6 @@ const Header = ({ cart }) => {
                 to="/news"
               >
                 Новости
-              </NavLink>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? "sans active" : "sans"
-                }
-                to="/catalog"
-              >
-                Каталог
               </NavLink>
             </Box>
           )}

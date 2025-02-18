@@ -14,7 +14,6 @@ import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { getProfileData, login } from "../../redux/reducers/profile";
 import cookie from "cookie_js";
-import { useLocation, useNavigate } from "react-router";
 import { formData, instance } from "../../api";
 import {
   handleAuthDialog,
@@ -29,8 +28,6 @@ import Alert from "../../components/Alert";
 
 const Auth = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const loginData = useSelector((state) => state.profile.loginData);
   const auth = useSelector((state) => state.main.auth);

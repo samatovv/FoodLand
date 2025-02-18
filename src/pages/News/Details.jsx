@@ -46,65 +46,68 @@ const NewsDetails = () => {
     </Typography>,
   ];
   return (
-    <>
-      <Box component="section" p="45px 0 72px">
-        <Container maxWidth="lg">
+    <Container maxWidth="lg" sx={{ display: "flex", gap: { xs: 0, md: 5}, flexDirection: { xs: "column", md: "row"}, justifyContent: { xs: "start", md: "space-between" } }}>
+      <Box component="section" p="45px 0 72px" width={"100%"}>
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
             aria-label="breadcrumb"
           >
             {breadcrumbs}
           </Breadcrumbs>
+          <Typography fontSize={{ xs: 25, md: "35px", marginTop:"15px" }} fontWeight="700">
+            {details?.title}
+          </Typography>
           <Box
             component="img"
             sx={{
-              mt: 3,
-              mb: { xs: 3, md: 4 },
-              borderRadius: 2,
+              mt: 1,
+              mb: { xs: 3, md: 2 },
+              borderRadius: 6,
               objectFit: details.imageUrl ? "cover" : "contain",
-              maxHeight: details.imageUrl ? { xs: 146, md: "351px" } : "200px",
+
               width: "100%",
               display: "block",
-              background: "#F4F4F4"
+              background: "#F4F4F4",
             }}
-            width="100%"
-            height={details.imageUrl ? { xs: 146, md: "351px" } : "auto"} 
+            height={{ xs: 146, md: "425px" }}
             src={details.imageUrl || emptySvg}
             alt="Новость"
           />
 
-          <Typography fontSize={{ xs: 25, md: "35px" }} fontWeight="700">
-            {details?.title}
-          </Typography>
           <Typography
             mt={2.5}
+            width={"100%"}
             fontSize={{ xs: 14, md: 16 }}
             fontWeight={400}
             className="sans"
             lineHeight="27.24px"
             dangerouslySetInnerHTML={{ __html: htmlDecode(details.content) }}
           />
-        </Container>
+          <Typography color="#666" variant="body2" marginTop={2}>
+            {details?.createdAt
+              ? new Date(details.createdAt).toLocaleDateString("ru-RU")
+              : ""}
+          </Typography>
       </Box>
-      <Box component="section" backgroundColor="#F4F4F4" p="46px 0 59px">
-        <Container>
+      
+      <Box component="section" p="46px 0 59px" mt={{ xs: 0, md: "30px" }} >
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
-            mb={3}
+            mb={1}
           >
-            <Typography fontSize={{ xs: 18, md: "40px" }} fontWeight="700">
+            <Typography fontSize={{ xs: 18, md: "35px" }} fontWeight="700">
               Недавние новости
             </Typography>
           </Box>
-          <Grid2 container spacing="20px">
+          <Grid2 container spacing="20px" width={{ xs: "100%", md: "444px"}}>
             {Array.isArray(news?.results) &&
               news?.results
                 ?.slice(0, 3)
                 .filter((item) => item?.id !== id)
                 .map((item, idx) => (
-                  <Grid2 key={idx} size={{ xs: 12, sm: 6, md: 4 }}>
+                  <Grid2 key={idx}>
                     <Link to={`/news/${item?.id}`}>
                       <Box
                         className="news__card"
@@ -115,7 +118,7 @@ const NewsDetails = () => {
                               transition: "all 800ms ease",
                             },
                           },
-
+                          width: "100%",
                           "& img": {
                             objectFit: "cover",
                             transition: "all 800ms ease",
@@ -144,18 +147,21 @@ const NewsDetails = () => {
                         }}
                       >
                         <div className="div">
-                          <img
-                            style={{ borderRadius: "15px" }}
+                          <Box
+                            component="img"
                             src={item?.imageUrl || emptySvg}
-                            width="100%"
-                            height="256px"
-                            alt=""
+                            alt="i"
+                            sx={{
+                              borderRadius: '15px',
+                              width: { xs: '100%', md: '444px' },
+                              height: '238px',
+                            }}
                           />
                         </div>
 
                         <Box
                           display="flex"
-                          mt={3}
+                          mt={1.5}
                           alignItems="end"
                           justifyContent="space-between"
                         >
@@ -176,7 +182,6 @@ const NewsDetails = () => {
                             {item &&
                               new Intl.DateTimeFormat("ru", {
                                 dateStyle: "short",
-                                // timeStyle: "short",
                               }).format(new Date(item?.createdAt))}
                           </Typography>
                         </Box>
@@ -230,9 +235,8 @@ const NewsDetails = () => {
                   </Grid2>
                 ))}
           </Grid2>
-        </Container>
       </Box>
-    </>
+    </Container>
   );
 };
 

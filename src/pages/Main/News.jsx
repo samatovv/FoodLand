@@ -176,7 +176,7 @@ const News = () => {
                         alignItems="end"
                         justifyContent="space-between"
                       >
-                        <Typography variant="h5" fontWeight="700">
+                        <Typography variant="h5" fontSize={{ xs: 18, md: 28 }} fontWeight="700">
                           {lastPost?.title}
                         </Typography>
                         <Typography color="#666" variant="body2">
@@ -196,7 +196,9 @@ const News = () => {
                           WebkitLineClamp: 2,
                           WebkitBoxOrient: "vertical",
                           wordWrap: "break-word",
+                          color: "#000000",
                         }}
+                        fontSize={{ xs: 14, md: 16 }}
                         fontWeight={400}
                         mt={1.5}
                         mb={3}

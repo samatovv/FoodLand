@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Box, Container, Typography } from "@mui/material";
 import ButtonMore from "../../components/ButtonMore";
 import "swiper/css";
@@ -15,32 +15,49 @@ const First = () => {
   const buttonRef = useRef(null);
   const searchRef = useRef(null);
 
+  const firstAnimated = useRef(sessionStorage.getItem("firstAnimated") === "true");
+  const [isFirstLoad, setIsFirstLoad] = useState(!firstAnimated.current);
+
   useEffect(() => {
-    if (!banner?.results?.length) dispatch(getBanner(`/banners?type=main`));
+    if (!banner?.results?.length) {
+      dispatch(getBanner(`/banners?type=main`));
+    }
   }, []);
 
-  const hasAnimated = useRef(false);
+  useEffect(() => {
+    if (banner?.results?.length > 0) {
+      const delay = isFirstLoad ? 1.5 : 0; 
 
-useEffect(() => {
-  if (banner?.results?.length > 0 && !hasAnimated.current) {
-    hasAnimated.current = true;
-    gsap.fromTo(
-      containerRef.current,
-      { opacity: 0 },
-      { opacity: 1, duration: 1.5, ease: "power2.out" }
-    );
-    gsap.fromTo(
-      titleRef.current,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out", delay: 0.5 }
-    );
-    gsap.fromTo(
-      [searchRef.current, buttonRef.current],
-      { y: 30, opacity: 0 },
-      { y: 0, opacity: 1, duration: 1, ease: "power2.out", stagger: 0.3, delay: 1 }
-    );
-  }
-}, [banner]);
+      gsap.fromTo(
+        containerRef.current,
+        { opacity: 0 },
+        { opacity: 1, duration: 1.5, ease: "power2.out", delay }
+      );
+
+      gsap.fromTo(
+        titleRef.current,
+        { y: 50, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power2.out", delay: delay + 0.5 }
+      );
+
+      gsap.fromTo(
+        [searchRef.current, buttonRef.current],
+        { y: 30, opacity: 0 },
+        { y: 0, opacity: 1, duration: 1, ease: "power2.out", stagger: 0.3, delay: delay + 1 }
+      );
+
+      firstAnimated.current = true;
+      sessionStorage.setItem("firstAnimated", "true");
+
+      setIsFirstLoad(false);
+    }
+  }, [banner]);
+
+  useEffect(() => {
+    const clearSession = () => sessionStorage.removeItem("firstAnimated");
+    window.addEventListener("beforeunload", clearSession);
+    return () => window.removeEventListener("beforeunload", clearSession);
+  }, []);
 
 
   return (
@@ -80,7 +97,7 @@ useEffect(() => {
           flexDirection={{ xs: "column", md: "row" }}
           rowGap={2}
         >
-          <Box ref={searchRef}>
+          <Box ref={searchRef} sx={{ zIndex: 10, position: "relative" }}>
             <Search />
           </Box>
           <Box ref={buttonRef}>

@@ -66,7 +66,7 @@ const Search = () => {
       position="relative"
     >
       <TextField
-        placeholder="Найти на FOODLAND-..."
+        placeholder="Найти на FOODLAND -"
         value={value}
         autoComplete="off"
         onChange={(e) => {
@@ -120,6 +120,12 @@ const Search = () => {
           },
           "& fieldset": {
             display: "none",
+          },
+          minHeight: 48,
+            '& input::placeholder': {
+              color: 'black', 
+              fontStyle: 'Open Sans',
+              opacity: 1,
           },
         }}
       />
