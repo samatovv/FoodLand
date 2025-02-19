@@ -27,7 +27,6 @@ const Search = ({
   searchValue,
   setValueSearch,
   category,
-  params,
 }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -63,14 +62,7 @@ const Search = ({
         dispatch(setProducts([]));
         if (page === 1) {
           setCategory({ title: "", search: true });
-          navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
-          // dispatch(
-          //   getProducts(
-          //     `/products/query?limit=12&page=1&search=${encodeURI(
-          //       searchValue
-          //     )}&categoryIds=`
-          //   )
-          // );
+          navigate(`/catalog/?search=${encodeURIComponent(searchValue)}&categoryIds=&page=1`);
         }
       }}
       width="100%"
@@ -90,7 +82,6 @@ const Search = ({
           }
           setValueSearch(e.target.value);
           handleSearch(e);
-          // navigate(`/catalog/?search=${searchValue}&categoryIds=&page=1`);
         }}
         slotProps={{
           input: {

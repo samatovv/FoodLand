@@ -79,7 +79,7 @@ const Card = ({ item, search, width, setCart, preview }) => {
             WebkitBoxOrient: "vertical",
             wordWrap: "break-word",
             fontFamily: "Open Sans",
-            height: "25px",
+            height: "32px",
           }}
           variant="subtitle1"
           lineHeight={1}
