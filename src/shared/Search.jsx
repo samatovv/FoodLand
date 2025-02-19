@@ -126,6 +126,7 @@ const Search = () => {
               color: 'black', 
               fontStyle: 'Open Sans',
               opacity: 1,
+              fontSize: 14
           },
         }}
       />
