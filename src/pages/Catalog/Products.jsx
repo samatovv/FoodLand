@@ -271,7 +271,7 @@ const Products = ({
         </Box>
       ) : (
         <>
-          <Grid2 container spacing={2}>
+          <Grid2 container spacing={2} alignItems={"stretch"}>
             {Array.isArray(products?.products) &&
               products?.products?.map((item, idx) => (
                 <Grid2 size={{ xs: 6, sm: 4, md: 4, lg: 3, xl: 3 }} key={idx}>

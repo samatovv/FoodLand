@@ -25,6 +25,9 @@ const Card = ({ item, search, width, setCart, preview }) => {
   return (
     <Box
       sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
         "&:hover": {
           background: search ? "#E4E9DD" : "#EDEDED70",
           transition: "all 0.2s ease",
@@ -79,11 +82,11 @@ const Card = ({ item, search, width, setCart, preview }) => {
             WebkitBoxOrient: "vertical",
             wordWrap: "break-word",
             fontFamily: "Open Sans",
-            height: "32px",
-            fontSize: "14px"
+            fontSize: "14px",
+            minHeight: { xs: 38, md: 38, lg: 35 },
           }}
           variant="subtitle1"
-          lineHeight={1}
+          lineHeight={1.2}
         >
           {details?.name}
         </Typography>
