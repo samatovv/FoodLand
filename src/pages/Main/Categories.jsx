@@ -8,10 +8,12 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import img from "../../assets/images/category-1.webp";
 import img2 from "../../assets/images/category-2.webp";
-import img3 from "../../assets/images/category-3.webp";
+import img3 from "../../assets/images/ingredients.jpeg";
 import img4 from "../../assets/images/category-4.webp";
+import img8 from "../../assets/images/category-3.webp";
 import img5 from "../../assets/images/category-5.webp";
 import img6 from "../../assets/images/category-6.webp";
+import img7 from "../../assets/images/milk_prod.jpeg"
 import ButtonMore from "../../components/ButtonMore";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -25,9 +27,11 @@ const categories = [
     img: img,
     id: "670cfc0e8d01bf78e1ad9a6c",
   },
-  { title: "Молочная продукция", img: img2, id: "670cfc198d01bf78e1ad9b16" },
+  { title: "Продукция для бариста", img: img2, id: "670cfc148d01bf78e1ad9ad0" },
+  { title: "Молочная продукция", img: img7, id: "670cfc198d01bf78e1ad9b16" },
   { title: "Ингредиенты", img: img3, id: "670cfc088d01bf78e1ad9a53" },
-  { title: "Продукция для Бариста", img: img5, id: "670cfc148d01bf78e1ad9ad0" },
+  { title: "Инвентарь", img: img5, id: "67b35ee67b3c3a8da917444d" },
+  { title: "Орехи и сухофрукты", img: img8, id: "" },
   {
     title: "Покрытия и наполнители",
     img: img4,
@@ -37,16 +41,6 @@ const categories = [
     title: "Пищевая печать",
     img: img6,
     id: "670cfc1a8d01bf78e1ad9b25",
-  },
-  {
-    title: "Шоколад и какао продукты",
-    img: img,
-    id: "670cfc0e8d01bf78e1ad9a6c",
-  },
-  {
-    title: "Покрытия и наполнители",
-    img: img4,
-    id: "670cfc0a8d01bf78e1ad9a5c",
   },
 ];
 
@@ -112,7 +106,7 @@ const Categories = () => {
                   <Typography fontSize={{ xs: 16, md: 20 }} mb={{ xs: 1, md: 2.5 }} maxWidth={219} fontWeight="bold">
                     {item?.title}
                   </Typography>
-                  <Link to={`/catalog/?search=&categoryIds=${item.id}&page=1`}>
+                  <Link to={`/catalog/?search=&categoryIds=${item.id}&page=1` || "/catalog"}>
                     <ButtonMore
                       txt="Подробнее "
                       radius="15px"

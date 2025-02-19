@@ -109,6 +109,7 @@ const News = () => {
                   fontWeight="bold"
                   maxWidth={681}
                   mt={1}
+                  width={{ xs: "100%", md: "90%" }}
                 >
                   Будьте в курсе о последних новостях
                 </Typography>

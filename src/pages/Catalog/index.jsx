@@ -38,6 +38,7 @@ const mainCategories = [
   },
 ];
 
+
 const Catalog = ({ setCart }) => {
   const isAuth = useAuth();
   const dispatch = useDispatch();
