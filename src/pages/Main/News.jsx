@@ -180,7 +180,7 @@ const News = () => {
                         <Typography variant="h5" fontSize={{ xs: 18, md: 28 }} fontWeight="700">
                           {lastPost?.title}
                         </Typography>
-                        <Typography color="#666" variant="body2">
+                        <Typography color="#666" fontSize={12} variant="body2">
                           {lastPost &&
                             new Intl.DateTimeFormat("ru", {
                               dateStyle: "short",
@@ -209,7 +209,7 @@ const News = () => {
                       />
                       <span
                         className="sans"
-                        style={{ textDecoration: "underline" }}
+                        style={{ textDecoration: "underline",fontSize: 14 }}
                       >
                         Читать далее
                         <IconButton sx={{ p: 0, ml: 1 }}>

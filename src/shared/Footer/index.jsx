@@ -6,8 +6,7 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import React from "react";
-import logo from "../../assets/images/logo.svg";
-import logo3 from "../../assets/images/logo3.svg";
+import logo from "../../assets/images/footerLogo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import instagram from "../../assets/images/instagram.svg";
 import moore from "../../assets/images/moore.svg";
@@ -53,17 +52,13 @@ const Footer = () => {
         <Grid2 container mb={{ xs: "41px", md: 7 }}>
           <Grid2 size={{ xs: 12, md: 6 }}>
             <Link to="/">
-              {md ? (
-                <Box component="img" src={logo} alt="" />
-              ) : (
-                <Box component="img" src={logo3} alt="" />
-              )}
+              <Box width={{ xs: "159px", md: "110px" }} height={{ xs: "65px", md: "45px" }} component="img" src={logo} alt="" />
             </Link>
             <Typography
               variant="subtitle2"
               color="#878787"
               mt={{ xs: "28px", md: 2.5 }}
-              mb={{ xs: 2.5, md: 10 }}
+              mb={{ xs: "41px", md: 7 }}
               lineHeight="130%"
             >
               Ваш путеводитель в области сырья и ингредиентов для пищевой
@@ -72,7 +67,8 @@ const Footer = () => {
             {md && (
               <Typography
                 variant="subtitle2"
-                fontWeight="600"
+                fontWeight="700"
+                fontSize={18}
                 mb={2}
                 color="#5F5F5F"
               >
@@ -80,7 +76,7 @@ const Footer = () => {
                 Контакты
               </Typography>
             )}
-            <Typography variant="subtitle2" fontWeight="400" color="#707070">
+            <Typography variant="subtitle2" fontSize={{ xs: 14, md: 16 }} fontWeight="400" color="#707070">
               <a className="link" href="https://go.2gis.com/m1271">
                 Г.Бишкек ул. Матросова 1а/21
               </a>
@@ -104,7 +100,8 @@ const Footer = () => {
                   <Typography
                     variant="subtitle2"
                     color="#5F5F5F"
-                    fontWeight={600}
+                    fontWeight={{ xs: 600, md: 700 }}
+                    fontSize={18}
                     mb={2}
                   >
                     Навигация
@@ -121,6 +118,7 @@ const Footer = () => {
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
+                        fontSize={{ xs: 14, md: 16 }}
                       >
                         Главная
                       </Typography>
@@ -131,6 +129,7 @@ const Footer = () => {
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
+                        fontSize={{ xs: 14, md: 16 }}
                       >
                         Каталог{" "}
                       </Typography>
@@ -141,6 +140,7 @@ const Footer = () => {
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
+                        fontSize={{ xs: 14, md: 16 }}
                       >
                         Новости
                       </Typography>
@@ -157,6 +157,7 @@ const Footer = () => {
                       variant="subtitle2"
                       color="#707070"
                       fontWeight={400}
+                      fontSize={{ xs: 14, md: 16 }}
                     >
                       Личный кабинет
                     </Typography>
@@ -172,6 +173,7 @@ const Footer = () => {
                       variant="subtitle2"
                       color="#707070"
                       fontWeight={400}
+                      fontSize={{ xs: 14, md: 16 }}
                     >
                       Корзина
                     </Typography>
@@ -182,6 +184,7 @@ const Footer = () => {
                         variant="subtitle2"
                         color="#707070"
                         fontWeight={400}
+                        fontSize={{ xs: 14, md: 16 }}
                       >
                         О нас
                       </Typography>
@@ -205,8 +208,9 @@ const Footer = () => {
                   <Typography
                     variant="subtitle2"
                     color="#5F5F5F"
-                    fontWeight={600}
                     mb={2}
+                    fontWeight={{ xs: 600, md: 700 }}
+                    fontSize={18}
                   >
                     Каталог
                   </Typography>
@@ -227,6 +231,7 @@ const Footer = () => {
                           variant="subtitle2"
                           color="#707070"
                           fontWeight={400}
+                          fontSize={{ xs: 14, md: 16 }}
                         >
                           {item?.title}
                         </Typography>
