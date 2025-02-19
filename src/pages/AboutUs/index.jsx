@@ -57,7 +57,7 @@ const AboutUs = () => {
               </Typography>
             </Box>
             <Box>
-              <Typography fontSize={{ xs: 24, md: 35, lg: 48 }} width={{ xs: '100%', md: '80%', lg: '70%' }} fontWeight={700} >
+              <Typography fontSize={{ xs: 24, md: 48 }} width={{ xs: '100%', md: '90%' }} fontWeight={700} >
                 Сырья и ингредиентов для пищевой промышленности
               </Typography>
             </Box>

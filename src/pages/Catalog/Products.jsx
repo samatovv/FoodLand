@@ -46,9 +46,18 @@ const Products = ({
   const loading = useSelector((state) => state.main.loading);
   const [open, setOpen] = useState(false);
   const [searched, setSearched] = useState([]);
-
+  const [showSkeleton, setShowSkeleton] = useState(true);
   const firstUpdate = useRef(true);
   const firstUpdate2 = useRef(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowSkeleton(false);
+    }, 200); 
+  
+    return () => clearTimeout(timer);
+  }, []);
+  
 
   const handleDelete = (item) => {
     setPage(1);
@@ -126,7 +135,6 @@ const Products = ({
       return;
     }
 
-    // hide linear progress
     if (products.products)
       setTimeout(() => dispatch(handleLoading(false)), 500);
   }, [products]);
@@ -237,7 +245,7 @@ const Products = ({
             ))}
         </Box>
       )}
-      {loading ? (
+      {loading || showSkeleton ? (
         <>
           <Grid2 container spacing={2}>
             {Array.from(Array(8).keys()).map((item, idx) => (
