@@ -80,6 +80,7 @@ const Card = ({ item, search, width, setCart, preview }) => {
             wordWrap: "break-word",
             fontFamily: "Open Sans",
             height: "32px",
+            fontSize: "14px"
           }}
           variant="subtitle1"
           lineHeight={1}
