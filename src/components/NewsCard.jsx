@@ -91,6 +91,7 @@ const NewsCard = ({ item }) => {
                 textOverflow: "ellipsis",
                 maxWidth: "80%",
                 width: "80%",
+                color: "#000000"
               }}
               variant="h5"
               fontWeight="700"
@@ -109,7 +110,8 @@ const NewsCard = ({ item }) => {
             variant="body2"
             fontWeight={400}
             maxWidth="375px"
-            maxHeight={"60px"}
+            maxHeight={"63px"}
+            // border={"1px solid #E3E3E3"}
             fontSize={{ xs: 14, md: 16 }}
             height={"auto"}
             className="sans"
