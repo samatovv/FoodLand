@@ -38,6 +38,16 @@ const categories = [
     img: img6,
     id: "670cfc1a8d01bf78e1ad9b25",
   },
+  {
+    title: "Шоколад и какао продукты",
+    img: img,
+    id: "670cfc0e8d01bf78e1ad9a6c",
+  },
+  {
+    title: "Покрытия и наполнители",
+    img: img4,
+    id: "670cfc0a8d01bf78e1ad9a5c",
+  },
 ];
 
 const Categories = () => {
@@ -81,7 +91,7 @@ const Categories = () => {
         >
           Просмотр товаров по <span style={{ color: "#B89776" }}>категориям</span>
         </Typography>
-        <Box display="grid" gridTemplateColumns={{ xs: "repeat(2, 1fr)", md: "repeat(3, 1fr)" }} gap={2}>
+        <Box display="grid" gridTemplateColumns={{ xs: "repeat(2, 1fr)", md: "repeat(4, 1fr)" }} gap={2}>
           {Array.isArray(categories) &&
             categories.map((item, idx) => (
               <Box
@@ -98,7 +108,7 @@ const Categories = () => {
                   src={item?.img}
                   alt={item?.title}
                 />
-                <Box className="category__more" width="80%" sx={{ position: "absolute", bottom: 20, left: 20, color: "#FFF", zIndex: 3 }}>
+                <Box className="category__more" width={{ xs: "80%", md: "85%", lg: "87%" }} sx={{ position: "absolute", bottom: 20, left: 20, color: "#FFF", zIndex: 3, }}>
                   <Typography fontSize={{ xs: 16, md: 20 }} mb={{ xs: 1, md: 2.5 }} maxWidth={219} fontWeight="bold">
                     {item?.title}
                   </Typography>
