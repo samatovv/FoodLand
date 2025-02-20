@@ -1,5 +1,5 @@
 import { Box, Container, Typography } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import img1 from "../../assets/clients/supara.webp";
 import img2 from "../../assets/clients/podarimne.webp";
 import img3 from "../../assets/clients/kaynar.webp";
@@ -14,6 +14,8 @@ import img11 from "../../assets/images/umai.group.svg"
 import img12 from "../../assets/images/capito.svg"
 import img13 from "../../assets/images/skyberry.svg"
 import img14 from "../../assets/images/bellagio.svg"
+import img15 from "../../assets/images/capito2.svg"
+import img16 from "../../assets/images/skyberry2.svg"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 
@@ -29,12 +31,15 @@ const clients = [
   { img: img9, name: "Макаронная лавка" },
   { img: img10, name: "Konti pastry" },
   { img: img11, name: "Umai Group" },
-  { img: img12, name: "Capito" },
-  { img: img13, name: "Skyberry" },
+  { img: "capito", name: "Capito" },
+  { img: "skyberry", name: "Skyberry" },
   { img: img14, name: "Bellagio" },
 ];
 
+
 const OurClients = () => {
+  const [hoveredClient, setHoveredClient] = useState(null);
+
   return (
     <Box component="section" backgroundColor="#FFF" p="62px 0">
       <Container>
@@ -81,50 +86,77 @@ const OurClients = () => {
               }}
             >
               {clients.map((item, idx) => (
-                <SwiperSlide key={idx}>
+                <SwiperSlide 
+                key={idx}
+                onMouseEnter={() => setHoveredClient(item.name)}
+                onMouseLeave={() => setHoveredClient(null)}
+              >
+                <Box
+                  className="clients__card"
+                  p={{ xs: "12px", md: "24px" }}
+                  display="flex"
+                  justifyContent="center"
+                  flexDirection="column"
+                  alignItems="center"
+                  borderRadius="24px"
+                  border="1px solid #E6E6E6"
+                  sx={{
+                    transition: "box-shadow 0.3s ease",
+                    border: "1px solid #E6E6E6",
+                    "&:hover": {
+                      borderColor: "transparent",
+                      background: "#EDEDED",
+                    },
+                  }}
+                >
                   <Box
-                    className="clients__card"
-                    p={{ xs: "12px", md: "24px" }}
-                    display="flex"
-                    justifyContent="center"
-                    flexDirection="column"
-                    alignItems="center"
-                    borderRadius="24px"
-                    border="1px solid #E6E6E6"
-                    sx={{
-                      transition: "box-shadow 0.3s ease",
-                      border: "1px solid #E6E6E6",
-                      "&:hover": {
-                        borderColor: "transparent",
-                        background: "#EDEDED",
-                      },
-                    }}
+                    position="relative"
+                    width={{ xs: 90, md: 180 }}
+                    height={{ xs: 90, md: 180 }}
+                    borderRadius="50%"
                   >
+                    {/* Обычное изображение (по умолчанию) */}
                     <Box
                       component="img"
-                      width={{ xs: 90, md: 180 }}
-                      height={{ xs: 90, md: 180 }}
-                      src={item.img}
-                      // sx={{ border: "1px solid red" }}
-                      alt=""
+                      className="hover_image normal"
+                      src={item.img === "capito" ? img12 : item.img === "skyberry" ? img13 : item.img}
+                      width="100%"
+                      height="100%"
+                      borderRadius="50%"
+                      alt={item.name}
                     />
-                    <Typography
-                      mt={3}
-                      mb={1.7}
-                      textAlign="center"
-                      fontSize={{ xs: 13, md: 20 }}
-                      fontWeight="700"
-                      sx={{
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        maxWidth: "100%",
-                      }}
-                    >
-                      {item.name}
-                    </Typography>
+
+                    {/* Второе изображение (показывается при hover) */}
+                    {(item.img === "capito" || item.img === "skyberry") && (
+                      <Box
+                        component="img"
+                        className="hover_image hover"
+                        src={item.img === "capito" ? img15 : img16}
+                        width="100%"
+                        height="100%"
+                        borderRadius="50%"
+                        alt={item.name}
+                      />
+                    )}
                   </Box>
-                </SwiperSlide>
+                  <Typography
+                    mt={3}
+                    mb={1.7}
+                    textAlign="center"
+                    fontSize={{ xs: 13, md: 20 }}
+                    fontWeight="700"
+                    sx={{
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                      maxWidth: "100%",
+                    }}
+                  >
+                    {item.name}
+                  </Typography>
+                </Box>
+              </SwiperSlide>
+              
               ))}
             </Swiper>
           </Box>

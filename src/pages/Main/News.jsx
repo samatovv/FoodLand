@@ -98,20 +98,13 @@ const News = () => {
             >
               <div>
                 <Typography
-                  variant="h6"
-                  color="var(--primary-light)"
-                  fontWeight="medium"
-                >
-                  Последние новости
-                </Typography>
-                <Typography
                   variant="h2"
                   fontWeight="bold"
                   maxWidth={681}
                   mt={1}
                   width={{ xs: "100%", md: "90%" }}
                 >
-                  Будьте в курсе о последних новостях
+                  Будьте в курсе последних событий
                 </Typography>
               </div>
               {md && (

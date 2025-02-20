@@ -47,7 +47,7 @@ const NewsDetails = () => {
   ];
   return (
     <Container maxWidth="lg" sx={{ display: "flex", gap: { xs: 0, md: 5}, flexDirection: { xs: "column", md: "row"}, justifyContent: { xs: "start", md: "space-between" } }}>
-      <Box component="section" p="45px 0 72px" width={"100%"}>
+      <Box component="section" p="46px 0 59px" width={"100%"} >
           <Breadcrumbs
             separator={<NavigateNextIcon fontSize="small" />}
             aria-label="breadcrumb"
@@ -90,7 +90,7 @@ const NewsDetails = () => {
           </Typography>
       </Box>
       
-      <Box component="section" p="46px 0 59px" mt={{ xs: 0, md: "30px" }} >
+      <Box component="section" p="80px 0 59px" >
           <Box
             display="flex"
             justifyContent="space-between"
