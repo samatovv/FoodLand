@@ -158,7 +158,7 @@ const Details = ({ setCart }) => {
                     borderRadius: "16px",
                   }}
                   width="100%"
-                  height={322}
+                  height={408}
                 />
               ) : (
                 <Box
@@ -172,14 +172,16 @@ const Details = ({ setCart }) => {
               )}
               <Box display="flex" mt={2} columnGap={2}>
                 {loading ? (
-                  <Skeleton
-                    variant="rect"
-                    sx={{
-                      borderRadius: "10px",
-                    }}
-                    width={75}
-                    height={75}
-                  />
+                  [...Array(4)].map((item, idx) => (
+                    <Skeleton
+                      variant="rect"
+                      sx={{
+                        borderRadius: "10px",
+                      }}
+                      width={75}
+                      height={75}
+                    />
+                  ))
                 ) : (
                   images?.length > 0 &&
                   images.map((item, idx) => (
