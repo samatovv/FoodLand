@@ -34,7 +34,7 @@ const ButtonMore = ({ txt, sx, fullWidth, onClick, inCart, href }) => {
           </>
         ) : (
           <>
-            <span className="button_txt" style={{ fontSize: 13 }}>
+            <span className="button_txt" style={{ fontSize: 16 }}>
               {txt}
             </span>
             <Box width={40} borderRadius="14px" height={40} className="round">
