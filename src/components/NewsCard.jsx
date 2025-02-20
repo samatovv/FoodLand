@@ -99,7 +99,7 @@ const NewsCard = ({ item }) => {
             >
               {item?.title}
             </Typography>
-            <Typography color="#666" fontSize={12} variant="body2">
+            <Typography color="#666" fontSize={{ xs: 14, md: 16 }} variant="body2">
               {item.createdAt &&
                 new Intl.DateTimeFormat("ru", {
                   dateStyle: "short",
