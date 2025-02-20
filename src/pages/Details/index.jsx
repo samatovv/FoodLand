@@ -134,7 +134,7 @@ const Details = ({ setCart }) => {
           <Grid2 size={{ xs: 12, sm: 6, lg: 5 }}>
             <Box>
               {!md ? (
-                !details?.name ? (
+                loading ? (
                   <Skeleton
                     variant="rect"
                     sx={{
