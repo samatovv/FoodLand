@@ -260,11 +260,10 @@ const Details = ({ setCart }) => {
                 >
                   {details.description && (
                     <Typography
-                      fontSize={20}
                       mb={1}
-                      mt={4}
                       className="sans"
-                      fontWeight="600"
+                      fontWeight="400"
+                      fontSize={{ xs: 14, md: 16 }}
                       color="var(--primary)"
                     >
                       Описание
@@ -273,11 +272,11 @@ const Details = ({ setCart }) => {
 
                   <Typography
                     className="sans"
-                    fontSize={16}
                     whiteSpace="pre-wrap"
                     color="#767676"
                     mb={2}
                     fontWeight="400"
+                    fontSize={{ xs: 14, md: 16 }}
                   >
                     {details.description}
                   </Typography>

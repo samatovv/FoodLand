@@ -66,24 +66,25 @@ const Carousel = () => {
         modules={[Navigation]}
         initialSlide={md ? 1 : 0}
         loop={true}
-        loopAdditionalSlides={banners?.results?.length}
+        centeredSlides={true}
+        slidesPerView="auto"
+        spaceBetween={15}
         breakpoints={{
           0: {
             slidesPerView: 1,
-            spaceBetween: 15,
+            spaceBetween: 10,
           },
-
           768: {
             slidesPerView: 3,
-            spaceBetween: 30,
+            spaceBetween: 20,
           },
         }}
       >
-        {banners?.results?.map((item, idx) => (
+        {[...Array(20)].flatMap(() => banners?.results || []).map((item, idx) => (
           <SwiperSlide key={idx}>
             <Box
               component="img"
-              sx={{ objectFit: "cover!important", }}
+              sx={{ objectFit: "cover!important" }}
               src={item.imageUrl ? item.imageUrl : emptyImg}
               alt="photo"
             />
