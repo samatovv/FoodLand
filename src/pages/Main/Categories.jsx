@@ -102,7 +102,6 @@ const Categories = () => {
                     objectFit: "cover",
                     minHeight: { xs: 250, md: "396px" },
                     borderRadius: "16px",
-                    background: "linear-gradient(0deg, #000000, #67564687 0, #ffffff00)",
                   }}
                   src={item?.img}
                   alt={item?.title}

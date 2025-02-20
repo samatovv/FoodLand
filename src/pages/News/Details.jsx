@@ -192,6 +192,7 @@ const NewsDetails = () => {
                           mt={1.5}
                           mb={3}
                           className="sans"
+                          fontSize={{ xs: 14, md: 16 }}
                           sx={{
                             textOverflow: "ellipsis",
                             overflow: "hidden",
