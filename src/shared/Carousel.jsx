@@ -80,7 +80,7 @@ const Carousel = () => {
           },
         }}
       >
-        {[...Array(20)].flatMap(() => banners?.results || []).map((item, idx) => (
+        {[...Array(30)].flatMap(() => banners?.results || []).map((item, idx) => (
           <SwiperSlide key={idx}>
             <Box
               component="img"
