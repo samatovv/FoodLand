@@ -28,6 +28,7 @@ const Details = ({ setCart }) => {
 
   const { id } = useParams();
   const details = useSelector((state) => state.products.details);
+  const loading = useSelector((state) => state.products.loading);
   const data = useSelector((state) => state.profile.data);
   const images = Array.isArray(details.images) && details.images;
 
@@ -150,16 +151,37 @@ const Details = ({ setCart }) => {
               ) : (
                 ""
               )}
-              <Box
-                component="img"
-                src={!images[0]?.url ? empty : image}
-                width="100%"
-                height={{ xs: 322, sm: "auto", md: 405 }}
-                sx={{ borderRadius: 16, objectFit: "scale-down" }}
-                alt=""
-              />
+              {loading ? (
+                <Skeleton
+                  variant="rect"
+                  sx={{
+                    borderRadius: "16px",
+                  }}
+                  width="100%"
+                  height={322}
+                />
+              ) : (
+                <Box
+                  component="img"
+                  src={!images[0]?.url ? empty : image}
+                  width="100%"
+                  height={{ xs: 322, sm: "auto", md: 405 }}
+                  sx={{ borderRadius: 16, objectFit: "scale-down" }}
+                  alt=""
+                />
+              )}
               <Box display="flex" mt={2} columnGap={2}>
                 {images?.length > 1 &&
+                  loading ? (
+                    <Skeleton
+                      variant="rect"
+                      sx={{
+                        borderRadius: "10px",
+                      }}
+                      width={75}
+                      height={75}
+                    />
+                  ) : 
                   images.map((item, idx) => (
                     <Box
                       key={idx}
@@ -193,14 +215,14 @@ const Details = ({ setCart }) => {
             >
               <div>
                 {md &&
-                  (!details?.category?.name ? (
+                  (loading ? (
                     <Skeleton
                       variant="rect"
                       sx={{
-                        borderRadius: "10px",
+                        borderRadius: "16px",
                         mb: 2,
                       }}
-                      width="70%"
+                      width="40%"
                       height={40}
                     />
                   ) : (
@@ -215,11 +237,11 @@ const Details = ({ setCart }) => {
                     </Typography>
                   ))}
                 {md ? (
-                  !details?.name ? (
+                  loading ? (
                     <Skeleton
                       variant="rect"
                       sx={{
-                        borderRadius: "10px",
+                        borderRadius: "16px",
                       }}
                       width="100%"
                       height={40}
