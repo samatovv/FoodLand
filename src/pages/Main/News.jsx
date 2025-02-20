@@ -180,7 +180,7 @@ const News = () => {
                         <Typography variant="h5" fontSize={{ xs: 18, md: 28 }} fontWeight="700">
                           {lastPost?.title}
                         </Typography>
-                        <Typography color="#666" fontSize={12} variant="body2">
+                        <Typography color="#666" fontSize={{ xs: 14, md: 16 }} variant="body2">
                           {lastPost &&
                             new Intl.DateTimeFormat("ru", {
                               dateStyle: "short",
