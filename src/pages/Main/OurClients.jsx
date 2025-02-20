@@ -10,6 +10,10 @@ import img7 from "../../assets/clients/sova.webp";
 import img8 from "../../assets/clients/bublik.webp";
 import img9 from "../../assets/clients/macaronnaya.webp";
 import img10 from "../../assets/clients/konti.webp";
+import img11 from "../../assets/images/umai.group.svg"
+import img12 from "../../assets/images/capito.svg"
+import img13 from "../../assets/images/skyberry.svg"
+import img14 from "../../assets/images/bellagio.svg"
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 
@@ -23,7 +27,11 @@ const clients = [
   { img: img7, name: "SOVA" },
   { img: img8, name: "Бублик" },
   { img: img9, name: "Макаронная лавка" },
-  { img: img10, name: "Konti Pastry" },
+  { img: img10, name: "Konti pastry" },
+  { img: img11, name: "Umai Group" },
+  { img: img12, name: "Capito" },
+  { img: img13, name: "Skyberry" },
+  { img: img14, name: "Bellagio" },
 ];
 
 const OurClients = () => {
@@ -97,6 +105,7 @@ const OurClients = () => {
                       width={{ xs: 90, md: 180 }}
                       height={{ xs: 90, md: 180 }}
                       src={item.img}
+                      // sx={{ border: "1px solid red" }}
                       alt=""
                     />
                     <Typography
