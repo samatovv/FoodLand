@@ -110,7 +110,7 @@ const NewsCard = ({ item }) => {
             variant="body2"
             fontWeight={400}
             maxWidth="375px"
-            maxHeight={"63px"}
+            maxHeight={"65px"}
             // border={"1px solid #E3E3E3"}
             fontSize={{ xs: 14, md: 16 }}
             height={"auto"}
