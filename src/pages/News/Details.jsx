@@ -106,19 +106,19 @@ const NewsDetails = () => {
               news?.results
                 ?.slice(0, 3)
                 .filter((item) => item?.id !== id)
-                .map((item, idx) => (
+                .map((item, idx, array) => (
                   <Grid2 key={idx}>
                     <Link to={`/news/${item?.id}`}>
                       <Box
                         className="news__card"
-                        sx={{
+                        sx={{ 
+                          width: "100%",
                           "& svg": {
                             transition: "all 800ms ease",
                             "& rect": {
                               transition: "all 800ms ease",
                             },
                           },
-                          width: "100%",
                           "& img": {
                             objectFit: "cover",
                             transition: "all 800ms ease",
@@ -231,6 +231,7 @@ const NewsDetails = () => {
                             </svg>
                           </IconButton>
                         </span>
+                        <Box sx={{ borderBottom: idx !== array.length - 1 ? "1px solid #DEDEDE" : "none", marginTop: "16px" }}></Box>
                       </Box>
                     </Link>
                   </Grid2>
