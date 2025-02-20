@@ -106,6 +106,8 @@ const First = () => {
                 width: { xs: "100%", md: 193, borderRadius: "15px" },
                 ml: { xs: 0, md: "34.5px" },
                 fontFamily: "Open Sans",
+                fontWeight: 400,
+                fontSize: 16,
               }}
               txt="Заказать звонок"
               href="tel:+996 550 114 477"

@@ -122,11 +122,12 @@ const Search = () => {
             display: "none",
           },
           minHeight: 48,
-            '& input::placeholder': {
-              color: 'black', 
-              fontStyle: 'Open Sans',
-              opacity: 1,
-              fontSize: 14
+          '& input::placeholder': {
+            color: 'black', 
+            fontStyle: 'Open Sans',
+            opacity: 1,
+            fontSize: 16,
+            fontWeight: 400
           },
         }}
       />
