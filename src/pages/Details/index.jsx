@@ -171,17 +171,17 @@ const Details = ({ setCart }) => {
                 />
               )}
               <Box display="flex" mt={2} columnGap={2}>
-                {images?.length > 1 &&
-                  loading ? (
-                    <Skeleton
-                      variant="rect"
-                      sx={{
-                        borderRadius: "10px",
-                      }}
-                      width={75}
-                      height={75}
-                    />
-                  ) : 
+                {loading ? (
+                  <Skeleton
+                    variant="rect"
+                    sx={{
+                      borderRadius: "10px",
+                    }}
+                    width={75}
+                    height={75}
+                  />
+                ) : (
+                  images?.length > 0 &&
                   images.map((item, idx) => (
                     <Box
                       key={idx}
@@ -201,7 +201,8 @@ const Details = ({ setCart }) => {
                       src={item?.url}
                       alt=""
                     />
-                  ))}
+                  ))
+                )}
               </Box>
             </Box>
           </Grid2>
