@@ -10,7 +10,6 @@ import {
   Box,
   Container,
   Typography,
-  useMediaQuery,
 } from "@mui/material";
 
 const arr = [
@@ -38,7 +37,6 @@ const arr = [
 ];
 
 const Partners = () => {
-  const md = useMediaQuery("(min-width:768px)");
   return (
     <Box
       component="section"
@@ -72,7 +70,7 @@ const Partners = () => {
         }}
       >
         {arr.map((item, idx) => (
-          <img src={item} key={idx} alt="" />
+          <img src={item} key={idx} alt="partners" />
         ))}
       </Box>
     </Box>

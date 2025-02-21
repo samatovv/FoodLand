@@ -116,7 +116,7 @@ const Search = () => {
           },
           "& input": {
             borderRadius: !value ? "15px" : "15px 15px 0 0!important",
-            p: "10.5px 16px 10.5px 18px!important",
+            p: "10.5px 16px 10.5px 15px!important",
           },
           "& fieldset": {
             display: "none",

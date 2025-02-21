@@ -320,7 +320,16 @@ input:-webkit-autofill:focus {
 .hover {
   opacity: 0;
 }
-
+.clients__card {
+  animation: slide 40s linear infinite;
+  img {
+    filter: grayscale(1);
+    transition: all 300ms ease;
+  }
+  &:hover img {
+    filter: none;
+  }
+}
 .clients__card:hover .normal {
   opacity: 1;
 }

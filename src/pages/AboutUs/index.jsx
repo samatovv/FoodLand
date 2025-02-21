@@ -53,7 +53,7 @@ const AboutUs = () => {
                 color="var(--primary)"
                 mb={1}
               >
-                Ваш путеводитель в области:
+                Ваш путеводитель в области
               </Typography>
             </Box>
             <Box>
@@ -173,9 +173,9 @@ const AboutUs = () => {
                   >
                     Телефон
                   </Typography>
-                  <a href="tel:+996 0550 114 477">
+                  <a href="tel:+996 550 114 477">
                     <Typography fontSize={20} className="sans" fontWeight={400}>
-                      +996 0550 114 477
+                      +996 550 114 477
                     </Typography>
                   </a>
                 </div>

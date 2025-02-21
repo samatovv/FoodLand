@@ -23,18 +23,20 @@ import { getCategories, handleLoading } from "../../redux/reducers/mainSlice";
 const mainCategories = [
   {
     title: "Шоколад и какао продукты",
-    id: "670cfc0e8d01bf78e1ad9a6c",
+    id: "67b35ef97b3c3a8da91744a8",
   },
-  { title: "Молочная продукция", id: "670cfc198d01bf78e1ad9b16" },
-  { title: "Ингредиенты", id: "670cfc088d01bf78e1ad9a53" },
-  { title: "Продукция для бариста", id: "670cfc148d01bf78e1ad9ad0" },
+  { title: "Молочная продукция", id: "67b35f6e99ebd3e2532f4851" },
+  { title: "Ингредиенты", id: "67b35ef47b3c3a8da9174492" },
+  { title: "Продукция для бариста", id: "67b35f4899ebd3e2532f47ab" },
+  { title: "Инвентарь", id: "67b35ee67b3c3a8da917444d" },
+  { title: "Орехи и сухофрукты", id: "67b74dfc30787eebcbb0f2a1" },
   {
     title: "Покрытия и наполнители",
-    id: "670cfc0a8d01bf78e1ad9a5c",
+    id: "67b35efa7b3c3a8da91744b1",
   },
   {
     title: "Пищевая печать",
-    id: "670cfc1a8d01bf78e1ad9b25",
+    id: "67b35f7299ebd3e2532f4860",
   },
 ];
 
@@ -54,6 +56,8 @@ const Catalog = ({ setCart }) => {
   const [categories, setCategories] = useState({ first: [], second: [] });
 
   const allCategories = useSelector((state) => state.main.categories);
+
+  // console.log(page)
 
   useEffect(() => {
     if (allCategories) {

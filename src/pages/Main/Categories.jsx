@@ -25,22 +25,22 @@ const categories = [
   {
     title: "Шоколад и какао продукты",
     img: img,
-    id: "670cfc0e8d01bf78e1ad9a6c",
+    id: "67b35ef97b3c3a8da91744a8",
   },
-  { title: "Продукция для бариста", img: img2, id: "670cfc148d01bf78e1ad9ad0" },
-  { title: "Молочная продукция", img: img7, id: "670cfc198d01bf78e1ad9b16" },
-  { title: "Ингредиенты", img: img3, id: "670cfc088d01bf78e1ad9a53" },
+  { title: "Продукция для бариста", img: img2, id: "67b35f4899ebd3e2532f47ab" },
+  { title: "Молочная продукция", img: img7, id: "67b35f6e99ebd3e2532f4851" },
+  { title: "Ингредиенты", img: img3, id: "67b35ef47b3c3a8da9174492" },
   { title: "Инвентарь", img: img5, id: "67b35ee67b3c3a8da917444d" },
-  { title: "Орехи и сухофрукты", img: img8, id: "" },
+  { title: "Орехи и сухофрукты", img: img8, id: "67b74dfc30787eebcbb0f2a1" },
   {
     title: "Покрытия и наполнители",
     img: img4,
-    id: "670cfc0a8d01bf78e1ad9a5c",
+    id: "67b35efa7b3c3a8da91744b1",
   },
   {
     title: "Пищевая печать",
     img: img6,
-    id: "670cfc1a8d01bf78e1ad9b25",
+    id: "67b35f7299ebd3e2532f4860",
   },
 ];
 
