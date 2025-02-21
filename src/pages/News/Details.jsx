@@ -83,7 +83,7 @@ const NewsDetails = () => {
             lineHeight="27.24px"
             dangerouslySetInnerHTML={{ __html: htmlDecode(details.content) }}
           />
-          <Typography color="#666" variant="body2" marginTop={2}>
+          <Typography color="#666" variant="body2" marginTop={2} fontSize={{ xs: 14, md: 16 }}>
             {details?.createdAt
               ? new Date(details.createdAt).toLocaleDateString("ru-RU")
               : ""}
@@ -175,10 +175,11 @@ const NewsDetails = () => {
                             }}
                             variant="h5"
                             fontWeight="700"
+                            fontSize={{ xs: 18, md: 20 }}
                           >
                             {item?.title}
                           </Typography>
-                          <Typography color="#666" variant="body2">
+                          <Typography color="#666" variant="body2" fontSize={{ xs: 14, md: 16 }}>
                             {item &&
                               new Intl.DateTimeFormat("ru", {
                                 dateStyle: "short",
