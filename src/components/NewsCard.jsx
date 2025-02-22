@@ -82,8 +82,8 @@ const NewsCard = ({ item }) => {
             />
           )}
         </Box>
-        <Box sx={{ width: { xs: "100%", md: "76%", height: "150px", display: "flex", flexDirection: "column", justifyContent: "space-between" } }}>
-          <Box display="flex" mt={{ xs: 1, sm: 0 }} alignItems="end" justifyContent="space-between">
+        <Box sx={{ width: { xs: "100%", md: "76%"}, height: "150px", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <Box display="flex" mt={{ xs: 1, sm: 0 }} alignItems="end" justifyContent="space-between" gap={"15px"} width={{xs: "100%",md: "100%", lg: "360px"}}>
             <Typography
               sx={{
                 overflow: "hidden",
@@ -91,7 +91,7 @@ const NewsCard = ({ item }) => {
                 textOverflow: "ellipsis",
                 maxWidth: "80%",
                 width: "80%",
-                color: "#000000"
+                color: "#000000",
               }}
               variant="h5"
               fontWeight="700"

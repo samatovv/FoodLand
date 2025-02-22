@@ -54,6 +54,7 @@ const Catalog = ({ setCart }) => {
   const [searchValue, setValueSearch] = useState("");
   const [page, setPage] = useState(1);
   const [categories, setCategories] = useState({ first: [], second: [] });
+  const [catId, setCatId] = useState("");
 
   const allCategories = useSelector((state) => state.main.categories);
 
@@ -68,6 +69,7 @@ const Catalog = ({ setCart }) => {
   useEffect(() => {
     if (!categories || !categories.first || !categories.second) return;
     if (!location.search) return;
+    // console.log("useEffect")
   
     const queryParams = new URLSearchParams(location.search);
     const queryId = queryParams.get("categoryIds"); 
@@ -89,6 +91,7 @@ const Catalog = ({ setCart }) => {
   }, [allCategories.length, dispatch]);
 
   useEffect(() => {
+    // console.log("useEffect2")
     const categories = allCategories
       ?.filter((item) => !item?.parent?.name)
       .map((el) => ({
@@ -114,7 +117,7 @@ const Catalog = ({ setCart }) => {
             `/products/query?limit=12&page=${page}&search=&categoryIds=${item?.id}`
           )
         );
-    };
+  };
 
   const breadcrumbs = [
     <Link className="sans" key="1" to="/">
@@ -195,6 +198,8 @@ const Catalog = ({ setCart }) => {
           {md && (
             <Grid2 size={{ xs: 12, md: 3 }}>
               <Categories
+                catId={catId}
+                setCatId={setCatId}
                 category={category}
                 searchValue={searchValue}
                 setValueSearch={setValueSearch}
@@ -214,6 +219,9 @@ const Catalog = ({ setCart }) => {
           )}
           <Grid2 size={{ xs: 12, md: 9 }}>
             <Products
+              categories={categories}
+              catId={catId}
+              setCatId={setCatId}
               category={category}
               setCart={setCart}
               page={page}
@@ -231,6 +239,8 @@ const Catalog = ({ setCart }) => {
         </Grid2>
       </Container>
       <Filter
+        catId={catId}
+        setCatId={setCatId}
         setPage={setPage}
         setCategory={setCategory}
         category={category}

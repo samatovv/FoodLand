@@ -90,7 +90,7 @@ const NewsDetails = () => {
           </Typography>
       </Box>
       
-      <Box component="section" p="80px 0 59px" >
+      <Box component="section" p="78px 0 59px" >
           <Box
             display="flex"
             justifyContent="space-between"

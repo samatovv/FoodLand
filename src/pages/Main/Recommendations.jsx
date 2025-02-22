@@ -56,6 +56,7 @@ const Recommendations = ({ setCart }) => {
 
   const handleChange = (event, value) => {
     setPage(value);
+    console.log("recomendations", value);
   };
 
   return (
