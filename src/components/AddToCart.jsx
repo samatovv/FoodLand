@@ -1,7 +1,6 @@
 import { Button } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 import Cart from "../assets/images/Cart";
-// import ButtonMore from "./ButtonMore";
 import InCart from "../assets/images/InCart";
 import { useAuth } from "../shared/ProtectedRoutes";
 import { handleAuthDialog } from "../redux/reducers/mainSlice";
@@ -20,42 +19,36 @@ const AddToCart = ({
 }) => {
   const dispatch = useDispatch();
   const isAuth = useAuth();
-
   const data = useSelector((state) => state.profile.data);
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const productId = details?.id ? details?.id : details?._id;
+    const found = cart.some((item) => item?.id === productId);
+    setInCart(found);
+  }, [details, setInCart]);
 
   const clickHandler = () => {
-    let cart = JSON.parse(localStorage.getItem("cart"));
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
     let newItem = cart?.find((item) => item?.id === id);
 
     setCart(true);
     if (inCart) {
       setInCart(false);
       let filtered = cart.filter((item) => item?.id !== id);
-
-      if (!newItem) {
-        localStorage.setItem("cart", JSON.stringify(filtered));
-      } else {
-        localStorage.setItem(
-          "cart",
-          JSON.stringify([
-            ...filtered,
-          ])
-        );
-      }
+      localStorage.setItem("cart", JSON.stringify(filtered));
     } else {
       if (isAuth) {
         setInCart(true);
-
         if (!newItem) {
           localStorage.setItem(
             "cart",
             JSON.stringify([
-              ...JSON.parse(localStorage.getItem("cart")),
+              ...cart,
               {
-                id: details?.id ? details?.id : details._id,
+                id: details?.id ? details?.id : details?._id,
                 count: count,
                 name: details.name,
-                img: !!details.images ? details.images[0]?.url : null,
+                img: details.images ? details.images[0]?.url : null,
                 description: details.description,
                 category: search
                   ? details?.category?.name
@@ -100,7 +93,9 @@ const AddToCart = ({
             ])
           );
         }
-      } else dispatch(handleAuthDialog(true));
+      } else {
+        dispatch(handleAuthDialog(true));
+      }
     }
   };
 
@@ -161,22 +156,3 @@ const AddToCart = ({
 };
 
 export default AddToCart;
-
-// <ButtonMore
-//   card
-//   inCart={inCart}
-//   onClick={clickHandler}
-//   fullWidth
-//   sx={{
-//     border: "1px solid #F0F0F0",
-
-//     "& .round": {
-//       top: 3,
-//     },
-
-//     "&.Mui-disabled": {
-//       color: "#fff!important",
-//     },
-//   }}
-//   txt="В корзину"
-// />

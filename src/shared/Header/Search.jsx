@@ -1,6 +1,7 @@
 import {
   Box,
   Button,
+  Container,
   Dialog,
   InputAdornment,
   ListItemButton,
@@ -68,7 +69,7 @@ const SearchHeader = ({ open, setOpen }) => {
         "& .MuiPaper-root": {
           maxWidth: "unset",
           width: { xs: "100%", md: "70%" },
-          m: { xs: "11px 15px", md: "25px 15px" },
+          m: { xs: "11px 15px", md: "25px 25px", lg: "25px 75px" },
           borderRadius: "10px",
         },
       }}

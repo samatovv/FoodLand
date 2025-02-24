@@ -1,5 +1,5 @@
-import { Box, IconButton, TextField } from "@mui/material";
-import React, { useState } from "react";
+import { Box, IconButton } from "@mui/material";
+import React from "react";
 import Inc from "../assets/images/Inc";
 import Dec from "../assets/images/Dec";
 
@@ -13,18 +13,22 @@ const AddOrDelete = ({
   price,
   cartPage,
 }) => {
-  const cart = JSON.parse(localStorage.getItem("cart"));
+  const updateCart = (delta) => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existingItem = cart.find((item) => item?.id === id);
+    if (!existingItem) return;
+    
+    const newCount = existingItem.count + delta;
+    if (newCount < 1) return;
 
-  const updateCart = (newCount) => {
-    let newItem = cart?.find((item) => item?.id === id);
-    let updatedCart = cart.filter((item) => item?.id !== id);
-    const updatedItem = {
-      ...newItem,
-      count: newCount,
-      sum: parseInt(price) * newCount,
-    };
-    localStorage.setItem("cart", JSON.stringify([...updatedCart, updatedItem]));
-    setCart([...updatedCart, updatedItem]);
+    existingItem.count = newCount;
+    existingItem.sum = parseInt(price) * newCount;
+    cart = cart.map((item) => (item.id === id ? existingItem : item));
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+    if (typeof setCart === "function") {
+      setCart(cart);
+    }
   };
 
   const handleChange = (event) => {
@@ -34,21 +38,26 @@ const AddOrDelete = ({
       return;
     }
     value = Math.max(1, parseInt(value) || 1);
-    setCount(value);
-    if (cartPage) updateCart(value);
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let existingItem = cart.find((item) => item?.id === id);
+    if (existingItem) {
+      const delta = value - existingItem.count;
+      setCount(value);
+      updateCart(delta);
+    } else {
+      setCount(value);
+    }
   };
 
   const add = () => {
-    const newCount = parseInt(count) + 1;
-    setCount(newCount);
-    if (cartPage) updateCart(newCount);
+    setCount(count + 1);
+    updateCart(1);
   };
 
   const deleteHandler = () => {
     if (count > 1) {
-      const newCount = parseInt(count) - 1;
-      setCount(newCount);
-      if (cartPage) updateCart(newCount);
+      setCount(count - 1);
+      updateCart(-1);
     }
   };
 
@@ -70,7 +79,14 @@ const AddOrDelete = ({
       <input
         value={count}
         onChange={handleChange}
-        style={{ textAlign: "center", minWidth: "25px",maxWidth:"50px", outline: "none", background: "none", border: "none" }}
+        style={{
+          textAlign: "center",
+          minWidth: "25px",
+          maxWidth: "50px",
+          outline: "none",
+          background: "none",
+          border: "none",
+        }}
         inputProps={{
           style: { textAlign: "center", width: "30px" },
           min: 1,

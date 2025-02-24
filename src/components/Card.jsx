@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AddOrDelete from "./AddOrDelete";
 import AddToCart from "./AddToCart";
@@ -22,6 +22,14 @@ const Card = ({ item, search, width, setCart, preview }) => {
       : details?.category?.name;
   const [count, setCount] = useState(1);
   const id = item?._id ? item?._id : item?.product?.id;
+
+  useEffect(() => {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const existingItem = cart.find((i) => i?.id === id);
+    if (existingItem) {
+      setCount(existingItem.count);
+    }
+  }, [id]);
   return (
     <Box
       sx={{
@@ -115,8 +123,9 @@ const Card = ({ item, search, width, setCart, preview }) => {
           {!preview && (
             <AddOrDelete
               count={count}
+              setCart={setCart}
               setCount={setCount}
-              id={item?.id}
+              id={id}
               price={
                 details?.prices?.find((item) =>
                   item.price._id

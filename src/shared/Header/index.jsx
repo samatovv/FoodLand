@@ -160,7 +160,7 @@ const Header = ({ cart }) => {
               stroke-width="1.5"
             />
           </Box>
-          <SearchHeader open={open} setOpen={setOpen} />
+            <SearchHeader open={open} setOpen={setOpen} />
           <Box
             component="svg"
             onClick={() =>

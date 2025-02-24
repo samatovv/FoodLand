@@ -47,7 +47,10 @@ export const profileSlice = createSlice({
 });
 
 export const getProfileData = () => (dispatch) => {
-  Profile.getProfileData().then((res) => dispatch(setProfile(res)));
+  return Profile.getProfileData()
+    .then((res) => {
+      dispatch(setProfile(res));
+    });
 };
 
 export const login = (data) => (dispatch) => {
