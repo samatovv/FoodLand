@@ -399,7 +399,7 @@ const Categories = ({
                         [item.name]: !prev[item.name], 
                       }));
                     } else {
-                      setParams({});
+                      setParams({ id: item?.id, name: item.name });
                       setValueSearch("");
                       dispatch(setProducts([]));
                       dispatch(handleLoading(true));
