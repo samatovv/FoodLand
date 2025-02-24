@@ -30,7 +30,7 @@ const Categories = ({
 }) => {
   const dispatch = useDispatch();
   const md = useMediaQuery("(min-width:900px)");
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   const [expanded, setExpanded] = useState(() => {
     return {};
@@ -90,7 +90,6 @@ const Categories = ({
         }
         return newState;
       });
-      console.log(item.name);
       if (page > 1) setPage(1);
       if (page === 1) {
         dispatch(getProducts(`/products/query?limit=12&page=${page}&search=&categoryIds=${item.parent.id}`));
