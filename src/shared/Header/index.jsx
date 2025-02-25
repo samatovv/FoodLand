@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   IconButton,
   useMediaQuery,
 } from "@mui/material";
@@ -13,6 +12,7 @@ import { handleAuthDialog, handleDrawer } from "../../redux/reducers/mainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../ProtectedRoutes";
 import SearchHeader from "./Search";
+import Container from "../Container";
 
 const Header = ({ cart }) => {
   const dispatch = useDispatch();
@@ -39,28 +39,9 @@ const Header = ({ cart }) => {
       p={{ xs: "11px 0", md: "25px 0 0" }}
       borderBottom={filter ? "1px solid #D3D3D3" : "none"}
     >
-      <Container
-        maxWidth="lg"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          "& a": {
-            color: "#2F2F2F",
-            transition: "all 0.2s linear",
-            fontSize: 15,
-            "&:hover": {
-              color: "var(--primary)",
-            },
-          },
-        }}
-      >
-        <Box
-          display="flex"
-          justifyContent="space-between"
-          width="69%"
-          alignItems="center"
-        >
+      <Container>
+        <Box display="flex" justifyContent="space-between">
+        <Box>
           <Link to="/" style={{ height: 44 }}>
             {md ? (
               <Box component="img" src={logo} alt="" />
@@ -68,6 +49,12 @@ const Header = ({ cart }) => {
               <Box component="img" src={logo3} alt="" />
             )}
           </Link>
+        </Box>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           {md && (
             <Box
               component="nav"
@@ -114,10 +101,8 @@ const Header = ({ cart }) => {
           )}
         </Box>
         <Box
-          ml="16px"
           display="flex"
-          justifyContent="end"
-          width={{ xs: "100%", md: "31%" }}
+          justifyContent="space-between"
           alignItems="center"
         >
           <Box
@@ -160,7 +145,6 @@ const Header = ({ cart }) => {
               stroke-width="1.5"
             />
           </Box>
-            <SearchHeader open={open} setOpen={setOpen} />
           <Box
             component="svg"
             onClick={() =>
@@ -281,6 +265,10 @@ const Header = ({ cart }) => {
             </IconButton>
           )}
         </Box>
+        </Box>
+      </Container>
+      <Container>
+        <SearchHeader open={open} setOpen={setOpen} />
       </Container>
     </Box>
   );

@@ -1,7 +1,6 @@
 import {
   Box,
   Button,
-  Container,
   Dialog,
   InputAdornment,
   ListItemButton,
@@ -14,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { getProductsNames } from "../../redux/reducers/products";
 import { translit } from "../../hooks/translit";
+import Container from "../Container";
 
 const SearchHeader = ({ open, setOpen }) => {
   const navigate = useNavigate();
@@ -58,208 +58,208 @@ const SearchHeader = ({ open, setOpen }) => {
   }, [names]);
 
   return (
-    <Dialog
-      sx={{
-        "& .MuiDialog-container": {
-          justifyContent: "end!important",
-          alignItems: "start!important",
-          overflowX: "hidden",
-          width: "100%",
-        },
-        "& .MuiPaper-root": {
-          maxWidth: "unset",
-          width: { xs: "100%", md: "70%" },
-          m: { xs: "11px 15px", md: "25px 25px", lg: "25px 75px" },
-          borderRadius: "10px",
-        },
-      }}
-      open={open}
-      onClose={handleClose}
-    >
-      <Box
-        width="100%"
-        component="form"
-        onSubmit={(e) => {
-          e.preventDefault();
-          navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
-          handleClose();
-        }}
-      >
-        <TextField
-          value={value}
-          autoComplete="off"
-          onChange={(e) => {
-            setValue(e.target.value);
-            handleSearch(e);
-          }}
-          autoFocus
-          sx={{
+    <Container>
+      <Dialog
+        sx={{
+          "& .MuiDialog-container": {
+            justifyContent: "end!important",
+            alignItems: "start!important",
+            overflowX: "hidden",
             width: "100%",
-            background: "#FFF",
-            "& .MuiOutlinedInput-notchedOutline": {
-              border: "1px solid #E2E2E2",
-              borderRadius: !value
-                ? "10px!important"
-                : "10px 10px 0 0!important",
-            },
-            "& .MuiInputBase-root": {
-              borderRadius: !value
-                ? "10px!important"
-                : "10px 10px 0 0!important",
-            },
-            "&.MuiFormControl-root": {
-              background: "#FFF",
-              borderRadius: !value
-                ? "10px!important"
-                : "10px 10px 0 0!important",
-            },
-            "& input": {
-              borderRadius: !value
-                ? "10px!important"
-                : "10px 10px 0 0!important",
-              p: "10.5px 16px 10.5px 0px!important",
-            },
-            "& fieldset": {
-              display: "none",
-            },
+          },
+          "& .MuiPaper-root": {
+            maxWidth: "unset",
+            width: { xs: "100%", md: "70%" },
+            m: { xs: "11px 15px", md: "25px 25px", lg: "25px 75px" },
+            borderRadius: "10px",
+          },
+        }}
+        open={open}
+        onClose={handleClose}
+      >
+        <Box
+          width="100%"
+          // border={"1px solid red"}
+          component="form"
+          onSubmit={(e) => {
+            e.preventDefault();
+            navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
+            handleClose();
           }}
-          placeholder="Найти"
-          slotProps={{
-            input: {
-              startAdornment: (
-                <InputAdornment position="start" sx={{ cursor: "pointer" }}>
-                  <svg
-                    width="18"
-                    height="18"
-                    viewBox="0 0 18 18"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M12.7333 12.7333L17 17M14.8667 7.93333C14.8667 11.7625 11.7625 14.8667 7.93333 14.8667C4.10416 14.8667 1 11.7625 1 7.93333C1 4.10416 4.10416 1 7.93333 1C11.7625 1 14.8667 4.10416 14.8667 7.93333Z"
-                      stroke="black"
-                      stroke-width="1.5"
-                    />
-                  </svg>
-                </InputAdornment>
-              ),
-              endAdornment: (
-                <InputAdornment
-                  onClick={handleClose}
-                  position="end"
-                  sx={{ cursor: "pointer" }}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 20 20"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      fill-rule="evenodd"
-                      clip-rule="evenodd"
-                      d="M13.461 12.2484L12.4 13.3094L9.999 10.9104L7.599 13.3064L6.539 12.2454L8.938 9.85038L6.539 7.45237L7.6 6.39138L10 8.79037L12.401 6.39337L13.461 7.45538L11.061 9.85038L13.461 12.2484ZM10 0.109375C4.624 0.109375 0.25 4.48338 0.25 9.85938C0.25 15.2354 4.624 19.6094 10 19.6094C15.376 19.6094 19.75 15.2354 19.75 9.85938C19.75 4.48338 15.376 0.109375 10 0.109375Z"
-                      fill="#6E8435"
-                    />
-                  </svg>
-                </InputAdornment>
-              ),
-            },
-          }}
-        />
-        {value && (
-          <Box
+        >
+          <TextField
+            value={value}
+            autoComplete="off"
+            onChange={(e) => {
+              setValue(e.target.value);
+              handleSearch(e);
+            }}
+            autoFocus
             sx={{
-              opacity: open ? "1" : "0",
-              visibility: open ? "unset" : "hidden",
-              height: open ? "auto" : "0px",
-              maxHeight: "60vh",
-              overflowY: all ? "scroll" : "auto",
-              overflowX: "hidden",
-              transition: "height 300ms linear",
-              backgroundColor: "#FFF",
-              p: "22px 0 10px",
-              borderRadius: "0 0 10px 10px",
-              position: "relative",
-              // width: "-webkit-fill-available",
-              // zIndex: 3,
-
-              "& .MuiButtonBase-root": {
-                pl: "40px",
+              width: "100%",
+              background: "#FFF",
+              "& .MuiOutlinedInput-notchedOutline": {
+                border: "1px solid #E2E2E2",
+                borderRadius: !value
+                  ? "10px!important"
+                  : "10px 10px 0 0!important",
+              },
+              "& .MuiInputBase-root": {
+                borderRadius: !value
+                  ? "10px!important"
+                  : "10px 10px 0 0!important",
+              },
+              "&.MuiFormControl-root": {
+                background: "#FFF",
+                borderRadius: !value
+                  ? "10px!important"
+                  : "10px 10px 0 0!important",
+              },
+              "& input": {
+                borderRadius: !value
+                  ? "10px!important"
+                  : "10px 10px 0 0!important",
+                p: "10.5px 16px 10.5px 0px!important",
+              },
+              "& fieldset": {
+                display: "none",
               },
             }}
-          >
-            {!searched.length ? (
-              <Typography className="sans" ml="40px">
-                Ничего не найдено
-              </Typography>
-            ) : (
-              <ListItemButton
-                onClick={() => {
-                  handleClose();
-
-                  navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
-                }}
-                mb={0.8}
-              >
-                <Typography className="sans">
-                  <b>{value}</b>
+            placeholder="Найти"
+            slotProps={{
+              input: {
+                startAdornment: (
+                  <InputAdornment position="start" sx={{ cursor: "pointer" }}>
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 18 18"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M12.7333 12.7333L17 17M14.8667 7.93333C14.8667 11.7625 11.7625 14.8667 7.93333 14.8667C4.10416 14.8667 1 11.7625 1 7.93333C1 4.10416 4.10416 1 7.93333 1C11.7625 1 14.8667 4.10416 14.8667 7.93333Z"
+                        stroke="black"
+                        stroke-width="1.5"
+                      />
+                    </svg>
+                  </InputAdornment>
+                ),
+                endAdornment: (
+                  <InputAdornment
+                    onClick={handleClose}
+                    position="end"
+                    sx={{ cursor: "pointer" }}
+                  >
+                    <svg
+                      width="20"
+                      height="20"
+                      viewBox="0 0 20 20"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M13.461 12.2484L12.4 13.3094L9.999 10.9104L7.599 13.3064L6.539 12.2454L8.938 9.85038L6.539 7.45237L7.6 6.39138L10 8.79037L12.401 6.39337L13.461 7.45538L11.061 9.85038L13.461 12.2484ZM10 0.109375C4.624 0.109375 0.25 4.48338 0.25 9.85938C0.25 15.2354 4.624 19.6094 10 19.6094C15.376 19.6094 19.75 15.2354 19.75 9.85938C19.75 4.48338 15.376 0.109375 10 0.109375Z"
+                        fill="#6E8435"
+                      />
+                    </svg>
+                  </InputAdornment>
+                ),
+              },
+            }}
+          />
+          {value && (
+            <Box
+              sx={{
+                opacity: open ? "1" : "0",
+                visibility: open ? "unset" : "hidden",
+                height: open ? "auto" : "0px",
+                maxHeight: "60vh",
+                overflowY: all ? "scroll" : "auto",
+                overflowX: "hidden",
+                transition: "height 300ms linear",
+                backgroundColor: "#FFF",
+                p: "22px 0 10px",
+                borderRadius: "0 0 10px 10px",
+                position: "relative",
+                "& .MuiButtonBase-root": {
+                  pl: "40px",
+                },
+              }}
+            >
+              {!searched.length ? (
+                <Typography className="sans" ml="40px">
+                  Ничего не найдено
                 </Typography>
-              </ListItemButton>
-            )}
-            {all
-              ? searched?.map((item, idx) => (
-                  <ListItemButton
-                    key={idx}
-                    onClick={() => {
-                      handleClose();
-                      navigate(`/catalog/${translit(item.name)}/${item.id}`);
-                    }}
-                    mb={0.8}
-                  >
-                    <Typography className="sans">{item.name}</Typography>
-                  </ListItemButton>
-                ))
-              : searched?.slice(0, 4).map((item, idx) => (
-                  <ListItemButton
-                    key={idx}
-                    onClick={() => {
-                      handleClose();
-                      navigate(`/catalog/${translit(item.name)}/${item.id}`);
-                    }}
-                    mb={0.8}
-                  >
-                    <Typography className="sans">{item.name}</Typography>
-                  </ListItemButton>
-                ))}
-            {searched.length ? (
-              <Box p={{ xs: "20px 17px 10px 17px", md: "30px 40px 0" }}>
-                <Button
+              ) : (
+                <ListItemButton
                   onClick={() => {
-                    navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
                     handleClose();
+
+                    navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
                   }}
-                  variant="outlined"
-                  sx={{
-                    color: "var(--primary)",
-                    borderRadius: "10px",
-                    p: "10px 40px!important",
-                  }}
-                  disabled={searched.length <= 5}
-                  fullWidth
-                  color="primary"
+                  mb={0.8}
                 >
-                  {all ? "Скрыть" : "Смотреть все результаты"}
-                </Button>
-              </Box>
-            ) : (
-              ""
-            )}
-          </Box>
-        )}
-      </Box>
-    </Dialog>
+                  <Typography className="sans">
+                    <b>{value}</b>
+                  </Typography>
+                </ListItemButton>
+              )}
+              {all
+                ? searched?.map((item, idx) => (
+                    <ListItemButton
+                      key={idx}
+                      onClick={() => {
+                        handleClose();
+                        navigate(`/catalog/${translit(item.name)}/${item.id}`);
+                      }}
+                      mb={0.8}
+                    >
+                      <Typography className="sans">{item.name}</Typography>
+                    </ListItemButton>
+                  ))
+                : searched?.slice(0, 4).map((item, idx) => (
+                    <ListItemButton
+                      key={idx}
+                      onClick={() => {
+                        handleClose();
+                        navigate(`/catalog/${translit(item.name)}/${item.id}`);
+                      }}
+                      mb={0.8}
+                    >
+                      <Typography className="sans">{item.name}</Typography>
+                    </ListItemButton>
+                  ))}
+              {searched.length ? (
+                <Box p={{ xs: "20px 17px 10px 17px", md: "30px 40px 0" }}>
+                  <Button
+                    onClick={() => {
+                      navigate(`/catalog/?search=${value}&categoryIds=&page=1`);
+                      handleClose();
+                    }}
+                    variant="outlined"
+                    sx={{
+                      color: "var(--primary)",
+                      borderRadius: "10px",
+                      p: "10px 40px!important",
+                    }}
+                    disabled={searched.length <= 5}
+                    fullWidth
+                    color="primary"
+                  >
+                    {all ? "Скрыть" : "Смотреть все результаты"}
+                  </Button>
+                </Box>
+              ) : (
+                ""
+              )}
+            </Box>
+          )}
+        </Box>
+      </Dialog>
+    </Container>
   );
 };
 
