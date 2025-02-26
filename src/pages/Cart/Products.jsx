@@ -5,6 +5,7 @@ import {
   IconButton,
   Typography,
   useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import React, { useState } from "react";
 import Delete from "../../assets/images/Delete";
@@ -17,6 +18,8 @@ import empty from "../../assets/images/empty-no-bg.svg";
 const Products = ({ cart, setCart, setCartGlobal }) => {
   const md = useMediaQuery("(min-width:769px)");
   const [count, setCount] = useState(1);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const deleteHandler = (id) => {
     let filtered = cart.filter((item) => item?.id !== id);
     setCart(filtered);
@@ -139,6 +142,26 @@ const Products = ({ cart, setCart, setCartGlobal }) => {
                 />
               </Collapse>
             ))}
+            {isMobile && (
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                mt={2}
+                alignItems="baseline"
+              >
+                <Typography className="sans" fontSize={25} fontWeight="700">
+                  Итого:
+                </Typography>
+                <Typography fontSize={25} fontWeight="700">
+                  {cart &&
+                    cart?.reduce(
+                      (total, amount) => total + parseInt(amount.sum),
+                      0
+                    )}{" "}
+                  c
+                </Typography>
+              </Box>
+            )}
         </TransitionGroup>
       )}
     </Box>
