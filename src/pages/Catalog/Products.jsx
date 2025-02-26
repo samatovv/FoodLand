@@ -96,10 +96,7 @@ const Products = ({
     );
   };
 
-  useEffect(() => {
-    dispatch(getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`));
-  }, [dispatch]);
-
+  
   useLayoutEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -118,26 +115,40 @@ const Products = ({
     }
   }, [searchValue]);
 
+  useEffect(() => {
+    const categoryId = location.search.split("&")[1]?.split("=")[1] || "";
+    
+    if (categoryId) {
+      setParams([{ name: "Category", id: categoryId }]);
+    }
+  }, [location.search]);
+  
+  
   useLayoutEffect(() => {
     if (firstUpdate2.current) {
       firstUpdate2.current = false;
       return;
     }
-
+  
     window.scrollTo(0, 0);
     dispatch(setProducts([]));
-    category?.title === "Рекомендуемые товары"
-      ? dispatch(getProd(`recommendations?limit=12&page=${page}`))
-      : dispatch(
+  
+    const categoryId = params?.id || location.search.split("&")[1]?.split("=")[1] || "";
+  
+    setTimeout(() => {
+      if (category?.title === "Рекомендуемые товары") {
+        dispatch(getProd(`recommendations?limit=12&page=${page}`));
+      } else {
+        dispatch(
           getProducts(
-            `/products/query?limit=12&page=${page}&search=${encodeURI(
-              searchValue
-            )}&categoryIds=${params.id ? params.id : ""}`
+            `/products/query?limit=12&page=${page}&search=${encodeURI(searchValue)}&categoryIds=${categoryId}`
           )
         );
-  }, [page]);
-
-
+      }
+    }, 100);
+  }, [page, params, searchValue, category]);  
+  
+  
   useEffect(() => {
     if (location.search && category?.title !== "Рекомендуемые товары") {
       setPage(+location.search.split("&")[2].split("=")[1]);
@@ -145,24 +156,29 @@ const Products = ({
       dispatch(
         setSearch(decodeURI(location.search.split("&")[0].split("=")[1]))
       );
-
+    setTimeout(() => {
       dispatch(
         getProducts(
           `/products/query?limit=12&page=${
             location.search.split("&")[2].split("=")[1]
           }&search=${
             location.search.includes("searchmain")
-              ? location.search.split("&")[0].split("=")[1]
-              : decodeURI(location.search.split("&")[0].split("=")[1])
+            ? location.search.split("&")[0].split("=")[1]
+            : decodeURI(location.search.split("&")[0].split("=")[1])
           }&categoryIds=${
             params.id && !category?.search
-              ? params.id
-              : location.search.split("&")[1].split("=")[1]
+            ? params.id
+            : location.search.split("&")[1].split("=")[1]
           }`
         )
       );
+    }, 600)
     }
   }, [location.search]);
+
+  useEffect(() => {
+      dispatch(getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`));
+  }, [dispatch]);
 
   return (
     <Box component="section">

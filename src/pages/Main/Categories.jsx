@@ -15,7 +15,7 @@ import img5 from "../../assets/images/category-5.webp";
 import img6 from "../../assets/images/category-6.webp";
 import img7 from "../../assets/images/milk_prod.jpeg"
 import ButtonMore from "../../components/ButtonMore";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getCategories } from "../../redux/reducers/mainSlice";
 
@@ -31,7 +31,7 @@ const categories = [
   { title: "Молочная продукция", img: img7, id: "67b35f6e99ebd3e2532f4851" },
   { title: "Ингредиенты", img: img3, id: "67b35ef47b3c3a8da9174492" },
   { title: "Инвентарь", img: img5, id: "67b35ee67b3c3a8da917444d" },
-  { title: "Орехи и сухофрукты", img: img8, id: "67b74dfc30787eebcbb0f2a1" },
+  { title: "Орехи и сухофрукты", img: img8, id: "67bc70d57ead33026b001985" },
   {
     title: "Покрытия и наполнители",
     img: img4,
@@ -45,9 +45,14 @@ const categories = [
 ];
 
 const Categories = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const categoryRefs = useRef([]);
 
+  const handleClick = (id) => {
+    navigate(`/catalog/?search=&categoryIds=${id}&page=1`);
+  };
+  
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
@@ -110,7 +115,7 @@ const Categories = () => {
                   <Typography fontSize={{ xs: 16, md: 20 }} mb={{ xs: 1, md: 2.5 }} maxWidth={219} fontWeight="bold">
                     {item?.title}
                   </Typography>
-                  <Link to={`/catalog/?search=&categoryIds=${item.id}&page=1` || "/catalog"}>
+                  <Box onClick={() => handleClick(item.id)}>
                     <ButtonMore
                       txt="Подробнее "
                       radius="15px"
@@ -121,7 +126,7 @@ const Categories = () => {
                         "& span": { color: "#000" },
                       }}
                     />
-                  </Link>
+                  </Box>
                 </Box>
               </Box>
             ))}
