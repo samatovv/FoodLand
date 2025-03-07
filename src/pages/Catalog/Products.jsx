@@ -49,7 +49,6 @@ const Products = ({
   const [showSkeleton, setShowSkeleton] = useState(true);
   const firstUpdate = useRef(true);
   const firstUpdate2 = useRef(true);
-
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSkeleton(false);
@@ -95,28 +94,24 @@ const Products = ({
       }&categoryIds=&page=${value}`
     );
   };
-  useEffect(() => {
-      dispatch(getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`));
-  }, [dispatch]);
-
   
-  useLayoutEffect(() => {
-    if (firstUpdate.current) {
-      firstUpdate.current = false;
-      return;
-    }
-    if (page > 1) setPage(1);
-    if (!searchValue && !category?.title && page === 1) {
-      dispatch(
-        getProducts(
-          `/products/query?limit=12&page=1&search=${encodeURI(
-            searchValue
-          )}&categoryIds=`
-        )
-      );
-      setOpen(false);
-    }
-  }, [searchValue]);
+  // useLayoutEffect(() => {
+  //   if (firstUpdate.current) {
+  //     firstUpdate.current = false;
+  //     return;
+  //   }
+  //   if (page > 1) setPage(1);
+  //   if (!searchValue && !category?.title && page === 1) {
+  //     dispatch(
+  //       getProducts(
+  //         `/products/query?limit=12&page=1&search=${encodeURI(
+  //           searchValue
+  //         )}&categoryIds=`
+  //       )
+  //     );
+  //     setOpen(false);
+  //   }
+  // }, [searchValue]);
   
   
   useEffect(() => {
@@ -126,7 +121,6 @@ const Products = ({
       dispatch(
         setSearch(decodeURI(location.search.split("&")[0].split("=")[1]))
       );
-      setTimeout(() => {
         dispatch(
           getProducts(
             `/products/query?limit=12&page=${
@@ -142,9 +136,16 @@ const Products = ({
             }`
           )
         );
-      }, 600)
     }
   }, [location.search]);
+
+  useEffect(() => {
+    if (!location.search || location.search === "?") {
+      console.log("Fetching products for empty search params...");
+      dispatch(getProducts(`/products/query?limit=12&page=1&search=&categoryIds=`));
+    }
+  }, [dispatch, location.search]);
+  
   
   useLayoutEffect(() => {
     if (firstUpdate2.current) {
